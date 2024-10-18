@@ -1,0 +1,66 @@
+.dropdown-father
+  width: 100px 
+  border-radius: 4px 
+  padding: 0 
+  //background: red
+.mat-form-field 
+  height: 10px !important
+ 
+  .mat-mdc-text-field-wrapper
+    height: 20px !important // Ajustar altura
+
+  .mat-select
+    background-color: #003366 // Azul oscuro
+    color: white // Letras en blanco
+    border: 1px solid transparent // Borde transparente por defecto
+    transition: border-color 0.3s ease // Transición suave para el borde
+    padding: 0 // Reducir el padding
+
+    &:hover
+      border-color: #0055a5 // Color del borde al pasar el ratón
+    &:focus-within
+      border-color: #0077cc // Color del borde al estar enfocado
+
+  .mat-select-arrow
+    color: white // Icono en blanco
+
+  .mat-option
+    color: black // Color de las opciones
+    background-color: white // Color de fondo de las opciones
+    transition: background-color 0.3s ease // Transición suave para el fondo
+    font-size: 11px // Tamaño de fuente para las opciones
+
+    &:hover
+      background-color: #f1f1f1 // Color de fondo al pasar el ratón
+
+    &.mat-option-selected
+      background-color: #0055a5 // Color al seleccionar
+      color: white // Color de letra al seleccionar
+
+.custom-select
+  font-size: 11px // Tamaño de fuente del select
+  padding: 0 // Quitar padding en el select
+  .mat-select-trigger
+    height: 20px // Ajusta la altura de la caja que activa el desplegable
+.custom-option
+  font-size: 11px // Tamaño de fuente de las opciones
+.custom-label
+  white-space: nowrap // Evitar que el texto se corte y se ajuste en una sola línea
+  overflow: visible // Ocultar cualquier texto que se desborde
+  text-overflow: ellipsis // Añadir puntos suspensivos si el texto es demasiado largo para el contenedor
+
+
+  
+:host
+  // Always protect ::ng-deep with a :host !
+  ::ng-deep
+    .mat-mdc-form-field-infix
+      padding: 5px !important
+    .mdc-notched-outline
+      height: 40px !important
+    .mat-mdc-form-field-infix
+      min-height: 40px
+    .mat-mdc-floating-label.mdc-floating-label
+      max-width: 100px
+    .mat-mdc-form-field-subscript-wrapper
+      height: 0px

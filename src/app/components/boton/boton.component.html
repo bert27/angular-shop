@@ -1,0 +1,13 @@
+@if (disabled) {
+  <button class="btn-primario disabled" disabled>
+    {{ texto }}
+  </button>
+} @else if (tipo === 'primario') {
+  <button class="btn-primario">
+    {{ texto }}
+  </button>
+} @else if (tipo === 'secundario') {
+  <button class="btn-secundario">
+    {{ texto }}
+  </button>
+}

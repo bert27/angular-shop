@@ -1,0 +1,62 @@
+<div class="card" id="my-card" (click)="navigateToProduct(cardData)">
+  <div class="image-content-f">
+    <div id="image-content" class="image-content">
+      <img
+        *ngIf="cardData.imageUrl"
+        [src]="cardData.imageUrl"
+        alt="{{ cardData.title }}"
+        style="max-width: 100%; height: 100px"
+      />
+    </div>
+  </div>
+  <h4 class="title-card">{{ cardData.title }}</h4>
+
+  <p *ngIf="isArticle(cardData)" class="description-class">
+    {{ cardData.bodyTitle }}
+    <!-- Usar bodyTitle para artículos -->
+  </p>
+
+  <ng-container *ngIf="!isArticle(cardData)">
+    <div class="price-stock-container">
+      <p *ngIf="selectedPrice" class="price-class">{{ selectedPrice }} €</p>
+      <p
+        *ngIf="cardData.stock; else noStock"
+        class="en-stock"
+        style="font-weight: 700; margin-left: 10px"
+      >
+        En stock
+      </p>
+      <ng-template #noStock>
+        <p class="agotado" style="font-weight: 700; margin-left: 10px">
+          Agotado
+        </p>
+      </ng-template>
+    </div>
+
+    <p *ngIf="cardData.description" class="description-class">
+      {{ cardData.description }}
+    </p>
+
+    <div
+      style="
+        margin-top: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+      "
+      (click)="$event.stopPropagation()"
+    >
+      <custom-dropdown-material
+        [(selectedOption)]="selectedOption"
+        [options]="cardData.options"
+      />
+      <custom-button
+        texto="Añadir a la cesta"
+        tipo="primario"
+        [disabled]="!cardData.stock || !selectedOption"
+        (click)="handleAddToCart()"
+        style="margin-left: 10px"
+      />
+    </div>
+  </ng-container>
+</div>

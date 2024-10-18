@@ -1,0 +1,17 @@
+<div class="product-content">
+  <div class="product-content-card">
+    <div class="product-image">
+      <img [src]="productData?.imageUrl" alt="{{ productData?.title }}" />
+    </div>
+    <div class="product-description">
+      <h1 class="product-title">{{ productData?.title }}</h1>
+      <p class="description-text">{{ productData?.description }}</p>
+      <!-- Asegúrate de que 'description' esté en productData -->
+    </div>
+
+    <div class="button-father">
+      <custom-button texto="Añadir al carrito" tipo="primario" />
+    </div>
+
+  </div>
+</div>

@@ -1,0 +1,69 @@
+
+@import '../../../../styles.sass' // Ajusta la ruta según sea necesario
+
+.card
+  border: 1px solid #444 // Borde más oscuro
+  border-radius: 8px
+  padding: 8px // Aumentado para mayor comodidad visual
+  background-color: #312E3F // Fondo oscuro
+  color: #ffffff // Texto blanco
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6) // Sombra más pronunciada
+  cursor: pointer
+  transition: transform 0.2s, box-shadow 0.2s // Animación al pasar el ratón
+  display: flex // Usar flexbox para alinear los elementos
+  flex-direction: column // Coloca los elementos en columna
+  height: 100% // Asegura que todas las tarjetas tengan la misma altura
+
+ 
+  &:hover
+    transform: translateY(-4px) // Levanta la tarjeta al pasar el ratón
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8) // Sombra más intensa al pasar el ratón
+.title-card
+  margin-bottom: 10px
+.price-class
+  font-weight: bold // Texto en negrita
+  font-size: 1.2em // Tamaño de fuente más grande
+.price-stock-container
+  display: flex // Usa flexbox para alinear elementos
+  justify-content: space-between // Espacio entre los elementos
+  align-items: center // Centra verticalmente los elementos
+.en-stock
+  color:  $colorPrimary // Color azul para "En stock"
+
+.agotado
+  color: red // Color rojo para "Agotado"
+
+.description-class
+  font-size: $tamañoTexto1 // Tamaño de fuente según tamañoTexto1
+  line-height: 1.5 // Espaciado entre líneas para mejorar la legibilidad
+  margin-top: 0.5em // Margen superior para separación visual
+  overflow: hidden // Oculta el desbordamiento si el texto es demasiado largo
+  display: -webkit-box // Para compatibilidad con webkit
+  -webkit-box-orient: vertical // Orientación vertical del contenedor
+  -webkit-line-clamp: 2 // Limita a 2 líneas
+  text-overflow: ellipsis // Añade "..." si el texto es demasiado largo
+  max-height: calc(2 * 1.5em) // Establece la altura máxima según el número de líneas
+
+
+.image-content-f
+  display: flex
+  justify-content: center // Centra la imagen horizontalmente
+  align-items: center // Centra la imagen verticalmente
+  height: 100px // Ajusta la altura según sea necesario
+  padding: 0.5em
+.image-content
+ 
+  max-width: 200px // Limita el ancho máximo del contenedor
+
+ 
+
+img
+  max-width: 100%  // Asegura que la imagen ocupe todo el ancho del contenedor
+  height: auto // Mantiene la proporción de aspecto
+  border-radius: 4px // Bordes redondeados para la imagen
+
+
+#fila
+  display: flex
+  justify-content: space-between // Espaciado entre botones
+  margin-top: 12px // Espacio superior para separación visual

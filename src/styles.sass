@@ -1,0 +1,52 @@
+@import "./custom-theme.scss" 
+
+$tamañoTexto1: 11px // Definición de la variable tamañoTexto1
+$TextSizeHead: 18px
+$colorPrimary: #177a82
+
+// Cambia el color de fondo a oscuro y el texto a blanco
+body
+  margin: 0
+  background-color: #1C1A26 // Fondo oscuro
+  color: #ffffff // Texto blanco
+
+// Estiliza el contenedor principal si lo prefieres
+.app-container
+  background-color: #121212 // Fondo oscuro
+  color: #ffffff // Texto blanco
+
+// Estiliza el h1 para que el texto sea blanco
+h1
+  color: #ffffff // Texto blanco
+  font-size: $tamañoTexto1 // Usa la variable para el tamaño del texto
+
+h2
+  margin: 0
+  margin-bottom: 0.5em
+
+h4
+  margin: 0
+
+// Estilos para el mat-form-field
+mat-form-field
+  width: 230px // Ajusta el ancho según sea necesario
+  background-color: transparent // Fondo transparente para el mat-form-field
+
+  .mat-select
+    background-color: #003366 // Azul oscuro
+    color: white // Letras en blanco
+    border-radius: 4px // Bordes redondeados
+
+  .mat-select-arrow
+    color: white // Icono en blanco
+
+  .mat-option
+    color: black // Color de las opciones
+    background-color: white // Color de fondo de las opciones
+
+    &:hover
+      background-color: #e1e1e1 // Color al pasar el ratón
+
+    &.mat-option-selected
+      background-color: #cfe3ff // Color al seleccionar
+      color: black // Color de letra al seleccionar

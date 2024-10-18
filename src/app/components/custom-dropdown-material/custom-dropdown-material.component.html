@@ -1,0 +1,16 @@
+<mat-form-field appearance="outline" class="dropdown-father">
+  <mat-label class="custom-label">Espacio</mat-label>
+  <mat-select
+    class="custom-select"
+    [(ngModel)]="selectedOption" 
+    (selectionChange)="selectOption($event.value)"
+  >
+    <mat-option
+      class="custom-option"
+      *ngFor="let option of options"
+      [value]="option"
+    >
+      {{ option.tipo }}
+    </mat-option>
+  </mat-select>
+</mat-form-field>

@@ -1,0 +1,37 @@
+@import '../../../styles.sass' // Ajusta la ruta según sea necesario
+
+// Definición de colores
+$color-primario: #177A82
+$color-primario-hover: darken($color-primario, 10%)
+$color-secundario: #6c757d
+$color-secundario-hover: darken($color-secundario, 20%)
+$color-desactivado: #a9a9a9 // Gris más oscuro para el botón deshabilitado
+
+button
+  border: none
+  padding: 10px 20px
+  cursor: pointer
+  font-size: $tamañoTexto1 // Aplica la variable de tamaño de texto
+  font-weight: bold
+  border-radius: 4px
+  transition: background-color 0.3s ease
+
+  &.btn-primario
+    background-color: $color-primario
+    color: white
+
+    &:hover
+      background-color: $color-primario-hover
+
+  &.btn-secundario
+    background-color: $color-secundario
+    color: white
+
+    &:hover
+      background-color: $color-secundario-hover
+
+  &.disabled
+    background-color: $color-desactivado
+    color: white
+    cursor: not-allowed // Cambia el cursor al pasar por encima
+    pointer-events: none // Evita cualquier interacción con el botón

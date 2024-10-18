@@ -1,0 +1,58 @@
+.dropdown
+  position: relative
+  display: inline-block
+  width: 230px // Ajusta el ancho según sea necesario
+  font-family: Arial, sans-serif // Cambia la fuente para un mejor aspecto
+  margin-top: 10px
+  margin-left: 10px
+
+  .dropdown-toggle
+    display: flex // Cambia a flexbox
+    justify-content: space-between // Espacia el texto y el ícono
+    align-items: center // Centra verticalmente el contenido
+    background-color: #003366 // Fondo azul oscuro
+    color: #ffffff // Letras en blanco
+    border: 1px solid #ccc
+    padding: 8px 16px
+    font-size: 16px
+    cursor: pointer
+    width: 100%
+    text-align: left
+    transition: background-color 0.3s ease, border-color 0.3s ease
+    border-radius: 4px // Añade bordes redondeados
+
+    &:hover
+      background-color: #00509e // Cambia a un azul más claro al pasar el ratón
+      border-color: #aaa // Cambia el color del borde al pasar el ratón
+
+  .arrow
+    margin-left: 10px // Espacio entre el texto y el ícono
+    font-size: 16px // Ajusta el tamaño del ícono si es necesario
+    color: #ffffff // Color del ícono en blanco
+
+  .dropdown-menu
+    position: absolute
+    top: 100%
+    left: 0
+    background-color: #003366 // Fondo azul oscuro
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2)
+    z-index: 1000 // Asegura que el menú aparezca por encima de otros elementos
+    list-style: none
+    padding: 0
+    margin: 0
+    width: 100%
+    border: 1px solid #ccc
+    border-radius: 4px // Añade bordes redondeados
+
+    li
+      padding: 10px 16px
+      cursor: pointer
+      color: #ffffff // Letras en blanco
+      transition: background-color 0.3s ease // Transición suave al cambiar el fondo
+
+      &:hover
+        background-color: #00509e // Cambia el fondo al pasar el ratón
+
+      &.selected // Estilo para la opción seleccionada
+        background-color: #01162b // Cambia el fondo de la opción seleccionada
+        color: #ffffff // Letras en azul oscuro para la opción seleccionada
