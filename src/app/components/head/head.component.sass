@@ -1,5 +1,4 @@
-
-  @import '../../../styles.sass'  // Ajusta la ruta según la ubicación de tu archivo styles.sass
+@import '../../../styles.sass'  // Ajusta la ruta según la ubicación de tu archivo styles.sass
 
 header
   background-color: $colorPrimary
@@ -9,32 +8,38 @@ header
   align-items: center
   justify-content: space-between
   width: 100%
-  box-sizing: border-box  // Asegura que el padding y border estén incluidos en el ancho total
+  box-sizing: border-box
+  flex-wrap: wrap
+
+  #column1-head
+    width: 200px
+
+  #column2-head
+    width: 68%
+    display: flex
+    align-items: center
+    justify-content: space-between
 
   h1
     margin: 0
     color: #ffffff
     margin-bottom: 13px
-    width: 30%
     font-size: 30px
 
   nav
-    display: flex
-    flex-grow: 1
-    justify-content: center
-    width: 50%
-
     a
       cursor: pointer
       margin-right: 15px
       text-decoration: none
       color: #ffffff
-      font-size: $TextSizeHead  // Usa la variable para el tamaño del texto
-      transition: color 0.3s ease
+      font-size: $TextSizeHead 
+      transition: all 0.3s ease 
 
       &:hover
-        color: #121212
-        text-decoration: underline
+        font-size: $TextSizeHead * 1.1 
+        font-weight: bold 
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4) 
+        color: lighten(#ffffff, 10%) 
 
   .carrito-content
     display: flex
@@ -59,98 +64,10 @@ header
       font-size: 12px
       font-weight: bold
 
-  .carrito-lista
-    position: absolute
-    top: 50px
-    right: 10px
-    background-color: #1C1A26
-    color: carrito-header
-    border: 1px solid #ccc
-    border-radius: 4px
-    padding: 10px
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2)
-    z-index: 10
-
-    .carrito-header
-      display: flex
-      align-items: center
-      justify-content: space-between
-      margin-bottom: 10px
-
-      h2
-        margin: 0
-        font-size: 16px
-        color: white
-
-      .close-button
-        background: none
-        border: none
-        color: red
-        font-size: 16px
-        cursor: pointer
-        margin-left: 10px
-
-    ul
-      list-style: none
-      padding: 0
-      margin: 0
-
-      li
-        padding: 10px 0
-        border-bottom: 1px solid #ccc
-        display: flex
-        justify-content: space-between  // Separa el contenido y el botón de eliminar
-        align-items: center
-        &:last-child
-          border-bottom: none
-        .producto-detalles
-            margin-top: 10px      
-        .producto-content
-          display: flex
-          flex-direction: column    // Imagen arriba, texto abajo
-          align-items: flex-start   // Alinea el contenido al inicio de la columna
-          width: 100%
-          .producto-content-image
-            display: flex              // Activa flexbox para centrar
-            justify-content: center    // Centra horizontalmente
-            align-items: center        // Centra verticalmente
-            width: 100%                // Asegúrate de que ocupe todo el ancho disponible
-
-            .producto-img
-              width: 40px              // Ajusta el tamaño de la imagen
-              height: 40px
-        .remove-button
-          background-color: red
-          color: white
-          border: none
-          padding: 5px 10px
-          cursor: pointer
-          font-size: 12px
-          border-radius: 4px
-          display: flex               // Activa flexbox
-          align-items: center         // Centra verticalmente el contenido
-          justify-content: center      // Centra horizontalmente el contenido
-          width: 25px                 // Ancho del botón
-          height: 25px                // Alto del botón
-          padding: 0                  // Elimina padding adicional para ajustar el tamaño
-
-
-  .subtotal
-    display: flex
-    align-items: center
-    justify-content: flex-start
-    font-size: 14px
-    color: #FF8118
-    font-weight: bold
-
-    .title-subtotal
-      margin-right: 5px
-
-    .amount
-      font-weight: bold
-
-.button-father
-  display: flex
-  justify-content: center
-  margin-top: 10px
-
+// Media query para pantallas en modo portrait
+@media (orientation: portrait)
+  #column2-head
+    width: 95% // Cambia el ancho a 100% en modo portrait
+@media (max-width: 768px)
+  #column2-head
+    width: 95% !important // Cambia el ancho a 100% en dispositivos móviles

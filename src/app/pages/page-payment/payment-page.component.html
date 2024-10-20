@@ -1,0 +1,18 @@
+<div class="payment-page">
+  <h1>Pagar</h1>
+  
+  <form (submit)="pay(); $event.preventDefault();">
+    <div class="form-group">
+      <label for="address">Dirección</label>
+      <input type="text" id="address" placeholder="Introduce tu dirección" [(ngModel)]="address" name="address" required />
+    </div>
+
+    <div class="form-group">
+      <label for="card-element">Información de la tarjeta de crédito</label>
+      <div id="card-element"></div> <!-- Aquí se montará el elemento de Stripe -->
+      <div id="card-errors" role="alert"></div> <!-- Para mostrar errores de tarjeta -->
+    </div>
+
+    <button type="submit" class="payment-button">Tramitar Pago</button>
+  </form>
+</div>

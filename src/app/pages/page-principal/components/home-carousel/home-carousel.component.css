@@ -1,0 +1,32 @@
+.content-carousel {
+  width: 85%;
+  margin: auto;
+  padding-top: 10px;
+}
+
+ngbd-table-filtering span.ngb-highlight {
+  background-color: yellow;
+}
+
+ngbd-table-complete span.ngb-highlight {
+  background-color: yellow;
+}
+
+ngb-carousel .picsum-img-wrapper {
+  position: relative;
+  height: 0;
+  padding-top: 32%; /* Ajusta según tu preferencia */
+  overflow: hidden; /* Para ocultar cualquier parte que sobresalga */
+}
+
+ngb-carousel .picsum-img-wrapper > img {
+max-height: 300px !important;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%; /* Asegura que la imagen ocupe todo el ancho */
+  height: 100%; /* Asegura que la imagen ocupe todo el alto */
+  object-fit: contain;
+  object-position: center;
+  transform: translate(-50%, -50%); /* Centra la imagen */
+}

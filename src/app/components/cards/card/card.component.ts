@@ -33,7 +33,7 @@ export class CardComponent implements OnInit {
     productSelect: ProductDataInterface,
     optionSelect: { tipo: string; price: number }
   ) {
-    this.carritoService.agregarProducto(productSelect, optionSelect);
+    this.carritoService.addProduct(productSelect, optionSelect);
   }
 
   isArticle(
@@ -44,16 +44,26 @@ export class CardComponent implements OnInit {
 
   handleAddToCart() {
     if (!this.isArticle(this.cardData)) {
+      console.log("añadiendo")
       this.addShoppingBasket(this.cardData, this.selectedOption);
     }
   }
-  
-  navigateToProduct(cardData: ProductDataInterface | ArticleInterface) {
+
+  navigateToProduct(
+    cardData: ProductDataInterface | ArticleInterface,
+    selectedOption: { tipo: string; price: number } | undefined // Permite que sea undefined
+  ) {
     const productName = cardData.title.toLowerCase().replace(/\s+/g, '-'); // Convierte el nombre a una URL amigable
     const routePrefix = this.isArticle(cardData) ? 'articulo' : 'producto'; // Determina si es un artículo o un producto
-    
-    console.log("`/${routePrefix}/${productName}`",`/${routePrefix}/${productName}`)
-    this.router.navigate([`/${routePrefix}/${productName}`]); // Redirige a la ruta adecuada
+  
+    let route = `/${routePrefix}/${productName}`; // Ruta base
+  
+    // Solo añade el tipo si es un producto y selectedOption está definido
+    if (!this.isArticle(cardData) && selectedOption) {
+      route += `/${selectedOption.tipo}`; // Agrega el tipo para productos
+    }
+  
+    this.router.navigate([route]); // Redirige a la ruta adecuada
   }
 
   get selectedPrice(): number {

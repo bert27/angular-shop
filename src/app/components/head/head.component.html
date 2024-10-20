@@ -1,79 +1,31 @@
 <header>
-  <h1>Chic & Unique</h1>
-  <nav>
-    <a routerLink="/">Inicio</a>
-    <a routerLink="/productos">Productos</a>
-    <a routerLink="/metodo-envio">Método de Envío</a>
-    <a routerLink="/blog">Blog</a>
-  </nav>
-
-  <div
-    class="carrito-content"
-    (mouseover)="openCarritoView()"
-    (mouseleave)="startAutoClose()"
-  >
-    <div style="margin-left: 16px">
-      <custom-icon-svg src="icons/carrito-de-compras.svg" [color]="'#ff8118'" />
-    </div>
-
-    <span class="numero-productos">{{ cantidadProductos }}</span>
+  <div id="column1-head">
+    <h1>Chic & Unique</h1>
   </div>
 
-  <div
-    class="carrito-lista"
-    *ngIf="carritoAbierto"
-    (mouseover)="resetAutoClose()"
-    (mouseleave)="startAutoClose()"
-  >
-    <div class="carrito-header">
-      <h2>Productos en el Carrito</h2>
-      <button
-        (click)="closeCarritoView()"
-        class="close-button"
-        aria-label="Cerrar carrito"
-      >
-        X
-      </button>
-    </div>
-    <div class="subtotal" *ngIf="carritoService.productos.length > 0">
-      <div class="title-subtotal">Total:</div>
-      <div class="amount">{{ calcularSubtotal() }}€</div>
-    </div>
-    <ul>
-      <li *ngFor="let producto of carritoService.productos">
-        <div class="producto-content">
-          <div class="producto-content-image">
-            <img
-              [src]="producto.imageUrl"
-              alt="{{ producto.title }}"
-              class="producto-img"
-            />
-          </div>
-          <div class="producto-detalles">
-            {{ producto.title }} ({{ producto.tipoSeleccionado.tipo }}) X
-            {{ producto.cantidad }} - {{ producto.tipoSeleccionado.price * producto.cantidad }}€
-          </div>
-        </div>
-      
-        <button class="remove-button" (click)="eliminarProducto(producto)">
-          <custom-icon-svg
-            src="icons/papelera.svg"
-            [color]="'#ff8118'"
-            [size]="12"
-          />
-        </button>
-      </li>
-      
-    </ul>
+  <div id="column2-head">
+    <nav>
+      <a routerLink="/">Inicio</a>
+      <a routerLink="/productos">Productos</a>
+      <a routerLink="/metodo-envio">Método de Envío</a>
+      <a routerLink="/blog">Blog</a>
+    </nav>
 
-    <ng-container *ngIf="carritoService.productos.length === 0">
-      <div class="mensaje-vacio">El carrito está vacío</div>
-    </ng-container>
-
-    <ng-container *ngIf="carritoService.productos.length > 0">
-      <div class="button-father">
-        <custom-button texto="Ir a la cesta" tipo="primario" />
+    <div
+      class="carrito-content"
+      (mouseover)="openCarritoView()"
+      (mouseleave)="startAutoClose()"
+    >
+      <div style="margin-left: 16px" (click)="router.navigate(['/carrito'])">
+        <custom-icon-svg
+          src="icons/carrito-de-compras.svg"
+          [color]="'#ff8118'"
+        />
       </div>
-    </ng-container>
+
+      <span class="numero-productos">{{ cantidadProductos }}</span>
+    </div>
   </div>
+
+  <app-shopping-cart-popup />
 </header>

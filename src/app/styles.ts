@@ -51,11 +51,8 @@ export const styles = `
   }
 
   main {
-    width: 100%;
-    display: flex;
-    align-items: baseline;
-    box-sizing: inherit;
     position: relative;
+    min-height: 80vh
   }
 
 

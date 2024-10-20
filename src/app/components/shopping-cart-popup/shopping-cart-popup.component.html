@@ -1,0 +1,61 @@
+<div
+  class="carrito-lista"
+  *ngIf="carritoAbierto"
+  (mouseover)="resetAutoClose()"
+  (mouseleave)="startAutoClose()"
+>
+  <div class="carrito-header">
+    <h2>Productos en el Carrito</h2>
+    <button
+      (click)="closeCarritoView()"
+      class="close-button"
+      aria-label="Cerrar carrito"
+    >
+      X
+    </button>
+  </div>
+  <div class="subtotal" *ngIf="carritoService.products.length > 0">
+   
+    <div class="amount">{{ getTotalPrice() }}</div>
+  </div>
+  <ul>
+    <li *ngFor="let producto of carritoService.products">
+      <div class="producto-content">
+        <div class="producto-content-image">
+          <img
+            [src]="producto.imageUrl"
+            alt="{{ producto.title }}"
+            class="producto-img"
+          />
+        </div>
+        <div class="producto-detalles">
+          {{ producto.title }} ({{ producto.tipoSeleccionado.tipo }}) X
+          {{ producto.cantidad }} -
+          {{ producto.tipoSeleccionado.price * producto.cantidad }}€
+        </div>
+      </div>
+
+      <button class="remove-button" (click)="removeProduct(producto)">
+        <custom-icon-svg
+          src="icons/papelera.svg"
+          [color]="'#ff8118'"
+          [size]="12"
+        />
+      </button>
+    </li>
+  </ul>
+
+  <ng-container *ngIf="carritoService.products.length === 0">
+    <div class="mensaje-vacio">El carrito está vacío</div>
+  </ng-container>
+
+  <ng-container *ngIf="carritoService.products.length > 0">
+    <div class="button-father">
+      <custom-button
+        texto="Ir a la cesta"
+        tipo="primario"
+        (click)="router.navigate(['/carrito'])"
+      />
+    </div>
+  </ng-container>
+</div>

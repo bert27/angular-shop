@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { IconSvgComponent } from "../components/icon-svg/icon-svg.component";
+import { IconSvgComponent } from '../icon-svg/icon-svg.component';
 
 @Component({
   selector: 'app-footer',

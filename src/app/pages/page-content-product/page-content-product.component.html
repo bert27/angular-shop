@@ -4,14 +4,23 @@
       <img [src]="productData?.imageUrl" alt="{{ productData?.title }}" />
     </div>
     <div class="product-description">
-      <h1 class="product-title">{{ productData?.title }}</h1>
+      <h3 class="product-title">{{ productData?.title }}: {{ typeProduct }}</h3>
       <p class="description-text">{{ productData?.description }}</p>
-      <!-- Asegúrate de que 'description' esté en productData -->
-    </div>
 
-    <div class="button-father">
-      <custom-button texto="Añadir al carrito" tipo="primario" />
+      <div class="price">{{ getPrice() }}€</div>
+      <!-- Muestra el precio en euros -->
+      <div class="button-father">
+        <custom-button
+          texto="Añadir a la cesta"
+          tipo="secundario"
+          (click)="addShoppingBasket()" 
+        />
+        <custom-button
+          texto="Comprar ya"
+          tipo="primario"
+          (click)="router.navigate(['/carrito'])"
+        />
+      </div>
     </div>
-
   </div>
 </div>

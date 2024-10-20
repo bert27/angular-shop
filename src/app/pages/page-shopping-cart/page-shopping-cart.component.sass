@@ -1,0 +1,90 @@
+.shopping-cart
+  padding: 16px
+  background-color: #f9f9f9
+  border-radius: 8px
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1)
+
+  h1
+    font-size: 24px
+    margin-bottom: 16px
+    font-weight: bold
+
+  .cart-layout
+    display: flex
+    justify-content: space-between
+    align-items: flex-start
+
+  .product-list
+    flex: 1
+    list-style: none
+    padding: 0
+    margin-right: 20px
+
+  .product-item
+    display: flex
+    align-items: center
+    margin-bottom: 16px
+    padding: 8px
+    border: 1px solid #ddd
+    border-radius: 4px
+    background-color: #fff
+    box-shadow: 0 1px 5px rgba(0, 0, 0, 0.1)
+    transition: box-shadow 0.3s
+
+    &:hover
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2)
+
+  .product-image
+    width: 100px
+    height: auto
+    margin-right: 16px
+    border-radius: 4px
+
+  .product-details
+    flex-grow: 1
+
+    h2
+      font-size: 18px
+      margin: 0
+      font-weight: semi-bold
+
+    p
+      margin: 4px 0
+      color: #555 // Color más suave para los detalles
+
+  .remove-button-container
+    margin-left: 16px // Espaciado entre los detalles y el botón de eliminar
+    align-self: center
+
+    .remove-button
+      background-color: red
+      color: white
+      border: none
+      padding: 0
+      cursor: pointer
+      font-size: 12px
+      border-radius: 4px
+      display: flex
+      align-items: center
+      justify-content: center
+      width: 25px
+      height: 25px
+
+      &:hover
+        opacity: 0.8 // Efecto hover para el botón de eliminar
+
+  .checkout-column
+    display: flex
+    flex-direction: column
+    justify-content: flex-start
+    width: 200px
+
+  .total-price
+    font-size: 18px
+    margin-bottom: 16px
+    text-align: right
+    font-weight: bold // Resalta el total
+
+  .checkout-button
+    display: flex
+    justify-content: flex-end

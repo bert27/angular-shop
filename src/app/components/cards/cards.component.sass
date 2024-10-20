@@ -1,31 +1,33 @@
 .cards-container
-  display: flex // Activa el modelo de flexbox
-  flex-wrap: wrap // Permite que las tarjetas se envuelvan en filas
-  justify-content: flex-start // Centra las tarjetas horizontalmente
-  align-items: flex-start // Alinea las tarjetas en la parte superior
+  display: flex
+  flex-wrap: wrap
+  justify-content: flex-start
+  align-items: flex-start
   gap: 16px // Espacio entre las tarjetas
-  margin-left: 8px // Espacio entre las tarjetas reducido
-  margin-top: 12px // Mayor espacio entre tarjetas
-  width: 100% // Asegura que el contenedor ocupe todo el ancho
+  margin-left: 8px
+  margin-top: 12px
+  width: 100%
   margin-bottom: 12px
-.custom-card
-  flex: 0 0 calc(25% - 16px) // Establece un ancho del 25% para cada tarjeta
-  // Pantallas grandes
-  @media (min-width: 1200px)
-    .card
-      flex: 0 0 calc(25% - 16px) // 4 tarjetas por fila (restando el gap)
-
-  // Pantallas medianas
-  @media (min-width: 992px) and (max-width: 1200px)
-    .card
-      flex: 0 0 calc(33.33% - 16px) // 3 tarjetas por fila
 
   // Pantallas pequeñas
   @media (max-width: 768px)
-    .card
-      flex: 0 0 calc(50% - 16px) // 2 tarjetas por fila
+    margin-left: 13px
+    width: 96%
+
+.custom-card
+  width: calc(25% - 12px) // Ajusta el ancho de la tarjeta restando la mitad del gap para 4 tarjetas por fila
+  // Pantallas grandes
+  @media (min-width: 1200px)
+    width: calc(25% - 12px) // 4 tarjetas por fila
+
+  // Pantallas medianas
+  @media (min-width: 992px) and (max-width: 1200px)
+    width: calc(25% - 16px) // 3 tarjetas por fila
+
+  // Pantallas pequeñas
+  @media (max-width: 768px)
+    width: calc(50% - 16px) // 2 tarjetas por fila
 
   // Pantallas muy pequeñas
   @media (max-width: 480px)
-    flex-direction: column // Cambia a columna en pantallas muy pequeñas
-    align-items: center // Centra las tarjetas
+    width: calc(48% - 8px) // 2 tarjetas por fila, ajustando el gap a 8px

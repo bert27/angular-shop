@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-
-import {
-  ArticleInterface,
-  ProductDataInterface,
-} from '../../../data/interfaces-moddel';
-import { articlesBlog, productsData } from '../../../data/data';
+import { ProductDataInterface } from '../../../data/interfaces-moddel';
+import { productsData } from '../../../data/data';
 import { BotonComponent } from '../../components/boton/boton.component';
+import { CarritoService } from '../../../services/carrito.service';
 
 @Component({
   selector: 'app-page-content-product',
@@ -16,54 +13,43 @@ import { BotonComponent } from '../../components/boton/boton.component';
   imports: [BotonComponent],
 })
 export class PageContentProductComponent {
-  productData: {
-    title: string;
-    imageUrl: string;
-    description: string | undefined;
-  } | null = null;
+  productData: ProductDataInterface | null = null;
+  typeProduct: string | null = null;
 
-  constructor(private route: ActivatedRoute, private router: Router) {
+
+  constructor(private route: ActivatedRoute, public router: Router,private carritoService: CarritoService) {
     this.route.paramMap.subscribe((params) => {
-      const title = params.get('title')?.replace(/-/g, ' '); // Reemplaza los guiones por espacios
-      const type = this.route.snapshot.data['type']; // Recupera el tipo (product o article) de la propiedad data
+      const title = params.get('title')?.replace(/-/g, ' ');
+      this.typeProduct = params.get('tipo');
+      const type = this.route.snapshot.data['type'];
 
-      console.log('title', title, type);
       if (title && type) {
         if (type === 'product') {
-          // Buscar en la lista de productos
           const foundProduct = productsData.find(
             (product: ProductDataInterface) =>
               product.title.toLowerCase() === title.toLowerCase()
           );
-          console.log('foundProduct', foundProduct);
+
           if (foundProduct) {
-            this.productData = {
-              title: foundProduct.title,
-              imageUrl: foundProduct.imageUrl,
-              description: foundProduct.description,
-            };
+            this.productData = foundProduct; // Asignación directa sin necesidad de crear un nuevo objeto
           } else {
-            // Redirigir a la página principal si no se encuentra el producto
-            this.router.navigate(['/']);
-          }
-        } else if (type === 'article') {
-          // Buscar en la lista de artículos
-          const foundArticle = articlesBlog.find(
-            (article: ArticleInterface) =>
-              article.title.toLowerCase() === title.toLowerCase()
-          );
-          if (foundArticle) {
-            this.productData = {
-              title: foundArticle.title,
-              imageUrl: foundArticle.imageUrl,
-              description: foundArticle.bodyTitle,
-            };
-          } else {
-            // Redirigir a la página principal si no se encuentra el artículo
             this.router.navigate(['/']);
           }
         }
       }
     });
+  }
+
+  getPrice(): number | undefined {
+    return this.productData?.options.find(option => option.tipo === this.typeProduct)?.price;
+  }
+
+  addShoppingBasket(): void { // Eliminar parámetros de entrada
+    if (this.productData) {
+      const selectedOption = this.productData.options.find(option => option.tipo === this.typeProduct);
+      if (selectedOption) {
+        this.carritoService.addProduct(this.productData, selectedOption); // Pasar los datos correctos al servicio
+      }
+    }
   }
 }

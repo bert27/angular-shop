@@ -1,5 +1,5 @@
 <app-head />
-<main class="main">
-<router-outlet />
+<main class="main" [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
+  <router-outlet #o="outlet" />
 </main>
 <app-footer />

@@ -1,4 +1,8 @@
-<div class="card" id="my-card" (click)="navigateToProduct(cardData)">
+<div
+  class="card"
+  id="my-card"
+  (click)="navigateToProduct(cardData, selectedOption)"
+>
   <div class="image-content-f">
     <div id="image-content" class="image-content">
       <img
@@ -38,6 +42,7 @@
     </p>
 
     <div
+      class="options-f-class"
       style="
         margin-top: 16px;
         display: flex;
@@ -50,13 +55,15 @@
         [(selectedOption)]="selectedOption"
         [options]="cardData.options"
       />
-      <custom-button
-        texto="Añadir a la cesta"
-        tipo="primario"
-        [disabled]="!cardData.stock || !selectedOption"
-        (click)="handleAddToCart()"
-        style="margin-left: 10px"
-      />
+      <div class="second-button">
+        <custom-button
+          texto="Añadir a la cesta"
+          tipo="primario"
+          [disabled]="!cardData.stock || !selectedOption"
+          (click)="handleAddToCart()"
+          style="margin-left: 10px"
+        />
+      </div>
     </div>
   </ng-container>
 </div>

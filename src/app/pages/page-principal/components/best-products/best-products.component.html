@@ -1,0 +1,26 @@
+<section class="section-carousel">
+  <div class="container">
+    <h3 class="products-title">Nuestros Mejores Productos</h3>
+    <div class="slider">
+      <owl-carousel-o [options]="customOptions" class="owl-stage">
+        <ng-container *ngFor="let item of bestProducts">
+          <ng-template carouselSlide [id]="item.title">
+            <div class="card" (click)="navigateToProduct(item, item.options[0])">
+              <img
+                class="product-image"
+                [src]="item.imageUrl"
+                [alt]="item.title"
+              />
+              <h4 class="product-title">{{ item.title }}</h4>
+              <p class="product-description">{{ item.description }}</p>
+              <div class="product-info">
+                <p class="product-tipo">{{ item.options[0].tipo }}</p>
+                <p class="product-price">{{ item.options[0].price }}€</p>
+              </div>
+            </div>
+          </ng-template>
+        </ng-container>
+      </owl-carousel-o>
+    </div>
+  </div>
+</section>

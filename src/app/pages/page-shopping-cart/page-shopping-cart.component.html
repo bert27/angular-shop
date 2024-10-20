@@ -1,0 +1,45 @@
+<div class="shopping-cart">
+  <h1>Tu Cesta</h1>
+
+  <div *ngIf="productos.length === 0; else productList">
+    <p>Tu cesta está vacía.</p>
+  </div>
+
+  <ng-template #productList>
+    <div class="cart-layout">
+      <ul class="product-list">
+        <li *ngFor="let producto of productos">
+          <div class="product-item" style="display: flex; justify-content: space-between;">
+            <div class="product-details" style="flex: 1;">
+              <img
+                [src]="producto?.imageUrl"
+                alt="{{ producto.tipoSeleccionado?.tipo }}"
+                class="product-image"
+              />
+              <h2>{{ producto.tipoSeleccionado?.tipo }}</h2>
+              <p>Cantidad: {{ producto.cantidad }}</p>
+              <p>Precio: {{ producto.tipoSeleccionado?.price }} €</p>
+            </div>
+            <div class="remove-button-container" style="align-self: center;">
+              <button class="remove-button" (click)="removeProduct(producto)">
+                <custom-icon-svg
+                  src="icons/papelera.svg"
+                  [color]="'#ff8118'"
+                  [size]="12"
+                />
+              </button>
+            </div>
+          </div>
+        </li>
+      </ul>
+      <div class="checkout-column">
+        <div class="total-price">
+          <p>{{ getTotalPrice() }}</p>
+        </div>
+        <div class="checkout-button">
+          <custom-button texto="Tramitar Pedido" tipo="primario" (click)="router.navigate(['/checkout'])" />
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</div>

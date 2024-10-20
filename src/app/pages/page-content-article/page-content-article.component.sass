@@ -1,0 +1,55 @@
+.article-content
+  padding: 20px
+  background-color: #f9f9f9
+  border: 1px solid #ddd
+  border-radius: 8px
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
+  margin: 20px
+  color: black
+  display: flex
+  flex-direction: column
+  align-items: center
+
+  .article-header
+    text-align: center
+
+  .article-title
+    font-size: 24px // Tamaño de título más pequeño
+    font-weight: bold
+    color: #333
+    margin-bottom: 15px
+
+  .article-image
+    width: 100%
+    max-width: 800px
+    margin-top: 20px // Margen superior
+    margin-bottom: 15px
+    border-radius: 4px
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) // Sombra en la imagen
+    overflow: hidden
+
+    img
+      width: 100%
+      height: auto
+      max-height: 200px // Limitar la altura máxima de la imagen
+      object-fit: cover
+      border-radius: 4px
+
+  .article-body
+    text-align: center // Centrar el texto
+    font-size: 16px
+    line-height: 1.5
+    color: #555
+
+    .article-subtitle
+      margin: 10px 0
+      font-size: 20px // Tamaño de subtítulo
+
+    .article-text
+      margin: 10px 0
+
+  .article-actions
+    margin-top: 20px
+    display: flex
+    width: 100% // Añadir ancho completo al contenedor
+    justify-content: flex-end // Alinear el botón al final

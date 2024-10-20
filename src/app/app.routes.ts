@@ -4,6 +4,9 @@ import { PagePrincipalComponent } from './pages/page-principal/page-principal.co
 import { BlogPageComponent } from './pages/blog/blog-page/blog-page.component';
 import { MetodoEnvioPageComponent } from './pages/metodo-envio/metodo-envio-page/metodo-envio-page.component';
 import { PageContentProductComponent } from './pages/page-content-product/page-content-product.component';
+import { PageContentArticleComponent } from './pages/page-content-article/page-content-article.component';
+import { PageShoppingCartComponent } from './pages/page-shopping-cart/page-shopping-cart.component';
+import { PaymentPageComponent } from './pages/page-payment/payment-page.component';
 
 export const routes: Routes = [
   { path: '', component: PagePrincipalComponent },
@@ -11,17 +14,18 @@ export const routes: Routes = [
   { path: 'blog', component: BlogPageComponent },
   { path: 'metodo-envio', component: MetodoEnvioPageComponent },
   
-  // Rutas dinámicas para productos y artículos
   {
-    path: 'producto/:title', // Ruta para los productos
+    path: 'producto/:title/:tipo', 
     component: PageContentProductComponent,
     data: { type: 'product' },
   },
   {
-    path: 'articulo/:title', // Ruta para los artículos
-    component: PageContentProductComponent,
+    path: 'articulo/:title', 
+    component: PageContentArticleComponent,
     data: { type: 'article' },
   },
   
-  { path: '**', redirectTo: '', pathMatch: 'full' }, // Redirige a la página principal si la ruta no coincide
+  { path: 'carrito', component: PageShoppingCartComponent }, 
+  { path: 'checkout', component: PaymentPageComponent }, 
+  { path: '**', redirectTo: '', pathMatch: 'full' }, 
 ];

@@ -1,63 +1,106 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ProductDataInterface } from '../data/interfaces-moddel';
+
 interface Option {
   tipo: string;
   price: number;
 }
+
 export interface ProductCarritoInterface extends ProductDataInterface {
-  cantidad: number; // Propiedad para la cantidad
-  tipoSeleccionado: Option; // Propiedad para la opción seleccionada
+  cantidad: number;
+  tipoSeleccionado: Option;
 }
 
 @Injectable({
   providedIn: 'root',
 })
 export class CarritoService {
-  public productos: ProductCarritoInterface[] = []; // Cambia a ProductCarritoInterface
-  private cantidadProductosSubject = new BehaviorSubject<number>(0); // Inicializa con 0
+  public products: ProductCarritoInterface[] = [];
+  private cantidadProductosSubject = new BehaviorSubject<number>(0);
 
-  agregarProducto(producto: ProductDataInterface, optionSelect: Option) {
-    // Verifica si el producto ya existe en el carrito
-    const productoExistente = this.productos.find(
+  constructor() {
+    this.loadInLocalStorage(); // Cargar productos de localStorage al inicializar
+  }
+
+  addProduct(producto: ProductDataInterface, optionSelect: Option) {
+    console.log('agregando producto', producto);
+    const productoExistente = this.products.find(
       (p) =>
         p.title === producto.title &&
         p.tipoSeleccionado?.tipo === optionSelect?.tipo
-    ); // Ajusta la comparación según lo que consideres único
+    );
 
     if (productoExistente) {
-      // Si el producto ya existe, aumentar su cantidad
-      productoExistente.cantidad += 1; // Aumenta la cantidad
+      productoExistente.cantidad += 1;
     } else {
-      // Si no existe, agregarlo a la lista
       const nuevoProducto: ProductCarritoInterface = {
         ...producto,
         cantidad: 1,
-        tipoSeleccionado: optionSelect, // Guarda la opción seleccionada
+        tipoSeleccionado: optionSelect,
       };
-      this.productos.push(nuevoProducto);
+      this.products.push(nuevoProducto);
     }
 
-    this.cantidadProductosSubject.next(this.productos.length); // Actualiza la cantidad total
+    this.saveInLocalStorage(); // Guardar los productos actualizados
+    this.cantidadProductosSubject.next(this.products.length);
   }
-  // Método para eliminar producto
-  eliminarProducto(productoAEliminar: ProductCarritoInterface) {
-    // Filtrar el producto a eliminar
-    this.productos = this.productos.filter(
+
+  removeProduct(productoAEliminar: ProductCarritoInterface) {
+    this.products = this.products.filter(
       (producto) =>
         producto.title !== productoAEliminar.title ||
         producto.tipoSeleccionado?.tipo !==
           productoAEliminar.tipoSeleccionado?.tipo
     );
 
-    // Actualiza la cantidad de productos
-    this.cantidadProductosSubject.next(this.productos.length);
-  }
-  getProductos(): ProductCarritoInterface[] {
-    return this.productos; // Devuelve la lista de productos en el carrito
+    this.saveInLocalStorage(); // Guardar los productos actualizados
+    this.cantidadProductosSubject.next(this.products.length);
   }
 
-  obtenerCantidadProductos() {
-    return this.cantidadProductosSubject.asObservable(); // Devuelve un observable
+  getProductos(): ProductCarritoInterface[] {
+    return this.products;
+  }
+
+  getProductCount() {
+    console.log('get productg count');
+    return this.cantidadProductosSubject.asObservable();
+  }
+
+  private saveInLocalStorage() {
+    if (typeof localStorage !== 'undefined') {
+      // Verifica si localStorage está definido
+      localStorage.setItem('productosCarrito', JSON.stringify(this.products));
+    }
+  }
+  getTotalPrice(): number {
+    return this.products.reduce((total, producto) => {
+      const price = producto.tipoSeleccionado?.price || 0;
+      return total + price * producto.cantidad;
+    }, 0);
+  }
+  getTotalPriceWithQuantity(): string {
+    const total = this.products.reduce((sum, producto) => {
+      const price = producto.tipoSeleccionado?.price || 0;
+      return sum + price * producto.cantidad;
+    }, 0);
+
+    const cantidad = this.products.reduce(
+      (sum, producto) => sum + producto.cantidad,
+      0
+    );
+
+    return `Subtotal (${cantidad} productos): ${total.toFixed(2)} €`;
+  }
+
+  public loadInLocalStorage() {
+    if (typeof localStorage !== 'undefined') {
+      // Verifica si localStorage está definido
+      const productosGuardados = localStorage.getItem('productosCarrito');
+      if (productosGuardados) {
+        this.products = JSON.parse(productosGuardados);
+        this.cantidadProductosSubject.next(this.products.length); // Actualiza la cantidad
+      }
+    }
   }
 }

@@ -1,6 +1,7 @@
 .product-content
+  width: 100%
   display: flex
-  flex-direction: column
+  flex-direction: row
   align-items: center
   text-align: center
   padding: 20px
@@ -9,30 +10,49 @@
   border-radius: 8px
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
   margin: 20px
-  max-width: 400px
   transition: transform 0.3s, box-shadow 0.3s
   color: black
+  justify-content: center // Centra el contenido
+
   &:hover
     transform: translateY(-2px)
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2)
 
-  .product-title
-    font-size: 24px
-    font-weight: bold
-    color: #333
-    margin-bottom: 10px
-  .description-text
   .product-content-card
-   display: flex
-   justify-content: space-between
-   align-items: center
-  .product-image
+    display: flex
     width: 100%
-    max-width: 200px // Ajusta este valor para hacer la imagen más pequeña
+    justify-content: center // Centra las columnas
+    align-items: flex-start
+
+  .product-image
+    width: 30% // Ajustar el ancho para centrar
+    max-width: 300px
     margin: 0 auto
 
     img
-      width: 100px
+      width: 100% // Asegura que la imagen se ajuste al contenedor
       height: auto
       border-radius: 4px
       object-fit: cover
+
+  .product-description
+    width: 60% // Ajustar el ancho para centrar
+
+    .price
+      width: 60%
+      font-size: 1.5rem
+      font-weight: bold
+      color: #ff5722
+      padding: 5px
+      border: 1px solid #ff5722
+      border-radius: 4px
+      background-color: rgba(255, 87, 34, 0.1)
+      margin: 0 auto
+      margin-top: 10px
+      margin-bottom: 10px
+
+  .button-father
+    display: flex
+    flex-direction: row // Cambiar a fila
+    justify-content: center // Centra los botones
+    gap: 10px // Espaciado entre los botones

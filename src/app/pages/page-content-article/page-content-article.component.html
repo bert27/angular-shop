@@ -1,0 +1,19 @@
+<div class="article-content">
+    <div class="article-header">
+      <h1 class="article-title">{{ articleData?.title }}</h1>
+    </div>
+  
+    <div class="article-image">
+      <img [src]="articleData?.imageUrl" alt="{{ articleData?.title }}" />
+    </div>
+  
+    <div class="article-body">
+      <h2 class="article-subtitle">{{ articleData?.bodyTitle }}</h2>
+      <p class="article-text">{{ articleData?.textContent }}</p>
+    </div>
+  
+    <div class="article-actions">
+      <custom-button texto="Volver a la lista" tipo="secundario" (click)="router.navigate(['/'])"></custom-button>
+    </div>
+  </div>
+  

@@ -1,0 +1,74 @@
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
+@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+
+:host {
+  ::ng-deep .owl-stage {
+    display: flex;
+    width: 84vw;
+    overflow: hidden;
+  }
+
+  .container {
+    width: 84vw;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+    /* color: black;*/
+    /* background: #1e9af2*/
+  }
+
+  ::ng-deep .owl-nav {
+    font-weight: bold;
+    cursor: pointer;
+    display: none;
+  }
+
+  ::ng-deep .owl-carousel {
+    width: 100%;
+    margin: 0 auto;
+  }
+
+  .section-carousel {
+    padding-top: 10px;
+    width: 87%;
+    margin: 0 auto;
+    padding-bottom: 20px;
+  }
+
+  .product-image {
+    width: 100px;
+    border-radius: 5px;
+  }
+
+  .card {
+    width: 180px;
+    height: 450px;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background: #312e3f;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+  }
+
+  /* Nuevo CSS para alinear el tipo y el precio en una fila */
+  .product-info {
+    display: flex;
+    justify-content: space-between; /* Alinea el tipo y precio a los lados */
+    align-items: center; /* Centra verticalmente el contenido */
+    margin-top: 10px;
+  }
+
+  .product-tipo {
+    font-size: 14px;
+    color: #ffffff;
+  }
+
+  .product-price {
+    font-size: 16px;
+    font-weight: bold; /* Hace que el precio sea en negrita */
+    color: #ffcc00; /* Color amarillo para el precio */
+  }
+}
