@@ -43,7 +43,13 @@ export class CarritoService {
     }
 
     this.saveInLocalStorage(); // Guardar los productos actualizados
-    this.cantidadProductosSubject.next(this.products.length);
+
+    // Actualiza la cantidad total de productos
+    const totalProductos = this.products.reduce(
+      (total, producto) => total + producto.cantidad,
+      0
+    );
+    this.cantidadProductosSubject.next(totalProductos);
   }
 
   removeProduct(productoAEliminar: ProductCarritoInterface) {

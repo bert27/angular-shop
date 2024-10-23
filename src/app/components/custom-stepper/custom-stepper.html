@@ -1,0 +1,51 @@
+<mat-stepper>
+  <!-- Primer paso: Dirección de Envío -->
+  <mat-step label="Dirección de envío" state="phone">
+    <custom-form (formCompleted)="onFormCompleted($event)"></custom-form>
+
+    <div>
+      <button mat-button (click)="nextStep()" matStepperNext>Siguiente</button>
+    </div>
+  </mat-step>
+
+  <!-- Segundo paso: Pago -->
+  <mat-step label="Pago" state="chat">
+    <div class="step-content">
+      <div class="column">
+        <h3>Enviar a:</h3>
+        <p><strong>Nombre:</strong> {{ direccionFormData.name }}</p>
+        <p><strong>Apellidos:</strong> {{ direccionFormData.surname }}</p>
+        <p><strong>Dirección:</strong> {{ direccionFormData.address }}</p>
+        <p><strong>Código Postal:</strong> {{ direccionFormData.postalCode }}</p>
+        <p><strong>País:</strong> {{ direccionFormData.country }}</p>
+        <p><strong>Provincia:</strong> {{ direccionFormData.province }}</p>
+        <p><strong>Ciudad:</strong> {{ direccionFormData.city }}</p>
+        <p><strong>Teléfono:</strong> {{ direccionFormData.phone }}</p>
+      </div>
+
+      <div class="column">
+        <form (submit)="pay(); $event.preventDefault()">
+          <div class="form-group">
+            <label for="card-element">Información de la tarjeta de crédito</label>
+            <div>Total: 230€</div>
+            <div id="card-element"></div>
+            <!-- Aquí se montará el elemento de Stripe -->
+            <div id="card-errors" role="alert"></div>
+            <!-- Para mostrar errores de tarjeta -->
+          </div>
+          <custom-button texto="Tramitar Pago" tipo="primario" type="submit"></custom-button>
+        </form>
+      </div>
+    </div>
+
+    <div>
+      <button mat-button matStepperPrevious>Atrás</button>
+      <button mat-button matStepperNext>Siguiente</button>
+    </div>
+  </mat-step>
+
+  <!-- Paso 3: Factura -->
+  <mat-step label="Factura">
+    <custom-button texto="Descargar factura" tipo="primario"></custom-button>
+  </mat-step>
+</mat-stepper>

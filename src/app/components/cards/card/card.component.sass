@@ -1,81 +1,83 @@
-@import '../../../../styles.sass' // Ajusta la ruta según sea necesario
+@import '../../../../styles.sass'
 
 .card
-  border: 1px solid #444 // Borde más oscuro
+  border: 1px solid #444
   border-radius: 8px
-  padding: 8px // Aumentado para mayor comodidad visual
-  background-color: #312E3F // Fondo oscuro
-  color: #ffffff // Texto blanco
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6) // Sombra más pronunciada
+  padding: 8px
+  background-color: #312E3F
+  color: #ffffff
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6)
   cursor: pointer
-  transition: transform 0.2s, box-shadow 0.2s // Animación al pasar el ratón
-  display: flex // Usar flexbox para alinear los elementos
-  flex-direction: column // Coloca los elementos en columna
-  height: 100% // Asegura que todas las tarjetas tengan la misma altura
+  transition: transform 0.2s, box-shadow 0.2s
+  display: flex
+  flex-direction: column
+  height: 100%
+  min-height: 300px
+  justify-content: space-between
 
   &:hover
-    transform: translateY(-4px) // Levanta la tarjeta al pasar el ratón
-    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8) // Sombra más intensa al pasar el ratón
+    transform: translateY(-4px)
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.8)
 
 .title-card
   margin-top: 10px
   margin-bottom: 10px
   text-align: center
 
-
 .price-class
-  font-weight: bold // Texto en negrita
-  font-size: 1.2em // Tamaño de fuente más grande
+  font-weight: bold
+  font-size: 1.2em
 
 .price-stock-container
-  display: flex // Usa flexbox para alinear elementos
-  justify-content: space-between // Espacio entre los elementos
-  align-items: center // Centra verticalmente los elementos
+  display: flex
+  justify-content: space-between
+  align-items: center
 
 .en-stock
-  color:  $colorPrimary // Color azul para "En stock"
+  color: $colorPrimary
 
 .agotado
-  color: red // Color rojo para "Agotado"
+  color: red
 
 .description-class
-  font-size: $tamañoTexto1 // Tamaño de fuente según tamañoTexto1
-  line-height: 1.5 // Espaciado entre líneas para mejorar la legibilidad
-  margin-top: 0.5em // Margen superior para separación visual
-  overflow: hidden // Oculta el desbordamiento si el texto es demasiado largo
-  display: -webkit-box // Para compatibilidad con webkit
-  -webkit-box-orient: vertical // Orientación vertical del contenedor
-  -webkit-line-clamp: 2 // Limita a 2 líneas
-  text-overflow: ellipsis // Añade "..." si el texto es demasiado largo
-  max-height: calc(2 * 1.5em) // Establece la altura máxima según el número de líneas
+  font-size: $tamañoTexto1
+  line-height: 1.5
+  margin-top: 0.5em
+  overflow: hidden
+  display: -webkit-box
+  -webkit-box-orient: vertical
+  -webkit-line-clamp: 2
+  text-overflow: ellipsis
+  max-height: calc(2 * 1.5em)
 
 .image-content-f
   display: flex
-  justify-content: center // Centra la imagen horizontalmente
-  align-items: center // Centra la imagen verticalmente
-  height: 100px // Ajusta la altura según sea necesario
+  justify-content: center
+  align-items: center
+  height: 100px
   padding: 0.5em
 
 .image-content
-  max-width: 200px // Limita el ancho máximo del contenedor
+  max-width: 200px
   @media (max-width: 768px)
     max-width: 150px
+
 img
-  max-width: 100%  // Asegura que la imagen ocupe todo el ancho del contenedor
-  height: auto // Mantiene la proporción de aspecto
-  border-radius: 4px // Bordes redondeados para la imagen
+  max-width: 100%
+  height: auto
+  border-radius: 4px
 
 #fila
   display: flex
-  justify-content: space-between // Espaciado entre botones
-  margin-top: 12px // Espacio superior para separación visual
+  justify-content: space-between
+  margin-top: 12px
 
 .options-f-class
-  flex-direction: row // Mantiene flex-direction en fila de forma predeterminada
+  flex-direction: row
 
-  // Solo en pantallas pequeñas
   @media (max-width: 768px)
-    flex-direction: column // Cambia la dirección a columna en pantallas pequeñas
+    flex-direction: column
+
 .second-button
   @media (max-width: 768px)
-    margin-top: 10px 
+    margin-top: 10px

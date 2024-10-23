@@ -3,13 +3,22 @@
 This project is an Angular-based online shop that is currently under construction. At this stage, it includes the product views and shopping cart functionality only. 
 The project is in Spanish.
 
+## **update:** *home page with carousels, product details, cart, stripe installed, not configured*
+
+## PC
+
 
 <div style="display: flex; align-items: center; width: 100%;">
-  <img src="public/screenshots/1.jpg" alt="Screenshot 1" style="width: 40%;">
-  <img src="public/screenshots/2.jpg" alt="Screenshot 2" style="width: 40%;">
+  <img src="public/screenshots/4.jpg" alt="Home" style="width: 40%;">
+  <img src="public/screenshots/2.jpg" alt="Products" style="width: 40%;">
 </div>
 
+## SmartPhone
 
+<div style="display: flex; align-items: center; width: 100%;">
+  <img src="public/screenshots/2a.jpg" alt="Home" style="width: 40%;">
+  <img src="public/screenshots/1a.jpg" alt="Products" style="width: 40%;">
+</div>
 
 ## Install
 
@@ -29,14 +38,6 @@ Run `ng generate component component-name` to generate a new component. You can 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
-## Running unit tests
-
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
 
 ## How to modify products
 
