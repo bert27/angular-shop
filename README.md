@@ -3,13 +3,20 @@
 This project is an Angular-based online shop that is currently under construction. At this stage, it includes the product views and shopping cart functionality only. 
 The project is in Spanish.
 
+## PC
+
 
 <div style="display: flex; align-items: center; width: 100%;">
-  <img src="public/screenshots/1.jpg" alt="Screenshot 1" style="width: 40%;">
-  <img src="public/screenshots/2.jpg" alt="Screenshot 2" style="width: 40%;">
+  <img src="public/screenshots/4.jpg" alt="Home" style="width: 40%;">
+  <img src="public/screenshots/2.jpg" alt="Products" style="width: 40%;">
 </div>
 
+## SmartPhone
 
+<div style="display: flex; align-items: center; width: 100%;">
+  <img src="public/screenshots/2a.jpg" alt="Home" style="width: 40%;">
+  <img src="public/screenshots/1a.jpg" alt="Products" style="width: 40%;">
+</div>
 
 ## Install
 
