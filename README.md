@@ -3,6 +3,8 @@
 This project is an Angular-based online shop that is currently under construction. At this stage, it includes the product views and shopping cart functionality only. 
 The project is in Spanish.
 
+## **update:** *home page with carousels, product details, cart, stripe installed, not configured*
+
 ## PC
 
 
