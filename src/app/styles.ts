@@ -52,9 +52,9 @@ export const styles = `
 
   main {
     position: relative;
-    min-height: 80vh
+    min-height: 80vh;
+    margin-top: 110px;
   }
-
 
   .content {
     display: flex;
@@ -142,6 +142,10 @@ export const styles = `
   }
 
   @media screen and (max-width: 650px) {
+    main {
+      margin-top: 150px; /* Ajuste para dispositivos móviles */
+    }
+
     .content {
       flex-direction: column;
       width: max-content;

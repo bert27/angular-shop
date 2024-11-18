@@ -68,7 +68,6 @@ export class BestProductsComponent {
 
   constructor(private router: Router) {
     // Inyección del Router
-    console.log('bestProducts', this.bestProducts);
   }
 
   navigateToProduct(

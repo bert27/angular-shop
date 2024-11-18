@@ -16,6 +16,24 @@ export interface ProductCarritoInterface extends ProductDataInterface {
   providedIn: 'root',
 })
 export class CarritoService {
+  updateProductQuantity(
+    producto: ProductCarritoInterface,
+    nuevaCantidad: number
+  ) {
+    const productoExistente = this.products.find(
+      (p) =>
+        p.title === producto.title &&
+        p.tipoSeleccionado.tipo === producto.tipoSeleccionado.tipo
+    );
+
+    if (productoExistente) {
+      productoExistente.cantidad = nuevaCantidad;
+    }
+
+    this.saveInLocalStorage();
+    this.updateTotalCantidad();
+  }
+
   public products: ProductCarritoInterface[] = [];
   private cantidadProductosSubject = new BehaviorSubject<number>(0);
 
@@ -23,8 +41,13 @@ export class CarritoService {
     this.loadInLocalStorage(); // Cargar productos de localStorage al inicializar
   }
 
-  addProduct(producto: ProductDataInterface, optionSelect: Option) {
-    console.log('agregando producto', producto);
+  addProduct(
+    producto: ProductDataInterface,
+    optionSelect: Option,
+    cantidad: number = 1 // Añadimos cantidad como parámetro opcional, por defecto 1
+  ) {
+    console.log('Añadiendo producto:', producto);
+
     const productoExistente = this.products.find(
       (p) =>
         p.title === producto.title &&
@@ -32,11 +55,13 @@ export class CarritoService {
     );
 
     if (productoExistente) {
-      productoExistente.cantidad += 1;
+      // Si el producto ya está en el carrito, sumamos la cantidad
+      productoExistente.cantidad += cantidad;
     } else {
+      // Si es un nuevo producto, lo añadimos con la cantidad especificada
       const nuevoProducto: ProductCarritoInterface = {
         ...producto,
-        cantidad: 1,
+        cantidad,
         tipoSeleccionado: optionSelect,
       };
       this.products.push(nuevoProducto);
@@ -44,12 +69,8 @@ export class CarritoService {
 
     this.saveInLocalStorage(); // Guardar los productos actualizados
 
-    // Actualiza la cantidad total de productos
-    const totalProductos = this.products.reduce(
-      (total, producto) => total + producto.cantidad,
-      0
-    );
-    this.cantidadProductosSubject.next(totalProductos);
+    // Actualizar la cantidad total de productos en el carrito
+    this.updateTotalCantidad();
   }
 
   removeProduct(productoAEliminar: ProductCarritoInterface) {
@@ -61,7 +82,7 @@ export class CarritoService {
     );
 
     this.saveInLocalStorage(); // Guardar los productos actualizados
-    this.cantidadProductosSubject.next(this.products.length);
+    this.updateTotalCantidad();
   }
 
   getProductos(): ProductCarritoInterface[] {
@@ -69,44 +90,55 @@ export class CarritoService {
   }
 
   getProductCount() {
-    console.log('get productg count');
     return this.cantidadProductosSubject.asObservable();
   }
 
-  private saveInLocalStorage() {
-    if (typeof localStorage !== 'undefined') {
-      // Verifica si localStorage está definido
-      localStorage.setItem('productosCarrito', JSON.stringify(this.products));
-    }
-  }
   getTotalPrice(): number {
     return this.products.reduce((total, producto) => {
       const price = producto.tipoSeleccionado?.price || 0;
       return total + price * producto.cantidad;
     }, 0);
   }
-  getTotalPriceWithQuantity(): string {
-    const total = this.products.reduce((sum, producto) => {
-      const price = producto.tipoSeleccionado?.price || 0;
-      return sum + price * producto.cantidad;
-    }, 0);
 
-    const cantidad = this.products.reduce(
-      (sum, producto) => sum + producto.cantidad,
-      0
-    );
+getTotalPriceWithQuantity(): string {
+  const total = this.products.reduce((sum, producto) => {
+    const price = producto.tipoSeleccionado?.price || 0;
+    return sum + price * producto.cantidad;
+  }, 0);
 
-    return `Subtotal (${cantidad} productos): ${total.toFixed(2)} €`;
-  }
+  const cantidad = this.products.reduce(
+    (sum, producto) => sum + producto.cantidad,
+    0
+  );
+
+  const totalFormatted = total % 1 === 0 ? total.toFixed(0) : total.toFixed(2);
+
+  return `Subtotal (${cantidad} productos): ${totalFormatted} €`;
+}
+
 
   public loadInLocalStorage() {
     if (typeof localStorage !== 'undefined') {
-      // Verifica si localStorage está definido
       const productosGuardados = localStorage.getItem('productosCarrito');
       if (productosGuardados) {
         this.products = JSON.parse(productosGuardados);
-        this.cantidadProductosSubject.next(this.products.length); // Actualiza la cantidad
+        this.updateTotalCantidad(); // Actualiza la cantidad
       }
     }
+  }
+
+  private saveInLocalStorage() {
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem('productosCarrito', JSON.stringify(this.products));
+    }
+  }
+
+  private updateTotalCantidad() {
+    // Calcula la cantidad total de productos en el carrito
+    const totalProductos = this.products.reduce(
+      (total, producto) => total + producto.cantidad,
+      0
+    );
+    this.cantidadProductosSubject.next(totalProductos); // Actualiza el BehaviorSubject
   }
 }

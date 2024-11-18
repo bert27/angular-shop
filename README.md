@@ -1,9 +1,10 @@
 # Ng-shop
 
-This project is an Angular-based online shop that is currently under construction. At this stage, it includes the product views and shopping cart functionality only. 
-The project is in Spanish.
+This project is an online store built with Angular and is currently under construction. At this stage, it includes the product views, a shopping cart functionality, and a carousel on the homepage.
 
-## **update:** *home page with carousels, product details, cart, stripe installed, not configured*
+The project is in Spanish. Stripe is configured, but you will need to update your keys: change the public key in the frontend and the private key on the server. The keys are located in the .env files.
+
+To start the server, navigate to the stripe-server directory and run: npm start
 
 ## PC
 

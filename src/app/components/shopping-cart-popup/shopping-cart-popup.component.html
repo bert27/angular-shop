@@ -5,7 +5,7 @@
   (mouseleave)="startAutoClose()"
 >
   <div class="carrito-header">
-    <h2>Productos en el Carrito</h2>
+    <h2 class="carrito-title">Productos en el Carrito</h2>
     <button
       (click)="closeCarritoView()"
       class="close-button"
@@ -14,12 +14,11 @@
       X
     </button>
   </div>
-  <div class="subtotal" *ngIf="carritoService.products.length > 0">
-   
+  <div class="subtotal" *ngIf="productos.length > 0">
     <div class="amount">{{ getTotalPrice() }}</div>
   </div>
   <ul>
-    <li *ngFor="let producto of carritoService.products">
+    <li *ngFor="let producto of productos">
       <div class="producto-content">
         <div class="producto-content-image">
           <img
@@ -29,9 +28,13 @@
           />
         </div>
         <div class="producto-detalles">
-          {{ producto.title }} ({{ producto.tipoSeleccionado.tipo }}) X
-          {{ producto.cantidad }} -
-          {{ producto.tipoSeleccionado.price * producto.cantidad }}€
+          {{ producto.title }} ({{ producto.tipoSeleccionado.tipo }}) -
+          {{ producto.tipoSeleccionado.price }}€
+          <custom-input
+            [value]="producto.cantidad"
+            (valueChange)="updateCantidad(producto, $event)"
+            [typeVisual]="'no-material'"
+          />
         </div>
       </div>
 
@@ -40,22 +43,22 @@
           src="icons/papelera.svg"
           [color]="'#ff8118'"
           [size]="12"
-        />
+        ></custom-icon-svg>
       </button>
     </li>
   </ul>
 
-  <ng-container *ngIf="carritoService.products.length === 0">
+  <ng-container *ngIf="productos.length === 0">
     <div class="mensaje-vacio">El carrito está vacío</div>
   </ng-container>
 
-  <ng-container *ngIf="carritoService.products.length > 0">
+  <ng-container *ngIf="productos.length > 0">
     <div class="button-father">
       <custom-button
         texto="Ir a la cesta"
         tipo="primario"
-        (click)="router.navigate(['/carrito'])"
-      />
+        (click)="navigateTo('/carrito')"
+      ></custom-button>
     </div>
   </ng-container>
 </div>

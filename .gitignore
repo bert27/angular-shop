@@ -5,7 +5,9 @@
 /tmp
 /out-tsc
 /bazel-out
-
+# Environment Configuration Files
+.env
+stripe-server/.env
 # Node
 /node_modules
 stripe-server/node_modules

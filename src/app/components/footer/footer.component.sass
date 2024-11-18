@@ -1,14 +1,16 @@
+@import '../../../styles.sass' // Importa las configuraciones generales
+
 footer
   width: 100%
-  background-color: #126268
-  color: #ffffff              // Texto en blanco
+  background-color: $colorPrimary // Usa el color importado
+  color: #ffffff                 // Texto en blanco
   text-align: center
   position: relative
   bottom: 0
 
 .footer-content
   max-width: 1200px
-  margin: 0 auto              // Centra el contenido horizontalmente
+  margin: 0 auto                // Centra el contenido horizontalmente
   display: flex
   flex-direction: column
   align-items: center
@@ -25,7 +27,7 @@ p
     color: #ffffff
     text-decoration: none
     &:hover
-      color: #ff8118         // Cambia el color del enlace al pasar el mouse
+      color: #ff8118          // Cambia el color del enlace al pasar el mouse
 
 .social-media
   display: flex

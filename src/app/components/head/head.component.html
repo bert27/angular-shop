@@ -16,16 +16,21 @@
       (mouseover)="openCarritoView()"
       (mouseleave)="startAutoClose()"
     >
-      <div style="margin-left: 16px" (click)="router.navigate(['/carrito'])">
+      <div
+        style="margin-left: 16px; margin: 20px"
+        (click)="router.navigate(['/carrito'])"
+      >
         <custom-icon-svg
           src="icons/carrito-de-compras.svg"
           [color]="'#ff8118'"
+          [size]="50"
         />
       </div>
 
       <span class="numero-productos">{{ cantidadProductos }}</span>
+
+      <!-- Popup debe estar dentro del contenedor relativo -->
+      <app-shopping-cart-popup />
     </div>
   </div>
-
-  <app-shopping-cart-popup />
 </header>

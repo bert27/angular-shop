@@ -1,3 +1,4 @@
+@import '../../../styles.sass'
 .product-content
   width: 100%
   display: flex
@@ -5,13 +6,13 @@
   align-items: center
   text-align: center
   padding: 20px
-  background-color: #312E3F
+  background-color: $colorCard
   border: 1px solid #ddd
   border-radius: 8px
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1)
   margin: 20px
   transition: transform 0.3s, box-shadow 0.3s
-  justify-content: center // Centra el contenido
+  justify-content: center
 
   &:hover
     transform: translateY(-2px)
@@ -20,25 +21,24 @@
   .product-content-card
     display: flex
     width: 100%
-    justify-content: center // Centra las columnas
+    justify-content: center
     align-items: flex-start
 
   .product-image
-    width: 30% // Ajustar el ancho para centrar
+    width: 30%
     max-width: 300px
     margin: 0 auto
 
     img
-      width: 100% // Asegura que la imagen se ajuste al contenedor
+      width: 100%
       height: auto
       border-radius: 4px
       object-fit: cover
 
   .product-description
-    width: 60% // Ajustar el ancho para centrar
+    width: 60%
 
     .price
-      width: 60%
       font-size: 1.5rem
       font-weight: bold
       color: #ff5722
@@ -46,12 +46,19 @@
       border: 1px solid #ff5722
       border-radius: 4px
       background-color: rgba(255, 87, 34, 0.1)
-      margin: 0 auto
+
+    .price-quantity-row
+      width: 36%
+      display: flex
+      justify-content: space-evenly
+      align-items: center
+      gap: 10px
+      margin: 10px auto // Centra el elemento horizontalmente
       margin-top: 10px
       margin-bottom: 10px
 
-  .button-father
-    display: flex
-    flex-direction: row // Cambiar a fila
-    justify-content: center // Centra los botones
-    gap: 10px // Espaciado entre los botones
+    .button-father
+      display: flex
+      flex-direction: row
+      justify-content: center
+      gap: 10px

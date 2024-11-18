@@ -7,19 +7,23 @@
       <h3 class="product-title">{{ productData?.title }}: {{ typeProduct }}</h3>
       <p class="description-text">{{ productData?.description }}</p>
 
-      <div class="price">{{ getPrice() }}€</div>
-      <!-- Muestra el precio en euros -->
+      <!-- Nueva fila con precio y selector de cantidad -->
+      <div class="price-quantity-row">
+        <custom-quantity-selector
+          [(value)]="quantity"
+          (valueChange)="onQuantityChange($event)"
+          (click)="$event.stopPropagation(); $event.preventDefault()"
+        />
+        <div class="price">{{ getPrice() }}€</div>
+      </div>
+
       <div class="button-father">
         <custom-button
           texto="Añadir a la cesta"
           tipo="secundario"
-          (click)="addShoppingBasket()" 
+          (click)="addShoppingBasket()"
         />
-        <custom-button
-          texto="Comprar ya"
-          tipo="primario"
-          (click)="router.navigate(['/carrito'])"
-        />
+        <custom-button texto="Comprar ya" tipo="primario" (click)="buyNow()" />
       </div>
     </div>
   </div>

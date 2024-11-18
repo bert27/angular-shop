@@ -1,0 +1,17 @@
+<div class="quantity-selector">
+  <custom-button
+    texto="-"
+    tipo="primario"
+    [disabled]="value <= 1"
+    (click)="decrement($event)"
+  />
+
+  <custom-input
+    [value]="value"
+    (valueChange)="onInputChange($event)"
+    type="number"
+  />
+
+  <custom-button texto="+" tipo="primario" (click)="increment($event)" />
+</div>
+

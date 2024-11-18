@@ -1,0 +1,24 @@
+.quantity-selector
+  display: flex
+  align-items: center
+  gap: 0.5rem 
+
+
+
+  button
+    padding: 0.5rem 1rem
+    font-size: 1.2rem
+    font-weight: bold
+    background-color: #007bff
+    color: #fff
+    border: none
+    border-radius: 5px
+    cursor: pointer
+    transition: background-color 0.2s ease-in-out
+
+    &:hover
+      background-color: #0056b3
+
+    &:disabled
+      background-color: #ccc
+      cursor: not-allowed

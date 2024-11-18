@@ -1,74 +1,125 @@
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
 @import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
+@import '../../../../../styles.sass';
 
 :host {
-  ::ng-deep .owl-stage {
-    display: flex;
-    width: 84vw;
-    overflow: hidden;
-  }
+}
 
-  .container {
-    width: 84vw;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-    /* color: black;*/
-    /* background: #1e9af2*/
-  }
+:host ::ng-deep .owl-stage {
+  display: flex;
+  width: 84vw;
+  overflow: hidden;
+}
 
-  ::ng-deep .owl-nav {
-    font-weight: bold;
-    cursor: pointer;
-    display: none;
-  }
+.section-carousel {
+  padding-top: 10px;
+  width: 93%;
+  padding-bottom: 20px;
+  margin-left: 65px;
+}
 
-  ::ng-deep .owl-carousel {
-    width: 100%;
-    margin: 0 auto;
-  }
+.container {
+  width: 98%; /* Ancho deseado */
+  margin: inherit; /* Empuja el contenedor hacia la izquierda del todo */
+}
 
+:host ::ng-deep .owl-nav {
+  font-weight: bold;
+  cursor: pointer;
+  display: none;
+}
+
+:host ::ng-deep .owl-carousel {
+  width: 100%;
+  margin: 0 auto;
+}
+
+.card {
+  width: 20vw;
+  height: 325px; /* Altura fija para asegurar uniformidad */
+  padding: 20px;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  background-color: var(--colorCard);
+  text-align: center;
+  cursor: pointer;
+}
+
+.product-image-container {
+  width: 50%;
+  height: 120px; /* Altura fija para el contenedor de imágenes */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.product-image {
+  max-height: 100%; /* La imagen se adapta a la altura del contenedor */
+  max-width: 100%; /* La imagen se adapta al ancho del contenedor */
+  object-fit: contain; /* Escala la imagen sin deformarla ni recortarla */
+  object-position: center; /* Centra la imagen en el contenedor */
+}
+
+.products-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.product-title {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin: 10px 0;
+}
+
+.product-description {
+  font-size: 1rem;
+  margin: 10px 0;
+  flex-grow: 1; /* Asegura que el texto ocupe espacio proporcional */
+}
+
+.product-info {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.product-tipo {
+  font-size: 14px;
+}
+
+.product-price {
+  font-size: var(--TextSizeHead);
+  font-weight: bold;
+  color: var(--colorPrimary);
+}
+
+/* Media Queries para dispositivos responsivos */
+@media (max-width: 1024px) { /* Tablets (iPad y similares) */
   .section-carousel {
-    padding-top: 10px;
-    width: 87%;
-    margin: 0 auto;
-    padding-bottom: 20px;
+    margin-left: 30px; /* Ajusta el valor según sea necesario */
   }
-
-  .product-image {
-    width: 100px;
-    border-radius: 5px;
-  }
-
+  
   .card {
-    width: 180px;
-    height: 450px;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    background: #312e3f;
-    color: white;
-    text-align: center;
-    cursor: pointer;
+    width: 30vw; /* Las tarjetas serán más anchas en tablets */
   }
+}
 
-  /* Nuevo CSS para alinear el tipo y el precio en una fila */
-  .product-info {
-    display: flex;
-    justify-content: space-between; /* Alinea el tipo y precio a los lados */
-    align-items: center; /* Centra verticalmente el contenido */
-    margin-top: 10px;
+@media (max-width: 768px) { /* Móviles */
+  .section-carousel {
+    margin-left: 10px; /* Ajusta el valor según sea necesario */
   }
-
-  .product-tipo {
-    font-size: 14px;
-    color: #ffffff;
-  }
-
-  .product-price {
-    font-size: 16px;
-    font-weight: bold; /* Hace que el precio sea en negrita */
-    color: #ffcc00; /* Color amarillo para el precio */
+  
+  .card {
+    width: 90%; /* Las tarjetas ocuparán casi todo el ancho de la pantalla */
+    height: auto; /* Permite que la altura sea dinámica */
+    padding: 15px; /* Reduce el espacio interno */
   }
 }

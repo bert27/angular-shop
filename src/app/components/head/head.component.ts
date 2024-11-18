@@ -1,7 +1,6 @@
 import { Component, OnInit, OnDestroy, ViewChild } from '@angular/core';
 import { IconSvgComponent } from '../icon-svg/icon-svg.component';
 import { Router, RouterModule } from '@angular/router'; // Asegúrate de importar Router
-import { BotonComponent } from '../boton/boton.component';
 import { ShoppingCartPopupComponent } from '../shopping-cart-popup/shopping-cart-popup.component';
 import { CarritoService } from '../../../services/carrito.service';
 import { Subscription } from 'rxjs';
@@ -14,7 +13,6 @@ import { Subscription } from 'rxjs';
   imports: [
     IconSvgComponent,
     RouterModule,
-    BotonComponent,
     ShoppingCartPopupComponent,
   ],
 })
@@ -29,7 +27,6 @@ export class HeadComponent implements OnInit, OnDestroy {
     this.subscription = this.carritoService
       .getProductCount()
       .subscribe((count) => {
-        console.log('Cantidad de productos:', count) // Añade esta línea
         this.cantidadProductos = count;
       });
   }

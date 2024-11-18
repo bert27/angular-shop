@@ -8,17 +8,27 @@ import {
 } from '../../../../data/interfaces-moddel';
 import { CustomDropdownMaterialComponent } from '../../custom-dropdown-material/custom-dropdown-material.component';
 import { Router } from '@angular/router';
+import { CustomQuantitySelectorComponent } from '../../custom-quantity-selector/custom-quantity-selector.component';
 
 @Component({
   selector: 'custom-card',
   standalone: true,
-  imports: [CommonModule, BotonComponent, CustomDropdownMaterialComponent],
+  imports: [
+    CommonModule,
+    BotonComponent,
+    CustomDropdownMaterialComponent,
+    CustomQuantitySelectorComponent,
+  ],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.sass'],
 })
 export class CardComponent implements OnInit {
+  onQuantityChange(newQuantity: number): void {
+    console.log('Cantidad actualizada:', newQuantity);
+  }
   @Input() cardData!: ProductDataInterface | ArticleInterface;
   selectedOption!: { tipo: string; price: number }; // Cambia a un objeto para incluir tipo y precio
+  quantity: number = 1;
 
   constructor(private carritoService: CarritoService, private router: Router) {} // Inyecta Router aquí
 
@@ -31,9 +41,10 @@ export class CardComponent implements OnInit {
 
   addShoppingBasket(
     productSelect: ProductDataInterface,
-    optionSelect: { tipo: string; price: number }
+    optionSelect: { tipo: string; price: number },
+    quantity: number
   ) {
-    this.carritoService.addProduct(productSelect, optionSelect);
+    this.carritoService.addProduct(productSelect, optionSelect, quantity);
   }
 
   isArticle(
@@ -44,8 +55,7 @@ export class CardComponent implements OnInit {
 
   handleAddToCart() {
     if (!this.isArticle(this.cardData)) {
-      console.log("añadiendo")
-      this.addShoppingBasket(this.cardData, this.selectedOption);
+      this.addShoppingBasket(this.cardData, this.selectedOption, this.quantity);
     }
   }
 
@@ -55,14 +65,14 @@ export class CardComponent implements OnInit {
   ) {
     const productName = cardData.title.toLowerCase().replace(/\s+/g, '-'); // Convierte el nombre a una URL amigable
     const routePrefix = this.isArticle(cardData) ? 'articulo' : 'producto'; // Determina si es un artículo o un producto
-  
+
     let route = `/${routePrefix}/${productName}`; // Ruta base
-  
+
     // Solo añade el tipo si es un producto y selectedOption está definido
     if (!this.isArticle(cardData) && selectedOption) {
       route += `/${selectedOption.tipo}`; // Agrega el tipo para productos
     }
-  
+
     this.router.navigate([route]); // Redirige a la ruta adecuada
   }
 

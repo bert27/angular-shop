@@ -1,33 +1,32 @@
 .cards-container
   display: flex
   flex-wrap: wrap
-  justify-content: flex-start
-  align-items: flex-start
-  gap: 16px // Espacio entre las tarjetas
-  margin-left: 8px
-  margin-top: 12px
+  justify-content: start
+  align-items: stretch
+  row-gap: 16px
+  column-gap: 13px
+  padding: 12px 13px
   width: 100%
-  margin-bottom: 12px
-
-  // Pantallas pequeñas
-  @media (max-width: 768px)
-    margin-left: 13px
-    width: 96%
 
 .custom-card
-  width: calc(25% - 12px) // Ajusta el ancho de la tarjeta restando la mitad del gap para 4 tarjetas por fila
+  width: calc(25% - 12px) // Por defecto, 4 tarjetas por fila
+  height: auto
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+
   // Pantallas grandes
   @media (min-width: 1200px)
-    width: calc(25% - 12px) // 4 tarjetas por fila
+    width: calc(25% - 12px)
 
-  // Pantallas medianas
-  @media (min-width: 992px) and (max-width: 1200px)
-    width: calc(25% - 16px) // 3 tarjetas por fila
+  // Pantallas medianas (iPad incluido aquí)
+  @media (min-width: 768px) and (max-width: 1024px)
+    width: 32.1%
 
   // Pantallas pequeñas
   @media (max-width: 768px)
-    width: calc(50% - 16px) // 2 tarjetas por fila
+    width: 49%
 
   // Pantallas muy pequeñas
   @media (max-width: 480px)
-    width: calc(48% - 8px) // 2 tarjetas por fila, ajustando el gap a 8px
+    width: 100%

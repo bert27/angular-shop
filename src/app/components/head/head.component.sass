@@ -1,13 +1,17 @@
-@import '../../../styles.sass'  // Ajusta la ruta según la ubicación de tu archivo styles.sass
+@import '../../../styles.sass' // Importa las configuraciones generales
 
 header
+  position: fixed
+  top: 0
+  left: 0
+  z-index: 1000 // Asegura que el header esté encima de otros elementos
+  width: 100% // Asegura que cubra todo el ancho de la pantalla
   background-color: $colorPrimary
   padding: 10px
   border-bottom: 1px solid #333
   display: flex
   align-items: center
   justify-content: space-between
-  width: 100%
   box-sizing: border-box
   flex-wrap: wrap
 
@@ -32,42 +36,47 @@ header
       margin-right: 15px
       text-decoration: none
       color: #ffffff
-      font-size: $TextSizeHead 
-      transition: all 0.3s ease 
+      font-size: var(--TextSizeHead) // Usamos la variable global
+      transition: all 0.3s ease
 
       &:hover
-        font-size: $TextSizeHead * 1.1 
-        font-weight: bold 
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4) 
-        color: lighten(#ffffff, 10%) 
+        font-size: calc(var(--TextSizeHead) * 1.1) // Escalado dinámico en hover
+        font-weight: bold
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4)
+        color: lighten(#ffffff, 10%)
 
   .carrito-content
     display: flex
     align-items: center
-    width: 10%
+    width: 10% // Ancho por defecto
     margin-left: auto
     position: relative
     cursor: pointer
 
     .numero-productos
       position: absolute
-      top: -10px
-      left: 30px
+      top: 9px
+      left: 40px
       background-color: #ff8118
       color: white
       border-radius: 50%
-      width: 20px
-      height: 20px
+      width: 25px
+      height: 25px
       display: flex
       align-items: center
       justify-content: center
-      font-size: 12px
+      font-size: 15px
       font-weight: bold
+
 
 // Media query para pantallas en modo portrait
 @media (orientation: portrait)
   #column2-head
     width: 95% // Cambia el ancho a 100% en modo portrait
+
 @media (max-width: 768px)
   #column2-head
     width: 95% !important // Cambia el ancho a 100% en dispositivos móviles
+
+  .carrito-content
+    width: auto !important // Forzar ancho automático en móviles
