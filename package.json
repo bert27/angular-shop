@@ -6,7 +6,7 @@
     "start": "concurrently \"ng serve\" \"npm run open:chrome\"",
     "server": "node dist/angular-shop/server/server.mjs",
     "open:chrome": "npx open-cli http://localhost:3000 --app chrome",
-    "run start": "npm start",
+    "run start": "npm start && cd server && npm run start",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
@@ -67,4 +67,3 @@
     "rollup": "^4.23.0"
   }
 }
-

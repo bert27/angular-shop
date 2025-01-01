@@ -1,10 +1,37 @@
 # Ng-shop
 
-This project is an online store built with Angular and is currently under construction. At this stage, it includes the product views, a shopping cart functionality, and a carousel on the homepage.
+This project is an online store built with Angular.
 
 The project is in Spanish. Stripe is configured, but you will need to update your keys: change the public key in the frontend and the private key on the server. The keys are located in the .env files.
 
 To start the server, navigate to the stripe-server directory and run: npm start
+
+**V1.1 Features:**
+
+    •	Multiple payment gateways.
+    •	Invoice delivery via email with React HTML templates.
+    •	PDF generation attached with the company’s logo and VAT included.
+
+### Components:
+
+- Carousel with animations
+- Forms for user inputs
+- Shopping cart for managing products
+- Button to download invoices in PDF format
+- Responsive design for all devices
+
+### Configuration:
+
+- Data, colors, and sections are configured in data.ts.
+- Product configuration is located in products-data.ts, both in the data folder.
+- In selectedMethodPay, you can use monei or stripe. This will automatically switch the payment method.
+
+**Webhooks and External Communication:**
+
+    -  The server includes an example .env file. For the webhooks to work, use ngrok or any other tool to expose your local server to the internet.
+    -  If you deploy the server outside your local machine, this issue will not occur.
+    -  External communication allows payment gateways to return the status of the order (successful or failed) to the server.
+    -  Once the server receives the payment status, it sends a PDF invoice with a React HTML template.
 
 ## PC
 
@@ -26,22 +53,17 @@ navigate to the project and write npm i
 
 ## Start the web to get started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:3000/` Or click on start.windows.bat/start-mac.sh and it will start by itself.
+Run npm run start to start both the client and server. The client will run on http://localhost:3000/, and the server will run on http://localhost:4000/.
+
 The application will automatically reload if you change any of the source files.
+
+Alternatively, you can click on start-mac.sh (for macOS) or start-windows.bat (for Windows) to start the application.
 
 ---
 
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
-
-## Build
-
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
-
 ## How to modify products
 
-To modify the products, go to `src/data/data`, where you can find `export const productsData = [ cardProduct1, cardProduct2, macMini, cardProduct4, cardProduct5 ] as ProductDataInterface[];`. By changing the properties of these objects, you can add your own products.
+To modify the products, go to `src/data/products-data.ts`. This file contains an array of product objects exported as `productsData`. Each product has properties such as `title`, `description`, `stock`, `imageUrl`, `category`, and `options`. You can add or update products by modifying the objects in this file.
 
 ### Example
 
