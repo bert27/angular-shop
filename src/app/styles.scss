@@ -4,16 +4,59 @@
 @use "@angular/material" as mat;
 
 /* --------------------------------
-   2) Incluir el núcleo de Angular Material
+   2) Definir Variables SASS
+-------------------------------- */
+$tamañoTexto1: 30px;
+$tamañoTexto2: 20px;
+$TextSizeHead: 40px;
+$colorCard: #f4f6f7;
+$color-primary: #323E8A;    // Valor actual de dataWeb.colorPrimary
+$color-secondary: #6c757d;  // Valor actual de dataWeb.colorSecondary
+
+/* --------------------------------
+   3) Incluir el núcleo de Angular Material
 -------------------------------- */
 @include mat.core();
 
 /* --------------------------------
-   3) Definir Paletas de Colores Personalizadas
+   4) Definir Paletas de Colores Personalizadas
 -------------------------------- */
 
 /* Paleta Primaria Personalizada */
-$custom-primary-palette: mat.m2-define-palette(mat.$m2-green-palette, 500);
+$custom-primary-palette: mat.m2-define-palette(
+  (
+    50: lighten($color-primary, 45%),
+    100: lighten($color-primary, 35%),
+    200: lighten($color-primary, 25%),
+    300: lighten($color-primary, 15%),
+    400: lighten($color-primary, 5%),
+    500: $color-primary,
+    600: darken($color-primary, 5%),
+    700: darken($color-primary, 15%),
+    800: darken($color-primary, 25%),
+    900: darken($color-primary, 35%),
+    A100: lighten($color-primary, 60%),
+    A200: lighten($color-primary, 50%),
+    A400: lighten($color-primary, 40%),
+    A700: lighten($color-primary, 30%),
+    contrast: (
+      50: rgba(0, 0, 0, 0.87),
+      100: rgba(0, 0, 0, 0.87),
+      200: rgba(0, 0, 0, 0.87),
+      300: rgba(0, 0, 0, 0.87),
+      400: rgba(0, 0, 0, 0.87),
+      500: white,
+      600: white,
+      700: white,
+      800: white,
+      900: white,
+      A100: rgba(0, 0, 0, 0.87),
+      A200: white,
+      A400: white,
+      A700: white,
+    )
+  )
+);
 
 /* Paleta Secundaria Personalizada (Accent) */
 $custom-accent-palette: mat.m2-define-palette(mat.$m2-orange-palette, 500);
@@ -22,7 +65,7 @@ $custom-accent-palette: mat.m2-define-palette(mat.$m2-orange-palette, 500);
 $custom-warn-palette: mat.m2-define-palette(mat.$m2-red-palette, 600);
 
 /* --------------------------------
-   4) Definir el Tema Personalizado
+   5) Definir el Tema Personalizado
 -------------------------------- */
 $angular-shop-theme: mat.m2-define-light-theme(
   (
@@ -30,7 +73,7 @@ $angular-shop-theme: mat.m2-define-light-theme(
       theme-type: light,
       primary: $custom-primary-palette,
       accent: $custom-accent-palette,
-      /* Cambiado de 'tertiary' a 'accent' */ warn: $custom-warn-palette,
+      warn: $custom-warn-palette,
     ),
     density: (
       scale: 0,
@@ -39,17 +82,9 @@ $angular-shop-theme: mat.m2-define-light-theme(
 );
 
 /* --------------------------------
-   5) Aplicar el Tema a Todos los Componentes
+   6) Aplicar el Tema a Todos los Componentes
 -------------------------------- */
 @include mat.all-component-themes($angular-shop-theme);
-
-/* --------------------------------
-   6) Definir Variables SASS
--------------------------------- */
-$tamañoTexto1: 30px;
-$tamañoTexto2: 20px;
-$TextSizeHead: 40px;
-$colorCard: #f4f6f7;
 
 /* --------------------------------
    7) Definir Variables CSS (Custom Properties)
@@ -62,10 +97,10 @@ $colorCard: #f4f6f7;
   --colorCard: #{$colorCard};
   --colorBackground: #ffffff;
   --colorText: #000000;
-  --colorPrimary: #a4161a;
-  --colorSecondary: #6c757d;
-  --colorPrimaryHover: #a4161a;
-  --colorSecondaryHover: #6c757d;
+  --colorPrimary: #{$color-primary};                   // Sincronizado con SASS
+  --colorSecondary: #{$color-secondary};               // Sincronizado con SASS
+  --colorPrimaryHover: darken(#{$color-primary}, 10%);  // Generado dinámicamente
+  --colorSecondaryHover: darken(#{$color-secondary}, 20%); // Generado dinámicamente
   --colorDesactivado: #a9a9a9;
 }
 
