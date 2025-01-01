@@ -8,33 +8,26 @@
   justify-content: start
   align-items: stretch
   row-gap: 16px
-  column-gap: 13px
-  padding: 12px 13px
+  padding: 12px
   width: 100%
 
-  // Pantallas muy pequeñas
   @media (max-width: 480px)
     padding: 0
 
 .custom-card
-  width: 32%
+  width: calc(33.33% - 13px) // Restar el espacio del margen
+  margin-right: 13px
   height: auto
   display: flex
   flex-direction: column
   justify-content: space-between
 
-  // Pantallas grandes
-  @media (min-width: 1200px)
-    width: 29%
-
-  // Pantallas medianas (iPad incluido aquí)
-  @media (min-width: 768px) and (max-width: 1024px)
-    width: 32.1%
-
-  // Pantallas pequeñas
   @media (max-width: 768px)
-    width: 49%
+    width: calc(49% - 13px)
 
-  // Pantallas muy pequeñas
   @media (max-width: 480px)
     width: 100%
+    margin-right: 0 // Eliminar margen en pantallas muy pequeñas
+
+  &:nth-child(3n)
+    margin-right: 0 // Eliminar margen para el último elemento de cada fila

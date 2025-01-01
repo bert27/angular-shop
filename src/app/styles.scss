@@ -4,16 +4,33 @@
 @use "@angular/material" as mat;
 
 /* --------------------------------
-   2) Definimos el tema para Angular Material
+   2) Incluir el núcleo de Angular Material
 -------------------------------- */
 @include mat.core();
 
-$angular-shop-theme: mat.define-theme(
+/* --------------------------------
+   3) Definir Paletas de Colores Personalizadas
+-------------------------------- */
+
+/* Paleta Primaria Personalizada */
+$custom-primary-palette: mat.m2-define-palette(mat.$m2-green-palette, 500);
+
+/* Paleta Secundaria Personalizada (Accent) */
+$custom-accent-palette: mat.m2-define-palette(mat.$m2-orange-palette, 500);
+
+/* Paleta de Advertencia Personalizada (Warn) */
+$custom-warn-palette: mat.m2-define-palette(mat.$m2-red-palette, 600);
+
+/* --------------------------------
+   4) Definir el Tema Personalizado
+-------------------------------- */
+$angular-shop-theme: mat.m2-define-light-theme(
   (
     color: (
       theme-type: light,
-      primary: mat.$red-palette,
-      tertiary: mat.$orange-palette,
+      primary: $custom-primary-palette,
+      accent: $custom-accent-palette,
+      /* Cambiado de 'tertiary' a 'accent' */ warn: $custom-warn-palette,
     ),
     density: (
       scale: 0,
@@ -21,25 +38,21 @@ $angular-shop-theme: mat.define-theme(
   )
 );
 
-:root {
-  @include mat.all-component-themes($angular-shop-theme);
-}
-
-/*
-  Si quieres la tipografía de Angular Material descomentada, haz:
-  @include mat.typography-hierarchy($angular-shop-theme);
-*/
+/* --------------------------------
+   5) Aplicar el Tema a Todos los Componentes
+-------------------------------- */
+@include mat.all-component-themes($angular-shop-theme);
 
 /* --------------------------------
-   3) Definimos variables SASS
+   6) Definir Variables SASS
 -------------------------------- */
 $tamañoTexto1: 30px;
 $tamañoTexto2: 20px;
 $TextSizeHead: 40px;
-$colorCard: #F4F6F7;
+$colorCard: #f4f6f7;
 
 /* --------------------------------
-   4) Definimos variables CSS (Custom Properties)
+   7) Definir Variables CSS (Custom Properties)
 -------------------------------- */
 :root {
   --tamañoTexto1: #{$tamañoTexto1};
@@ -49,15 +62,15 @@ $colorCard: #F4F6F7;
   --colorCard: #{$colorCard};
   --colorBackground: #ffffff;
   --colorText: #000000;
-  --colorPrimary: #a4161a; 
+  --colorPrimary: #a4161a;
   --colorSecondary: #6c757d;
-  --colorPrimaryHover: #a4161a; 
+  --colorPrimaryHover: #a4161a;
   --colorSecondaryHover: #6c757d;
   --colorDesactivado: #a9a9a9;
 }
 
 /* --------------------------------
-   5) Ajustes responsivos
+   8) Ajustes Responsivos
 -------------------------------- */
 @media (max-width: 820px) {
   :root {
@@ -68,7 +81,7 @@ $colorCard: #F4F6F7;
 }
 
 /* --------------------------------
-   6) Estilos globales
+   9) Estilos Globales
 -------------------------------- */
 html,
 body {
@@ -93,7 +106,7 @@ body {
   color: var(--colorText);
 }
 
-// Encabezados
+/* Encabezados */
 h1 {
   color: var(--colorText);
   font-size: var(--tamañoTexto1);
@@ -111,10 +124,10 @@ h2 {
   font-size: calc(var(--tamañoTexto1) * 0.9);
 }
 
-// etc...
+/* Otros estilos... */
 
 /* --------------------------------
-   7) Tus estilos de Angular Material
+   10) Tus estilos de Angular Material
 -------------------------------- */
 mat-form-field {
   width: 230px;
