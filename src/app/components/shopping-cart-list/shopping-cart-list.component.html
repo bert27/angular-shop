@@ -16,8 +16,8 @@
           </div>
           <div class="product-details">
             <div class="title-and-type">
-              <h2>{{ producto.title }}</h2>
-              <h2>{{ producto.tipoSeleccionado.tipo }}</h2>
+              <p>{{ producto.title }}</p>
+              <p>{{ producto.tipoSeleccionado.tipo }}</p>
             </div>
             <div class="quantity-selector">
               <custom-quantity-selector
@@ -50,7 +50,7 @@
         <custom-button
           texto="Tramitar Pedido"
           tipo="primario"
-          (click)="nextStep.emit()"
+          (click)="sendOrder()"
         />
       </div>
     </div>

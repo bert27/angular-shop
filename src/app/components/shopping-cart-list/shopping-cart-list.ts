@@ -6,7 +6,7 @@ import {
 import { IconSvgComponent } from '../../components/icon-svg/icon-svg.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { BotonComponent } from '../boton/boton.component';
+import { BotonComponent } from '../custom-button/custom-button.component';
 import { CustomQuantitySelectorComponent } from '../custom-quantity-selector/custom-quantity-selector.component';
 
 @Component({
@@ -26,8 +26,12 @@ export class ShoppingCartListComponent {
   @Output() remove = new EventEmitter<ProductCarritoInterface>();
   @Output() nextStep = new EventEmitter<void>();
 
-  constructor(private carritoService: CarritoService, public router: Router) {
-    this.productos = this.carritoService.getProductos();
+  constructor(
+    private carritoService: CarritoService,
+    public router: Router,
+
+  ) {
+    this.productos = this.carritoService.getProducts();
   }
 
   updateCantidad(producto: ProductCarritoInterface, nuevaCantidad: number) {
@@ -35,15 +39,19 @@ export class ShoppingCartListComponent {
       nuevaCantidad = 1; // Evita cantidades menores a 1
     }
     this.carritoService.updateProductQuantity(producto, nuevaCantidad);
-    this.productos = this.carritoService.getProductos(); // Actualiza la lista tras el cambio
+    this.productos = this.carritoService.getProducts();
   }
 
   removeProduct(producto: ProductCarritoInterface) {
     this.carritoService.removeProduct(producto);
-    this.productos = this.carritoService.getProductos();
+    this.productos = this.carritoService.getProducts();
   }
 
   getTotalPrice(): string {
     return this.carritoService.getTotalPriceWithQuantity();
+  }
+
+  async sendOrder() {
+    this.nextStep.emit();
   }
 }

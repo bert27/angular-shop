@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ProductDataInterface } from '../data/interfaces-moddel';
+import { ProductDataInterface } from '../data/interfaces-model';
 
 interface Option {
   tipo: string;
@@ -38,15 +38,14 @@ export class CarritoService {
   private cantidadProductosSubject = new BehaviorSubject<number>(0);
 
   constructor() {
-    this.loadInLocalStorage(); // Cargar productos de localStorage al inicializar
+    this.loadInLocalStorage();
   }
 
   addProduct(
     producto: ProductDataInterface,
     optionSelect: Option,
-    cantidad: number = 1 // Añadimos cantidad como parámetro opcional, por defecto 1
+    cantidad = 1
   ) {
-    console.log('Añadiendo producto:', producto);
 
     const productoExistente = this.products.find(
       (p) =>
@@ -55,10 +54,8 @@ export class CarritoService {
     );
 
     if (productoExistente) {
-      // Si el producto ya está en el carrito, sumamos la cantidad
       productoExistente.cantidad += cantidad;
     } else {
-      // Si es un nuevo producto, lo añadimos con la cantidad especificada
       const nuevoProducto: ProductCarritoInterface = {
         ...producto,
         cantidad,
@@ -72,7 +69,11 @@ export class CarritoService {
     // Actualizar la cantidad total de productos en el carrito
     this.updateTotalCantidad();
   }
-
+  setEmptyCart(): void {
+    this.products = [];
+    this.saveInLocalStorage();
+    this.updateTotalCantidad();
+  }
   removeProduct(productoAEliminar: ProductCarritoInterface) {
     this.products = this.products.filter(
       (producto) =>
@@ -81,11 +82,11 @@ export class CarritoService {
           productoAEliminar.tipoSeleccionado?.tipo
     );
 
-    this.saveInLocalStorage(); // Guardar los productos actualizados
+    this.saveInLocalStorage();
     this.updateTotalCantidad();
   }
 
-  getProductos(): ProductCarritoInterface[] {
+  getProducts(): ProductCarritoInterface[] {
     return this.products;
   }
 
@@ -100,29 +101,29 @@ export class CarritoService {
     }, 0);
   }
 
-getTotalPriceWithQuantity(): string {
-  const total = this.products.reduce((sum, producto) => {
-    const price = producto.tipoSeleccionado?.price || 0;
-    return sum + price * producto.cantidad;
-  }, 0);
+  getTotalPriceWithQuantity(): string {
+    const total = this.products.reduce((sum, producto) => {
+      const price = producto.tipoSeleccionado?.price || 0;
+      return sum + price * producto.cantidad;
+    }, 0);
 
-  const cantidad = this.products.reduce(
-    (sum, producto) => sum + producto.cantidad,
-    0
-  );
+    const cantidad = this.products.reduce(
+      (sum, producto) => sum + producto.cantidad,
+      0
+    );
 
-  const totalFormatted = total % 1 === 0 ? total.toFixed(0) : total.toFixed(2);
+    const totalFormatted =
+      total % 1 === 0 ? total.toFixed(0) : total.toFixed(2);
 
-  return `Subtotal (${cantidad} productos): ${totalFormatted} €`;
-}
-
+    return `Subtotal (${cantidad} productos): ${totalFormatted} €`;
+  }
 
   public loadInLocalStorage() {
     if (typeof localStorage !== 'undefined') {
       const productosGuardados = localStorage.getItem('productosCarrito');
       if (productosGuardados) {
         this.products = JSON.parse(productosGuardados);
-        this.updateTotalCantidad(); // Actualiza la cantidad
+        this.updateTotalCantidad();
       }
     }
   }
@@ -134,11 +135,10 @@ getTotalPriceWithQuantity(): string {
   }
 
   private updateTotalCantidad() {
-    // Calcula la cantidad total de productos en el carrito
     const totalProductos = this.products.reduce(
       (total, producto) => total + producto.cantidad,
       0
     );
-    this.cantidadProductosSubject.next(totalProductos); // Actualiza el BehaviorSubject
+    this.cantidadProductosSubject.next(totalProductos);
   }
 }

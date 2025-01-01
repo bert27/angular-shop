@@ -1,11 +1,10 @@
-@import '../../../../styles.sass'
 
 .card
   border: 1px solid rgba(0, 0, 0, 0.1) // Borde suave
   border-radius: 8px
   padding: 16px
-  background-color: $colorCard
-  color: $colorText
+  background-color: var(--colorCard)
+  color: var(--colorText)
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1) // Elevación suave
   cursor: pointer
   transition: transform 0.2s ease, box-shadow 0.2s ease
@@ -23,37 +22,34 @@
   margin-bottom: 10px
   text-align: center
   font-weight: bold
-  font-size: calc($tamañoTexto1 * 1.3)
 
 .price-class
   font-weight: bold
-  font-size: calc($tamañoTexto1 * 1.2)
-  color: $colorPrimary
+  font-size: var(--tamañoTexto1) 
+  color: var(--colorPrimary)
 
 .price-stock-container
-  font-size: $tamañoTexto1
+  font-size: var(--tamañoTexto1) 
   display: flex
   justify-content: space-between
   align-items: center
-  margin-top: 8px
 
 .en-stock
-  color: $colorPrimary
+  color: green
 
 .agotado
   color: red
 
 .description-class
-  font-size: $tamañoTexto1
+  font-size: var(--tamañoTexto2) 
   line-height: 1.5
-  margin-top: 0.5em
-  margin-bottom: 1em
   overflow: hidden
   display: -webkit-box
   -webkit-box-orient: vertical
   -webkit-line-clamp: 3
   text-overflow: ellipsis
   max-height: calc(3 * 1.5em)
+  text-align: center
 
 .image-content-f
   display: flex
@@ -110,7 +106,10 @@ img
     custom-dropdown-material
       width: 100%
       margin-bottom: 10px
-
+.image-content-f
+ padding: 0
+.quantity-options-row
+ flex-wrap: nowrap
 .button-row
   display: flex
   justify-content: center

@@ -7,10 +7,10 @@
 /bazel-out
 # Environment Configuration Files
 .env
-stripe-server/.env
+server/.env
 # Node
 /node_modules
-stripe-server/node_modules
+server/node_modules
 npm-debug.log
 yarn-error.log
 

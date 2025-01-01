@@ -1,0 +1,22 @@
+<form id="payment-form" (submit)="handleSubmit($event)">
+  <div id="card-error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  <div class="button-group">
+    <custom-button
+      texto="Atrás"
+      tipo="secundario"
+      (click)="goToPreviousStep()"
+    />
+    <custom-button
+      texto="{{ isLoading ? 'Procesando...' : 'Tramitar Pedido' }}"
+      tipo="primario"
+      [disabled]="isLoading"
+      type="submit"
+    />
+    <custom-button
+      texto="Siguiente"
+      tipo="secundario"
+      (click)="goToNextStep()"
+    />
+  </div>
+</form>
+

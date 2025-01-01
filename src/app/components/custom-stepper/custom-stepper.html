@@ -7,7 +7,7 @@
   <ng-template matStepperIcon="edit">
     <mat-icon>{{ currentStepIcon }}</mat-icon>
   </ng-template>
-  <!-- Paso 1: Dirección de Envío -->
+  <!-- Step 1: Direction Shipping -->
   <mat-step label="Dirección de envío" [state]="'home'">
     <ng-template matStepperIcon="home">
       <mat-icon>home</mat-icon>
@@ -26,7 +26,7 @@
     </div>
   </mat-step>
 
-  <!-- Paso 2: Pago -->
+  <!-- Step 2: Payment -->
   <mat-step label="Pago" [state]="'cardPay'">
     <ng-template matStepperIcon="cardPay">
       <mat-icon>credit_card</mat-icon>
@@ -48,25 +48,32 @@
         <p><strong>Provincia:</strong> {{ directionShipping.province }}</p>
         <p><strong>Ciudad:</strong> {{ directionShipping.city }}</p>
         <p><strong>Teléfono:</strong> {{ directionShipping.phone }}</p>
+        <p><strong>Email:</strong> {{ directionShipping.email }}</p>
       </div>
       <div class="column">
-        <form (submit)="pay(); $event.preventDefault()">
-          <div class="form-group">
-            <label for="card-element"
-              >Información de la tarjeta de crédito</label
-            >
-            <div>Total: 230€</div>
-            <app-stripe-field
-              (previousStep)="stepper.previous()"
-              (nextStep)="stepper.next()"
-            />
-          </div>
-        </form>
+        <div class="form-group">
+          <label for="card-element">Información de la tarjeta de crédito</label>
+          <div>Total: {{ totalPrice }} €</div>
+
+          @if (selectedMethodPay === 'monei') {
+          <app-monei-credit-card
+            [directionShipping]="directionShipping"
+            (nextStep)="stepper.next()"
+            (previousStep)="stepper.previous()"
+          />
+          } @else {
+          <app-stripe-field
+            [directionShipping]="directionShipping"
+            (nextStep)="stepper.next()"
+            (previousStep)="stepper.previous()"
+          />
+          }
+        </div>
       </div>
     </div>
   </mat-step>
 
-  <!-- Paso 3: Factura -->
+  <!-- Step 3: Invoice/Error -->
   <mat-step label="Factura" [state]="'receiptIcon'">
     <ng-template matStepperIcon="receiptIcon">
       <mat-icon>receipt</mat-icon>
@@ -74,12 +81,37 @@
     <ng-template matStepperIcon="done">
       <mat-icon>check_circle</mat-icon>
     </ng-template>
-
+    <!-- Show error message if isErrorPage is true -->
+    @if (isErrorPage) {
+    <p style="margin-bottom: 20px; color: red; font-weight: bold">
+      Error en el pago.
+    </p>
+    <p style="margin-bottom: 20px">
+      Hubo un problema al procesar tu pago. Por favor, intentalo de nuevo.
+    </p>
     <div class="step-content">
-      <custom-button texto="Descargar factura" tipo="primario"></custom-button>
+      <custom-button
+        texto="Volver a intentar"
+        tipo="primario"
+        (click)="retryPayment()"
+      />
     </div>
-    <div>
-      <button mat-button (click)="previousStep()">Atrás</button>
+    } @else {
+    <p style="margin-bottom: 20px">
+      <strong>¡Gracias por tu compra en {{ titleShop }}!</strong>
+    </p>
+    <p><strong>Número de Pedido:</strong> {{ orderId }}</p>
+    <p style="margin-bottom: 20px">
+      Te hemos enviado un correo electrónico con tu factura adjunta. Si lo
+      prefieres, también puedes descargarla directamente desde aquí:
+    </p>
+    <div class="step-content">
+      <custom-button
+        texto="Descargar factura"
+        tipo="primario"
+        (click)="downloadInvoice()"
+      />
     </div>
+    }
   </mat-step>
 </mat-stepper>

@@ -2,13 +2,9 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Router, RouterModule } from '@angular/router';
-import { ProductDataInterface } from '../../../../../data/interfaces-moddel';
-import {
-  cardProduct1,
-  cardProduct2,
-  macMini,
-  cardProduct4,
-} from '../../../../../data/data';
+import { ProductDataInterface } from '../../../../../data/interfaces-model';
+import { productsData } from '../../../../../data/products-data';
+
 
 @Component({
   selector: 'app-best-products',
@@ -18,7 +14,7 @@ import {
   styleUrls: ['./best-products.component.css'],
 })
 export class BestProductsComponent {
-  bestProducts = [cardProduct1, cardProduct2, macMini, cardProduct4];
+  bestProducts = productsData;
 
   productImages = [
     { url: 'images-products/1.jpg', id: '1' },

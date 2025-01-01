@@ -16,8 +16,8 @@ export interface Option {
   imports: [CommonModule, MatSelectModule, FormsModule],
 })
 export class CustomDropdownMaterialComponent {
-  @Input() options: Option[] = []; // Cambiado a un array de objetos
-  @Input() selectedOption: Option | null = this.options[0]; // Cambiado para que sea un objeto
+  @Input() options: Option[] = [];
+  @Input() selectedOption: Option | null = this.options[0];
   @Output() selectedOptionChange = new EventEmitter<Option | null>();
 
   selectOption(option: Option) {

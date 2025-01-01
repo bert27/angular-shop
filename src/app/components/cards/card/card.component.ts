@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { BotonComponent } from '../../boton/boton.component';
+import { BotonComponent } from '../../custom-button/custom-button.component';
 import { CarritoService } from '../../../../services/carrito.service';
 import {
   ProductDataInterface,
   ArticleInterface,
-} from '../../../../data/interfaces-moddel';
+} from '../../../../data/interfaces-model';
 import { CustomDropdownMaterialComponent } from '../../custom-dropdown-material/custom-dropdown-material.component';
 import { Router } from '@angular/router';
 import { CustomQuantitySelectorComponent } from '../../custom-quantity-selector/custom-quantity-selector.component';
@@ -28,7 +28,7 @@ export class CardComponent implements OnInit {
   }
   @Input() cardData!: ProductDataInterface | ArticleInterface;
   selectedOption!: { tipo: string; price: number }; // Cambia a un objeto para incluir tipo y precio
-  quantity: number = 1;
+  quantity = 1;
 
   constructor(private carritoService: CarritoService, private router: Router) {} // Inyecta Router aquí
 

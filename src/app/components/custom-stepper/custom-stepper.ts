@@ -1,23 +1,23 @@
-import { Component, ViewChild } from '@angular/core';
-import {
-  FormBuilder,
-  FormGroup,
-  FormArray,
-  Validators,
-  ReactiveFormsModule,
-} from '@angular/forms';
+import { Component, ViewChild, Input, AfterViewInit } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { MatStepperModule, MatStepper } from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { CustomFormComponent } from '../forms/custom-form/custom-form.component';
-import { BotonComponent } from '../boton/boton.component';
+import { BotonComponent } from '../custom-button/custom-button.component';
 import { ShoppingCartListComponent } from '../shopping-cart-list/shopping-cart-list';
 import { CommonModule } from '@angular/common';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { StripeFieldComponent } from '../stripe field/stripe-field.compoonent';
+import { CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
+import { StripeFieldComponent } from '../stripe-credit-card/stripe-field.component';
+import { MoneiCreditCardComponent } from '../monei-credit-card/monei-credit-card';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CarritoService } from '../../../services/carrito.service';
+import { dataWeb, selectedMethodPay } from '../../../data/data';
+import { DirectionShippingInterface } from '../../../data/interfaces-model';
 
 @Component({
   selector: 'custom-stepper',
@@ -34,7 +34,7 @@ import { StripeFieldComponent } from '../stripe field/stripe-field.compoonent';
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    MatStepperModule, // Asegúrate de que MatStepperModule está importado
+    MatStepperModule,
     ReactiveFormsModule,
     MatIconModule,
     CustomFormComponent,
@@ -42,79 +42,182 @@ import { StripeFieldComponent } from '../stripe field/stripe-field.compoonent';
     ShoppingCartListComponent,
     CommonModule,
     StripeFieldComponent,
+    MoneiCreditCardComponent,
   ],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA], // Asegura que Angular reconozca elementos personalizados
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
-export class StepperComponent {
+export class StepperComponent implements AfterViewInit, OnInit {
   @ViewChild(MatStepper) stepper!: MatStepper;
   @ViewChild(CustomFormComponent) customFormComponent!: CustomFormComponent;
 
-  directionShipping: any = {}; // Variable para guardar los datos del formulario
-  currentStepIndex: number = 0;
-  currentStepIcon: string = 'home'; // Icono inicial
+  orderId: string | null = null;
+  isErrorPage = false;
+  totalPrice = 0;
 
-  constructor(private formBuilder: FormBuilder) {}
+  directionShipping: DirectionShippingInterface = {
+    name: '',
+    surname: '',
+    address: '',
+    postalCode: '',
+    country: '',
+    province: '',
+    city: '',
+    phone: '',
+    email: '',
+  };
+  currentStepIcon = 'home';
+  titleShop = dataWeb.nameShop;
+  selectedMethodPay = selectedMethodPay
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private carritoService: CarritoService
+  ) {}
 
-  pay() {
-    // Método de pago implementado aquí
+  updateTotalPrice(): void {
+    this.totalPrice = this.carritoService.getTotalPrice();
   }
 
-  nextStep() {
+  ngOnInit(): void {
+    this.route.queryParamMap.subscribe((params) => {
+      this.orderId = params.get('orderId');
+
+      this.isErrorPage = this.router.url.includes('/checkout/error');
+      if (this.isErrorPage) {
+        console.log('Página de error detectada');
+      }
+    });
+    this.updateTotalPrice();
+  }
+
+  ngAfterViewInit(): void {
+    // Ensures safe initialization of the stepper after it is available
+    if (this.orderId) {
+      setTimeout(() => {
+        this.goToInvoiceStep();
+      });
+    }
+  }
+
+  private goToInvoiceStep(): void {
     if (this.stepper) {
-      switch (this.stepper.selectedIndex) {
-        case 0:
-          // Lógica para el paso 1: Dirección de Envío
-          if (this.customFormComponent) {
-            this.customFormComponent.onSubmit();
-            if (this.customFormComponent.customForm.valid) {
-              // Guarda los datos del formulario en 'directionShipping'
-              this.directionShipping = {
-                ...this.customFormComponent.customForm.value,
-              };
-            } else {
-              console.error('El formulario no es válido.');
-              return; // Detén el avance si el formulario no es válido
-            }
-          }
-          break;
-
-        case 1:
-          // Lógica para el paso 2: Pago
-          console.log('Preparando para el pago...');
-          break;
-
-        case 2:
-          // Lógica para el paso 3: Factura
-          console.log('Mostrando la factura...');
-          break;
-
-        default:
-          console.error('Paso no reconocido.');
-          return;
+      this.stepper.next();
+      this.stepper.next();
+      this.carritoService.setEmptyCart();
+    }
+  }
+  retryPayment(): void {
+    this.router.navigate(['/checkout']);
+  }
+  async downloadInvoice(): Promise<void> {
+    try {
+      if (!this.orderId) {
+        console.error('No hay orderId para generar la factura.');
+        return;
       }
 
-      // Avanza al siguiente paso y actualiza el índice del paso actual
-      this.stepper.next();
-      this.updateStepIcon(this.stepper.selectedIndex); // Actualiza el ícono
+      const response = await fetch('http://localhost:4000/download-pdf', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ invoiceNumber: this.orderId }),
+      });
+
+      if (!response.ok) {
+        throw new Error(
+          `Error al descargar la factura. Estado: ${response.status}`
+        );
+      }
+
+      const contentDisposition = response.headers.get('Content-Disposition');
+      const filename =
+        contentDisposition?.match(/filename="(.+)"/)?.[1] ||
+        `Factura_${this.orderId}.pdf`;
+
+      // Manejo del stream
+      const reader = response.body?.getReader();
+      const chunks: Uint8Array[] = [];
+      let receivedLength = 0;
+
+      if (reader) {
+        while (true) {
+          const { done, value } = await reader.read();
+          if (done) break;
+
+          if (value) {
+            chunks.push(value);
+            receivedLength += value.length;
+          }
+        }
+      }
+
+      // Combine chunks into a single file
+      const blob = new Blob(chunks, { type: 'application/pdf' });
+      // Create a temporary link for downloading
+      const url = window.URL.createObjectURL(blob);
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = filename;
+      link.click();
+      // Revoke the generated URL
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error('Error al descargar la factura:', (error as Error).message);
+      alert(
+        'Hubo un error al intentar descargar la factura. Por favor, inténtelo de nuevo.'
+      );
     }
   }
 
-  previousStep() {
-    // Retrocede al paso anterior y actualiza el índice del paso actual
+  private handleStep1(): boolean {
+    if (this.customFormComponent) {
+      this.customFormComponent.onSubmit();
+      if (this.customFormComponent.customForm.valid) {
+        this.directionShipping = {
+          ...this.customFormComponent.customForm.value,
+        };
+        return true;
+      }
+    }
+    console.error('El formulario no es válido.');
+    return false;
+  }
+
+  nextStep(): void {
+    if (this.stepper) {
+      const isStepValid = (() => {
+        switch (this.stepper.selectedIndex) {
+          case 0:
+            return this.handleStep1();
+          case 1:
+            return true;
+          case 2:
+            return true;
+          default:
+            return false;
+        }
+      })();
+
+      if (isStepValid) {
+        this.stepper.next();
+        this.updateStepIcon(this.stepper.selectedIndex);
+      }
+    }
+  }
+
+  previousStep(): void {
     if (this.stepper) {
       this.stepper.previous();
-      this.updateStepIcon(this.stepper.selectedIndex); // Actualiza el ícono
+      this.updateStepIcon(this.stepper.selectedIndex);
     }
   }
 
-  onStepChange(event: any): void {
-    // Actualiza el índice del paso actual y el ícono cuando se cambia de paso con las bolas
-    this.currentStepIndex = event.selectedIndex;
+  onStepChange(event: { selectedIndex: number }): void {
     this.updateStepIcon(event.selectedIndex);
   }
 
   updateStepIcon(stepIndex: number): void {
-    // Actualiza el ícono según el paso actual
     switch (stepIndex) {
       case 0:
         this.currentStepIcon = 'home';
@@ -131,12 +234,11 @@ export class StepperComponent {
     }
   }
 
-  onFormCompleted(isValid: boolean): void {
-    // Callback para manejar la finalización del formulario
-    if (isValid && this.customFormComponent) {
-      this.directionShipping = { ...this.customFormComponent.customForm.value };
+  onFormCompleted(formData: DirectionShippingInterface | null): void {
+    if (formData) {
+      this.directionShipping = formData;
     } else {
-      console.error('El formulario no se completó correctamente.');
+      console.error('El formulario no es válido');
     }
   }
 }

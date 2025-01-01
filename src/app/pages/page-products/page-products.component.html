@@ -1,0 +1,18 @@
+<div class="container">
+  <div class="options">
+    <ng-container *ngFor="let category of categories">
+      <custom-button
+        (click)="selectCategory(category)"
+        [texto]="category"
+        tipo="primario"
+      ></custom-button>
+    </ng-container>
+  </div>
+  <div class="content">
+    @if (filteredProducts.length > 0) {
+    <custom-cards [items]="filteredProducts"></custom-cards>
+    } @else {
+    <p>No hay productos disponibles en esta categoría.</p>
+    }
+  </div>
+</div>

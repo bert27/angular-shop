@@ -1,4 +1,3 @@
-@import '../../../styles.sass'
 
 :host
   width: 100%
@@ -6,7 +5,7 @@
 
   ::ng-deep
     .mat-horizontal-stepper-wrapper
-      background: $colorBackground
+      background: var(--colorBackground)
 
     .mat-horizontal-stepper-header
       .mat-step-icon
@@ -16,7 +15,7 @@
         font-size: 24px
         color: white
       .mat-step-icon-selected
-        background-color: $colorPrimary
+        background-color: var(--colorPrimary)
         transform: scale(1.1)
       .mat-step-icon-state-done
         background-color: lightgreen !important

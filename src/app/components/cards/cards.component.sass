@@ -1,3 +1,7 @@
+:host
+  width: 100%
+  display: block
+
 .cards-container
   display: flex
   flex-wrap: wrap
@@ -8,8 +12,12 @@
   padding: 12px 13px
   width: 100%
 
+  // Pantallas muy pequeñas
+  @media (max-width: 480px)
+    padding: 0
+
 .custom-card
-  width: calc(25% - 12px) // Por defecto, 4 tarjetas por fila
+  width: 32%
   height: auto
   display: flex
   flex-direction: column
@@ -17,7 +25,7 @@
 
   // Pantallas grandes
   @media (min-width: 1200px)
-    width: calc(25% - 12px)
+    width: 29%
 
   // Pantallas medianas (iPad incluido aquí)
   @media (min-width: 768px) and (max-width: 1024px)

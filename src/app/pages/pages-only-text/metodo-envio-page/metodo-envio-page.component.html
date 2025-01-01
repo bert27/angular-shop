@@ -1,0 +1,9 @@
+<section class="container">
+  <h2 class="metodo-envio__titulo">Método de Envío</h2>
+
+  <p
+    *ngFor="let paragraph of paragraphs"
+    class="metodo-envio__texto metodo-envio__texto--bold metodo-envio__texto--grande"
+    [innerHTML]="paragraph"
+  ></p>
+</section>

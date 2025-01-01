@@ -11,9 +11,9 @@ import { MatInputModule } from '@angular/material/input';
   styleUrls: ['./custom-input.component.sass'],
 })
 export class CustomInputComponent {
-  @Input() label: string = 'Cantidad'; 
-  @Input() placeholder: string = ''; 
-  @Input() value: number = 1; 
+  @Input() label = 'Cantidad'; 
+  @Input() placeholder = ''; 
+  @Input() value = 1; 
   @Input() typeVisual: 'material' | 'no-material' = 'material'; 
 
   @Output() valueChange = new EventEmitter<number>();

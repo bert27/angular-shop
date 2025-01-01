@@ -1,7 +1,6 @@
-@import '../../../styles.sass'
 
 .dropdown-father
-  width: 140px
+  width: 143px
   border-radius: 4px
  
 
@@ -17,7 +16,7 @@
     border: 1px solid transparent
     transition: border-color 0.3s ease
     padding: 0
-    font-size: $tamañoTexto1 // Tamaño de texto dinámico
+    font-size: var(--tamañoTexto2) 
 
     &:hover
       border-color: #0055a5
@@ -32,30 +31,30 @@
     color: black
     background-color: white
     transition: background-color 0.3s ease
-    font-size: $tamañoTexto1 // Tamaño de texto dinámico
+    font-size: var(--tamañoTexto2) 
 
     &:hover
-      background-color: #f1f1f1 // Color de fondo al pasar el ratón
+      background-color: #f1f1f1 
 
     &.mat-option-selected
       background-color: #0055a5 // Color al seleccionar
       color: white // Color de letra al seleccionar
 
 .custom-select
-  font-size: $tamañoTexto1 // Tamaño dinámico
+  font-size: var(--tamañoTexto2)  // Tamaño dinámico
   padding: 0 // Quitar padding en el select
 
   .mat-select-trigger
     height: 20px // Ajusta la altura de la caja que activa el desplegable
 
 .custom-option
-  font-size: $tamañoTexto1 // Tamaño dinámico de las opciones
+  font-size: var(--tamañoTexto2)  // Tamaño dinámico de las opciones
 
 .custom-label
   white-space: nowrap // Evitar que el texto se corte y se ajuste en una sola línea
   overflow: visible // Ocultar cualquier texto que se desborde
   text-overflow: ellipsis // Añadir puntos suspensivos si el texto es demasiado largo para el contenedor
-  font-size: $tamañoTexto1 // Tamaño dinámico para el label
+  font-size: var(--tamañoTexto2) // Tamaño dinámico para el label
 
 :host
   // Always protect ::ng-deep with a :host !
@@ -65,7 +64,7 @@
 
     .mat-mdc-floating-label.mdc-floating-label
       max-width: 100px
-      font-size: $tamañoTexto1 // Tamaño dinámico para la etiqueta flotante
+      font-size: var(--tamañoTexto2)// Tamaño dinámico para la etiqueta flotante
 
     .mat-mdc-form-field-subscript-wrapper
       height: 0px

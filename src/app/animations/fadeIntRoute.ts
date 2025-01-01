@@ -4,25 +4,42 @@ import {
   transition,
   style,
   query,
+  group,
 } from '@angular/animations';
 
 export const fadeAnimation = trigger('fadeAnimation', [
   transition('* <=> *', [
-    // Oculta el nuevo elemento antes de que entre
-    query(':enter', [style({ opacity: 0 })], { optional: true }),
-
-    // Anima la salida del elemento anterior
     query(
-      ':leave',
-      [style({ opacity: 1 }), animate('0.2s', style({ opacity: 0 }))],
+      ':enter, :leave',
+      [
+        style({
+          position: 'absolute',
+          top: 0,
+          left: 0,
+          width: '100%',
+        }),
+      ],
       { optional: true }
     ),
 
-    // Anima la entrada del nuevo elemento
-    query(
-      ':enter',
-      [style({ opacity: 0 }), animate('0.2s', style({ opacity: 1 }))],
-      { optional: true }
-    ),
+    group([
+      query(
+        ':leave',
+        [
+          style({ opacity: 1 }),
+          animate('300ms ease-out', style({ opacity: 0 })),
+        ],
+        { optional: true }
+      ),
+
+      query(
+        ':enter',
+        [
+          style({ opacity: 0 }),
+          animate('300ms ease-in', style({ opacity: 1 })),
+        ],
+        { optional: true }
+      ),
+    ]),
   ]),
 ]);

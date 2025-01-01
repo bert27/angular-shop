@@ -8,7 +8,6 @@ To start the server, navigate to the stripe-server directory and run: npm start
 
 ## PC
 
-
 <div style="display: flex; align-items: center; width: 100%;">
   <img src="public/screenshots/4.jpg" alt="Home" style="width: 40%;">
   <img src="public/screenshots/2.jpg" alt="Products" style="width: 40%;">
@@ -27,10 +26,10 @@ navigate to the project and write npm i
 
 ## Start the web to get started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:3000/` Or click on Ejecutar.bat and it will start by itself (Windows).
+Run `ng serve` for a dev server. Navigate to `http://localhost:3000/` Or click on start.windows.bat/start-mac.sh and it will start by itself.
 The application will automatically reload if you change any of the source files.
 
---------------------------------------------------
+---
 
 ## Code scaffolding
 
@@ -48,23 +47,23 @@ To modify the products, go to `src/data/data`, where you can find `export const 
 
 ```javascript
 export const cardProduct1 = {
-  title: 'Iphone 16 pro',
-  description: 'Smartphone 5G con Control de Cámara, grabación en 4K a 120 f/s con Dolby Vision.',
+  title: "Iphone 16 pro",
+  description: "Smartphone 5G con Control de Cámara, grabación en 4K a 120 f/s con Dolby Vision.",
   stock: true,
-  imageUrl: 'images-products/1.jpg',
+  imageUrl: "images-products/1.jpg",
   options: [
     {
-      price: 1219, 
-      tipo: "128Gb"
+      price: 1219,
+      tipo: "128Gb",
     },
     {
-      price: 1540,  
-      tipo: "256Gb"
+      price: 1540,
+      tipo: "256Gb",
     },
     {
-      price: 1800,  
-      tipo: "512Gb"
-    }
-  ]
+      price: 1800,
+      tipo: "512Gb",
+    },
+  ],
 };
-
+```

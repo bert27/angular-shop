@@ -1,15 +1,17 @@
 {
-  "name": "mi-programa",
-  "version": "0.0.0",
+  "name": "angular-shop",
+  "version": "1.1",
   "scripts": {
     "ng": "ng",
     "start": "concurrently \"ng serve\" \"npm run open:chrome\"",
+    "server": "node dist/angular-shop/server/server.mjs",
     "open:chrome": "npx open-cli http://localhost:3000 --app chrome",
     "run start": "npm start",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "serve:ssr:mi-programa": "node dist/mi-programa/server/server.mjs"
+    "serve:ssr:angular-shop": "node dist/angular-shop/server/server.mjs",
+    "lint": "ng lint"
   },
   "private": true,
   "dependencies": {
@@ -25,6 +27,7 @@
     "@angular/platform-server": "^18.2.0",
     "@angular/router": "^18.2.0",
     "@angular/ssr": "^18.2.4",
+    "@monei-js/components": "^1.7.4",
     "@ng-bootstrap/ng-bootstrap": "^17.0.1",
     "@popperjs/core": "^2.11.8",
     "@stripe/stripe-js": "^4.9.0",
@@ -33,6 +36,7 @@
     "jquery": "^3.7.1",
     "ngx-owl-carousel-o": "^18.0.0",
     "rxjs": "~7.8.0",
+    "sitemap": "^8.0.0",
     "tslib": "^2.8.0",
     "zone.js": "~0.14.10"
   },
@@ -45,13 +49,22 @@
     "@types/jasmine": "~5.1.0",
     "@types/node": "^18.18.0",
     "@types/stripe-v3": "^3.1.33",
+    "angular-eslint": "19.0.2",
     "concurrently": "^9.0.1",
+    "eslint": "^9.16.0",
     "jasmine-core": "~5.2.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.2.0",
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "typescript": "~5.5.2"
+    "typescript": "~5.5.2",
+    "typescript-eslint": "8.18.0"
+  },
+  "overrides": {
+    "http-proxy-middleware": "^3",
+    "vite": "^5.4.5",
+    "rollup": "^4.23.0"
   }
 }
+

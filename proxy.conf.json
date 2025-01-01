@@ -1,0 +1,6 @@
+{
+  "/create-payment-intent": {
+    "target": "http://localhost:4000",
+    "secure": false
+  }
+}

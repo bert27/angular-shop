@@ -6,14 +6,19 @@ import {
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { IconSvgComponent } from '../icon-svg/icon-svg.component';
-import { BotonComponent } from '../boton/boton.component';
+import { BotonComponent } from '../custom-button/custom-button.component';
 import { CommonModule } from '@angular/common';
-import { CustomInputComponent } from "../custom-input/custom-input.component";
+import { CustomInputComponent } from '../custom-input/custom-input.component';
 
 @Component({
   selector: 'app-shopping-cart-popup',
   standalone: true,
-  imports: [IconSvgComponent, BotonComponent, CommonModule, CustomInputComponent],
+  imports: [
+    IconSvgComponent,
+    BotonComponent,
+    CommonModule,
+    CustomInputComponent,
+  ],
   templateUrl: './shopping-cart-popup.component.html',
   styleUrls: ['./shopping-cart-popup.component.sass'],
 })
@@ -26,32 +31,31 @@ export class ShoppingCartPopupComponent implements OnInit, OnDestroy {
   constructor(public router: Router, public carritoService: CarritoService) {}
 
   ngOnInit() {
-    this.actualizarProductos();
+    this.updateProducts();
     this.cantidadSubscription = this.carritoService
       .getProductCount()
-      .subscribe(() => this.actualizarProductos());
+      .subscribe(() => this.updateProducts());
   }
 
-  private actualizarProductos() {
-    this.productos = this.carritoService.getProductos();
+  private updateProducts() {
+    this.productos = this.carritoService.getProducts();
   }
 
   updateCantidad(producto: ProductCarritoInterface, nuevaCantidad: number) {
     if (nuevaCantidad < 1) {
-      nuevaCantidad = 1; // Cantidad mínima permitida
+      nuevaCantidad = 1;
     }
     this.carritoService.updateProductQuantity(producto, nuevaCantidad);
-    this.actualizarProductos(); // Refresca la lista tras el cambio
+    this.updateProducts();
   }
 
-openCarrito() {
-  if (this.router.url === '/carrito') {
-    // Si ya estamos en la página del carrito, no abrimos el popup
-    return;
+  openCarrito() {
+    if (this.router.url === '/carrito' || this.router.url === '/checkout') {
+      return;
+    }
+    this.carritoAbierto = true;
+    this.resetAutoClose();
   }
-  this.carritoAbierto = true;
-  this.resetAutoClose();
-}
   closeCarritoView() {
     this.carritoAbierto = false;
     this.resetAutoClose();
@@ -75,16 +79,15 @@ openCarrito() {
 
   removeProduct(producto: ProductCarritoInterface) {
     this.carritoService.removeProduct(producto);
-    this.actualizarProductos();
+    this.updateProducts();
   }
 
-navigateTo(route: string) {
-  if (route === '/carrito') {
-    this.carritoAbierto = false; // Cierra el popup
+  navigateTo(route: string) {
+    if (route === '/carrito') {
+      this.carritoAbierto = false;
+    }
+    this.router.navigate([route]);
   }
-  this.router.navigate([route]);
-}
-
 
   ngOnDestroy() {
     this.cantidadSubscription.unsubscribe();

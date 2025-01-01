@@ -12,14 +12,16 @@
       />
     </div>
   </div>
-  <h2 class="title-card">{{ cardData.title }}</h2>
+  <h1 class="title-card">{{ cardData.title }}</h1>
 
   <p *ngIf="isArticle(cardData)" class="description-class">
     {{ cardData.bodyTitle }}
   </p>
 
   <ng-container *ngIf="!isArticle(cardData)">
-    <!-- Nuevo contenedor -->
+    <span *ngIf="cardData.description" class="description-class">
+      {{ cardData.description }}
+    </span>
     <div class="card-content-container">
       <div class="price-stock-container">
         <p *ngIf="selectedPrice" class="price-class">{{ selectedPrice }} €</p>
@@ -37,11 +39,6 @@
         </ng-template>
       </div>
 
-      <p *ngIf="cardData.description" class="description-class">
-        {{ cardData.description }}
-      </p>
-
-      <!-- Nueva fila: Selector de cantidad y dropdown -->
       <div class="quantity-options-row" (click)="$event.stopPropagation()">
         <custom-quantity-selector
           [(value)]="quantity"
@@ -54,7 +51,6 @@
         />
       </div>
 
-      <!-- Nueva fila: Botón centrado -->
       <div class="button-row">
         <custom-button
           texto="Añadir a la cesta"

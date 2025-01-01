@@ -1,0 +1,46 @@
+{
+  "name": "stripe-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "ts-node -r dotenv/config index.ts",
+    "dev": "nodemon --exec ts-node -r dotenv/config index.ts"
+  },
+  "keywords": [
+    "stripe",
+    "monei",
+    "typescript",
+    "server",
+    "payments",
+    "sendEmail",
+    "pdf"
+  ],
+  "author": "Albert",
+  "license": "ISC",
+  "dependencies": {
+    "@monei-js/node-sdk": "^1.4.8",
+    "@react-email/render": "^1.0.3",
+    "body-parser": "^1.20.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "nodemailer": "^6.9.16",
+    "pdfkit": "^0.15.1",
+    "stripe": "^17.2.1"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.17",
+    "@types/express": "^5.0.0",
+    "@types/node": "^22.8.1",
+    "@types/nodemailer": "^6.4.17",
+    "@types/pdfkit": "^0.13.7",
+    "@types/react": "^19.0.1",
+    "nodemon": "^3.1.9",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.6.3"
+  },
+  "overrides": {
+    "axios": "^1.4.0"
+  }
+}

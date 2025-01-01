@@ -1,0 +1,6 @@
+<section class="container">
+  <div *ngFor="let section of policySections">
+    <h2>{{ section.title }}</h2>
+    <p [innerHTML]="section.content"></p>
+  </div>
+</section>

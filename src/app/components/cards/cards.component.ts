@@ -4,7 +4,7 @@ import { CardComponent } from './card/card.component';
 import {
   ProductDataInterface,
   ArticleInterface,
-} from '../../../data/interfaces-moddel';
+} from '../../../data/interfaces-model';
 
 @Component({
   selector: 'custom-cards',

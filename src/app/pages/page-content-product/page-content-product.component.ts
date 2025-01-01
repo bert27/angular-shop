@@ -1,22 +1,22 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductDataInterface } from '../../../data/interfaces-moddel';
-import { productsData } from '../../../data/data';
-import { BotonComponent } from '../../components/boton/boton.component';
+import { ProductDataInterface } from '../../../data/interfaces-model';
+import { BotonComponent } from '../../components/custom-button/custom-button.component';
 import { CarritoService } from '../../../services/carrito.service';
 import { CustomQuantitySelectorComponent } from '../../components/custom-quantity-selector/custom-quantity-selector.component'; // Import necesario
+import { productsData } from '../../../data/products-data';
 
 @Component({
   selector: 'app-page-content-product',
   standalone: true,
   templateUrl: './page-content-product.component.html',
   styleUrls: ['./page-content-product.component.sass'],
-  imports: [BotonComponent, CustomQuantitySelectorComponent], // Asegúrate de incluirlo aquí
+  imports: [BotonComponent, CustomQuantitySelectorComponent], 
 })
 export class PageContentProductComponent {
   productData: ProductDataInterface | null = null;
   typeProduct: string | null = null;
-  quantity: number = 1; // Añadida variable para el selector de cantidad
+  quantity = 1; 
 
   constructor(
     private route: ActivatedRoute,

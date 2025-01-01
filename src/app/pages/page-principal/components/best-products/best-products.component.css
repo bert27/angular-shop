@@ -1,7 +1,3 @@
-@import 'ngx-owl-carousel-o/lib/styles/scss/owl.carousel';
-@import 'ngx-owl-carousel-o/lib/styles/scss/owl.theme.default';
-@import '../../../../../styles.sass';
-
 :host {
 }
 
@@ -19,8 +15,8 @@
 }
 
 .container {
-  width: 98%; /* Ancho deseado */
-  margin: inherit; /* Empuja el contenedor hacia la izquierda del todo */
+  width: 98%;
+  margin: inherit;
 }
 
 :host ::ng-deep .owl-nav {
@@ -36,7 +32,7 @@
 
 .card {
   width: 20vw;
-  height: 325px; /* Altura fija para asegurar uniformidad */
+  height: 325px;
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -51,7 +47,7 @@
 
 .product-image-container {
   width: 50%;
-  height: 120px; /* Altura fija para el contenedor de imágenes */
+  height: 120px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,10 +56,10 @@
 }
 
 .product-image {
-  max-height: 100%; /* La imagen se adapta a la altura del contenedor */
-  max-width: 100%; /* La imagen se adapta al ancho del contenedor */
-  object-fit: contain; /* Escala la imagen sin deformarla ni recortarla */
-  object-position: center; /* Centra la imagen en el contenedor */
+  max-height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+  object-position: center;
 }
 
 .products-title {
@@ -81,7 +77,7 @@
 .product-description {
   font-size: 1rem;
   margin: 10px 0;
-  flex-grow: 1; /* Asegura que el texto ocupe espacio proporcional */
+  flex-grow: 1;
 }
 
 .product-info {
@@ -102,21 +98,23 @@
 }
 
 /* Media Queries para dispositivos responsivos */
-@media (max-width: 1024px) { /* Tablets (iPad y similares) */
+@media (max-width: 1024px) {
+  /* Tablets (iPad y similares) */
   .section-carousel {
     margin-left: 30px; /* Ajusta el valor según sea necesario */
   }
-  
+
   .card {
     width: 30vw; /* Las tarjetas serán más anchas en tablets */
   }
 }
 
-@media (max-width: 768px) { /* Móviles */
+@media (max-width: 768px) {
+  /* Móviles */
   .section-carousel {
     margin-left: 10px; /* Ajusta el valor según sea necesario */
   }
-  
+
   .card {
     width: 90%; /* Las tarjetas ocuparán casi todo el ancho de la pantalla */
     height: auto; /* Permite que la altura sea dinámica */

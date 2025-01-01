@@ -1,17 +1,17 @@
-@import '../../../styles.sass'
 
 .carrito-lista
   position: absolute
   top: 80px
   right: 10px
-  background-color: $colorBackground
+  background: var(--colorBackground)
   color: carrito-header
   border: 1px solid #ccc
   border-radius: 4px
   padding: 10px
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2)
   z-index: 10
-  width: 300px // Aumenta el ancho del popup
+  width: 300px // Ancho del popup
+
 
   .carrito-header
     display: flex
@@ -21,8 +21,6 @@
 
     .carrito-title
       margin: 0
-      font-size: $tamañoTexto1
-      color: $colorText
 
     .close-button
       background: none
@@ -36,6 +34,10 @@
     list-style: none
     padding: 0
     margin: 0
+    max-height: 550px 
+    overflow-y: auto 
+    border-top: 1px solid #ccc
+    border-bottom: 1px solid #ccc
 
     li
       padding: 10px 0
@@ -43,13 +45,13 @@
       display: flex
       justify-content: space-between
       align-items: center
-      
+
       &:last-child
         border-bottom: none
 
       .producto-detalles
         margin-top: 10px
-        
+
       .producto-content
         display: flex
         flex-direction: column
@@ -85,13 +87,11 @@
     display: flex
     align-items: center
     justify-content: flex-start
-    font-size: 14px
+    font-size: var(--tamañoTexto2) 
     color: #FF8118
     font-weight: bold
 
     .amount
       font-weight: bold
-      font-size: calc($tamañoTexto1 * 1.2)
+      font-size: var(--tamañoTexto2) 
 
-.button-father
-  

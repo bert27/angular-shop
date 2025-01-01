@@ -1,0 +1,16 @@
+<section class="container"
+>
+  <h2>Aviso Legal</h2>
+  <ng-container *ngFor="let paragraph of paragraphs">
+    <p
+      *ngIf="!paragraph.bold && !paragraph.isHtml"
+      [innerHTML]="paragraph.text"
+    ></p>
+    <p
+      *ngIf="paragraph.bold && !paragraph.isHtml"
+      class="highlight-text"
+      [innerHTML]="paragraph.text"
+    ></p>
+    <p *ngIf="paragraph.isHtml" [innerHTML]="paragraph.text"></p>
+  </ng-container>
+</section>

@@ -1,35 +1,39 @@
-@import '../../../styles.sass' // Importa las configuraciones generales
 
 header
   position: fixed
   top: 0
   left: 0
-  z-index: 1000 // Asegura que el header esté encima de otros elementos
-  width: 100% // Asegura que cubra todo el ancho de la pantalla
-  background-color: $colorPrimary
-  padding: 10px
-  border-bottom: 1px solid #333
+  z-index: 1000
+  width: 100%
+  background: var(--colorPrimary)
   display: flex
   align-items: center
   justify-content: space-between
   box-sizing: border-box
   flex-wrap: wrap
 
+  .header-logo
+    width: 150px // Ancho por defecto del logo
+    height: auto
+    display: block
+    cursor: pointer
+    margin: 0.5em
+
   #column1-head
-    width: 200px
+    width: 350px
+    display: flex
+    align-items: center
+    justify-content: center 
 
   #column2-head
     width: 68%
     display: flex
     align-items: center
     justify-content: space-between
-
-  h1
-    margin: 0
-    color: #ffffff
-    margin-bottom: 13px
-    font-size: 30px
-
+  .nav-father
+   width: auto
+   display: flex
+   flex-wrap: wrap
   nav
     a
       cursor: pointer
@@ -48,7 +52,7 @@ header
   .carrito-content
     display: flex
     align-items: center
-    width: 10% // Ancho por defecto
+    width: 10%
     margin-left: auto
     position: relative
     cursor: pointer
@@ -68,15 +72,27 @@ header
       font-size: 15px
       font-weight: bold
 
-
-// Media query para pantallas en modo portrait
-@media (orientation: portrait)
-  #column2-head
-    width: 95% // Cambia el ancho a 100% en modo portrait
-
 @media (max-width: 768px)
+  header
+    flex-direction: column // Asegura que el contenido del header se ajuste bien en móviles
+
+    .header-logo
+      width: 130px 
+      height: auto 
+      margin: 0
+
+
   #column2-head
-    width: 95% !important // Cambia el ancho a 100% en dispositivos móviles
+    width: 95% !important
+    margin-bottom: 10px
 
   .carrito-content
-    width: auto !important // Forzar ancho automático en móviles
+    width: auto !important
+  .nav-father
+   width: 65%
+   display: flex
+   flex-wrap: wrap
+  nav
+    a
+      font-size: 14px // Ajusta el tamaño del texto en los enlaces del menú para móviles
+      margin-right: 10px // Reduce el espacio entre los enlaces

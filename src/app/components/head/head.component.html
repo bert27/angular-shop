@@ -1,11 +1,15 @@
 <header>
   <div id="column1-head">
-    <h1>Chic & Unique</h1>
+    <img
+      [src]="logoSrc"
+      alt="Shop logo"
+      class="header-logo"
+      (click)="navigateToInicio()"
+    />
   </div>
 
   <div id="column2-head">
-    <nav>
-      <a routerLink="/">Inicio</a>
+    <nav class="nav-father">
       <a routerLink="/productos">Productos</a>
       <a routerLink="/metodo-envio">Método de Envío</a>
       <a routerLink="/blog">Blog</a>
@@ -18,7 +22,7 @@
     >
       <div
         style="margin-left: 16px; margin: 20px"
-        (click)="router.navigate(['/carrito'])"
+        (click)="navigateToCarrito()"
       >
         <custom-icon-svg
           src="icons/carrito-de-compras.svg"
@@ -29,7 +33,6 @@
 
       <span class="numero-productos">{{ cantidadProductos }}</span>
 
-      <!-- Popup debe estar dentro del contenedor relativo -->
       <app-shopping-cart-popup />
     </div>
   </div>
