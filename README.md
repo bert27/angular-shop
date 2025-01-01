@@ -1,10 +1,7 @@
 # Ng-shop
 
-This project is an online store built with Angular.
-
-The project is in Spanish. Stripe is configured, but you will need to update your keys: change the public key in the frontend and the private key on the server. The keys are located in the .env files.
-
-To start the server, navigate to the stripe-server directory and run: npm start
+This project is an online store in Spanish created with Angular.
+If you use stripe change the stripePublicKey in the client, everything else is in data.ts
 
 **V1.1 Features:**
 
@@ -25,6 +22,32 @@ To start the server, navigate to the stripe-server directory and run: npm start
 - Data, colors, and sections are configured in data.ts.
 - Product configuration is located in products-data.ts, both in the data folder.
 - In selectedMethodPay, you can use monei or stripe. This will automatically switch the payment method.
+
+  ```export const dataWeb = {
+  nameShop: 'Tecnología Avanzada',
+  name: 'mike',
+  email: 'soporte@tecnologiaavanzada.com',
+  instagram: 'https://www.instagram.com',
+  youtube: 'https://www.youtube.com',
+  phone: '+34 900 123 456',
+  address: 'Calle Innovación 42, 28001 Madrid, España',
+  nif: 'A12345678',
+  paymentIntentUrl:
+   (selectedMethodPay as MethodPayInterface) === 'stripe'
+     ? 'http://localhost:4000/stripe-payment'
+     : 'http://localhost:4000/monei-payment',
+
+  shippingCost: 9,
+  logo: {
+   mobile: `${directory}/images-logo/logo-head-mobile.png`,
+   pc: `${directory}/images-logo/logo-head.png`,
+   icon: `${directory}/icon.ico`,
+  },
+  colorPrimary: '#323E8A',
+  colorSecondary: '#6c757d',
+  colorBackground: 'white',
+  colorText: 'black',
+  ```
 
 **Webhooks and External Communication:**
 
