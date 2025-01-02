@@ -25,8 +25,6 @@ export const dataWeb = {
     pc: `${directory}/images-logo/logo-head.png`,
     icon: `${directory}/icon.ico`,
   },
-  colorPrimary: '#323E8A',
-  colorSecondary: '#6c757d',
   colorBackground: 'white',
   colorText: 'black',
 };

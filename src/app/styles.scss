@@ -1,20 +1,36 @@
-/* --------------------------------
-   1) Importamos Angular Material
--------------------------------- */
 @use "@angular/material" as mat;
 
 /* --------------------------------
-   2) Definir Variables SASS
+   Var SASS
 -------------------------------- */
 $tamañoTexto1: 30px;
 $tamañoTexto2: 20px;
 $TextSizeHead: 40px;
 $colorCard: #f4f6f7;
-$color-primary: #323E8A;    // Valor actual de dataWeb.colorPrimary
-$color-secondary: #6c757d;  // Valor actual de dataWeb.colorSecondary
+$color-primary: #323e8a;
+$color-secondary: #6c757d;
+$colorPrimaryHover: darken($color-primary, 10%);
+$colorSecondaryHover: darken($color-secondary, 20%);
+/* --------------------------------
+     Variables CSS 
+-------------------------------- */
+:root {
+  --tamañoTexto1: #{$tamañoTexto1};
+  --tamañoTexto2: #{$tamañoTexto2};
+  --TextSizeHead: #{$TextSizeHead};
+  --bs-body-font-size: #{$tamañoTexto2};
+  --colorCard: #{$colorCard};
+  --colorBackground: #ffffff;
+  --colorText: #000000;
+  --colorPrimary: #{$color-primary};
+  --colorSecondary: #{$color-secondary};
+  --colorPrimaryHover: #{$colorPrimaryHover};
+  --colorSecondaryHover: #{$colorSecondaryHover};
+  --colorDesactivado: #{$color-secondary};
+}
 
 /* --------------------------------
-   3) Incluir el núcleo de Angular Material
+    Incluir el núcleo de Angular Material
 -------------------------------- */
 @include mat.core();
 
@@ -22,7 +38,8 @@ $color-secondary: #6c757d;  // Valor actual de dataWeb.colorSecondary
    4) Definir Paletas de Colores Personalizadas
 -------------------------------- */
 
-/* Paleta Primaria Personalizada */
+$custom-accent-palette: mat.m2-define-palette(mat.$m2-orange-palette, 500);
+$custom-warn-palette: mat.m2-define-palette(mat.$m2-red-palette, 600);
 $custom-primary-palette: mat.m2-define-palette(
   (
     50: lighten($color-primary, 45%),
@@ -54,19 +71,10 @@ $custom-primary-palette: mat.m2-define-palette(
       A200: white,
       A400: white,
       A700: white,
-    )
+    ),
   )
 );
 
-/* Paleta Secundaria Personalizada (Accent) */
-$custom-accent-palette: mat.m2-define-palette(mat.$m2-orange-palette, 500);
-
-/* Paleta de Advertencia Personalizada (Warn) */
-$custom-warn-palette: mat.m2-define-palette(mat.$m2-red-palette, 600);
-
-/* --------------------------------
-   5) Definir el Tema Personalizado
--------------------------------- */
 $angular-shop-theme: mat.m2-define-light-theme(
   (
     color: (
@@ -81,31 +89,10 @@ $angular-shop-theme: mat.m2-define-light-theme(
   )
 );
 
-/* --------------------------------
-   6) Aplicar el Tema a Todos los Componentes
--------------------------------- */
 @include mat.all-component-themes($angular-shop-theme);
 
 /* --------------------------------
-   7) Definir Variables CSS (Custom Properties)
--------------------------------- */
-:root {
-  --tamañoTexto1: #{$tamañoTexto1};
-  --tamañoTexto2: #{$tamañoTexto2};
-  --TextSizeHead: #{$TextSizeHead};
-  --bs-body-font-size: #{$tamañoTexto2};
-  --colorCard: #{$colorCard};
-  --colorBackground: #ffffff;
-  --colorText: #000000;
-  --colorPrimary: #{$color-primary};                   // Sincronizado con SASS
-  --colorSecondary: #{$color-secondary};               // Sincronizado con SASS
-  --colorPrimaryHover: darken(#{$color-primary}, 10%);  // Generado dinámicamente
-  --colorSecondaryHover: darken(#{$color-secondary}, 20%); // Generado dinámicamente
-  --colorDesactivado: #a9a9a9;
-}
-
-/* --------------------------------
-   8) Ajustes Responsivos
+   Responsivos
 -------------------------------- */
 @media (max-width: 820px) {
   :root {
@@ -116,7 +103,7 @@ $angular-shop-theme: mat.m2-define-light-theme(
 }
 
 /* --------------------------------
-   9) Estilos Globales
+Globales
 -------------------------------- */
 html,
 body {
@@ -159,10 +146,8 @@ h2 {
   font-size: calc(var(--tamañoTexto1) * 0.9);
 }
 
-/* Otros estilos... */
-
 /* --------------------------------
-   10) Tus estilos de Angular Material
+Others
 -------------------------------- */
 mat-form-field {
   width: 230px;
@@ -230,7 +215,7 @@ main {
 
 @media screen and (max-width: 650px) {
   main {
-    margin-top: 200px; /* Ajuste para dispositivos móviles */
+    margin-top: 200px;
   }
   .content {
     flex-direction: column;
@@ -243,3 +228,4 @@ main {
     margin-block: 1.5rem;
   }
 }
+

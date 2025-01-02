@@ -18,14 +18,7 @@ export class ThemeService {
     if (isPlatformBrowser(this.platformId)) {
       const root = document.documentElement;
 
-      const primary = dataWeb.colorPrimary;
-      const secondary = dataWeb.colorSecondary;
-
       const variables = {
-        '--colorPrimary': primary,
-        '--colorPrimaryHover': this.darkenColor(primary, 10),
-        '--colorSecondary': secondary,
-        '--colorSecondaryHover': this.darkenColor(secondary, 20),
         '--colorBackground': dataWeb.colorBackground,
         '--colorText': dataWeb.colorText,
       };
@@ -36,35 +29,5 @@ export class ThemeService {
 
       this.cssVariablesSubject.next(variables);
     }
-  }
-
-  private darkenColor(color: string, percent: number): string {
-    let hex = color.replace('#', '');
-    if (hex.length === 3) {
-      hex = hex
-        .split('')
-        .map((char) => char + char)
-        .join('');
-    }
-
-    const num = parseInt(hex, 16);
-    let r = (num >> 16) - Math.round((255 * percent) / 100);
-    let g = ((num >> 8) & 0x00ff) - Math.round((255 * percent) / 100);
-    let b = (num & 0x0000ff) - Math.round((255 * percent) / 100);
-
-    r = r < 0 ? 0 : r;
-    g = g < 0 ? 0 : g;
-    b = b < 0 ? 0 : b;
-
-    const newColor =
-      '#' +
-      [r, g, b]
-        .map((x) => {
-          const hexPart = x.toString(16);
-          return hexPart.length === 1 ? '0' + hexPart : hexPart;
-        })
-        .join('');
-
-    return newColor;
   }
 }

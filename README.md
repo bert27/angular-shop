@@ -19,7 +19,7 @@ If you use stripe change the stripePublicKey in the client, everything else is i
 
 ### Configuration:
 
-- Data, colors, and sections are configured in data.ts.
+- Data, and sections are configured in data.ts.
 - Product configuration is located in products-data.ts, both in the data folder.
 - In selectedMethodPay, you can use monei or stripe. This will automatically switch the payment method.
 
@@ -43,8 +43,6 @@ If you use stripe change the stripePublicKey in the client, everything else is i
    pc: `${directory}/images-logo/logo-head.png`,
    icon: `${directory}/icon.ico`,
   },
-  colorPrimary: '#323E8A',
-  colorSecondary: '#6c757d',
   colorBackground: 'white',
   colorText: 'black',
   ```
@@ -55,6 +53,14 @@ If you use stripe change the stripePublicKey in the client, everything else is i
     -  If you deploy the server outside your local machine, this issue will not occur.
     -  External communication allows payment gateways to return the status of the order (successful or failed) to the server.
     -  Once the server receives the payment status, it sends a PDF invoice with a React HTML template.
+
+## View template in server
+
+localhost:4000/preview-email
+
+<div style="display: flex; align-items: center; width: 100%;">
+  <img src="public/screenshots/template.png" alt="Template" style="width: 60%;">
+</div>
 
 ## PC
 
