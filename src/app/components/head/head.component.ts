@@ -4,9 +4,10 @@ import {
   OnDestroy,
   ViewChild,
   HostListener,
+  AfterViewInit,
 } from '@angular/core';
 import { IconSvgComponent } from '../icon-svg/icon-svg.component';
-import { Router, RouterModule } from '@angular/router'; // Asegúrate de importar Router
+import { Router, RouterModule } from '@angular/router';
 import { ShoppingCartPopupComponent } from '../shopping-cart-popup/shopping-cart-popup.component';
 import { CarritoService } from '../../../services/carrito.service';
 import { Subscription } from 'rxjs';
@@ -19,36 +20,68 @@ import { dataWeb } from '../../../data/data';
   styleUrls: ['./head.component.sass'],
   imports: [IconSvgComponent, RouterModule, ShoppingCartPopupComponent],
 })
-export class HeadComponent implements OnInit, OnDestroy {
+export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(ShoppingCartPopupComponent)
-  shoppingCartPopup!: ShoppingCartPopupComponent; // Referencia al componente
+  shoppingCartPopup!: ShoppingCartPopupComponent;
   cantidadProductos = 0;
   private subscription: Subscription | undefined;
   logoSrc: string = dataWeb.logo.pc;
-
-  constructor(private carritoService: CarritoService, public router: Router) {} // Inyección del Router
+  private resizeTimer: any;
+  constructor(private carritoService: CarritoService, public router: Router) {}
 
   ngOnInit() {
-    // Escucha los cambios en el carrito
     this.subscription = this.carritoService
       .getProductCount()
       .subscribe((count) => {
         this.cantidadProductos = count;
       });
 
-    // Inicializa el logo según el tamaño de la pantalla
+    this.subscription = this.carritoService.getCartOpen().subscribe((open) => {
+      if (open) {
+        this.openCarritoView();
+      }
+    });
+
     this.updateLogo();
   }
 
   @HostListener('window:resize', ['$event'])
-  onResize() {
-    this.updateLogo();
+  onResize(event: UIEvent) {
+    const isMobile = window.innerWidth <= 768;
+
+    clearTimeout(this.resizeTimer);
+
+    if (isMobile) {
+      this.resizeTimer = setTimeout(() => {
+        this.updateLogo();
+        this.adjustMainMargin();
+      }, 200);
+    } else {
+      this.updateLogo();
+      this.adjustMainMargin();
+    }
+  }
+
+  ngAfterViewInit() {
+    this.adjustMainMargin();
   }
 
   private updateLogo() {
     if (typeof window !== 'undefined') {
       const isMobile = window.innerWidth <= 768;
       this.logoSrc = isMobile ? dataWeb.logo.mobile : dataWeb.logo.pc;
+    }
+  }
+
+  private adjustMainMargin() {
+    if (typeof window !== 'undefined') {
+      const header = document.querySelector('header') as HTMLElement;
+      const main = document.querySelector('main') as HTMLElement;
+
+      if (header && main) {
+        const headerHeight = header.offsetHeight;
+        main.style.marginTop = `${headerHeight}px`;
+      }
     }
   }
 
@@ -75,6 +108,6 @@ export class HeadComponent implements OnInit, OnDestroy {
   }
 
   navigateToCarrito() {
-    this.router.navigate(['/carrito']); // Método para navegar al carrito
+    this.router.navigate(['/carrito']);
   }
 }

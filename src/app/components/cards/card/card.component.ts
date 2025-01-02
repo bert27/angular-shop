@@ -50,36 +50,36 @@ export class CardComponent implements OnInit {
   isArticle(
     data: ProductDataInterface | ArticleInterface
   ): data is ArticleInterface {
-    return (data as ArticleInterface).textContent !== undefined; // Cambiado a 'textContent'
+    return (data as ArticleInterface).textContent !== undefined;
   }
 
   handleAddToCart() {
     if (!this.isArticle(this.cardData)) {
       this.addShoppingBasket(this.cardData, this.selectedOption, this.quantity);
+      this.carritoService.openCartView();
     }
   }
 
   navigateToProduct(
     cardData: ProductDataInterface | ArticleInterface,
-    selectedOption: { tipo: string; price: number } | undefined // Permite que sea undefined
+    selectedOption: { tipo: string; price: number } | undefined
   ) {
-    const productName = cardData.title.toLowerCase().replace(/\s+/g, '-'); // Convierte el nombre a una URL amigable
-    const routePrefix = this.isArticle(cardData) ? 'articulo' : 'producto'; // Determina si es un artículo o un producto
+    const productName = cardData.title.toLowerCase().replace(/\s+/g, '-');
+    const routePrefix = this.isArticle(cardData) ? 'articulo' : 'producto';
 
-    let route = `/${routePrefix}/${productName}`; // Ruta base
+    let route = `/${routePrefix}/${productName}`;
 
-    // Solo añade el tipo si es un producto y selectedOption está definido
     if (!this.isArticle(cardData) && selectedOption) {
-      route += `/${selectedOption.tipo}`; // Agrega el tipo para productos
+      route += `/${selectedOption.tipo}`;
     }
 
-    this.router.navigate([route]); // Redirige a la ruta adecuada
+    this.router.navigate([route]);
   }
 
   get selectedPrice(): number {
     if (!this.isArticle(this.cardData)) {
-      return this.selectedOption.price; // Devuelve el precio de la opción seleccionada
+      return this.selectedOption.price;
     }
-    return 0; // Para artículos, puedes devolver 0 o un valor que tenga sentido
+    return 0;
   }
 }

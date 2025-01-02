@@ -17,12 +17,11 @@
 
     <div
       class="carrito-content"
-      (mouseover)="openCarritoView()"
       (mouseleave)="startAutoClose()"
     >
       <div
         style="margin-left: 16px; margin: 20px"
-        (click)="navigateToCarrito()"
+        (click)="openCarritoView()"
       >
         <custom-icon-svg
           src="icons/carrito-de-compras.svg"

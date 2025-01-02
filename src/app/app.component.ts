@@ -1,12 +1,11 @@
 import {
   Component,
-  OnInit,
   Inject,
   PLATFORM_ID,
   Renderer2,
+  afterNextRender,
 } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
-import { isPlatformBrowser } from '@angular/common';
 import { HeadComponent } from './components/head/head.component';
 import { fadeAnimation } from './animations/fadeIntRoute';
 import { FooterComponent } from './components/footer/footer.component';
@@ -21,26 +20,19 @@ import { ThemeService } from '../services/theme.service';
   templateUrl: './app.component.html',
   animations: [fadeAnimation],
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: object,
     private titleService: Title,
     private renderer: Renderer2,
     private themeService: ThemeService
-  ) {}
-
-  iconWeb() {
-    const favicon = document.querySelector('link[rel="icon"]');
-    this.renderer.setAttribute(favicon, 'href', dataWeb.logo.icon);
-  }
-
-  ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
+  ) {
+    afterNextRender(() => {
       this.iconWeb();
       this.themeService.setCSSVariables();
 
-      // reset scroll
+      //Reset scroll
       this.router.events.subscribe((event) => {
         if (event instanceof NavigationEnd) {
           window.scrollTo(0, 0);
@@ -48,7 +40,12 @@ export class AppComponent implements OnInit {
       });
 
       this.setTitle(dataWeb.nameShop);
-    }
+    });
+  }
+
+  iconWeb() {
+    const favicon = document.querySelector('link[rel="icon"]');
+    this.renderer.setAttribute(favicon, 'href', dataWeb.logo.icon);
   }
 
   private setTitle(newTitle: string) {

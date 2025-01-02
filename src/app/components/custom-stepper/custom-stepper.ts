@@ -103,7 +103,7 @@ export class StepperComponent implements AfterViewInit, OnInit {
     if (this.stepper) {
       this.stepper.next();
       this.stepper.next();
-      this.carritoService.setEmptyCart();
+      this.carritoService.removeProducts();
     }
   }
   retryPayment(): void {

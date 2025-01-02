@@ -10,13 +10,13 @@ import { productsData } from '../../../data/products-data';
   selector: 'app-page-content-product',
   standalone: true,
   templateUrl: './page-content-product.component.html',
-  styleUrls: ['./page-content-product.component.sass'],
-  imports: [BotonComponent, CustomQuantitySelectorComponent], 
+  styleUrls: ['./page-content-product.component.scss'],
+  imports: [BotonComponent, CustomQuantitySelectorComponent],
 })
 export class PageContentProductComponent {
   productData: ProductDataInterface | null = null;
   typeProduct: string | null = null;
-  quantity = 1; 
+  quantity = 1;
 
   constructor(
     private route: ActivatedRoute,
@@ -60,14 +60,15 @@ export class PageContentProductComponent {
         this.carritoService.addProduct(
           this.productData,
           selectedOption,
-          this.quantity // Pasar la cantidad seleccionada
+          this.quantity
         );
+        this.carritoService.openCartView();
       }
     }
   }
 
   onQuantityChange(newQuantity: number): void {
-    this.quantity = newQuantity < 1 ? 1 : newQuantity; // Asegura que no sea menor a 1
+    this.quantity = newQuantity < 1 ? 1 : newQuantity;
   }
 
   buyNow(): void {
@@ -79,10 +80,10 @@ export class PageContentProductComponent {
         this.carritoService.addProduct(
           this.productData,
           selectedOption,
-          this.quantity // Asegura que la cantidad seleccionada se añada
+          this.quantity
         );
       }
-      this.router.navigate(['/carrito']); // Redirige al carrito después de añadir los productos
+      this.router.navigate(['/carrito']);
     }
   }
 }

@@ -16,41 +16,34 @@ export interface ProductCarritoInterface extends ProductDataInterface {
   providedIn: 'root',
 })
 export class CarritoService {
-  updateProductQuantity(
-    producto: ProductCarritoInterface,
-    nuevaCantidad: number
-  ) {
-    const productoExistente = this.products.find(
-      (p) =>
-        p.title === producto.title &&
-        p.tipoSeleccionado.tipo === producto.tipoSeleccionado.tipo
-    );
-
-    if (productoExistente) {
-      productoExistente.cantidad = nuevaCantidad;
-    }
-
-    this.saveInLocalStorage();
-    this.updateTotalCantidad();
-  }
-
-  public products: ProductCarritoInterface[] = [];
+  private products: ProductCarritoInterface[] = [];
   private cantidadProductosSubject = new BehaviorSubject<number>(0);
+  private openPopUpCart = new BehaviorSubject<boolean>(false);
 
   constructor() {
-    this.loadInLocalStorage();
+    this.loadFromLocalStorage();
+  }
+
+  openCartView(): void {
+    this.openPopUpCart.next(true);
+  }
+  closeCartView(): void {
+    this.openPopUpCart.next(false);
+  }
+
+  getCartOpen() {
+    return this.openPopUpCart.asObservable();
   }
 
   addProduct(
     producto: ProductDataInterface,
     optionSelect: Option,
     cantidad = 1
-  ) {
-
+  ): void {
     const productoExistente = this.products.find(
       (p) =>
         p.title === producto.title &&
-        p.tipoSeleccionado?.tipo === optionSelect?.tipo
+        p.tipoSeleccionado.tipo === optionSelect.tipo
     );
 
     if (productoExistente) {
@@ -64,30 +57,43 @@ export class CarritoService {
       this.products.push(nuevoProducto);
     }
 
-    this.saveInLocalStorage(); // Guardar los productos actualizados
+    this.persistChanges();
+  }
 
-    // Actualizar la cantidad total de productos en el carrito
-    this.updateTotalCantidad();
+  updateProductQuantity(
+    producto: ProductCarritoInterface,
+    nuevaCantidad: number
+  ): void {
+    const productoExistente = this.products.find(
+      (p) =>
+        p.title === producto.title &&
+        p.tipoSeleccionado.tipo === producto.tipoSeleccionado.tipo
+    );
+
+    if (productoExistente) {
+      productoExistente.cantidad = nuevaCantidad;
+      this.persistChanges();
+    }
   }
-  setEmptyCart(): void {
-    this.products = [];
-    this.saveInLocalStorage();
-    this.updateTotalCantidad();
-  }
-  removeProduct(productoAEliminar: ProductCarritoInterface) {
+
+  removeProduct(productoAEliminar: ProductCarritoInterface): void {
     this.products = this.products.filter(
       (producto) =>
         producto.title !== productoAEliminar.title ||
-        producto.tipoSeleccionado?.tipo !==
-          productoAEliminar.tipoSeleccionado?.tipo
+        producto.tipoSeleccionado.tipo !==
+          productoAEliminar.tipoSeleccionado.tipo
     );
 
-    this.saveInLocalStorage();
-    this.updateTotalCantidad();
+    this.persistChanges();
+  }
+
+  clearCart(): void {
+    this.products = [];
+    this.persistChanges();
   }
 
   getProducts(): ProductCarritoInterface[] {
-    return this.products;
+    return [...this.products];
   }
 
   getProductCount() {
@@ -102,11 +108,7 @@ export class CarritoService {
   }
 
   getTotalPriceWithQuantity(): string {
-    const total = this.products.reduce((sum, producto) => {
-      const price = producto.tipoSeleccionado?.price || 0;
-      return sum + price * producto.cantidad;
-    }, 0);
-
+    const total = this.getTotalPrice();
     const cantidad = this.products.reduce(
       (sum, producto) => sum + producto.cantidad,
       0
@@ -118,7 +120,7 @@ export class CarritoService {
     return `Subtotal (${cantidad} productos): ${totalFormatted} €`;
   }
 
-  public loadInLocalStorage() {
+  private loadFromLocalStorage(): void {
     if (typeof localStorage !== 'undefined') {
       const productosGuardados = localStorage.getItem('productosCarrito');
       if (productosGuardados) {
@@ -128,17 +130,26 @@ export class CarritoService {
     }
   }
 
-  private saveInLocalStorage() {
+  private saveToLocalStorage(): void {
     if (typeof localStorage !== 'undefined') {
       localStorage.setItem('productosCarrito', JSON.stringify(this.products));
     }
   }
+  removeProducts(): void {
+    this.products = [];
+    this.persistChanges();
+  }
 
-  private updateTotalCantidad() {
+  private updateTotalCantidad(): void {
     const totalProductos = this.products.reduce(
       (total, producto) => total + producto.cantidad,
       0
     );
     this.cantidadProductosSubject.next(totalProductos);
+  }
+
+  private persistChanges(): void {
+    this.saveToLocalStorage();
+    this.updateTotalCantidad();
   }
 }

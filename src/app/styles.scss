@@ -185,7 +185,6 @@ p {
 main {
   position: relative;
   min-height: 80vh;
-  margin-top: 140px;
 }
 
 .container {
@@ -214,9 +213,6 @@ main {
 }
 
 @media screen and (max-width: 650px) {
-  main {
-    margin-top: 200px;
-  }
   .content {
     flex-direction: column;
     width: max-content;
