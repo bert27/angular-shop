@@ -35,7 +35,13 @@ export class AppComponent {
       //Reset scroll
       this.router.events.subscribe((event) => {
         if (event instanceof NavigationEnd) {
-          window.scrollTo(0, 0);
+          if (event instanceof NavigationEnd) {
+            window.scrollTo({
+              top: 0,
+              left: 0,
+              behavior: 'instant',
+            });
+          }
         }
       });
 

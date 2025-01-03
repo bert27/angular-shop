@@ -1,0 +1,137 @@
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  width: 100%;
+  background: var(--colorPrimary);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  box-sizing: border-box;
+  flex-wrap: wrap;
+
+  .header-logo {
+    width: 150px;
+    height: auto;
+    display: block;
+    cursor: pointer;
+    margin: 0.5em;
+  }
+
+  #column1-head {
+    flex: 1;
+    width: auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    user-select: none;
+  }
+
+  #column2-head {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 68%; // Default width for larger screens
+  }
+
+  .nav-menu {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  nav {
+    a {
+      cursor: pointer;
+      margin-right: 15px;
+      text-decoration: none;
+      color: #ffffff;
+      font-size: var(--TextSizeHead);
+      transition: all 0.3s ease;
+
+      &:hover {
+        font-size: calc(var(--TextSizeHead) * 1.1);
+        font-weight: bold;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+        color: lighten(#ffffff, 10%);
+      }
+    }
+  }
+
+  .carrito-content {
+    display: flex;
+    align-items: center;
+    width: auto;
+    margin-left: auto;
+    position: relative;
+    cursor: pointer;
+
+    .numero-productos {
+      position: absolute;
+      top: 9px;
+      left: 40px;
+      background-color: #ff8118;
+      color: white;
+      border-radius: 50%;
+      width: 25px;
+      height: 25px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: bold;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+
+    #column1-head,
+    #column2-head {
+      width: 100%;
+      margin-bottom: 0;
+    }
+
+    .header-logo {
+      width: 150px;
+      height: auto;
+      margin: 0;
+    }
+
+    .carrito-content {
+      width: auto;
+    }
+
+    .nav-menu {
+      padding: 0px 20px;
+      width: 65%;
+      display: flex;
+      flex-wrap: wrap;
+
+      a {
+        flex-shrink: 0;
+        margin-right: 10px;
+        transition: none;
+      }
+    }
+
+    nav {
+      a {
+        margin-right: 10px;
+        font-size: var(--TextSizeHead);
+        text-decoration: none;
+
+        &:hover,
+        &:focus {
+          font-size: var(--TextSizeHead);
+          font-weight: normal;
+          text-shadow: none;
+          color: #ffffff;
+        }
+      }
+    }
+  }
+}

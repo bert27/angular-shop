@@ -13,7 +13,7 @@ import { CustomQuantitySelectorComponent } from '../custom-quantity-selector/cus
   selector: 'custom-shopping-cart-list',
   standalone: true,
   templateUrl: './shopping-cart-list.component.html',
-  styleUrls: ['./shopping-cart-list.component.sass'],
+  styleUrls: ['./shopping-cart-list.component.scss'],
   imports: [
     IconSvgComponent,
     CommonModule,

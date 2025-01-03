@@ -5,14 +5,17 @@
       <owl-carousel-o [options]="customOptions" class="owl-stage">
         <ng-container *ngFor="let item of bestProducts">
           <ng-template carouselSlide [id]="item.title">
-            <div class="card" (click)="navigateToProduct(item, item.options[0])">
-              <div class="product-image-container">
-                <img
-                  class="product-image"
-                  [src]="item.imageUrl"
-                  [alt]="item.title"
-                />
-              </div>
+            <div
+              class="card"
+              (mousedown)="onDragStart($event)"
+              (touchstart)="onDragStart($event)"
+              (mousemove)="onDragMove($event)"
+              (touchmove)="onDragMove($event)"
+              (mouseup)="onDragEnd($event)"
+              (touchend)="onDragEnd($event)"
+              (click)="onCardClick(item, item.options[0])"
+            >
+              <component-image [cardData]="item" />
               <h4 class="product-title">{{ item.title }}</h4>
               <p class="product-description">{{ item.description }}</p>
               <div class="product-info">

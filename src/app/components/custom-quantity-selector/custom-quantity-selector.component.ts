@@ -8,7 +8,7 @@ import { BotonComponent } from '../custom-button/custom-button.component';
   standalone: true,
   imports: [CommonModule, CustomInputComponent, BotonComponent],
   templateUrl: './custom-quantity-selector.component.html',
-  styleUrls: ['./custom-quantity-selector.component.sass'],
+  styleUrls: ['./custom-quantity-selector.component.scss'],
 })
 export class CustomQuantitySelectorComponent {
   @Input() value = 1;

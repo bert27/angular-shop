@@ -1,0 +1,71 @@
+:host {
+  width: 100%;
+  display: block;
+
+  ::ng-deep {
+    .mat-horizontal-stepper-wrapper {
+      background: var(--colorBackground);
+    }
+
+    .mat-horizontal-stepper-header {
+      .mat-step-icon {
+        background-color: #a0a2a0;
+        border-radius: 50%;
+        transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+        font-size: 24px;
+        color: white;
+      }
+      .mat-step-icon-selected {
+        background-color: var(--colorPrimary);
+        transform: scale(1.1);
+      }
+      .mat-step-icon-state-done {
+        background-color: lightgreen !important;
+      }
+    }
+
+    .step-content {
+      display: flex;
+      justify-content: space-between;
+
+      @media (max-width: 768px) {
+        flex-direction: column;
+      }
+
+      .column {
+        width: 48%;
+      @media (max-width: 768px) {
+          margin-bottom: 10px;
+          width: 100%;
+          }
+        h3 {
+          margin-bottom: 10px;
+        }
+
+        .form-group {
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+}
+
+.step1-checkout {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+
+  .form-container,
+  .cart-container {
+    width: 40%;
+    margin-bottom: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .form-container,
+    .cart-container {
+      width: 100%;
+    }
+  }
+}

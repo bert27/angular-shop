@@ -7,13 +7,14 @@
     "start:server": "cd server && npm run start",
     "server": "node dist/angular-shop/server/server.mjs",
     "start:angular-server": "node --loader ts-node/esm server.ts",
-    "start": "concurrently \"npm run start:client\" \"npm run start:server\"",
     "open:chrome": "npx open-cli http://localhost:3000 --app chrome",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "serve:ssr:angular-shop": "node dist/angular-shop/server/server.mjs",
-    "lint": "ng lint"
+    "lint": "ng lint",
+    "start": "concurrently \"npm run start:client\" \"npm run start:server\"",
+    "install": "npm install && cd server && npm install"
   },
   "private": true,
   "dependencies": {

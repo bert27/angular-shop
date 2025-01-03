@@ -3,15 +3,7 @@
   id="my-card"
   (click)="navigateToProduct(cardData, selectedOption)"
 >
-  <div class="image-content-f">
-    <div id="image-content" class="image-content">
-      <img
-        *ngIf="cardData.imageUrl"
-        [src]="cardData.imageUrl"
-        alt="{{ cardData.title }}"
-      />
-    </div>
-  </div>
+  <component-image [cardData]="cardData" />
   <h1 class="title-card">{{ cardData.title }}</h1>
 
   <p *ngIf="isArticle(cardData)" class="description-class">

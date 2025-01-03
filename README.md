@@ -5,9 +5,9 @@ If you use stripe change the stripePublicKey in the client, everything else is i
 
 **V1.1 Features:**
 
-    •	Multiple payment gateways.
-    •	Invoice delivery via email with React HTML templates.
-    •	PDF generation attached with the company’s logo and VAT included.
+- Multiple payment gateways.
+- Invoice delivery via email with React HTML templates.
+- PDF generation attached with the company’s logo and VAT included.
 
 ### Components:
 
@@ -78,7 +78,11 @@ localhost:4000/preview-email
 
 ## Install
 
-navigate to the project and write npm i
+Navigate to the project and run:
+
+npm run install
+
+This will install both the server and the client dependencies.
 
 ## Start the web to get started
 

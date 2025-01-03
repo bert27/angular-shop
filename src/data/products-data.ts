@@ -52,11 +52,11 @@ export const productsData = [
     options: [
       {
         price: 2199,
-        tipo: '16GB RAM, 512GB SSD',
+        tipo: '16GB RAM, 512GB',
       },
       {
         price: 2499,
-        tipo: '32GB RAM, 1TB SSD',
+        tipo: '32GB RAM, 1TB',
       },
     ],
   },
@@ -84,15 +84,15 @@ export const productsData = [
     options: [
       {
         price: 799,
-        tipo: '256Gb SSD',
+        tipo: '256Gb',
       },
       {
         price: 999,
-        tipo: '512Gb SSD',
+        tipo: '512Gb',
       },
       {
         price: 1299,
-        tipo: '1Tb SSD',
+        tipo: '1Tb',
       },
     ],
   },

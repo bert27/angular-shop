@@ -6,7 +6,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
-import { CustomFormComponent } from '../forms/custom-form/custom-form.component';
 import { BotonComponent } from '../custom-button/custom-button.component';
 import { ShoppingCartListComponent } from '../shopping-cart-list/shopping-cart-list';
 import { CommonModule } from '@angular/common';
@@ -18,11 +17,13 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { CarritoService } from '../../../services/carrito.service';
 import { dataWeb, selectedMethodPay } from '../../../data/data';
 import { DirectionShippingInterface } from '../../../data/interfaces-model';
+import { Step1Form } from './steps/step1-form/step1-form.component';
+import { Step2DirectionComponent } from './steps/step2-direction/step2-direction';
 
 @Component({
   selector: 'custom-stepper',
   templateUrl: './custom-stepper.html',
-  styleUrls: ['./custom-stepper.sass'],
+  styleUrls: ['./custom-stepper.scss'],
   standalone: true,
   providers: [
     {
@@ -37,18 +38,19 @@ import { DirectionShippingInterface } from '../../../data/interfaces-model';
     MatStepperModule,
     ReactiveFormsModule,
     MatIconModule,
-    CustomFormComponent,
+    Step1Form,
     BotonComponent,
     ShoppingCartListComponent,
     CommonModule,
     StripeFieldComponent,
     MoneiCreditCardComponent,
+    Step2DirectionComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class StepperComponent implements AfterViewInit, OnInit {
   @ViewChild(MatStepper) stepper!: MatStepper;
-  @ViewChild(CustomFormComponent) customFormComponent!: CustomFormComponent;
+  @ViewChild(Step1Form) customFormComponent!: Step1Form;
 
   orderId: string | null = null;
   isErrorPage = false;
@@ -67,7 +69,7 @@ export class StepperComponent implements AfterViewInit, OnInit {
   };
   currentStepIcon = 'home';
   titleShop = dataWeb.nameShop;
-  selectedMethodPay = selectedMethodPay
+  selectedMethodPay = selectedMethodPay;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -91,7 +93,6 @@ export class StepperComponent implements AfterViewInit, OnInit {
   }
 
   ngAfterViewInit(): void {
-    // Ensures safe initialization of the stepper after it is available
     if (this.orderId) {
       setTimeout(() => {
         this.goToInvoiceStep();
@@ -135,7 +136,7 @@ export class StepperComponent implements AfterViewInit, OnInit {
         contentDisposition?.match(/filename="(.+)"/)?.[1] ||
         `Factura_${this.orderId}.pdf`;
 
-      // Manejo del stream
+      // Stream
       const reader = response.body?.getReader();
       const chunks: Uint8Array[] = [];
       let receivedLength = 0;

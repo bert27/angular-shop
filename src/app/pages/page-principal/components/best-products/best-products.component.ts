@@ -4,18 +4,18 @@ import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Router, RouterModule } from '@angular/router';
 import { ProductDataInterface } from '../../../../../data/interfaces-model';
 import { productsData } from '../../../../../data/products-data';
-
+import { ImageComponent } from '../../../../components/image/image';
 
 @Component({
   selector: 'app-best-products',
   standalone: true,
-  imports: [CarouselModule, CommonModule, RouterModule],
+  imports: [CarouselModule, CommonModule, RouterModule, ImageComponent],
   templateUrl: './best-products.component.html',
-  styleUrls: ['./best-products.component.css'],
+  styleUrls: ['./best-products.component.scss'],
 })
 export class BestProductsComponent {
   bestProducts = productsData;
-
+  isMoveActive = true;
   productImages = [
     { url: 'images-products/1.jpg', id: '1' },
     { url: 'images-products/2.jpg', id: '2' },
@@ -34,18 +34,20 @@ export class BestProductsComponent {
 
   customOptions: OwlOptions = {
     loop: true,
-    autoplay: true,
-    autoplayTimeout: 2000,
+    autoplay: this.isMoveActive,
+    autoplayTimeout: 5000, // Aumenta el tiempo entre transiciones automáticas
     autoplayHoverPause: true,
     autoWidth: false,
-    mouseDrag: true,
-    touchDrag: true,
-    pullDrag: true,
+    mouseDrag: this.isMoveActive,
+    touchDrag: this.isMoveActive,
+    pullDrag: this.isMoveActive,
     dots: false,
     navSpeed: 700,
+    smartSpeed: 600, // Controla la velocidad de la transición
+    autoplaySpeed: 600, // Controla la velocidad de reproducción automática
     nav: false,
     margin: 60,
-    navText: ['Atras', 'Siguiente'],
+    navText: ['Atrás', 'Siguiente'],
     responsive: {
       0: {
         items: 1,
@@ -62,24 +64,77 @@ export class BestProductsComponent {
     },
   };
 
-  constructor(private router: Router) {
-    // Inyección del Router
+  // Variables para rastrear el desplazamiento
+  isDragging = false;
+  dragThreshold = 5; // Umbral en píxeles para considerar que es un desplazamiento
+  startX = 0;
+  startY = 0;
+
+  constructor(private router: Router) {}
+
+  // Método para manejar el inicio del desplazamiento
+  onDragStart(event: MouseEvent | TouchEvent): void {
+    this.isDragging = false;
+    if (event instanceof MouseEvent) {
+      this.startX = event.clientX;
+      this.startY = event.clientY;
+    } else if (event instanceof TouchEvent) {
+      this.startX = event.touches[0].clientX;
+      this.startY = event.touches[0].clientY;
+    }
   }
 
+  // Método para manejar el movimiento durante el desplazamiento
+  onDragMove(event: MouseEvent | TouchEvent): void {
+    let currentX = 0;
+    let currentY = 0;
+    if (event instanceof MouseEvent) {
+      currentX = event.clientX;
+      currentY = event.clientY;
+    } else if (event instanceof TouchEvent) {
+      currentX = event.touches[0].clientX;
+      currentY = event.touches[0].clientY;
+    }
+
+    const deltaX = Math.abs(currentX - this.startX);
+    const deltaY = Math.abs(currentY - this.startY);
+
+    if (deltaX > this.dragThreshold || deltaY > this.dragThreshold) {
+      this.isDragging = true;
+    }
+  }
+
+  // Método para manejar el fin del desplazamiento
+  onDragEnd(event: MouseEvent | TouchEvent): void {
+    // No se requiere acción adicional aquí
+  }
+
+  // Método para manejar el clic en la tarjeta
+  onCardClick(cardData: ProductDataInterface, selectedOption: { tipo: string; price: number } | undefined): void {
+    if (this.isDragging) {
+      // Si se detectó un desplazamiento, no realizar la navegación
+      this.isDragging = false; // Resetear el flag
+      return;
+    }
+    this.navigateToProduct(cardData, selectedOption);
+  }
+
+  // Método para navegar al producto seleccionado
   navigateToProduct(
     cardData: ProductDataInterface,
     selectedOption: { tipo: string; price: number } | undefined
   ) {
-    const productName = cardData.title.toLowerCase().replace(/\s+/g, '-'); 
+    const productName = cardData.title.toLowerCase().replace(/\s+/g, '-');
 
-    let route = `/producto//${productName}`; 
+    let route = `/producto/${productName}`; // Eliminado doble slash
 
     if (selectedOption) {
-      route += `/${selectedOption.tipo}`; 
+      route += `/${selectedOption.tipo}`;
     }
-    this.router.navigate([route]); 
+    this.router.navigate([route]);
   }
 
+  // Método para cambiar la imagen seleccionada (si es necesario)
   changeImage(image: string) {
     this.selectedImage = image;
   }

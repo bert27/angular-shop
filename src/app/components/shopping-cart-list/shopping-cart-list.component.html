@@ -28,7 +28,10 @@
             </div>
           </div>
           <div class="price-column">
-            <p class="price">{{ producto.tipoSeleccionado.price }} €</p>
+            <p class="price">
+              {{ producto.tipoSeleccionado.price }} € -
+              {{ producto.tipoSeleccionado.price * producto.cantidad }} €
+            </p>
           </div>
           <div class="remove-button-container">
             <button class="remove-button" (click)="removeProduct(producto)">

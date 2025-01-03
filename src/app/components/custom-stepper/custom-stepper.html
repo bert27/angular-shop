@@ -18,7 +18,8 @@
 
     <div class="step1-checkout">
       <div class="form-container">
-        <custom-form (formCompleted)="onFormCompleted($event)" />
+        <h3>Entrega</h3>
+        <app-step1-form (formCompleted)="onFormCompleted($event)" />
       </div>
       <div class="cart-container">
         <custom-shopping-cart-list (click)="nextStep()" />
@@ -37,21 +38,12 @@
 
     <div class="step-content">
       <div class="column">
-        <h3>Enviar a:</h3>
-        <p><strong>Nombre:</strong> {{ directionShipping.name }}</p>
-        <p><strong>Apellidos:</strong> {{ directionShipping.surname }}</p>
-        <p><strong>Dirección:</strong> {{ directionShipping.address }}</p>
-        <p>
-          <strong>Código Postal:</strong> {{ directionShipping.postalCode }}
-        </p>
-        <p><strong>País:</strong> {{ directionShipping.country }}</p>
-        <p><strong>Provincia:</strong> {{ directionShipping.province }}</p>
-        <p><strong>Ciudad:</strong> {{ directionShipping.city }}</p>
-        <p><strong>Teléfono:</strong> {{ directionShipping.phone }}</p>
-        <p><strong>Email:</strong> {{ directionShipping.email }}</p>
+        <h3>Entrega</h3>
+        <app-step2-direction [directionShipping]="directionShipping"/>
       </div>
       <div class="column">
         <div class="form-group">
+          <h3>Pago</h3>
           <label for="card-element">Información de la tarjeta de crédito</label>
           <div>Total: {{ totalPrice }} €</div>
 

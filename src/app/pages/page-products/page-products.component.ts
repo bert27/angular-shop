@@ -9,7 +9,7 @@ import { productsData } from '../../../data/products-data';
   standalone: true,
   imports: [CardsComponent, CommonModule, BotonComponent],
   templateUrl: './page-products.component.html',
-  styleUrls: ['./page-products.component.sass'],
+  styleUrls: ['./page-products.component.scss'],
 })
 export class ProductosComponent {
   products = productsData;

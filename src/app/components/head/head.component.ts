@@ -17,7 +17,7 @@ import { dataWeb } from '../../../data/data';
   selector: 'app-head',
   standalone: true,
   templateUrl: './head.component.html',
-  styleUrls: ['./head.component.sass'],
+  styleUrls: ['./head.component.scss'],
   imports: [IconSvgComponent, RouterModule, ShoppingCartPopupComponent],
 })
 export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -37,7 +37,8 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
       });
 
     this.subscription = this.carritoService.getCartOpen().subscribe((open) => {
-      if (open) {
+      const isMobile = window.innerWidth <= 768;
+      if (open && !isMobile) {
         this.openCarritoView();
       }
     });
@@ -109,5 +110,14 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
 
   navigateToCarrito() {
     this.router.navigate(['/carrito']);
+  }
+
+  handleCarritoClick() {
+    const isMobile = window.innerWidth <= 768;
+    if (isMobile) {
+      this.navigateToCarrito();
+    } else {
+      this.openCarritoView();
+    }
   }
 }

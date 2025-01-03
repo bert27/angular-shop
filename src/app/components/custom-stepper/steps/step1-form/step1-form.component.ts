@@ -6,16 +6,16 @@ import {
   ReactiveFormsModule,
 } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { DirectionShippingInterface } from '../../../../data/interfaces-model';
+import { DirectionShippingInterface } from '../../../../../data/interfaces-model';
 
 @Component({
-  selector: 'custom-form',
-  templateUrl: './custom-form.component.html',
-  styleUrls: ['./custom-form.component.sass'],
+  selector: 'app-step1-form',
+  templateUrl: './step1-form.component.html',
+  styleUrls: ['./step1-form.component.scss'],
   standalone: true,
   imports: [ReactiveFormsModule, CommonModule],
 })
-export class CustomFormComponent {
+export class Step1Form {
   customForm: FormGroup;
   submitted = false;
 

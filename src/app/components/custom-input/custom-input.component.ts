@@ -8,7 +8,7 @@ import { MatInputModule } from '@angular/material/input';
   standalone: true,
   imports: [CommonModule, MatFormFieldModule, MatInputModule],
   templateUrl: './custom-input.component.html',
-  styleUrls: ['./custom-input.component.sass'],
+  styleUrls: ['./custom-input.component.scss'],
 })
 export class CustomInputComponent {
   @Input() label = 'Cantidad'; 

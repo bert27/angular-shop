@@ -9,6 +9,7 @@ import {
 import { CustomDropdownMaterialComponent } from '../../custom-dropdown-material/custom-dropdown-material.component';
 import { Router } from '@angular/router';
 import { CustomQuantitySelectorComponent } from '../../custom-quantity-selector/custom-quantity-selector.component';
+import { ImageComponent } from '../../image/image';
 
 @Component({
   selector: 'custom-card',
@@ -18,22 +19,22 @@ import { CustomQuantitySelectorComponent } from '../../custom-quantity-selector/
     BotonComponent,
     CustomDropdownMaterialComponent,
     CustomQuantitySelectorComponent,
+    ImageComponent
   ],
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.sass'],
+  styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
   onQuantityChange(newQuantity: number): void {
     console.log('Cantidad actualizada:', newQuantity);
   }
   @Input() cardData!: ProductDataInterface | ArticleInterface;
-  selectedOption!: { tipo: string; price: number }; // Cambia a un objeto para incluir tipo y precio
+  selectedOption!: { tipo: string; price: number }; 
   quantity = 1;
 
-  constructor(private carritoService: CarritoService, private router: Router) {} // Inyecta Router aquí
+  constructor(private carritoService: CarritoService, private router: Router) {} 
 
   ngOnInit() {
-    // Inicializa selectedOption con la primera opción disponible
     if (!this.isArticle(this.cardData) && this.cardData.options.length > 0) {
       this.selectedOption = this.cardData.options[0];
     }

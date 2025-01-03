@@ -1,0 +1,23 @@
+.content-carousel {
+  width: 85%;
+  margin: 0 auto;
+  padding-top: 10px;
+}
+
+.picsum-img-wrapper {
+  width: 100%;
+  height: 388px;
+  overflow: hidden;
+  position: relative;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 768px) {
+    height: 240px;
+  }
+}

@@ -9,7 +9,7 @@
   </div>
 
   <div id="column2-head">
-    <nav class="nav-father">
+    <nav class="nav-menu">
       <a routerLink="/productos">Productos</a>
       <a routerLink="/metodo-envio">Método de Envío</a>
       <a routerLink="/blog">Blog</a>
@@ -21,7 +21,7 @@
     >
       <div
         style="margin-left: 16px; margin: 20px"
-        (click)="openCarritoView()"
+        (click)="handleCarritoClick()"
       >
         <custom-icon-svg
           src="icons/carrito-de-compras.svg"

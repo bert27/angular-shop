@@ -1,0 +1,117 @@
+.card {
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  padding: 16px;
+  background-color: var(--colorCard);
+  color: var(--colorText);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+  @media (max-width: 768px) {
+    padding: 6px;
+  }
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.title-card {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-weight: bold;
+}
+
+.price-class {
+  font-weight: bold;
+  font-size: var(--textSize1);
+  color: var(--colorPrimary);
+}
+
+.price-stock-container {
+  font-size: var(--textSize1);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.en-stock {
+  color: green;
+}
+
+.agotado {
+  color: red;
+}
+
+.description-class {
+  font-size: var(--textSize2);
+  line-height: 1.5;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  text-overflow: ellipsis;
+  max-height: calc(3 * 1.5em);
+  text-align: center;
+}
+#fila {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.options-f-class {
+  flex-direction: row;
+
+  @media (max-width: 768px) {
+    flex-direction: column;
+  }
+}
+
+.second-button {
+  @media (max-width: 768px) {
+    margin-top: 10px;
+  }
+}
+
+.card-content-container {
+  padding: 0.5em;
+}
+
+.quantity-options-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  margin-top: 16px;
+  gap: 10px;
+
+  @media (max-width: 768px) {
+    justify-content: space-between;
+    flex-wrap: nowrap;
+
+    custom-quantity-selector,
+    custom-dropdown-material {
+      width: 50%;
+      margin-bottom: 0;
+    }
+  }
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 16px;
+
+  custom-button {
+    text-align: center;
+    width: auto;
+  }
+}

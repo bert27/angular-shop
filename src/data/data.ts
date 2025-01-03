@@ -2,7 +2,7 @@ import { ArticleInterface } from './interfaces-model';
 
 export const directory = 'shop1';
 type MethodPayInterface = 'monei' | 'stripe';
-export const selectedMethodPay: MethodPayInterface = 'stripe';
+export const selectedMethodPay: MethodPayInterface = 'monei';
 
 // conf general
 export const dataWeb = {
@@ -34,16 +34,19 @@ export const carouselConfig = [
     bannerImg: `${directory}/images-carousel/1a.jpg`,
     title: 'iphone 16',
     description: 'Elige uno u otro.',
+    url: '/producto/airpods-pro-2/Con%20estuche%20MagSafe',
   },
   {
     bannerImg: `${directory}/images-carousel/2a.jpg`,
     title: 'iphone 16 pro',
     description: 'Elige uno u otro.',
+    url: '/producto/iphone-16-pro-max/128Gb',
   },
   {
     bannerImg: `${directory}/images-carousel/3a.jpg`,
     title: 'mac mini',
     description: 'Elige uno u otro.',
+    url: '/producto/mac-mini-m4/256Gb',
   },
 ];
 

@@ -12,7 +12,7 @@ import { DirectionShippingInterface } from '../../../data/interfaces-model';
 @Component({
   selector: 'app-monei-credit-card',
   templateUrl: './monei-credit-card.html',
-  styleUrls: ['./monei-credit-card.sass'],
+  styleUrls: ['./monei-credit-card.scss'],
   standalone: true,
   imports: [CommonModule, BotonComponent],
 })
