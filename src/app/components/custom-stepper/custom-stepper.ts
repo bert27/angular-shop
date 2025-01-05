@@ -19,6 +19,7 @@ import { dataWeb, selectedMethodPay } from '../../../data/data';
 import { DirectionShippingInterface } from '../../../data/interfaces-model';
 import { Step1Form } from './steps/step1-form/step1-form.component';
 import { Step2DirectionComponent } from './steps/step2-direction/step2-direction';
+import { FormStateService } from '../../../services/formstate.service';
 
 @Component({
   selector: 'custom-stepper',
@@ -44,7 +45,7 @@ import { Step2DirectionComponent } from './steps/step2-direction/step2-direction
     CommonModule,
     StripeFieldComponent,
     MoneiCreditCardComponent,
-    Step2DirectionComponent
+    Step2DirectionComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
@@ -73,7 +74,8 @@ export class StepperComponent implements AfterViewInit, OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private carritoService: CarritoService
+    private carritoService: CarritoService,
+    private formStateService: FormStateService
   ) {}
 
   updateTotalPrice(): void {
@@ -89,6 +91,11 @@ export class StepperComponent implements AfterViewInit, OnInit {
         console.log('Página de error detectada');
       }
     });
+
+    const savedDirection = this.formStateService.getFormData();
+    if (savedDirection) {
+      this.directionShipping = savedDirection;
+    }
     this.updateTotalPrice();
   }
 
@@ -104,6 +111,7 @@ export class StepperComponent implements AfterViewInit, OnInit {
     if (this.stepper) {
       this.stepper.next();
       this.stepper.next();
+      this.carritoService.storeLastPurchase();
       this.carritoService.removeProducts();
     }
   }
@@ -122,7 +130,11 @@ export class StepperComponent implements AfterViewInit, OnInit {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ invoiceNumber: this.orderId }),
+        body: JSON.stringify({
+          invoiceNumber: this.orderId,
+          directionShipping: this.directionShipping,
+          productos: this.carritoService.getLastPurchase(),
+        }),
       });
 
       if (!response.ok) {
@@ -216,6 +228,7 @@ export class StepperComponent implements AfterViewInit, OnInit {
 
   onStepChange(event: { selectedIndex: number }): void {
     this.updateStepIcon(event.selectedIndex);
+    this.updateTotalPrice();
   }
 
   updateStepIcon(stepIndex: number): void {
@@ -239,7 +252,7 @@ export class StepperComponent implements AfterViewInit, OnInit {
     if (formData) {
       this.directionShipping = formData;
     } else {
-      console.error('El formulario no es válido');
+      console.error('Error en el formulario');
     }
   }
 }

@@ -15,7 +15,10 @@
     </button>
   </div>
   <div class="subtotal" *ngIf="productos.length > 0">
-    <div class="amount">{{ getTotalPrice() }}</div>
+    <div class="amount">
+      Subtotal ({{ totalQuantity }} productos):
+      <span class="color-price">{{ totalPriceValue }} €</span>
+    </div>
   </div>
   <ul>
     <li *ngFor="let producto of productos">

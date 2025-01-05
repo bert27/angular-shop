@@ -1,6 +1,6 @@
 import nodemailer from "nodemailer";
 import { render } from "@react-email/render";
-import InvoiceTemplate from "../templates/template";
+import InvoiceTemplate from "../templates/template-email";
 import React from "react";
 import fs from "fs";
 

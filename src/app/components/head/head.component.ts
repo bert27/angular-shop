@@ -5,6 +5,8 @@ import {
   ViewChild,
   HostListener,
   AfterViewInit,
+  Inject,
+  PLATFORM_ID,
 } from '@angular/core';
 import { IconSvgComponent } from '../icon-svg/icon-svg.component';
 import { Router, RouterModule } from '@angular/router';
@@ -12,6 +14,7 @@ import { ShoppingCartPopupComponent } from '../shopping-cart-popup/shopping-cart
 import { CarritoService } from '../../../services/carrito.service';
 import { Subscription } from 'rxjs';
 import { dataWeb } from '../../../data/data';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-head',
@@ -23,43 +26,55 @@ import { dataWeb } from '../../../data/data';
 export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(ShoppingCartPopupComponent)
   shoppingCartPopup!: ShoppingCartPopupComponent;
+
   cantidadProductos = 0;
   private subscription: Subscription | undefined;
   logoSrc: string = dataWeb.logo.pc;
   private resizeTimer: any;
-  constructor(private carritoService: CarritoService, public router: Router) {}
+
+  constructor(
+    private carritoService: CarritoService,
+    public router: Router,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngOnInit() {
-    this.subscription = this.carritoService
-      .getProductCount()
-      .subscribe((count) => {
-        this.cantidadProductos = count;
-      });
+    if (isPlatformBrowser(this.platformId)) {
+      this.subscription = this.carritoService
+        .getProductCount()
+        .subscribe((count) => {
+          this.cantidadProductos = count;
+        });
 
-    this.subscription = this.carritoService.getCartOpen().subscribe((open) => {
-      const isMobile = window.innerWidth <= 768;
-      if (open && !isMobile) {
-        this.openCarritoView();
-      }
-    });
+      this.subscription = this.carritoService
+        .getCartOpen()
+        .subscribe((open) => {
+          const isMobile = window.innerWidth <= 768;
+          if (open && !isMobile) {
+            this.openCarritoView();
+          }
+        });
 
-    this.updateLogo();
+      this.updateLogo();
+    }
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: UIEvent) {
-    const isMobile = window.innerWidth <= 768;
+    if (isPlatformBrowser(this.platformId)) {
+      const isMobile = window.innerWidth <= 768;
 
-    clearTimeout(this.resizeTimer);
+      clearTimeout(this.resizeTimer);
 
-    if (isMobile) {
-      this.resizeTimer = setTimeout(() => {
+      if (isMobile) {
+        this.resizeTimer = setTimeout(() => {
+          this.updateLogo();
+          this.adjustMainMargin();
+        }, 200);
+      } else {
         this.updateLogo();
         this.adjustMainMargin();
-      }, 200);
-    } else {
-      this.updateLogo();
-      this.adjustMainMargin();
+      }
     }
   }
 
@@ -68,14 +83,14 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private updateLogo() {
-    if (typeof window !== 'undefined') {
+    if (isPlatformBrowser(this.platformId)) {
       const isMobile = window.innerWidth <= 768;
       this.logoSrc = isMobile ? dataWeb.logo.mobile : dataWeb.logo.pc;
     }
   }
 
   private adjustMainMargin() {
-    if (typeof window !== 'undefined') {
+    if (isPlatformBrowser(this.platformId)) {
       const header = document.querySelector('header') as HTMLElement;
       const main = document.querySelector('main') as HTMLElement;
 
@@ -113,11 +128,13 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   handleCarritoClick() {
-    const isMobile = window.innerWidth <= 768;
-    if (isMobile) {
-      this.navigateToCarrito();
-    } else {
-      this.openCarritoView();
+    if (isPlatformBrowser(this.platformId)) {
+      const isMobile = window.innerWidth <= 768;
+      if (isMobile) {
+        this.navigateToCarrito();
+      } else {
+        this.openCarritoView();
+      }
     }
   }
 }

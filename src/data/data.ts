@@ -32,21 +32,18 @@ export const dataWeb = {
 export const carouselConfig = [
   {
     bannerImg: `${directory}/images-carousel/1a.jpg`,
-    title: 'iphone 16',
+    title: 'Iphone 16 Pro Max',
     description: 'Elige uno u otro.',
-    url: '/producto/airpods-pro-2/Con%20estuche%20MagSafe',
   },
   {
     bannerImg: `${directory}/images-carousel/2a.jpg`,
-    title: 'iphone 16 pro',
+    title: 'Iphone 16 Pro Max',
     description: 'Elige uno u otro.',
-    url: '/producto/iphone-16-pro-max/128Gb',
   },
   {
     bannerImg: `${directory}/images-carousel/3a.jpg`,
-    title: 'mac mini',
+    title: 'Mac Mini M4',
     description: 'Elige uno u otro.',
-    url: '/producto/mac-mini-m4/256Gb',
   },
 ];
 

@@ -1,0 +1,32 @@
+<div class="product-item custom-card">
+  <div class="product-image-container">
+    <img
+      [src]="producto.imageUrl"
+      alt="{{ producto.tipoSeleccionado.tipo }}"
+      class="product-image"
+    />
+  </div>
+  <div class="product-details">
+    <div class="row-product column">
+      <p class="bold">{{ producto.title }}</p>
+      <p>{{ producto.tipoSeleccionado.tipo }}</p>
+    </div>
+    <div class="row-product between">
+      <div class="price-column">
+        {{
+          getPriceQuantity(producto.tipoSeleccionado.price * producto.cantidad)
+        }}
+        €
+      </div>
+      <div>
+        <custom-quantity-selector
+          [(value)]="producto.cantidad"
+          (valueChange)="onCantidadChange($event)"
+          (click)="$event.stopPropagation(); $event.preventDefault()"
+          [deleteButton]="true"
+          (productDelete)="onRemove()"
+        />
+      </div>
+    </div>
+  </div>
+</div>

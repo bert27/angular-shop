@@ -7,7 +7,6 @@ import { articlesBlog } from '../../../../data/data';
   standalone: true,
   imports: [CardsComponent],
   templateUrl: './blog-page.component.html',
-  styleUrls: ['./blog-page.component.sass']
 })
 export class BlogPageComponent {
   articles = articlesBlog; 

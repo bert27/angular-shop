@@ -3,16 +3,21 @@
   align-items: center;
   gap: 0.5rem;
 
+  // Estilo genérico para los demás botones
   button {
-    padding: 0.5rem 1rem;
+    width: 40px;
+    height: 40px;
     font-size: 1.2rem;
     font-weight: bold;
     background-color: #007bff;
     color: #fff;
     border: none;
-    border-radius: 5px;
+    border-radius: 50%;
     cursor: pointer;
     transition: background-color 0.2s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
     &:hover {
       background-color: #0056b3;
@@ -21,6 +26,30 @@
     &:disabled {
       background-color: #ccc;
       cursor: not-allowed;
+    }
+  }
+
+  .remove-button-container {
+    align-self: center;
+
+    .remove-button {
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      background-color: red;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.2s ease-in-out;
+      @media (max-width: 768px) {
+        width: 33px;
+        height: 33px;
+      }
+      &:hover {
+        opacity: 0.8;
+      }
     }
   }
 }

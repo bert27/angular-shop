@@ -73,8 +73,12 @@ export class ShoppingCartPopupComponent implements OnInit, OnDestroy {
     }
   }
 
-  getTotalPrice(): string {
-    return this.carritoService.getTotalPriceWithQuantity();
+  get totalQuantity(): number {
+    return this.carritoService.getTotalQuantity(); 
+  }
+
+  get totalPriceValue(): string {
+    return this.carritoService.getTotalPriceValue();
   }
 
   removeProduct(producto: ProductCarritoInterface) {

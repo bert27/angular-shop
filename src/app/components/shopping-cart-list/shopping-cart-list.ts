@@ -3,54 +3,46 @@ import {
   CarritoService,
   ProductCarritoInterface,
 } from '../../../services/carrito.service';
-import { IconSvgComponent } from '../../components/icon-svg/icon-svg.component';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { BotonComponent } from '../custom-button/custom-button.component';
-import { CustomQuantitySelectorComponent } from '../custom-quantity-selector/custom-quantity-selector.component';
+import { ItemShoppingCartComponent } from './item-shopping-cart/item-shopping-cart.component';
 
 @Component({
   selector: 'custom-shopping-cart-list',
   standalone: true,
   templateUrl: './shopping-cart-list.component.html',
   styleUrls: ['./shopping-cart-list.component.scss'],
-  imports: [
-    IconSvgComponent,
-    CommonModule,
-    BotonComponent,
-    CustomQuantitySelectorComponent,
-  ],
+  imports: [CommonModule, BotonComponent, ItemShoppingCartComponent],
 })
 export class ShoppingCartListComponent {
   @Input() productos: ProductCarritoInterface[] = [];
   @Output() remove = new EventEmitter<ProductCarritoInterface>();
   @Output() nextStep = new EventEmitter<void>();
 
-  constructor(
-    private carritoService: CarritoService,
-    public router: Router,
-
-  ) {
+  constructor(private carritoService: CarritoService, public router: Router) {
     this.productos = this.carritoService.getProducts();
   }
 
-  updateCantidad(producto: ProductCarritoInterface, nuevaCantidad: number) {
+  onUpdateCantidad(producto: ProductCarritoInterface, nuevaCantidad: number) {
     if (nuevaCantidad < 1) {
-      nuevaCantidad = 1; // Evita cantidades menores a 1
+      nuevaCantidad = 1;
     }
     this.carritoService.updateProductQuantity(producto, nuevaCantidad);
     this.productos = this.carritoService.getProducts();
   }
 
-  removeProduct(producto: ProductCarritoInterface) {
+  onRemoveProduct(producto: ProductCarritoInterface) {
     this.carritoService.removeProduct(producto);
     this.productos = this.carritoService.getProducts();
   }
-
-  getTotalPrice(): string {
-    return this.carritoService.getTotalPriceWithQuantity();
+  get totalQuantity(): number {
+    return this.carritoService.getTotalQuantity(); 
   }
 
+  get totalPriceValue(): string {
+    return this.carritoService.getTotalPriceValue();
+  }
   async sendOrder() {
     this.nextStep.emit();
   }

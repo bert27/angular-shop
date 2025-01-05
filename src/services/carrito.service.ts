@@ -1,6 +1,7 @@
-import { Injectable } from '@angular/core';
+import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { ProductDataInterface } from '../data/interfaces-model';
+import { isPlatformBrowser } from '@angular/common';
 
 interface Option {
   tipo: string;
@@ -17,16 +18,19 @@ export interface ProductCarritoInterface extends ProductDataInterface {
 })
 export class CarritoService {
   private products: ProductCarritoInterface[] = [];
+  private lastPurchase: ProductCarritoInterface[] = [];
+
   private cantidadProductosSubject = new BehaviorSubject<number>(0);
   private openPopUpCart = new BehaviorSubject<boolean>(false);
 
-  constructor() {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     this.loadFromLocalStorage();
   }
 
   openCartView(): void {
     this.openPopUpCart.next(true);
   }
+
   closeCartView(): void {
     this.openPopUpCart.next(false);
   }
@@ -87,11 +91,6 @@ export class CarritoService {
     this.persistChanges();
   }
 
-  clearCart(): void {
-    this.products = [];
-    this.persistChanges();
-  }
-
   getProducts(): ProductCarritoInterface[] {
     return [...this.products];
   }
@@ -107,21 +106,36 @@ export class CarritoService {
     }, 0);
   }
 
-  getTotalPriceWithQuantity(): string {
+  getTotalPriceValue(): string {
     const total = this.getTotalPrice();
-    const cantidad = this.products.reduce(
-      (sum, producto) => sum + producto.cantidad,
-      0
-    );
+    const formatter = new Intl.NumberFormat('es-ES', {
+      minimumFractionDigits: 0,
+      maximumFractionDigits: 2,
+    });
+    return formatter.format(total);
+  }
 
-    const totalFormatted =
-      total % 1 === 0 ? total.toFixed(0) : total.toFixed(2);
+  getTotalQuantity(): number {
+    return this.products.reduce((sum, producto) => sum + producto.cantidad, 0);
+  }
 
-    return `Subtotal (${cantidad} productos): ${totalFormatted} €`;
+  storeLastPurchase(): void {
+    if (isPlatformBrowser(this.platformId)) {
+      this.lastPurchase = [...this.products];
+      localStorage.setItem('lastPurchase', JSON.stringify(this.lastPurchase));
+    }
+  }
+
+  getLastPurchase(): ProductCarritoInterface[] {
+    if (isPlatformBrowser(this.platformId)) {
+      const stored = localStorage.getItem('lastPurchase');
+      return stored ? JSON.parse(stored) : [];
+    }
+    return [];
   }
 
   private loadFromLocalStorage(): void {
-    if (typeof localStorage !== 'undefined') {
+    if (isPlatformBrowser(this.platformId)) {
       const productosGuardados = localStorage.getItem('productosCarrito');
       if (productosGuardados) {
         this.products = JSON.parse(productosGuardados);
@@ -131,10 +145,11 @@ export class CarritoService {
   }
 
   private saveToLocalStorage(): void {
-    if (typeof localStorage !== 'undefined') {
+    if (isPlatformBrowser(this.platformId)) {
       localStorage.setItem('productosCarrito', JSON.stringify(this.products));
     }
   }
+
   removeProducts(): void {
     this.products = [];
     this.persistChanges();

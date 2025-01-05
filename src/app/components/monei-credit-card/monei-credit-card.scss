@@ -31,9 +31,9 @@
   @media (max-width: 768px) {
     flex-direction: column;
     gap: 10px;
-
+    align-items: center;
     custom-button {
-      width: 100%;
+      width: 50%;
     }
   }
 }
@@ -44,8 +44,7 @@
   padding: 12px 16px;
   border: none;
   border-radius: 50px;
-  font-size: var(--textSize2);
-  font-weight: bold;
+ font-weight: bold;
   cursor: pointer;
   transition: background-color 0.3s ease;
   width: auto;

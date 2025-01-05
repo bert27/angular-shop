@@ -39,21 +39,22 @@
     <div class="step-content">
       <div class="column">
         <h3>Entrega</h3>
-        <app-step2-direction [directionShipping]="directionShipping"/>
+        <app-step2-direction [directionShipping]="directionShipping" />
       </div>
       <div class="column">
-        <div class="form-group">
+        <div class="form-group custom-card">
           <h3>Pago</h3>
-          <label for="card-element">Información de la tarjeta de crédito</label>
-          <div>Total: {{ totalPrice }} €</div>
 
           @if (selectedMethodPay === 'monei') {
+          <div class="color-price">Total: {{ totalPrice }} €</div>
           <app-monei-credit-card
             [directionShipping]="directionShipping"
             (nextStep)="stepper.next()"
             (previousStep)="stepper.previous()"
           />
           } @else {
+          <label for="card-element">Información de la tarjeta de crédito</label>
+          <div class="color-price">Total: {{ totalPrice }} €</div>
           <app-stripe-field
             [directionShipping]="directionShipping"
             (nextStep)="stepper.next()"
@@ -81,7 +82,7 @@
     <p style="margin-bottom: 20px">
       Hubo un problema al procesar tu pago. Por favor, intentalo de nuevo.
     </p>
-    <div class="step-content">
+    <div class="step-content button-father">
       <custom-button
         texto="Volver a intentar"
         tipo="primario"
@@ -89,20 +90,23 @@
       />
     </div>
     } @else {
-    <p style="margin-bottom: 20px">
-      <strong>¡Gracias por tu compra en {{ titleShop }}!</strong>
-    </p>
-    <p><strong>Número de Pedido:</strong> {{ orderId }}</p>
-    <p style="margin-bottom: 20px">
-      Te hemos enviado un correo electrónico con tu factura adjunta. Si lo
-      prefieres, también puedes descargarla directamente desde aquí:
-    </p>
-    <div class="step-content">
-      <custom-button
-        texto="Descargar factura"
-        tipo="primario"
-        (click)="downloadInvoice()"
-      />
+    <div class="custom-card">
+      <p style="margin-bottom: 20px">
+        <strong>¡Gracias por tu compra en {{ titleShop }}!</strong>
+      </p>
+      <p><strong>Número de Pedido:</strong> {{ orderId }}</p>
+      <p style="margin-bottom: 20px">
+        Te hemos enviado un correo electrónico con tu factura adjunta. Si lo
+        prefieres, también puedes descargarla directamente desde aquí:
+      </p>
+
+      <div class="step-content button-father">
+        <custom-button
+          texto="Descargar factura"
+          tipo="primario"
+          (click)="downloadInvoice()"
+        />
+      </div>
     </div>
     }
   </mat-step>

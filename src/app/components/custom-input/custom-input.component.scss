@@ -33,7 +33,6 @@
 
   ::ng-deep input.mat-input-element {
     text-align: center;
-    //background-color: #272532;
   }
 
   ::ng-deep .mat-mdc-outline {
@@ -46,12 +45,9 @@
   white-space: nowrap;
   overflow: visible;
   text-overflow: ellipsis;
-  font-size: var(--textSize2);
+
 }
 
-.mdc-text-field__input {
-  font-size: var(--textSize2) !important;
-}
 
 .no-material-input {
   display: flex;
@@ -71,7 +67,6 @@
     border-radius: 4px;
     padding: 0 8px;
     text-align: center;
-    //background-color: #272532;
     box-sizing: border-box;
   }
 }

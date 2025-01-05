@@ -6,48 +6,19 @@
   <div class="cart-layout">
     <ul class="product-list">
       <li *ngFor="let producto of productos">
-        <div class="product-item">
-          <div class="product-image-container">
-            <img
-              [src]="producto?.imageUrl"
-              alt="{{ producto.tipoSeleccionado.tipo }}"
-              class="product-image"
-            />
-          </div>
-          <div class="product-details">
-            <div class="title-and-type">
-              <p>{{ producto.title }}</p>
-              <p>{{ producto.tipoSeleccionado.tipo }}</p>
-            </div>
-            <div class="quantity-selector">
-              <custom-quantity-selector
-                [(value)]="producto.cantidad"
-                (valueChange)="updateCantidad(producto, $event)"
-                (click)="$event.stopPropagation(); $event.preventDefault()"
-              />
-            </div>
-          </div>
-          <div class="price-column">
-            <p class="price">
-              {{ producto.tipoSeleccionado.price }} € -
-              {{ producto.tipoSeleccionado.price * producto.cantidad }} €
-            </p>
-          </div>
-          <div class="remove-button-container">
-            <button class="remove-button" (click)="removeProduct(producto)">
-              <custom-icon-svg
-                src="icons/papelera.svg"
-                [color]="'#ff8118'"
-                [size]="12"
-              />
-            </button>
-          </div>
-        </div>
+        <item-shopping-cart
+          [producto]="producto"
+          (remove)="onRemoveProduct($event)"
+          (updateCantidad)="
+            onUpdateCantidad($event.producto, $event.nuevaCantidad)
+          "
+        ></item-shopping-cart>
       </li>
     </ul>
     <div class="checkout-column">
       <div class="total-price">
-        <p>{{ getTotalPrice() }}</p>
+        <div>Subtotal ({{ totalQuantity }} productos):</div>
+        <div class="color-price">{{ totalPriceValue }} €</div>
       </div>
       <div class="checkout-button">
         <custom-button

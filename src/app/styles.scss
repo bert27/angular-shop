@@ -114,6 +114,7 @@ body {
   width: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
+  font-size: var(--textSize2);
 }
 
 body {
@@ -194,12 +195,19 @@ main {
 .container {
   padding: 16px;
 }
-
+.custom-card {
+  padding: 16px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 4px;
+  background-color: var(--colorCard);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.3s;
+  color: var(--colorText);
+}
 .content {
   display: flex;
   justify-content: space-around;
   width: 100%;
-  margin-bottom: 3rem;
 }
 
 .content h1 {
@@ -208,6 +216,9 @@ main {
 
 .content p {
   margin-top: 1.5rem;
+  @media (max-width: 768px) {
+    margin-top: 0;
+  }
 }
 
 .divider {
@@ -226,5 +237,8 @@ main {
     width: 100%;
     background: var(--red-to-pink-to-purple-horizontal-gradient);
     margin-block: 1.5rem;
+  }
+  .custom-card {
+    padding: 6px;
   }
 }

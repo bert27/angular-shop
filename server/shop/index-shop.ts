@@ -4,6 +4,10 @@ import { renderEmailTemplate } from './services/emailService';
 import { handlePDFResponse } from './services/generatePdfService';
 import { payMonei, sendEmailFromMoney } from './services/moneiService';
 import { handleStripeWebhook, payStripe } from './services/stripeService';
+import {
+  directionShippingInterface,
+  ProductCarritoInterface,
+} from './model-interfaces';
 
 export const indexShop = (): Router => {
   const shopRouter = Router();
@@ -75,21 +79,28 @@ export const indexShop = (): Router => {
     console.log('SENDEMAIL LLAMADO');
     sendEmailFromMoney(req, res);
   });
+  interface DownloadPdfBody {
+    invoiceNumber: string;
+    directionShipping: directionShippingInterface;
+    productos: ProductCarritoInterface[];
+  }
+  shopRouter.post(
+    '/download-pdf',
+    (req: Request<{}, {}, DownloadPdfBody>, res: Response) => {
+      const { invoiceNumber, directionShipping, productos } = req.body;
 
-  shopRouter.post('/download-pdf', (req: Request, res: Response) => {
-    const { invoiceNumber } = req.body;
+      if (!invoiceNumber) {
+        res.status(400).send('El número de factura es requerido.');
+        return;
+      }
 
-    if (!invoiceNumber) {
-      res.status(400).send('El número de factura es requerido.');
-      return;
-    }
-
-    handlePDFResponse(res, {
-      invoiceNumber,
-      directionShipping: directionShippingMocked,
-      productos: productosMocked,
-    });
-  });
+      handlePDFResponse(res, {
+        invoiceNumber,
+        directionShipping,
+        productos,
+      });
+    },
+  );
 
   return shopRouter;
 };
