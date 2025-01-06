@@ -3,7 +3,7 @@
 This project is an online store in Spanish created with Angular.
 If you use stripe change the stripePublicKey in the client, everything else is in data.ts
 
-**V1.1 Features:**
+**V1.2 Features:**
 
 - Multiple payment gateways.
 - Invoice delivery via email with React HTML templates.
@@ -54,27 +54,31 @@ If you use stripe change the stripePublicKey in the client, everything else is i
     -  External communication allows payment gateways to return the status of the order (successful or failed) to the server.
     -  Once the server receives the payment status, it sends a PDF invoice with a React HTML template.
 
-## View template in server
-
-localhost:4000/preview-email
-
-<div style="display: flex; align-items: center; width: 100%;">
-  <img src="public/screenshots/template.png" alt="Template" style="width: 60%;">
-</div>
 
 ## PC
 
 <div style="display: flex; align-items: center; width: 100%;">
-  <img src="public/screenshots/4.jpg" alt="Home" style="width: 40%;">
-  <img src="public/screenshots/2.jpg" alt="Products" style="width: 40%;">
+  <img src="public/screenshots/index_PC.png" alt="Home" style="width: 40%;">
+  <img src="public/screenshots/products_PC.png" alt="Products" style="width: 40%;">
 </div>
 
 ## SmartPhone
 
 <div style="display: flex; align-items: center; width: 100%;">
-  <img src="public/screenshots/2a.jpg" alt="Home" style="width: 40%;">
-  <img src="public/screenshots/1a.jpg" alt="Products" style="width: 40%;">
+  <img src="public/screenshots/index_MVL.png" alt="Home" style="width: 40%;">
+  <img src="public/screenshots/products_MVL.png" alt="Products" style="width: 40%;">
 </div>
+
+---
+
+### Other Characteristics
+
+| **View template in server** | **PDF template in server** | **Cart** |
+|-----------------------------|----------------------------|----------|
+| localhost:4000/preview-email<br>![Template](public/screenshots/template-email.png) | ![Template](public/screenshots/template-pdf.jpeg) | ![Cart](public/screenshots/1a.png) |
+
+---
+
 
 ## Install
 
