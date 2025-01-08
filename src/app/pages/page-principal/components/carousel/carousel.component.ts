@@ -42,7 +42,6 @@ export class CarouselComponent implements OnInit {
           ...carouselItem,
           url: `/producto/${productSlug}/${optionTipoSlug}`,
         };
-        console.log("dd",withUrl)
         return withUrl;
       }
 

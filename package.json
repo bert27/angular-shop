@@ -14,14 +14,14 @@
     "serve:ssr:angular-shop": "node dist/angular-shop/server/server.mjs",
     "lint": "ng lint",
     "start": "concurrently \"npm run start:client\" \"npm run start:server\"",
-    "install": "npm install && cd server && npm install"
+    "dev:ssr": "tsx watch server.ts"
   },
   "private": true,
   "dependencies": {
     "@angular/animations": "^18.2.0",
     "@angular/cdk": "^18.2.8",
     "@angular/common": "^18.2.0",
-    "@angular/compiler": "^18.2.0",
+    "@angular/compiler": "^18.2.13",
     "@angular/core": "^18.2.0",
     "@angular/forms": "^18.2.0",
     "@angular/material": "^18.2.8",
@@ -61,6 +61,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
+    "tsx": "^4.19.2",
     "typescript": "~5.5.2",
     "typescript-eslint": "8.18.0"
   },

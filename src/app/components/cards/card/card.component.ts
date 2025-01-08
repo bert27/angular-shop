@@ -26,7 +26,6 @@ import { ImageComponent } from '../../image/image';
 })
 export class CardComponent implements OnInit {
   onQuantityChange(newQuantity: number): void {
-    console.log('Cantidad actualizada:', newQuantity);
   }
   @Input() cardData!: ProductDataInterface | ArticleInterface;
   selectedOption!: { tipo: string; price: number }; 
