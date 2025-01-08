@@ -14,6 +14,7 @@
     "serve:ssr:angular-shop": "node dist/angular-shop/server/server.mjs",
     "lint": "ng lint",
     "start": "concurrently \"npm run start:client\" \"npm run start:server\"",
+    "install:all": "npm install && cd server && npm install && cd ..",
     "dev:ssr": "tsx watch server.ts"
   },
   "private": true,
@@ -61,7 +62,6 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.1.0",
-    "tsx": "^4.19.2",
     "typescript": "~5.5.2",
     "typescript-eslint": "8.18.0"
   },

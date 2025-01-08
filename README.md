@@ -54,7 +54,6 @@ If you use stripe change the stripePublicKey in the client, everything else is i
     -  External communication allows payment gateways to return the status of the order (successful or failed) to the server.
     -  Once the server receives the payment status, it sends a PDF invoice with a React HTML template.
 
-
 ## PC
 
 <div style="display: flex; align-items: center; width: 100%;">
@@ -73,18 +72,17 @@ If you use stripe change the stripePublicKey in the client, everything else is i
 
 ### Other Characteristics
 
-| **View template in server** | **PDF template in server** | **Cart** |
-|-----------------------------|----------------------------|----------|
+| **View template in server**                                                        | **PDF template in server**                        | **Cart**                           |
+| ---------------------------------------------------------------------------------- | ------------------------------------------------- | ---------------------------------- |
 | localhost:4000/preview-email<br>![Template](public/screenshots/template-email.png) | ![Template](public/screenshots/template-pdf.jpeg) | ![Cart](public/screenshots/1a.png) |
 
 ---
-
 
 ## Install
 
 Navigate to the project and run:
 
-npm run install
+npm run install:all
 
 This will install both the server and the client dependencies.
 
