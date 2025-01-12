@@ -3,6 +3,8 @@ import { CardsComponent } from '../../components/cards/cards.component';
 import { CommonModule } from '@angular/common';
 import { BotonComponent } from '../../components/custom-button/custom-button.component';
 import { productsData } from '../../../data/products-data';
+import { Meta, Title } from '@angular/platform-browser';
+import { setMetaTags } from '../../../data/seo';
 
 @Component({
   selector: 'app-productos',
@@ -16,14 +18,17 @@ export class ProductosComponent {
   categories: string[] = [];
   selectedCategory = '';
 
-  constructor() {
+  constructor(
+    private titleService: Title,
+    private metaService: Meta,
+  ) {
     this.initializeCategories();
   }
-
+  ngOnInit(): void {
+    setMetaTags('productos', this.titleService, this.metaService);
+  }
   initializeCategories(): void {
-    const uniqueCategories = new Set(
-      this.products.map((product) => product.category)
-    );
+    const uniqueCategories = new Set(this.products.map((product) => product.category));
     this.categories = Array.from(uniqueCategories);
     this.selectedCategory = this.categories[0];
   }
@@ -33,8 +38,6 @@ export class ProductosComponent {
   }
 
   get filteredProducts() {
-    return this.products.filter(
-      (product) => product.category === this.selectedCategory
-    );
+    return this.products.filter((product) => product.category === this.selectedCategory);
   }
 }

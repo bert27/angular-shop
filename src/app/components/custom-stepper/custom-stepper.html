@@ -1,8 +1,4 @@
-<mat-stepper
-  #stepper="matStepper"
-  linear
-  (selectionChange)="onStepChange($event)"
->
+<mat-stepper #stepper="matStepper" linear (selectionChange)="onStepChange($event)">
   <!-- Icono de edición dependiente del paso -->
   <ng-template matStepperIcon="edit">
     <mat-icon>{{ currentStepIcon }}</mat-icon>
@@ -47,19 +43,11 @@
 
           @if (selectedMethodPay === 'monei') {
           <div class="color-price">Total: {{ totalPrice }} €</div>
-          <app-monei-credit-card
-            [directionShipping]="directionShipping"
-            (nextStep)="stepper.next()"
-            (previousStep)="stepper.previous()"
-          />
+          <app-monei-credit-card [directionShipping]="directionShipping" (nextStep)="stepper.next()" (previousStep)="stepper.previous()" />
           } @else {
           <label for="card-element">Información de la tarjeta de crédito</label>
           <div class="color-price">Total: {{ totalPrice }} €</div>
-          <app-stripe-field
-            [directionShipping]="directionShipping"
-            (nextStep)="stepper.next()"
-            (previousStep)="stepper.previous()"
-          />
+          <app-stripe-field [directionShipping]="directionShipping" (nextStep)="stepper.next()" (previousStep)="stepper.previous()" />
           }
         </div>
       </div>
@@ -76,18 +64,10 @@
     </ng-template>
     <!-- Show error message if isErrorPage is true -->
     @if (isErrorPage) {
-    <p style="margin-bottom: 20px; color: red; font-weight: bold">
-      Error en el pago.
-    </p>
-    <p style="margin-bottom: 20px">
-      Hubo un problema al procesar tu pago. Por favor, intentalo de nuevo.
-    </p>
+    <p style="margin-bottom: 20px; color: red; font-weight: bold">Error en el pago.</p>
+    <p style="margin-bottom: 20px">Hubo un problema al procesar tu pago. Por favor, intentalo de nuevo.</p>
     <div class="step-content button-father">
-      <custom-button
-        texto="Volver a intentar"
-        tipo="primario"
-        (click)="retryPayment()"
-      />
+      <custom-button texto="Volver a intentar" tipo="primario" (click)="retryPayment()" />
     </div>
     } @else {
     <div class="custom-card">
@@ -96,16 +76,11 @@
       </p>
       <p><strong>Número de Pedido:</strong> {{ orderId }}</p>
       <p style="margin-bottom: 20px">
-        Te hemos enviado un correo electrónico con tu factura adjunta. Si lo
-        prefieres, también puedes descargarla directamente desde aquí:
+        Te hemos enviado un correo electrónico con tu factura adjunta. Si lo prefieres, también puedes descargarla directamente desde aquí:
       </p>
 
       <div class="step-content button-father">
-        <custom-button
-          texto="Descargar factura"
-          tipo="primario"
-          (click)="downloadInvoice()"
-        />
+        <custom-button texto="Descargar factura" tipo="primario" (click)="downloadInvoice()" />
       </div>
     </div>
     }

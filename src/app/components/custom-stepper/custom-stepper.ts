@@ -1,4 +1,4 @@
-import { Component, ViewChild, Input, AfterViewInit } from '@angular/core';
+import { Component, ViewChild, Input, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -8,7 +8,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { BotonComponent } from '../custom-button/custom-button.component';
 import { ShoppingCartListComponent } from '../shopping-cart-list/shopping-cart-list';
-import { CommonModule } from '@angular/common';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { StripeFieldComponent } from '../stripe-credit-card/stripe-field.component';
@@ -72,10 +72,12 @@ export class StepperComponent implements AfterViewInit, OnInit {
   titleShop = dataWeb.nameShop;
   selectedMethodPay = selectedMethodPay;
   constructor(
+    @Inject(PLATFORM_ID) private platformId: Object,
+
     private route: ActivatedRoute,
     private router: Router,
     private carritoService: CarritoService,
-    private formStateService: FormStateService
+    private formStateService: FormStateService,
   ) {}
 
   updateTotalPrice(): void {
@@ -138,15 +140,11 @@ export class StepperComponent implements AfterViewInit, OnInit {
       });
 
       if (!response.ok) {
-        throw new Error(
-          `Error al descargar la factura. Estado: ${response.status}`
-        );
+        throw new Error(`Error al descargar la factura. Estado: ${response.status}`);
       }
 
       const contentDisposition = response.headers.get('Content-Disposition');
-      const filename =
-        contentDisposition?.match(/filename="(.+)"/)?.[1] ||
-        `Factura_${this.orderId}.pdf`;
+      const filename = contentDisposition?.match(/filename="(.+)"/)?.[1] || `Factura_${this.orderId}.pdf`;
 
       // Stream
       const reader = response.body?.getReader();
@@ -164,22 +162,21 @@ export class StepperComponent implements AfterViewInit, OnInit {
           }
         }
       }
-
-      // Combine chunks into a single file
-      const blob = new Blob(chunks, { type: 'application/pdf' });
-      // Create a temporary link for downloading
-      const url = window.URL.createObjectURL(blob);
-      const link = document.createElement('a');
-      link.href = url;
-      link.download = filename;
-      link.click();
-      // Revoke the generated URL
-      window.URL.revokeObjectURL(url);
+      if (isPlatformBrowser(this.platformId)) {
+        // Combine chunks into a single file
+        const blob = new Blob(chunks, { type: 'application/pdf' });
+        // Create a temporary link for downloading
+        const url = window.URL.createObjectURL(blob);
+        const link = document.createElement('a');
+        link.href = url;
+        link.download = filename;
+        link.click();
+        // Revoke the generated URL
+        window.URL.revokeObjectURL(url);
+      }
     } catch (error) {
       console.error('Error al descargar la factura:', (error as Error).message);
-      alert(
-        'Hubo un error al intentar descargar la factura. Por favor, inténtelo de nuevo.'
-      );
+      alert('Hubo un error al intentar descargar la factura. Por favor, inténtelo de nuevo.');
     }
   }
 

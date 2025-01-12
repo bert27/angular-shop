@@ -39,16 +39,8 @@ export class CarritoService {
     return this.openPopUpCart.asObservable();
   }
 
-  addProduct(
-    producto: ProductDataInterface,
-    optionSelect: Option,
-    cantidad = 1
-  ): void {
-    const productoExistente = this.products.find(
-      (p) =>
-        p.title === producto.title &&
-        p.tipoSeleccionado.tipo === optionSelect.tipo
-    );
+  addProduct(producto: ProductDataInterface, optionSelect: Option, cantidad = 1): void {
+    const productoExistente = this.products.find((p) => p.title === producto.title && p.tipoSeleccionado.tipo === optionSelect.tipo);
 
     if (productoExistente) {
       productoExistente.cantidad += cantidad;
@@ -64,14 +56,9 @@ export class CarritoService {
     this.persistChanges();
   }
 
-  updateProductQuantity(
-    producto: ProductCarritoInterface,
-    nuevaCantidad: number
-  ): void {
+  updateProductQuantity(producto: ProductCarritoInterface, nuevaCantidad: number): void {
     const productoExistente = this.products.find(
-      (p) =>
-        p.title === producto.title &&
-        p.tipoSeleccionado.tipo === producto.tipoSeleccionado.tipo
+      (p) => p.title === producto.title && p.tipoSeleccionado.tipo === producto.tipoSeleccionado.tipo,
     );
 
     if (productoExistente) {
@@ -83,9 +70,7 @@ export class CarritoService {
   removeProduct(productoAEliminar: ProductCarritoInterface): void {
     this.products = this.products.filter(
       (producto) =>
-        producto.title !== productoAEliminar.title ||
-        producto.tipoSeleccionado.tipo !==
-          productoAEliminar.tipoSeleccionado.tipo
+        producto.title !== productoAEliminar.title || producto.tipoSeleccionado.tipo !== productoAEliminar.tipoSeleccionado.tipo,
     );
 
     this.persistChanges();
@@ -156,10 +141,7 @@ export class CarritoService {
   }
 
   private updateTotalCantidad(): void {
-    const totalProductos = this.products.reduce(
-      (total, producto) => total + producto.cantidad,
-      0
-    );
+    const totalProductos = this.products.reduce((total, producto) => total + producto.cantidad, 0);
     this.cantidadProductosSubject.next(totalProductos);
   }
 

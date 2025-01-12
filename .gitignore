@@ -7,10 +7,8 @@
 /bazel-out
 # Environment Configuration Files
 .env
-server/.env
 # Node
 /node_modules
-server/node_modules
 npm-debug.log
 yarn-error.log
 

@@ -1,15 +1,18 @@
 <section class="container">
   <div *ngFor="let section of policy">
     @if (section.title) {
-    <h2 [class.highlight-text]="section.isHighlight">{{ section.title }}</h2>
-    } @if (section.isList) {
-    <ul>
-      <li *ngFor="let item of section.items">{{ item }}</li>
-    </ul>
-    } @else { @if (section.isHtml) {
-    <p [innerHTML]="section.content"></p>
+      <h2 [class.highlight-text]="section.isHighlight">{{ section.title }}</h2>
+    }
+    @if (section.isList) {
+      <ul>
+        <li *ngFor="let item of section.items">{{ item }}</li>
+      </ul>
     } @else {
-    <p>{{ section.content }}</p>
-    } }
+      @if (section.isHtml) {
+        <p [innerHTML]="section.content"></p>
+      } @else {
+        <p>{{ section.content }}</p>
+      }
+    }
   </div>
 </section>

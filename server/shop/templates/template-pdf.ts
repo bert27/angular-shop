@@ -1,7 +1,4 @@
-import {
-  directionShippingInterface,
-  ProductCarritoInterface,
-} from '../model-interfaces';
+import { directionShippingInterface, ProductCarritoInterface } from '../model-interfaces';
 /**
  * Formatea un número para mostrarlo con separadores de miles y sin decimales si son .00.
  * @param value - Número a formatear.
@@ -59,10 +56,7 @@ export function populatePDFContent(
 
   // Invoice details and Billing address
   const currentDate = new Date();
-  const formattedDate = `${currentDate
-    .getDate()
-    .toString()
-    .padStart(2, '0')}/${(currentDate.getMonth() + 1)
+  const formattedDate = `${currentDate.getDate().toString().padStart(2, '0')}/${(currentDate.getMonth() + 1)
     .toString()
     .padStart(2, '0')}/${currentDate.getFullYear()}`;
 
@@ -77,20 +71,8 @@ export function populatePDFContent(
   addText(doc, directionShipping.name, 400, 120, 12);
   addText(doc, directionShipping.surname, 400, 135, 12);
   addText(doc, directionShipping.address, 400, 150, 12);
-  addText(
-    doc,
-    `${directionShipping.city}, ${directionShipping.province}`,
-    400,
-    165,
-    12,
-  );
-  addText(
-    doc,
-    `${directionShipping.postalCode}, ${directionShipping.country}`,
-    400,
-    180,
-    12,
-  );
+  addText(doc, `${directionShipping.city}, ${directionShipping.province}`, 400, 165, 12);
+  addText(doc, `${directionShipping.postalCode}, ${directionShipping.country}`, 400, 180, 12);
   addText(doc, `Teléfono: ${directionShipping.phone}`, 400, 195, 12);
   addText(doc, `Email: ${directionShipping.email}`, 400, 210, 12);
 
@@ -157,21 +139,7 @@ export function populatePDFContent(
   const ivaTotal = totalIVA;
   const precioTotalSinIVA = totalConIva / 1.21;
 
-  addText(
-    doc,
-    `Total (Sin IVA): ${formatNumber(precioTotalSinIVA)} €`,
-    400,
-    y + 10,
-    12,
-    true,
-  );
+  addText(doc, `Total (Sin IVA): ${formatNumber(precioTotalSinIVA)} €`, 400, y + 10, 12, true);
   addText(doc, `IVA (21%): ${formatNumber(ivaTotal)} €`, 400, y + 30, 12, true);
-  addText(
-    doc,
-    `Precio Total (inc. IVA): ${formatNumber(totalConIva)} €`,
-    400,
-    y + 50,
-    12,
-    true,
-  );
+  addText(doc, `Precio Total (inc. IVA): ${formatNumber(totalConIva)} €`, 400, y + 50, 12, true);
 }

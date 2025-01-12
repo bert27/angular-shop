@@ -2,10 +2,7 @@ import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BotonComponent } from '../custom-button/custom-button.component';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import {
-  CarritoService,
-  ProductCarritoInterface,
-} from '../../../services/carrito.service';
+import { CarritoService, ProductCarritoInterface } from '../../../services/carrito.service';
 import { dataWeb } from '../../../data/data';
 import { DirectionShippingInterface } from '../../../data/interfaces-model';
 
@@ -29,7 +26,7 @@ export class MoneiCreditCardComponent implements OnInit {
 
   constructor(
     private carritoService: CarritoService,
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   ngOnInit(): void {
@@ -78,4 +75,3 @@ export class MoneiCreditCardComponent implements OnInit {
     this.nextStep.emit();
   }
 }
-

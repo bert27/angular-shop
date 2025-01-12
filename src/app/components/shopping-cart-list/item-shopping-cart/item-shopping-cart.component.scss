@@ -55,7 +55,7 @@
   justify-content: space-between;
   flex: 1;
 
-  .row-product{
+  .row-product {
     display: flex;
     flex-wrap: wrap;
     p {
@@ -63,8 +63,6 @@
     }
 
     @media (max-width: 768px) {
-      
-
       p {
         width: auto;
         text-align: left;
@@ -87,10 +85,7 @@
   gap: 8px;
   color: var(--colorPrimary);
 
-
   .total-price {
     color: var(--colorSecondary);
   }
 }
-
-

@@ -21,7 +21,7 @@ export class PageContentProductComponent {
   constructor(
     private route: ActivatedRoute,
     public router: Router,
-    private carritoService: CarritoService
+    private carritoService: CarritoService,
   ) {
     this.route.paramMap.subscribe((params) => {
       const title = params.get('title')?.replace(/-/g, ' ');
@@ -30,10 +30,7 @@ export class PageContentProductComponent {
 
       if (title && type) {
         if (type === 'product') {
-          const foundProduct = productsData.find(
-            (product: ProductDataInterface) =>
-              product.title.toLowerCase() === title.toLowerCase()
-          );
+          const foundProduct = productsData.find((product: ProductDataInterface) => product.title.toLowerCase() === title.toLowerCase());
 
           if (foundProduct) {
             this.productData = foundProduct;
@@ -46,22 +43,14 @@ export class PageContentProductComponent {
   }
 
   getPrice(): number | undefined {
-    return this.productData?.options.find(
-      (option) => option.tipo === this.typeProduct
-    )?.price;
+    return this.productData?.options.find((option) => option.tipo === this.typeProduct)?.price;
   }
 
   addShoppingBasket(): void {
     if (this.productData) {
-      const selectedOption = this.productData.options.find(
-        (option) => option.tipo === this.typeProduct
-      );
+      const selectedOption = this.productData.options.find((option) => option.tipo === this.typeProduct);
       if (selectedOption) {
-        this.carritoService.addProduct(
-          this.productData,
-          selectedOption,
-          this.quantity
-        );
+        this.carritoService.addProduct(this.productData, selectedOption, this.quantity);
         this.carritoService.openCartView();
       }
     }
@@ -73,15 +62,9 @@ export class PageContentProductComponent {
 
   buyNow(): void {
     if (this.productData) {
-      const selectedOption = this.productData.options.find(
-        (option) => option.tipo === this.typeProduct
-      );
+      const selectedOption = this.productData.options.find((option) => option.tipo === this.typeProduct);
       if (selectedOption) {
-        this.carritoService.addProduct(
-          this.productData,
-          selectedOption,
-          this.quantity
-        );
+        this.carritoService.addProduct(this.productData, selectedOption, this.quantity);
       }
       this.router.navigate(['/carrito']);
     }

@@ -1,13 +1,4 @@
-import {
-  Component,
-  OnInit,
-  OnDestroy,
-  ViewChild,
-  HostListener,
-  AfterViewInit,
-  Inject,
-  PLATFORM_ID,
-} from '@angular/core';
+import { Component, OnInit, OnDestroy, ViewChild, HostListener, AfterViewInit, Inject, PLATFORM_ID, Renderer2 } from '@angular/core';
 import { IconSvgComponent } from '../icon-svg/icon-svg.component';
 import { Router, RouterModule } from '@angular/router';
 import { ShoppingCartPopupComponent } from '../shopping-cart-popup/shopping-cart-popup.component';
@@ -28,32 +19,41 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
   shoppingCartPopup!: ShoppingCartPopupComponent;
 
   cantidadProductos = 0;
-  private subscription: Subscription | undefined;
+  private subscriptions = new Subscription();
   logoSrc: string = dataWeb.logo.pc;
   private resizeTimer: any;
 
   constructor(
     private carritoService: CarritoService,
     public router: Router,
-    @Inject(PLATFORM_ID) private platformId: Object
+    @Inject(PLATFORM_ID) private platformId: Object,
+    private renderer: Renderer2,
   ) {}
 
-  ngOnInit() {
-    if (isPlatformBrowser(this.platformId)) {
-      this.subscription = this.carritoService
-        .getProductCount()
-        .subscribe((count) => {
-          this.cantidadProductos = count;
-        });
+  get isBrowser(): boolean {
+    return isPlatformBrowser(this.platformId);
+  }
 
-      this.subscription = this.carritoService
-        .getCartOpen()
-        .subscribe((open) => {
-          const isMobile = window.innerWidth <= 768;
+  private getWindow(): Window | null {
+    return this.isBrowser ? window : null;
+  }
+
+  ngOnInit() {
+    if (this.isBrowser) {
+      this.subscriptions.add(
+        this.carritoService.getProductCount().subscribe((count) => {
+          this.cantidadProductos = count;
+        }),
+      );
+
+      this.subscriptions.add(
+        this.carritoService.getCartOpen().subscribe((open) => {
+          const isMobile = this.getWindow()?.innerWidth! <= 768;
           if (open && !isMobile) {
             this.openCarritoView();
           }
-        });
+        }),
+      );
 
       this.updateLogo();
     }
@@ -61,20 +61,12 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @HostListener('window:resize', ['$event'])
   onResize(event: UIEvent) {
-    if (isPlatformBrowser(this.platformId)) {
-      const isMobile = window.innerWidth <= 768;
-
+    if (this.isBrowser) {
       clearTimeout(this.resizeTimer);
-
-      if (isMobile) {
-        this.resizeTimer = setTimeout(() => {
-          this.updateLogo();
-          this.adjustMainMargin();
-        }, 200);
-      } else {
+      this.resizeTimer = setTimeout(() => {
         this.updateLogo();
         this.adjustMainMargin();
-      }
+      }, 200);
     }
   }
 
@@ -83,20 +75,20 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   private updateLogo() {
-    if (isPlatformBrowser(this.platformId)) {
-      const isMobile = window.innerWidth <= 768;
+    if (this.isBrowser) {
+      const isMobile = this.getWindow()?.innerWidth! <= 768;
       this.logoSrc = isMobile ? dataWeb.logo.mobile : dataWeb.logo.pc;
     }
   }
 
   private adjustMainMargin() {
-    if (isPlatformBrowser(this.platformId)) {
-      const header = document.querySelector('header') as HTMLElement;
-      const main = document.querySelector('main') as HTMLElement;
+    if (this.isBrowser) {
+      const header = this.renderer.selectRootElement('header', true);
+      const main = this.renderer.selectRootElement('main', true);
 
       if (header && main) {
         const headerHeight = header.offsetHeight;
-        main.style.marginTop = `${headerHeight}px`;
+        this.renderer.setStyle(main, 'marginTop', `${headerHeight}px`);
       }
     }
   }
@@ -106,9 +98,7 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   ngOnDestroy() {
-    if (this.subscription) {
-      this.subscription.unsubscribe();
-    }
+    this.subscriptions.unsubscribe();
   }
 
   openCarritoView() {
@@ -128,8 +118,8 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
   }
 
   handleCarritoClick() {
-    if (isPlatformBrowser(this.platformId)) {
-      const isMobile = window.innerWidth <= 768;
+    if (this.isBrowser) {
+      const isMobile = this.getWindow()?.innerWidth! <= 768;
       if (isMobile) {
         this.navigateToCarrito();
       } else {

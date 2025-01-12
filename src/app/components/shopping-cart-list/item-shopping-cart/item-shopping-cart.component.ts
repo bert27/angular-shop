@@ -1,7 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CustomQuantitySelectorComponent } from '../../custom-quantity-selector/custom-quantity-selector.component';
-import { IconSvgComponent } from '../../icon-svg/icon-svg.component';
 import { ProductCarritoInterface } from '../../../../services/carrito.service';
 
 @Component({
@@ -9,11 +8,7 @@ import { ProductCarritoInterface } from '../../../../services/carrito.service';
   standalone: true,
   templateUrl: './item-shopping-cart.component.html',
   styleUrls: ['./item-shopping-cart.component.scss'],
-  imports: [
-    CommonModule,
-    CustomQuantitySelectorComponent,
-    IconSvgComponent,
-  ],
+  imports: [CommonModule, CustomQuantitySelectorComponent],
 })
 export class ItemShoppingCartComponent {
   @Input() producto!: ProductCarritoInterface;
@@ -33,8 +28,6 @@ export class ItemShoppingCartComponent {
    */
   onCantidadChange(nuevaCantidad: number) {
     this.updateCantidad.emit({ producto: this.producto, nuevaCantidad });
-
-    
   }
 
   /**

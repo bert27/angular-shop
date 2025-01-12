@@ -1,8 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import {
-  CarritoService,
-  ProductCarritoInterface,
-} from '../../../services/carrito.service';
+import { CarritoService, ProductCarritoInterface } from '../../../services/carrito.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { IconSvgComponent } from '../icon-svg/icon-svg.component';
@@ -13,12 +10,7 @@ import { CustomInputComponent } from '../custom-input/custom-input.component';
 @Component({
   selector: 'app-shopping-cart-popup',
   standalone: true,
-  imports: [
-    IconSvgComponent,
-    BotonComponent,
-    CommonModule,
-    CustomInputComponent,
-  ],
+  imports: [IconSvgComponent, BotonComponent, CommonModule, CustomInputComponent],
   templateUrl: './shopping-cart-popup.component.html',
   styleUrls: ['./shopping-cart-popup.component.sass'],
 })
@@ -28,13 +20,14 @@ export class ShoppingCartPopupComponent implements OnInit, OnDestroy {
   private autoCloseTimeout: any;
   private cantidadSubscription!: Subscription;
 
-  constructor(public router: Router, public carritoService: CarritoService) {}
+  constructor(
+    public router: Router,
+    public carritoService: CarritoService,
+  ) {}
 
   ngOnInit() {
     this.updateProducts();
-    this.cantidadSubscription = this.carritoService
-      .getProductCount()
-      .subscribe(() => this.updateProducts());
+    this.cantidadSubscription = this.carritoService.getProductCount().subscribe(() => this.updateProducts());
   }
 
   private updateProducts() {
@@ -74,7 +67,7 @@ export class ShoppingCartPopupComponent implements OnInit, OnDestroy {
   }
 
   get totalQuantity(): number {
-    return this.carritoService.getTotalQuantity(); 
+    return this.carritoService.getTotalQuantity();
   }
 
   get totalPriceValue(): string {

@@ -7,12 +7,7 @@ import { IconSvgComponent } from '../icon-svg/icon-svg.component';
 @Component({
   selector: 'custom-quantity-selector',
   standalone: true,
-  imports: [
-    CommonModule,
-    CustomInputComponent,
-    BotonComponent,
-    IconSvgComponent,
-  ],
+  imports: [CommonModule, CustomInputComponent, BotonComponent, IconSvgComponent],
   templateUrl: './custom-quantity-selector.component.html',
   styleUrls: ['./custom-quantity-selector.component.scss'],
 })

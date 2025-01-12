@@ -1,18 +1,17 @@
 import express, { Request, Response, Router } from 'express';
-import path from 'path';
-import { renderEmailTemplate } from './services/emailService';
 import { handlePDFResponse } from './services/generatePdfService';
 import { payMonei, sendEmailFromMoney } from './services/moneiService';
 import { handleStripeWebhook, payStripe } from './services/stripeService';
-import {
-  directionShippingInterface,
-  ProductCarritoInterface,
-} from './model-interfaces';
-
+import { directionShippingInterface, ProductCarritoInterface } from './model-interfaces';
+import { renderEmailTemplate } from './services/emailService';
+import { fileURLToPath } from 'url';
+import { dirname, resolve } from 'path';
 export const indexShop = (): Router => {
   const shopRouter = Router();
 
-  const publicDir = path.resolve(__dirname, 'public');
+  const currentFile = fileURLToPath(import.meta.url);
+  const currentDir = dirname(currentFile);
+  const publicDir = resolve(currentDir, 'public');
   shopRouter.use('/public', express.static(publicDir));
 
   const productosMocked = [
@@ -54,10 +53,7 @@ export const indexShop = (): Router => {
       res.setHeader('Content-Type', 'text/html');
       res.status(200).send(htmlContent);
     } catch (error) {
-      console.error(
-        'Error al renderizar la plantilla:',
-        (error as Error).message,
-      );
+      console.error('Error al renderizar la plantilla:', (error as Error).message);
       res.status(500).send('Error al renderizar la plantilla.');
     }
   });
@@ -69,14 +65,9 @@ export const indexShop = (): Router => {
   shopRouter.post('/stripe-payment', (req: Request, res: Response) => {
     payStripe(req, res);
   });
-  shopRouter.post(
-    '/stripe/webhook',
-    express.raw({ type: 'application/json' }),
-    handleStripeWebhook,
-  );
+  shopRouter.post('/stripe/webhook', express.raw({ type: 'application/json' }), handleStripeWebhook);
 
   shopRouter.post('/sendEmail', (req: Request, res: Response) => {
-    console.log('SENDEMAIL LLAMADO');
     sendEmailFromMoney(req, res);
   });
   interface DownloadPdfBody {
@@ -84,23 +75,20 @@ export const indexShop = (): Router => {
     directionShipping: directionShippingInterface;
     productos: ProductCarritoInterface[];
   }
-  shopRouter.post(
-    '/download-pdf',
-    (req: Request<{}, {}, DownloadPdfBody>, res: Response) => {
-      const { invoiceNumber, directionShipping, productos } = req.body;
+  shopRouter.post('/download-pdf', (req: Request<{}, {}, DownloadPdfBody>, res: Response) => {
+    const { invoiceNumber, directionShipping, productos } = req.body;
 
-      if (!invoiceNumber) {
-        res.status(400).send('El número de factura es requerido.');
-        return;
-      }
+    if (!invoiceNumber) {
+      res.status(400).send('El número de factura es requerido.');
+      return;
+    }
 
-      handlePDFResponse(res, {
-        invoiceNumber,
-        directionShipping,
-        productos,
-      });
-    },
-  );
+    handlePDFResponse(res, {
+      invoiceNumber,
+      directionShipping,
+      productos,
+    });
+  });
 
   return shopRouter;
 };

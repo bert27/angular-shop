@@ -10,10 +10,7 @@
     </strong>
     <div class="social-media">
       <a *ngFor="let social of socialMedia" [href]="social.href">
-        <custom-icon-svg
-          [src]="social.src"
-          [color]="social.color"
-        ></custom-icon-svg>
+        <custom-icon-svg [src]="social.src" [color]="social.color"></custom-icon-svg>
       </a>
     </div>
 

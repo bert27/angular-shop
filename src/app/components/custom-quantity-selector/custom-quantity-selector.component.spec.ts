@@ -8,9 +8,8 @@ describe('CustomQuantitySelectorComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomQuantitySelectorComponent]
-    })
-    .compileComponents();
+      imports: [CustomQuantitySelectorComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(CustomQuantitySelectorComponent);
     component = fixture.componentInstance;

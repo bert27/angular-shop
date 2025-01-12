@@ -1,0 +1,11 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "outDir": "./dist/out-tsc/server",
+    "target": "es2020",
+    "module": "es2020",
+    "types": ["node"]
+  },
+  "exclude": ["**/*.browser.ts"],
+  "include": ["main.server.ts", "server.ts", "**/*.server.ts", "**/*.node.ts"]
+}

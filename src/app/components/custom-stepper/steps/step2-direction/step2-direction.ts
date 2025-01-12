@@ -10,5 +10,5 @@ import { DirectionShippingInterface } from '../../../../../data/interfaces-model
   imports: [CommonModule],
 })
 export class Step2DirectionComponent {
-  @Input() directionShipping!: DirectionShippingInterface
+  @Input() directionShipping!: DirectionShippingInterface;
 }

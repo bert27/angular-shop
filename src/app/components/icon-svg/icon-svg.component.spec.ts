@@ -8,9 +8,8 @@ describe('IconSvgComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [IconSvgComponent]
-    })
-    .compileComponents();
+      imports: [IconSvgComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(IconSvgComponent);
     component = fixture.componentInstance;

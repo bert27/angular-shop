@@ -17,7 +17,8 @@
       .mat-step-icon {
         background-color: #a0a2a0;
         border-radius: 50%;
-        transition: background-color 0.3s ease-in-out,
+        transition:
+          background-color 0.3s ease-in-out,
           transform 0.3s ease-in-out;
         font-size: 24px;
         color: white;

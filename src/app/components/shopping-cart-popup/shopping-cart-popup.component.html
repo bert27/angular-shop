@@ -1,18 +1,7 @@
-<div
-  class="carrito-lista"
-  *ngIf="carritoAbierto"
-  (mouseover)="resetAutoClose()"
-  (mouseleave)="startAutoClose()"
->
+<div class="carrito-lista" *ngIf="carritoAbierto" (mouseover)="resetAutoClose()" (mouseleave)="startAutoClose()">
   <div class="carrito-header">
     <h1 class="carrito-title">Productos en el Carrito</h1>
-    <button
-      (click)="closeCarritoView()"
-      class="close-button"
-      aria-label="Cerrar carrito"
-    >
-      X
-    </button>
+    <button (click)="closeCarritoView()" class="close-button" aria-label="Cerrar carrito">X</button>
   </div>
   <div class="subtotal" *ngIf="productos.length > 0">
     <div class="amount">
@@ -24,29 +13,16 @@
     <li *ngFor="let producto of productos">
       <div class="producto-content">
         <div class="producto-content-image">
-          <img
-            [src]="producto.imageUrl"
-            alt="{{ producto.title }}"
-            class="producto-img"
-          />
+          <img [src]="producto.imageUrl" alt="{{ producto.title }}" class="producto-img" />
         </div>
         <div class="producto-detalles">
-          {{ producto.title }} ({{ producto.tipoSeleccionado.tipo }}) -
-          {{ producto.tipoSeleccionado.price }}€
-          <custom-input
-            [value]="producto.cantidad"
-            (valueChange)="updateCantidad(producto, $event)"
-            [typeVisual]="'no-material'"
-          />
+          {{ producto.title }} ({{ producto.tipoSeleccionado.tipo }}) - {{ producto.tipoSeleccionado.price }}€
+          <custom-input [value]="producto.cantidad" (valueChange)="updateCantidad(producto, $event)" [typeVisual]="'no-material'" />
         </div>
       </div>
 
       <button class="remove-button" (click)="removeProduct(producto)">
-        <custom-icon-svg
-          src="icons/papelera.svg"
-          [color]="'#ff8118'"
-          [size]="12"
-        ></custom-icon-svg>
+        <custom-icon-svg src="icons/papelera.svg" [color]="'#ff8118'" [size]="12"></custom-icon-svg>
       </button>
     </li>
   </ul>
@@ -57,11 +33,7 @@
 
   <ng-container *ngIf="productos.length > 0">
     <div class="button-father">
-      <custom-button
-        texto="Ir a la cesta"
-        tipo="primario"
-        (click)="navigateTo('/carrito')"
-      ></custom-button>
+      <custom-button texto="Ir a la cesta" tipo="primario" (click)="navigateTo('/carrito')"></custom-button>
     </div>
   </ng-container>
 </div>

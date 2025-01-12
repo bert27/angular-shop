@@ -120,10 +120,7 @@ export class BestProductsComponent {
   }
 
   // Método para navegar al producto seleccionado
-  navigateToProduct(
-    cardData: ProductDataInterface,
-    selectedOption: { tipo: string; price: number } | undefined
-  ) {
+  navigateToProduct(cardData: ProductDataInterface, selectedOption: { tipo: string; price: number } | undefined) {
     const productName = cardData.title.toLowerCase().replace(/\s+/g, '-');
 
     let route = `/producto/${productName}`; // Eliminado doble slash

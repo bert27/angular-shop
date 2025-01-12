@@ -1,32 +1,17 @@
-import {
-  Component,
-  EventEmitter,
-  Input,
-  OnDestroy,
-  OnInit,
-  Output,
-} from '@angular/core';
+import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {
-  loadStripe,
-  Stripe,
-  StripeCardElement,
-  StripeElements,
-} from '@stripe/stripe-js';
+import { loadStripe, Stripe, StripeCardElement, StripeElements } from '@stripe/stripe-js';
 import { BotonComponent } from '../custom-button/custom-button.component';
 import { environment } from '../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
-import {
-  CarritoService,
-  ProductCarritoInterface,
-} from '../../../services/carrito.service';
+import { CarritoService, ProductCarritoInterface } from '../../../services/carrito.service';
 import { DirectionShippingInterface } from '../../../data/interfaces-model';
 import { dataWeb } from '../../../data/data';
 
 @Component({
   selector: 'app-stripe-field',
   templateUrl: './stripe-field.component.html',
-  styleUrls: ['./stripe-field.component.sass'],
+  styleUrls: ['./stripe-field.component.scss'],
   standalone: true,
   imports: [CommonModule, BotonComponent],
 })
@@ -49,7 +34,7 @@ export class StripeFieldComponent implements OnInit, OnDestroy {
 
   constructor(
     private carritoService: CarritoService,
-    private http: HttpClient
+    private http: HttpClient,
   ) {}
 
   ngOnInit(): void {
@@ -108,7 +93,7 @@ export class StripeFieldComponent implements OnInit, OnDestroy {
       const productsCompress = this.productos.map((producto) => ({
         title: producto.title,
         tipoSeleccionado: producto.tipoSeleccionado,
-        cantidad: producto.cantidad
+        cantidad: producto.cantidad,
       }));
 
       const response = await fetch(dataWeb.paymentIntentUrl, {
@@ -126,14 +111,11 @@ export class StripeFieldComponent implements OnInit, OnDestroy {
 
       const paymentIntentResponse = await response.json();
       if (this.stripe && paymentIntentResponse.clientSecret) {
-        const { error, paymentIntent } = await this.stripe.confirmCardPayment(
-          paymentIntentResponse.clientSecret,
-          {
-            payment_method: {
-              card: this.cardElement!,
-            },
-          }
-        );
+        const { error, paymentIntent } = await this.stripe.confirmCardPayment(paymentIntentResponse.clientSecret, {
+          payment_method: {
+            card: this.cardElement!,
+          },
+        });
 
         if (error) {
           console.error('Error al confirmar el pago:', error.message);

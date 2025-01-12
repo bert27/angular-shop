@@ -9,9 +9,7 @@
         <item-shopping-cart
           [producto]="producto"
           (remove)="onRemoveProduct($event)"
-          (updateCantidad)="
-            onUpdateCantidad($event.producto, $event.nuevaCantidad)
-          "
+          (updateCantidad)="onUpdateCantidad($event.producto, $event.nuevaCantidad)"
         ></item-shopping-cart>
       </li>
     </ul>
@@ -21,11 +19,7 @@
         <div class="color-price">{{ totalPriceValue }} €</div>
       </div>
       <div class="checkout-button">
-        <custom-button
-          texto="Tramitar Pedido"
-          tipo="primario"
-          (click)="sendOrder()"
-        />
+        <custom-button texto="Tramitar Pedido" tipo="primario" (click)="sendOrder()" />
       </div>
     </div>
   </div>

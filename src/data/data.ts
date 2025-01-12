@@ -15,9 +15,7 @@ export const dataWeb = {
   address: 'Calle Innovación 42, 28001 Madrid, España',
   nif: 'A12345678',
   paymentIntentUrl:
-    (selectedMethodPay as MethodPayInterface) === 'stripe'
-      ? 'http://localhost:4000/stripe-payment'
-      : 'http://localhost:4000/monei-payment',
+    (selectedMethodPay as MethodPayInterface) === 'stripe' ? 'http://localhost:3000/stripe-payment' : 'http://localhost:3000/monei-payment',
 
   shippingCost: 9,
   logo: {
@@ -89,13 +87,7 @@ export const articleBlog5 = {
 };
 
 // articles
-export const articlesBlog = [
-  articleBlog1,
-  articleBlog2,
-  articleBlog3,
-  articleBlog4,
-  articleBlog5,
-] as ArticleInterface[];
+export const articlesBlog = [articleBlog1, articleBlog2, articleBlog3, articleBlog4, articleBlog5] as ArticleInterface[];
 
 // Aviso legal
 export const legalNotice = [
@@ -147,14 +139,12 @@ export const privacyPolicy = [
     content: `Los interesados tienen derecho a acceder a sus datos personales, así como a solicitar la rectificación de los datos inexactos o, en su caso, solicitar su supresión cuando los datos ya no sean necesarios para los fines que fueron recogidos. También tendrán derecho a limitar u oponerse al tratamiento de sus datos, así como solicitar la portabilidad de los mismos. Para ejercer sus derechos deberá dirigirse al Responsable en la dirección ${dataWeb.email}, acompañado de copia del documento de identidad del interesado.`,
   },
   {
-    title:
-      '1. ¿Quién es el responsable del tratamiento de tus datos personales?',
+    title: '1. ¿Quién es el responsable del tratamiento de tus datos personales?',
     content: `Innovación Tecnológica S.A., NIF/CIF: ${dataWeb.nif}, dirección: ${dataWeb.address}, y correo electrónico <a href="mailto:${dataWeb.email}">${dataWeb.email}</a> es el RESPONSABLE del tratamiento de los datos personales del USUARIO y le informa de que estos datos serán tratados de conformidad con lo dispuesto en el Reglamento (UE) 2016/679, de 27 de abril (GDPR), y la Ley Orgánica 3/2018, de 5 de diciembre (LOPDGDD).`,
     isHtml: true,
   },
   {
-    title:
-      '2. ¿Con qué finalidad se tratan los datos y cuál es la base que legitima el tratamiento?',
+    title: '2. ¿Con qué finalidad se tratan los datos y cuál es la base que legitima el tratamiento?',
     content: `Se trata la información que nos facilitan las personas interesadas con el fin de gestionar el envío de la información que nos soliciten, tramitar encargos, solicitudes, dar respuesta a consultas o cualquier tipo de petición realizada a través de las formas de contacto disponibles en la página web del RESPONSABLE.`,
   },
   {

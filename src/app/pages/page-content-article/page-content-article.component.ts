@@ -14,7 +14,10 @@ import { BotonComponent } from '../../components/custom-button/custom-button.com
 export class PageContentArticleComponent {
   articleData: ArticleInterface | null = null; // Usar ArticleInterface directamente
 
-  constructor(public  route: ActivatedRoute, public  router: Router) {
+  constructor(
+    public route: ActivatedRoute,
+    public router: Router,
+  ) {
     this.route.paramMap.subscribe((params) => {
       const title = params.get('title')?.replace(/-/g, ' '); // Reemplaza los guiones por espacios
 
@@ -26,10 +29,7 @@ export class PageContentArticleComponent {
       }
 
       // Buscar en la lista de artículos
-      const foundArticle = articlesBlog.find(
-        (article: ArticleInterface) =>
-          article.title.toLowerCase() === title.toLowerCase()
-      );
+      const foundArticle = articlesBlog.find((article: ArticleInterface) => article.title.toLowerCase() === title.toLowerCase());
 
       if (foundArticle) {
         this.articleData = foundArticle; // Asignar directamente el artículo encontrado

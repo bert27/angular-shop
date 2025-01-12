@@ -1,8 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import {
-  CarritoService,
-  ProductCarritoInterface,
-} from '../../../services/carrito.service';
+import { CarritoService, ProductCarritoInterface } from '../../../services/carrito.service';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { BotonComponent } from '../custom-button/custom-button.component';
@@ -20,7 +17,10 @@ export class ShoppingCartListComponent {
   @Output() remove = new EventEmitter<ProductCarritoInterface>();
   @Output() nextStep = new EventEmitter<void>();
 
-  constructor(private carritoService: CarritoService, public router: Router) {
+  constructor(
+    private carritoService: CarritoService,
+    public router: Router,
+  ) {
     this.productos = this.carritoService.getProducts();
   }
 
@@ -37,7 +37,7 @@ export class ShoppingCartListComponent {
     this.productos = this.carritoService.getProducts();
   }
   get totalQuantity(): number {
-    return this.carritoService.getTotalQuantity(); 
+    return this.carritoService.getTotalQuantity();
   }
 
   get totalPriceValue(): string {

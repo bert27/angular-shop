@@ -7,7 +7,7 @@ import { shippingMethodText } from '../../../../data/data';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './metodo-envio-page.component.html',
-//   styleUrl: './metodo-envio-page.component.sass',
+  //   styleUrl: './metodo-envio-page.component.sass',
 })
 export class MetodoEnvioPageComponent {
   paragraphs = shippingMethodText;

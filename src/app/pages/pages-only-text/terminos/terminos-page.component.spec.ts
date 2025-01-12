@@ -8,9 +8,8 @@ describe('MetodoEnvioPageComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [MetodoEnvioPageComponent]
-    })
-    .compileComponents();
+      imports: [MetodoEnvioPageComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(MetodoEnvioPageComponent);
     component = fixture.componentInstance;

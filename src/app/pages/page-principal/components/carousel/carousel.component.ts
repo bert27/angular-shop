@@ -1,10 +1,6 @@
-
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import {
-  NgbCarouselModule,
-  NgbCarouselConfig,
-} from '@ng-bootstrap/ng-bootstrap';
+import { NgbCarouselModule, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { carouselConfig } from '../../../../../data/data';
 import { RouterModule } from '@angular/router';
 import { productsData } from '../../../../../data/products-data';
@@ -30,9 +26,7 @@ export class CarouselComponent implements OnInit {
 
   ngOnInit() {
     this.carouselList = carouselConfig.map((carouselItem) => {
-      const matchedProduct = productsData.find(
-        (product) => slugify(product.title) === slugify(carouselItem.title)
-      );
+      const matchedProduct = productsData.find((product) => slugify(product.title) === slugify(carouselItem.title));
 
       if (matchedProduct && matchedProduct.options.length > 0) {
         const firstOption = matchedProduct.options[0];

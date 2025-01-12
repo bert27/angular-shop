@@ -1,10 +1,6 @@
 <div class="product-item custom-card">
   <div class="product-image-container">
-    <img
-      [src]="producto.imageUrl"
-      alt="{{ producto.tipoSeleccionado.tipo }}"
-      class="product-image"
-    />
+    <img [src]="producto.imageUrl" alt="{{ producto.tipoSeleccionado.tipo }}" class="product-image" />
   </div>
   <div class="product-details">
     <div class="row-product column">
@@ -13,9 +9,7 @@
     </div>
     <div class="row-product between">
       <div class="price-column">
-        {{
-          getPriceQuantity(producto.tipoSeleccionado.price * producto.cantidad)
-        }}
+        {{ getPriceQuantity(producto.tipoSeleccionado.price * producto.cantidad) }}
         €
       </div>
       <div>

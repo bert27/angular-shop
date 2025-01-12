@@ -1,20 +1,17 @@
-import nodemailer from "nodemailer";
-import { render } from "@react-email/render";
-import InvoiceTemplate from "../templates/template-email";
-import React from "react";
-import fs from "fs";
+import nodemailer from 'nodemailer';
+import { render } from '@react-email/render';
+import InvoiceTemplate from '../templates/template-email';
+import React from 'react';
+import fs from 'fs';
 
-import { generatePDF } from "./generatePdfService";
-import {
-  directionShippingInterface,
-  ProductCarritoInterface,
-} from "../model-interfaces";
+import { generatePDF } from './generatePdfService';
+import { directionShippingInterface, ProductCarritoInterface } from '../model-interfaces';
 
 const transporter = nodemailer.createTransport({
-  service: "gmail",
+  service: 'gmail',
   auth: {
-    user: process.env["GMAIL_USER"],
-    pass: process.env["GMAIL_APP_PASSWORD"],
+    user: process.env['GMAIL_USER'],
+    pass: process.env['GMAIL_APP_PASSWORD'],
   },
 });
 
@@ -34,13 +31,7 @@ export async function renderEmailTemplate({
   invoiceNumber: string;
   productos: ProductCarritoInterface[];
 }): Promise<string> {
-  return await render(
-    <InvoiceTemplate
-      directionShipping={directionShipping}
-      invoiceNumber={invoiceNumber}
-      productos={productos}
-    />,
-  );
+  return await render(<InvoiceTemplate directionShipping={directionShipping} invoiceNumber={invoiceNumber} productos={productos} />);
 }
 
 /**
@@ -75,9 +66,9 @@ export async function sendEmail({
 
     // Configure email options
     const mailOptions = {
-      from: `"Shop" <${process.env["GMAIL_USER"]}>`,
+      from: `"Shop" <${process.env['GMAIL_USER']}>`,
       to: directionShipping.email, // Recipient's email address
-      bcc: process.env["GMAIL_USER"], // Blind carbon copy to the sender's email
+      bcc: process.env['GMAIL_USER'], // Blind carbon copy to the sender's email
       subject: `Invoice for your purchase - ${invoiceNumber}`, // Email subject
       html: htmlContent, // Rendered HTML content
       attachments: [
@@ -90,15 +81,12 @@ export async function sendEmail({
 
     // Send the email
     const info = await transporter.sendMail(mailOptions);
-    console.log(
-      `Email successfully sent to ${directionShipping.email}. ID: ${info.messageId}`,
-    );
+    console.log(`Email successfully sent to ${directionShipping.email}. ID: ${info.messageId}`);
 
     // Delete the PDF after sending the email (optional)
     fs.unlinkSync(pdfPath);
   } catch (error) {
-    console.error("Error sending the email:", (error as Error).message);
+    console.error('Error sending the email:', (error as Error).message);
     throw error;
   }
 }
-

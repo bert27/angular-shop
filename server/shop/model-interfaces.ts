@@ -10,7 +10,6 @@ export interface directionShippingInterface {
   email: string;
 }
 
-
 interface Option {
   tipo: string;
   price: number;

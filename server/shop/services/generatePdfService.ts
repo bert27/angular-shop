@@ -3,10 +3,7 @@ import fs from 'fs';
 import path from 'path';
 
 import * as Express from 'express';
-import {
-  directionShippingInterface,
-  ProductCarritoInterface,
-} from '../model-interfaces';
+import { directionShippingInterface, ProductCarritoInterface } from '../model-interfaces';
 import { populatePDFContent } from '../templates/template-pdf';
 
 /**
@@ -95,10 +92,7 @@ export function handlePDFResponse(
     });
 
     res.setHeader('Content-Type', 'application/pdf');
-    res.setHeader(
-      'Content-Disposition',
-      `attachment; filename="Factura_${invoiceNumber}.pdf"`,
-    );
+    res.setHeader('Content-Disposition', `attachment; filename="Factura_${invoiceNumber}.pdf"`);
 
     pdfStream.pipe(res);
 
@@ -118,13 +112,9 @@ export function handlePDFResponse(
       pdfStream.end();
     });
   } catch (error) {
-    console.error(
-      'Error al manejar la respuesta del PDF:',
-      (error as Error).message,
-    );
+    console.error('Error al manejar la respuesta del PDF:', (error as Error).message);
     if (!res.headersSent) {
       res.status(500).send('Error al manejar la respuesta del PDF.');
     }
   }
 }
-

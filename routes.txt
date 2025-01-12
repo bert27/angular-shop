@@ -1,0 +1,11 @@
+/producto/Iphone%2016%20Pro%20Max/128Gb
+/producto/Iphone%2016%20Pro%20Max/256Gb
+/producto/Iphone%2016%20Pro%20Max/512Gb
+/producto/Apple%20Watch%20Series%209/41mm%20GPS
+/producto/Apple%20Watch%20Series%209/45mm%20GPS%20%2B%20Cellular
+/producto/MacBook%20Pro%2014%22/16GB%20RAM%2C%20512GB
+/producto/MacBook%20Pro%2014%22/32GB%20RAM%2C%201TB
+/producto/AirPods%20Pro%202/Con%20estuche%20MagSafe
+/producto/Mac%20Mini%20M4/256Gb
+/producto/Mac%20Mini%20M4/512Gb
+/producto/Mac%20Mini%20M4/1Tb

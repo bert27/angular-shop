@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { CardsComponent } from "../../../components/cards/cards.component";
+import { CardsComponent } from '../../../components/cards/cards.component';
 import { articlesBlog } from '../../../../data/data';
+import { setMetaTags } from '../../../../data/seo';
+import { Meta, Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-blog-page',
@@ -9,5 +11,13 @@ import { articlesBlog } from '../../../../data/data';
   templateUrl: './blog-page.component.html',
 })
 export class BlogPageComponent {
-  articles = articlesBlog; 
+  articles = articlesBlog;
+
+  constructor(
+    private titleService: Title,
+    private metaService: Meta,
+  ) {}
+  ngOnInit(): void {
+    setMetaTags('blog', this.titleService, this.metaService);
+  }
 }

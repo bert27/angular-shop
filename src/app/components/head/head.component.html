@@ -1,11 +1,6 @@
 <header>
   <div id="column1-head">
-    <img
-      [src]="logoSrc"
-      alt="Shop logo"
-      class="header-logo"
-      (click)="navigateToInicio()"
-    />
+    <img [src]="logoSrc" alt="Shop logo" class="header-logo" (click)="navigateToInicio()" />
   </div>
 
   <div id="column2-head">
@@ -15,19 +10,9 @@
       <a routerLink="/blog">Blog</a>
     </nav>
 
-    <div
-      class="carrito-content"
-      (mouseleave)="startAutoClose()"
-    >
-      <div
-        style="margin-left: 16px; margin: 20px"
-        (click)="handleCarritoClick()"
-      >
-        <custom-icon-svg
-          src="icons/carrito-de-compras.svg"
-          [color]="'#ff8118'"
-          [size]="50"
-        />
+    <div class="carrito-content" (mouseleave)="startAutoClose()">
+      <div style="margin-left: 16px; margin: 20px" (click)="handleCarritoClick()">
+        <custom-icon-svg src="icons/carrito-de-compras.svg" [color]="'#ff8118'" [size]="50" />
       </div>
 
       <span class="numero-productos">{{ cantidadProductos }}</span>

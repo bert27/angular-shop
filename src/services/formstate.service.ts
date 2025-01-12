@@ -13,8 +13,7 @@ export class FormStateService {
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
     const savedData = this.loadFormDataFromStorage();
-    this.formDataSubject =
-      new BehaviorSubject<DirectionShippingInterface | null>(savedData);
+    this.formDataSubject = new BehaviorSubject<DirectionShippingInterface | null>(savedData);
     this.formData$ = this.formDataSubject.asObservable();
   }
 
@@ -56,7 +55,6 @@ export class FormStateService {
       try {
         const serializedData = JSON.stringify(data);
         localStorage.setItem(this.STORAGE_KEY, serializedData);
-        console.log('Form data saved to localStorage.');
       } catch (error) {
         console.error('Error saving data to localStorage:', error);
       }
