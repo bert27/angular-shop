@@ -3,7 +3,7 @@
 This project is an online store in Spanish created with Angular.
 If you use stripe change the stripePublicKey in the client, everything else is in data.ts
 
-**V1.2 Features:**
+**V1.3 Features:**
 
 - Multiple payment gateways.
 - Invoice delivery via email with React HTML templates.
