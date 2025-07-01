@@ -1,11 +1,16 @@
 # Ng-shop
 
 This project is an online store in Spanish created with Angular.
-If you use stripe change the stripePublicKey in the client, everything else is in data.ts
+
+It supports three payment methods:
+
+````ts
+type MethodPayInterface = 'monei' | 'stripe' | 'redsys';
+
 
 **V1.3 Features:**
 
-- Multiple payment gateways. 
+- Multiple payment gateways.
 - Invoice delivery via email with React HTML templates.
 - PDF generation attached with the company’s logo and VAT included.
 
@@ -44,7 +49,7 @@ If you use stripe change the stripePublicKey in the client, everything else is i
    icon: `${directory}/icon.ico`,
   },
 
-  ```
+````
 
 **Webhooks and External Communication:**
 
