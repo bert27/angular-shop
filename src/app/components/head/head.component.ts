@@ -6,13 +6,16 @@ import { CarritoService } from '../../../services/carrito.service';
 import { Subscription } from 'rxjs';
 import { dataWeb } from '../../../data/data';
 import { isPlatformBrowser } from '@angular/common';
+import { MatIconModule } from '@angular/material/icon';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatButtonModule } from '@angular/material/button';
 
 @Component({
   selector: 'app-head',
   standalone: true,
   templateUrl: './head.component.html',
-  styleUrls: ['./head.component.scss'],
-  imports: [IconSvgComponent, RouterModule, ShoppingCartPopupComponent],
+  styleUrls: ['./head.component.scss', 'burger-menu.scss'],
+  imports: [IconSvgComponent, RouterModule, ShoppingCartPopupComponent, MatIconModule, MatMenuModule, MatButtonModule],
 })
 export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild(ShoppingCartPopupComponent)
@@ -20,8 +23,11 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
 
   cantidadProductos = 0;
   private subscriptions = new Subscription();
-  logoSrc: string = dataWeb.logo.pc;
+  logoSrc = dataWeb.logo.pc;
   private resizeTimer: any;
+
+  isMobile = false;
+  menuOpen = false;
 
   constructor(
     private carritoService: CarritoService,
@@ -37,7 +43,9 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
   private getWindow(): Window | null {
     return this.isBrowser ? window : null;
   }
-
+  toggleMenu(): void {
+    this.menuOpen = !this.menuOpen;
+  }
   ngOnInit() {
     if (this.isBrowser) {
       this.subscriptions.add(
@@ -76,8 +84,9 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
 
   private updateLogo() {
     if (this.isBrowser) {
-      const isMobile = this.getWindow()?.innerWidth! <= 768;
-      this.logoSrc = isMobile ? dataWeb.logo.mobile : dataWeb.logo.pc;
+      const width = this.getWindow()?.innerWidth!;
+      this.isMobile = width <= 768;
+      this.logoSrc = this.isMobile ? dataWeb.logo.mobile : dataWeb.logo.pc;
     }
   }
 

@@ -23,7 +23,7 @@ export class CarritoService {
   private cantidadProductosSubject = new BehaviorSubject<number>(0);
   private openPopUpCart = new BehaviorSubject<boolean>(false);
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object) {
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {
     this.loadFromLocalStorage();
   }
 

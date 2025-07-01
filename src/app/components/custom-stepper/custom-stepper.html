@@ -12,15 +12,15 @@
       <mat-icon>check_circle</mat-icon>
     </ng-template>
 
-    <div class="step1-checkout">
+    <form [formGroup]="customForm" (ngSubmit)="onSubmit()" class="step1-checkout">
       <div class="form-container">
         <h3>Entrega</h3>
-        <app-step1-form (formCompleted)="onFormCompleted($event)" />
+        <app-step1-form [customForm]="customForm" (formCompleted)="onFormCompleted($event)"></app-step1-form>
       </div>
       <div class="cart-container">
         <custom-shopping-cart-list (click)="nextStep()" />
       </div>
-    </div>
+    </form>
   </mat-step>
 
   <!-- Step 2: Payment -->
@@ -40,13 +40,15 @@
       <div class="column">
         <div class="form-group custom-card">
           <h3>Pago</h3>
-
+          <div class="">Precio Total: {{ totalPrice }} €</div>
+          <div class="">Gastos de envío: {{ shippingCost }} €</div>
+          <div class="color-price">Total: {{ totalPrice+shippingCost }} €</div>
           @if (selectedMethodPay === 'monei') {
-          <div class="color-price">Total: {{ totalPrice }} €</div>
           <app-monei-credit-card [directionShipping]="directionShipping" (nextStep)="stepper.next()" (previousStep)="stepper.previous()" />
+          } @else if (selectedMethodPay === 'redsys') {
+          <app-redsys-credit-card [directionShipping]="directionShipping" (nextStep)="stepper.next()" (previousStep)="stepper.previous()" />
           } @else {
           <label for="card-element">Información de la tarjeta de crédito</label>
-          <div class="color-price">Total: {{ totalPrice }} €</div>
           <app-stripe-field [directionShipping]="directionShipping" (nextStep)="stepper.next()" (previousStep)="stepper.previous()" />
           }
         </div>

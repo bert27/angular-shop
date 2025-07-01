@@ -1,31 +1,29 @@
 <section class="section-carousel">
-  <div class="container">
-    <h2 class="products-title">Nuestros Mejores Productos</h2>
-    <div class="slider">
-      <owl-carousel-o [options]="customOptions" class="owl-stage">
-        <ng-container *ngFor="let item of bestProducts">
-          <ng-template carouselSlide [id]="item.title">
-            <div
-              class="card"
-              (mousedown)="onDragStart($event)"
-              (touchstart)="onDragStart($event)"
-              (mousemove)="onDragMove($event)"
-              (touchmove)="onDragMove($event)"
-              (mouseup)="onDragEnd($event)"
-              (touchend)="onDragEnd($event)"
-              (click)="onCardClick(item, item.options[0])"
-            >
-              <component-image [cardData]="item" />
-              <h4 class="product-title">{{ item.title }}</h4>
-              <p class="product-description">{{ item.description }}</p>
-              <div class="product-info">
-                <p class="product-tipo">{{ item.options[0].tipo }}</p>
-                <p class="product-price">{{ item.options[0].price }}€</p>
-              </div>
+  <h2 class="products-title">Nuestros Mejores Productos</h2>
+  <div class="slider">
+    <owl-carousel-o [options]="customOptions" class="owl-stage">
+      <ng-container *ngFor="let item of bestProducts">
+        <ng-template carouselSlide [id]="item.title">
+          <div
+            class="card"
+            (mousedown)="onDragStart($event)"
+            (touchstart)="onDragStart($event)"
+            (mousemove)="onDragMove($event)"
+            (touchmove)="onDragMove($event)"
+            (mouseup)="onDragEnd($event)"
+            (touchend)="onDragEnd($event)"
+            (click)="onCardClick(item, item.options[0])"
+          >
+            <component-image [cardData]="item" size="small" />
+            <h4 class="product-title">{{ item.title }}</h4>
+            <p class="product-description">{{ item.description }}</p>
+            <div class="product-info">
+              <p class="product-tipo">{{ item.options[0].tipo }}</p>
+              <p class="product-price">{{ item.options[0].price }}€</p>
             </div>
-          </ng-template>
-        </ng-container>
-      </owl-carousel-o>
-    </div>
+          </div>
+        </ng-template>
+      </ng-container>
+    </owl-carousel-o>
   </div>
 </section>

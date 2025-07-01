@@ -1,8 +1,9 @@
 import { ArticleInterface } from './interfaces-model';
 
 export const directory = 'shop1';
-type MethodPayInterface = 'monei' | 'stripe';
-export const selectedMethodPay: MethodPayInterface = 'monei';
+
+type MethodPayInterface = 'monei' | 'stripe' | 'redsys';
+export const selectedMethodPay: MethodPayInterface = 'redsys';
 
 // conf general
 export const dataWeb = {
@@ -15,18 +16,21 @@ export const dataWeb = {
   address: 'Calle Innovación 42, 28001 Madrid, España',
   nif: 'A12345678',
   paymentIntentUrl:
-    (selectedMethodPay as MethodPayInterface) === 'stripe' ? 'http://localhost:3000/stripe-payment' : 'http://localhost:3000/monei-payment',
-
-  shippingCost: 9,
+    (selectedMethodPay as MethodPayInterface) === 'stripe'
+      ? 'http://localhost:3000/stripe-payment'
+      : (selectedMethodPay as MethodPayInterface) === 'redsys'
+        ? 'http://localhost:3000/redsys-payment'
+        : 'http://localhost:3000/monei-payment',
+  shippingCost: 4.24,
   logo: {
     mobile: `${directory}/images-logo/logo-head-mobile.png`,
     pc: `${directory}/images-logo/logo-head.png`,
     icon: `${directory}/icon.ico`,
   },
-  colorBackground: 'white',
+
+  colorBackground: '#F5F8F4',
   colorText: 'black',
 };
-
 export const carouselConfig = [
   {
     bannerImg: `${directory}/images-carousel/1a.jpg`,

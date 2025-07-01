@@ -12,7 +12,7 @@ export interface Option {
   selector: 'custom-dropdown-material',
   standalone: true,
   templateUrl: './custom-dropdown-material.component.html',
-  styleUrls: ['./custom-dropdown-material.component.sass'],
+  styleUrls: ['./custom-dropdown-material.component.scss'],
   imports: [CommonModule, MatSelectModule, FormsModule],
 })
 export class CustomDropdownMaterialComponent {

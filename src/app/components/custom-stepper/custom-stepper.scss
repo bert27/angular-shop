@@ -57,6 +57,7 @@
 
         .form-group {
           margin-bottom: 20px;
+          margin: auto;
         }
       }
     }
@@ -77,22 +78,24 @@
   }
 }
 .step1-checkout {
-  width: 100%;
   display: flex;
   justify-content: space-between;
-  flex-wrap: wrap;
+  align-items: center;
+  @media (max-width: 920px) {
+    flex-direction: column;
+  }
+}
 
+.form-container,
+.cart-container {
+  width: 47%;
+  margin-bottom: 16px;
+}
+
+@media (max-width: 768px) {
   .form-container,
   .cart-container {
-    width: 47%;
-    margin-bottom: 16px;
-  }
-
-  @media (max-width: 768px) {
-    .form-container,
-    .cart-container {
-      width: 100%;
-      margin-bottom: 0;
-    }
+    width: 100%;
+    margin-bottom: 0;
   }
 }

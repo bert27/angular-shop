@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Router, RouterModule } from '@angular/router';
 import { ProductDataInterface } from '../../../../../data/interfaces-model';
@@ -15,19 +15,8 @@ import { ImageComponent } from '../../../../components/image/image';
 })
 export class BestProductsComponent {
   bestProducts = productsData;
-  isMoveActive = true;
-  productImages = [
-    { url: 'images-products/1.jpg', id: '1' },
-    { url: 'images-products/2.jpg', id: '2' },
-    { url: 'images-products/mac-mini.jpg', id: '3' },
-    { url: 'images-products/mac-mini.jpg', id: '4' },
-    { url: 'images-products/mac-mini.jpg', id: '5' },
-    { url: 'images-products/1.jpg', id: '6' },
-    { url: 'images-products/2.jpg', id: '7' },
-    { url: 'images-products/mac-mini.jpg', id: '8' },
-    { url: 'images-products/mac-mini.jpg', id: '9' },
-    { url: 'images-products/mac-mini.jpg', id: '10' },
-  ];
+  isMoveActive = false;
+  isMoveManual = true;
 
   selectedImage: string | undefined;
   imageSize = 200;
@@ -37,10 +26,10 @@ export class BestProductsComponent {
     autoplay: this.isMoveActive,
     autoplayTimeout: 5000, // Aumenta el tiempo entre transiciones automáticas
     autoplayHoverPause: true,
-    autoWidth: false,
-    mouseDrag: this.isMoveActive,
-    touchDrag: this.isMoveActive,
-    pullDrag: this.isMoveActive,
+    autoWidth: true,
+    mouseDrag: this.isMoveManual,
+    touchDrag: this.isMoveManual,
+    pullDrag: this.isMoveManual,
     dots: false,
     navSpeed: 700,
     smartSpeed: 600, // Controla la velocidad de la transición
@@ -53,7 +42,7 @@ export class BestProductsComponent {
         items: 1,
       },
       400: {
-        items: 2,
+        items: 3,
       },
       740: {
         items: 3,
@@ -72,7 +61,7 @@ export class BestProductsComponent {
 
   constructor(private router: Router) {}
 
-  // Método para manejar el inicio del desplazamiento
+  // Métodos para manejar el desplazamiento y clics
   onDragStart(event: MouseEvent | TouchEvent): void {
     this.isDragging = false;
     if (event instanceof MouseEvent) {
@@ -84,7 +73,6 @@ export class BestProductsComponent {
     }
   }
 
-  // Método para manejar el movimiento durante el desplazamiento
   onDragMove(event: MouseEvent | TouchEvent): void {
     let currentX = 0;
     let currentY = 0;
@@ -104,7 +92,6 @@ export class BestProductsComponent {
     }
   }
 
-  // Método para manejar el fin del desplazamiento
   onDragEnd(event: MouseEvent | TouchEvent): void {
     // No se requiere acción adicional aquí
   }
@@ -123,12 +110,18 @@ export class BestProductsComponent {
   navigateToProduct(cardData: ProductDataInterface, selectedOption: { tipo: string; price: number } | undefined) {
     const productName = cardData.title.toLowerCase().replace(/\s+/g, '-');
 
-    let route = `/producto/${productName}`; // Eliminado doble slash
+    let route = '';
 
-    if (selectedOption) {
-      route += `/${selectedOption.tipo}`;
+    if (cardData.category) {
+      const categoryLower = cardData.category.toLowerCase().replace(/\s+/g, '-');
+      route = `/producto/${categoryLower}/${productName}`;
+    } else {
+      route = `/producto/${productName}`;
     }
-    this.router.navigate([route]);
+
+    this.router.navigate([route], {
+      state: { tipo: selectedOption?.tipo },
+    });
   }
 
   // Método para cambiar la imagen seleccionada (si es necesario)

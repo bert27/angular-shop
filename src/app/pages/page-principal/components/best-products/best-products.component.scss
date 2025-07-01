@@ -1,14 +1,12 @@
 :host ::ng-deep .owl-stage {
   display: flex;
-  width: 84vw;
+  width: 100%;
   overflow: hidden;
 }
 
 .section-carousel {
   padding-top: 10px;
-  width: 93%;
-  padding-bottom: 20px;
-  margin-left: 65px;
+  width: 100%;
 }
 
 .container {
@@ -28,9 +26,9 @@
 }
 
 .card {
-  width: 20vw;
-  height: 325px;
+  width: 100%;
   padding: 20px;
+  height: 100%;
   border-radius: 5px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   display: flex;
@@ -40,6 +38,7 @@
   background-color: var(--colorCard);
   text-align: center;
   cursor: pointer;
+  color: #404548;
 }
 
 .products-title {
@@ -54,22 +53,19 @@
 }
 
 .product-description {
-  line-height: 1.5;
   overflow: hidden;
-  display: -webkit-box; /* Configurar como caja flex para Webkit */
-  -webkit-box-orient: vertical; /* Orientación vertical prefijada */
-  box-orient: vertical; /* Orientación estándar */
-  -webkit-line-clamp: 1; /* Limitar a 1 línea (prefijada) */
-  line-clamp: 1; /* Compatibilidad con la propiedad estándar */
-  text-overflow: ellipsis; /* Mostrar "..." al final de la línea */
-  max-height: 1.5em; /* Altura máxima equivalente a una línea */
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
   text-align: center;
 }
+
 .product-info {
   display: flex;
   justify-content: space-between;
   width: 100%;
   align-items: center;
+  margin-top: 10px;
 }
 
 .product-tipo {
@@ -85,22 +81,7 @@
 
 @media (max-width: 1024px) {
   .section-carousel {
-    margin-left: 30px;
-  }
-
-  .card {
-    width: 30vw;
-  }
-}
-
-@media (max-width: 768px) {
-  .section-carousel {
-    margin-left: 10px;
-  }
-
-  .card {
-    width: 90%;
-    height: auto;
-    padding: 15px;
+    margin-left: 0px;
+    width: 100%;
   }
 }

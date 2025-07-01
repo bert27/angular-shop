@@ -1,8 +1,11 @@
+:host {
+ // width: 54%
+}
+
 .quantity-selector {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-
+  justify-content: space-around;
   // Estilo genérico para los demás botones
   button {
     width: 40px;

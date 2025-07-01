@@ -1,13 +1,15 @@
-<ng-container *ngIf="typeVisual === 'material'; else noMaterialInput">
-  <mat-form-field appearance="outline" class="custom-input-father">
-    <mat-label class="custom-label">{{ label }}</mat-label>
+<mat-form-field appearance="outline" class="form-field-class">
+  <mat-label>{{ label }}</mat-label>
+  <input
+    matInput
+    [type]="type"
+    [formControl]="control"
+    [errorStateMatcher]="matcher"
+    (input)="handleInputChange($event)"
+    (blur)="handleBlur()"
+  />
+  <mat-error *ngIf="control?.hasError('required')">
+    {{ errorMessage }}
+  </mat-error>
+</mat-form-field>
 
-    <input matInput type="number" [min]="1" [value]="value" [placeholder]="placeholder" (input)="onInputChange($event)" />
-  </mat-form-field>
-</ng-container>
-
-<ng-template #noMaterialInput>
-  <div class="no-material-input">
-    <input type="number" [min]="1" [value]="value" [placeholder]="placeholder" (input)="onInputChange($event)" />
-  </div>
-</ng-template>

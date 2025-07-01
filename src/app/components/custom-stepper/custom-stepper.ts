@@ -1,5 +1,5 @@
-import { Component, ViewChild, Input, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+import { Component, ViewChild, AfterViewInit, Inject, PLATFORM_ID } from '@angular/core';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
@@ -20,8 +20,10 @@ import { DirectionShippingInterface } from '../../../data/interfaces-model';
 import { Step1Form } from './steps/step1-form/step1-form.component';
 import { Step2DirectionComponent } from './steps/step2-direction/step2-direction';
 import { FormStateService } from '../../../services/formstate.service';
+import { RedsysCreditCardComponent } from '../redsys-credit-card/redsys-credit-card';
 
 @Component({
+  // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'custom-stepper',
   templateUrl: './custom-stepper.html',
   styleUrls: ['./custom-stepper.scss'],
@@ -45,18 +47,22 @@ import { FormStateService } from '../../../services/formstate.service';
     CommonModule,
     StripeFieldComponent,
     MoneiCreditCardComponent,
+    RedsysCreditCardComponent,
     Step2DirectionComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class StepperComponent implements AfterViewInit, OnInit {
   @ViewChild(MatStepper) stepper!: MatStepper;
-  @ViewChild(Step1Form) customFormComponent!: Step1Form;
 
+  // Declarar el formulario principal
+  customForm: FormGroup;
+
+  // Variables generales del componente
   orderId: string | null = null;
   isErrorPage = false;
   totalPrice = 0;
-
+  shippingCost = dataWeb.shippingCost;
   directionShipping: DirectionShippingInterface = {
     name: '',
     surname: '',
@@ -68,36 +74,45 @@ export class StepperComponent implements AfterViewInit, OnInit {
     phone: '',
     email: '',
   };
+
   currentStepIcon = 'home';
   titleShop = dataWeb.nameShop;
   selectedMethodPay = selectedMethodPay;
   constructor(
-    @Inject(PLATFORM_ID) private platformId: Object,
-
+    private formBuilder: FormBuilder,
+    @Inject(PLATFORM_ID) private platformId: object,
     private route: ActivatedRoute,
     private router: Router,
     private carritoService: CarritoService,
     private formStateService: FormStateService,
-  ) {}
-
-  updateTotalPrice(): void {
-    this.totalPrice = this.carritoService.getTotalPrice();
+  ) {
+    // Inicializar el formulario principal
+    this.customForm = this.formBuilder.group({
+      name: ['', Validators.required],
+      surname: ['', Validators.required],
+      address: ['', Validators.required],
+      postalCode: ['', Validators.required],
+      country: ['', Validators.required],
+      province: ['', Validators.required],
+      city: ['', Validators.required],
+      phone: ['', [Validators.required, Validators.pattern(/^[0-9]{9,12}$/)]],
+      email: ['', [Validators.required, Validators.email]],
+    });
   }
 
   ngOnInit(): void {
-    this.route.queryParamMap.subscribe((params) => {
-      this.orderId = params.get('orderId');
-
-      this.isErrorPage = this.router.url.includes('/checkout/error');
-      if (this.isErrorPage) {
-        console.log('Página de error detectada');
-      }
-    });
-
+    // Recuperar datos guardados en localStorage
     const savedDirection = this.formStateService.getFormData();
     if (savedDirection) {
       this.directionShipping = savedDirection;
+      this.customForm.patchValue(savedDirection);
     }
+
+    this.route.queryParamMap.subscribe((params) => {
+      this.orderId = params.get('orderId');
+      this.isErrorPage = this.router.url.includes('/checkout/error');
+    });
+
     this.updateTotalPrice();
   }
 
@@ -117,9 +132,11 @@ export class StepperComponent implements AfterViewInit, OnInit {
       this.carritoService.removeProducts();
     }
   }
+
   retryPayment(): void {
     this.router.navigate(['/checkout']);
   }
+
   async downloadInvoice(): Promise<void> {
     try {
       if (!this.orderId) {
@@ -146,10 +163,8 @@ export class StepperComponent implements AfterViewInit, OnInit {
       const contentDisposition = response.headers.get('Content-Disposition');
       const filename = contentDisposition?.match(/filename="(.+)"/)?.[1] || `Factura_${this.orderId}.pdf`;
 
-      // Stream
       const reader = response.body?.getReader();
       const chunks: Uint8Array[] = [];
-      let receivedLength = 0;
 
       if (reader) {
         while (true) {
@@ -158,20 +173,17 @@ export class StepperComponent implements AfterViewInit, OnInit {
 
           if (value) {
             chunks.push(value);
-            receivedLength += value.length;
           }
         }
       }
+
       if (isPlatformBrowser(this.platformId)) {
-        // Combine chunks into a single file
         const blob = new Blob(chunks, { type: 'application/pdf' });
-        // Create a temporary link for downloading
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
         link.download = filename;
         link.click();
-        // Revoke the generated URL
         window.URL.revokeObjectURL(url);
       }
     } catch (error) {
@@ -180,18 +192,34 @@ export class StepperComponent implements AfterViewInit, OnInit {
     }
   }
 
-  private handleStep1(): boolean {
-    if (this.customFormComponent) {
-      this.customFormComponent.onSubmit();
-      if (this.customFormComponent.customForm.valid) {
-        this.directionShipping = {
-          ...this.customFormComponent.customForm.value,
-        };
-        return true;
+  //Not work
+
+  private scrollToFirstInvalidControl(): void {
+    const firstInvalidControlName = Object.keys(this.customForm.controls).find((key) => this.customForm.get(key)?.invalid);
+    console.log('scroll', firstInvalidControlName);
+
+    if (firstInvalidControlName) {
+      const customInputElement = document.querySelector(`custom-input[controlName="${firstInvalidControlName}"]`) as HTMLElement;
+      console.log('customInputElement', customInputElement);
+
+      if (customInputElement) {
+        const inputElement = customInputElement.querySelector('input') as HTMLElement;
+
+        if (inputElement) {
+          inputElement.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          inputElement.focus();
+        }
       }
     }
-    console.error('El formulario no es válido.');
-    return false;
+  }
+
+  onSubmit(): void {
+    if (this.customForm.valid) {
+      console.log('Formulario válido', this.customForm.value);
+      this.formStateService.setFormData(this.customForm.value);
+    } else {
+      this.scrollToFirstInvalidControl(); // Agregar scroll al primer control inválido
+    }
   }
 
   nextStep(): void {
@@ -199,7 +227,8 @@ export class StepperComponent implements AfterViewInit, OnInit {
       const isStepValid = (() => {
         switch (this.stepper.selectedIndex) {
           case 0:
-            return this.handleStep1();
+            this.onSubmit();
+            return this.customForm.valid;
           case 1:
             return true;
           case 2:
@@ -229,22 +258,13 @@ export class StepperComponent implements AfterViewInit, OnInit {
   }
 
   updateStepIcon(stepIndex: number): void {
-    switch (stepIndex) {
-      case 0:
-        this.currentStepIcon = 'home';
-        break;
-      case 1:
-        this.currentStepIcon = 'credit_card';
-        break;
-      case 2:
-        this.currentStepIcon = 'receipt';
-        break;
-      default:
-        this.currentStepIcon = 'home';
-        break;
-    }
+    const icons = ['home', 'credit_card', 'receipt'];
+    this.currentStepIcon = icons[stepIndex] || 'home';
   }
 
+  updateTotalPrice(): void {
+    this.totalPrice = this.carritoService.getTotalPrice();
+  }
   onFormCompleted(formData: DirectionShippingInterface | null): void {
     if (formData) {
       this.directionShipping = formData;

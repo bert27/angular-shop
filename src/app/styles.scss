@@ -116,6 +116,7 @@ body {
   margin: 0;
   font-family: Roboto, 'Helvetica Neue', sans-serif;
   font-size: var(--textSize2);
+  line-height: 25px;
 }
 
 body {
@@ -148,7 +149,6 @@ h1 {
   color: var(--colorText);
   font-size: var(--textSize1);
   font-weight: 500;
-  line-height: 100%;
   letter-spacing: -0.125rem;
   margin: 0;
   font-family:
@@ -244,6 +244,10 @@ main {
   width: 1px;
   background: var(--red-to-pink-to-purple-vertical-gradient);
   margin-inline: 0.5rem;
+}
+.mat-mdc-form-field {
+  //https://stackoverflow.com/questions/54760371/how-to-change-height-in-mat-form-field
+  @include mat.all-component-densities(-1);
 }
 
 @media screen and (max-width: 650px) {

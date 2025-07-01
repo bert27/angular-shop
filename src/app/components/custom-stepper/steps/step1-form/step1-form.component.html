@@ -1,61 +1,89 @@
-<form [formGroup]="customForm" (ngSubmit)="onSubmit()" class="custom-form">
-  <div class="form-container">
-    <div class="columns-wrapper">
-      <div class="column">
-        <div class="form-group">
-          <label for="name">Nombre:</label>
-          <input id="name" formControlName="name" type="text" />
-          <div *ngIf="submitted && customForm.get('name')?.invalid" class="error-message">El nombre es obligatorio.</div>
-        </div>
+<div class="form-container">
+  <div class="columns-wrapper">
+    <div class="column">
+      <!-- Campo Nombre -->
+      <custom-input
+        label="Nombre"
+        [control]="getControl('name')"
+        [matcher]="matcher"
+        errorMessage="El nombre es obligatorio."
+        [controlName]="'name'"
+      ></custom-input>
 
-        <div class="form-group">
-          <label for="address">Dirección:</label>
-          <input id="address" formControlName="address" type="text" placeholder="Introduce tu dirección" />
-          <div *ngIf="submitted && customForm.get('address')?.invalid" class="error-message">La dirección es obligatoria.</div>
-        </div>
-        <div class="form-group">
-          <label for="phone">Teléfono:</label>
-          <input id="phone" formControlName="phone" type="text" placeholder="Introduce tu teléfono" />
-          <div *ngIf="submitted && customForm.get('phone')?.invalid" class="error-message">
-            El número de teléfono es obligatorio y debe ser válido.
-          </div>
-        </div>
-        <div class="form-group">
-          <label for="city">Ciudad:</label>
-          <input id="city" formControlName="city" type="text" placeholder="Introduce tu ciudad" />
-          <div *ngIf="submitted && customForm.get('city')?.invalid" class="error-message">La ciudad es obligatoria.</div>
-        </div>
-      </div>
+      <!-- Campo Dirección -->
+      <custom-input
+        label="Dirección"
+        [control]="getControl('address')"
+        [matcher]="matcher"
+        errorMessage="La dirección es obligatoria."
+        [controlName]="'address'"
+      ></custom-input>
 
-      <div class="column">
-        <div class="form-group">
-          <label for="surname">Apellidos:</label>
-          <input id="surname" formControlName="surname" type="text" />
-          <div *ngIf="submitted && customForm.get('surname')?.invalid" class="error-message">Los apellidos son obligatorios.</div>
-        </div>
-        <div class="form-group">
-          <label for="country">País:</label>
-          <input id="country" formControlName="country" type="text" placeholder="Introduce tu país" />
-          <div *ngIf="submitted && customForm.get('country')?.invalid" class="error-message">El país es obligatorio.</div>
-        </div>
-        <div class="form-group">
-          <label for="postalCode">Código Postal:</label>
-          <input id="postalCode" formControlName="postalCode" type="text" placeholder="Introduce tu código postal" />
-          <div *ngIf="submitted && customForm.get('postalCode')?.invalid" class="error-message">El código postal es obligatorio.</div>
-        </div>
-        <div class="form-group">
-          <label for="province">Provincia:</label>
-          <input id="province" formControlName="province" type="text" placeholder="Introduce tu provincia" />
-          <div *ngIf="submitted && customForm.get('province')?.invalid" class="error-message">La provincia es obligatoria.</div>
-        </div>
-      </div>
+      <!-- Campo Teléfono -->
+      <custom-input
+        label="Teléfono"
+        [control]="getControl('phone')"
+        [matcher]="matcher"
+        errorMessage="El número de teléfono es obligatorio y debe ser válido."
+        [controlName]="'phone'"
+      ></custom-input>
+
+      <!-- Campo Ciudad -->
+      <custom-input
+        label="Ciudad"
+        [control]="getControl('city')"
+        [matcher]="matcher"
+        errorMessage="La ciudad es obligatoria."
+        [controlName]="'city'"
+      ></custom-input>
     </div>
-    <div class="email">
-      <div class="form-group">
-        <label for="email">Email:</label>
-        <input id="email" formControlName="email" type="text" placeholder="Introduce tu email" />
-        <div *ngIf="submitted && customForm.get('email')?.invalid" class="error-message">El email debe de ser valido</div>
-      </div>
+
+    <div class="column">
+      <!-- Campo Apellidos -->
+      <custom-input
+        label="Apellidos"
+        [control]="getControl('surname')"
+        [matcher]="matcher"
+        errorMessage="Los apellidos son obligatorios."
+      ></custom-input>
+
+      <!-- Campo País -->
+      <custom-input
+        label="País"
+        [control]="getControl('country')"
+        [matcher]="matcher"
+        errorMessage="El país es obligatorio."
+        [controlName]="'country'"
+      ></custom-input>
+
+      <!-- Campo Código Postal -->
+      <custom-input
+        label="Código Postal"
+        [control]="getControl('postalCode')"
+        [matcher]="matcher"
+        errorMessage="El código postal es obligatorio."
+        [controlName]="'postalCode'"
+      ></custom-input>
+
+      <!-- Campo Provincia -->
+      <custom-input
+        label="Provincia"
+        [control]="getControl('province')"
+        [matcher]="matcher"
+        errorMessage="La provincia es obligatoria."
+        [controlName]="'province'"
+      ></custom-input>
     </div>
   </div>
-</form>
+
+  <div class="email">
+    <!-- Campo Email -->
+    <custom-input
+      label="Email"
+      [control]="getControl('email')"
+      [matcher]="matcher"
+      errorMessage="El email debe ser válido."
+      [controlName]="'email'"
+    ></custom-input>
+  </div>
+</div>

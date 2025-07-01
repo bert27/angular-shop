@@ -2,40 +2,40 @@ import { ServerRoute, RenderMode } from '@angular/ssr';
 import { generateProductRoutes, generateArticleRoutes } from './utils';
 
 export const serverRoutes: Array<ServerRoute> = [
-  // Página principal
   {
     path: '',
     renderMode: RenderMode.Prerender,
   },
 
-  // Página de productos
   {
     path: 'productos',
     renderMode: RenderMode.Prerender,
   },
 
-  // Página del blog
   {
     path: 'blog',
     renderMode: RenderMode.Prerender,
   },
 
-  // Método de envío
   {
     path: 'metodo-envio',
     renderMode: RenderMode.Prerender,
   },
 
-  // Página de contenido de productos (dinámica)
   {
-    path: 'producto/:title/:tipo',
+    path: 'producto/:category/:title',
     renderMode: RenderMode.Prerender,
     async getPrerenderParams() {
-      return generateProductRoutes();
+      return generateProductRoutes('withCategory');
     },
   },
-
-  // Página de contenido de artículos (dinámica)
+  {
+    path: 'producto/:title',
+    renderMode: RenderMode.Prerender,
+    async getPrerenderParams() {
+      return generateProductRoutes('withoutCategory');
+    },
+  },
   {
     path: 'articulo/:title',
     renderMode: RenderMode.Prerender,

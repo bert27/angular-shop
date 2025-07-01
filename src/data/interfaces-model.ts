@@ -1,6 +1,7 @@
 export interface ProductDataInterface {
   options: { tipo: string; price: number }[];
   title: string;
+  subtitle: string;
   body?: string;
   description?: string;
   stock?: boolean;

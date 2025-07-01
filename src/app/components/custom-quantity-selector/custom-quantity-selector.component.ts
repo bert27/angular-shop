@@ -1,13 +1,13 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { CustomInputComponent } from '../custom-input/custom-input.component';
 import { BotonComponent } from '../custom-button/custom-button.component';
 import { IconSvgComponent } from '../icon-svg/icon-svg.component';
+import { CustomInputNumberComponent } from '../custom-input-number/custom-input-number.component';
 
 @Component({
   selector: 'custom-quantity-selector',
   standalone: true,
-  imports: [CommonModule, CustomInputComponent, BotonComponent, IconSvgComponent],
+  imports: [CommonModule, CustomInputNumberComponent, BotonComponent, IconSvgComponent],
   templateUrl: './custom-quantity-selector.component.html',
   styleUrls: ['./custom-quantity-selector.component.scss'],
 })

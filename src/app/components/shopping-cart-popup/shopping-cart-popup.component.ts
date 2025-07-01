@@ -5,12 +5,12 @@ import { Router } from '@angular/router';
 import { IconSvgComponent } from '../icon-svg/icon-svg.component';
 import { BotonComponent } from '../custom-button/custom-button.component';
 import { CommonModule } from '@angular/common';
-import { CustomInputComponent } from '../custom-input/custom-input.component';
+import { CustomInputNumberComponent } from '../custom-input-number/custom-input-number.component';
 
 @Component({
   selector: 'app-shopping-cart-popup',
   standalone: true,
-  imports: [IconSvgComponent, BotonComponent, CommonModule, CustomInputComponent],
+  imports: [IconSvgComponent, BotonComponent, CommonModule, CustomInputNumberComponent],
   templateUrl: './shopping-cart-popup.component.html',
   styleUrls: ['./shopping-cart-popup.component.sass'],
 })

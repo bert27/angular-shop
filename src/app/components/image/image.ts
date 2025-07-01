@@ -10,7 +10,7 @@ import { CommonModule } from '@angular/common';
 })
 export class ImageComponent {
   @Input() cardData!: { imageUrl?: string; title?: string };
-
+  @Input() size: 'small' | 'normal' = 'normal';
   get hasImage(): boolean {
     return !!this.cardData?.imageUrl;
   }

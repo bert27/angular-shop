@@ -6,16 +6,17 @@
   justify-content: space-between;
 
   &:hover {
-    transform: translateY(-4px);
+    // transform: translateY(-4px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   }
 }
 
 .title-card {
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 8px;
+  margin-bottom: 8px;
   text-align: center;
   font-weight: bold;
+  color: #404548;
 }
 
 .price-class {
@@ -47,7 +48,6 @@
 }
 
 .description-class {
-  line-height: 1.5;
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -56,6 +56,19 @@
   text-overflow: ellipsis;
   max-height: calc(3 * 1.5em);
   text-align: center;
+}
+.subtitle-class {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  text-overflow: ellipsis;
+  max-height: calc(3 * 1.5em);
+  text-align: center;
+  font-weight: bold;
+  color: #404548;
+  margin-bottom: 8px;
 }
 #fila {
   display: flex;
@@ -87,7 +100,7 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
   margin-top: 16px;
-  gap: 10px;
+  gap: 16px;
 
   @media (max-width: 768px) {
     justify-content: space-between;
@@ -96,6 +109,7 @@
     custom-quantity-selector,
     custom-dropdown-material {
       width: 50%;
+      text-align: center;
       margin-bottom: 0;
     }
   }

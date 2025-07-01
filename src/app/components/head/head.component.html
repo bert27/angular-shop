@@ -4,19 +4,46 @@
   </div>
 
   <div id="column2-head">
-    <nav class="nav-menu">
-      <a routerLink="/productos">Productos</a>
-      <a routerLink="/metodo-envio">Método de Envío</a>
-      <a routerLink="/blog">Blog</a>
-    </nav>
+    @if (!isMobile) {
+      <nav class="nav-menu">
+        <a routerLink="/productos">Productos</a>
+        <a routerLink="/metodo-envio">Método de Envío</a>
+        <a routerLink="/blog">Blog</a>
+      </nav>
+    } @else {
+      <div
+        mat-icon-button
+        class="burger-menu"
+        [class.open]="menuOpen"
+        [matMenuTriggerFor]="menu"
+        aria-label="Menú de navegación"
+        (click)="toggleMenu()"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+
+      <mat-menu #menu="matMenu" (closed)="menuOpen = false">
+        <button mat-menu-item routerLink="/productos" routerLinkActive="selected-menu-item" [routerLinkActiveOptions]="{ exact: true }">
+          Productos
+        </button>
+
+        <button mat-menu-item routerLink="/metodo-envio" routerLinkActive="selected-menu-item" [routerLinkActiveOptions]="{ exact: true }">
+          Método de Envío
+        </button>
+
+        <button mat-menu-item routerLink="/blog" routerLinkActive="selected-menu-item" [routerLinkActiveOptions]="{ exact: true }">
+          Blog
+        </button>
+      </mat-menu>
+    }
 
     <div class="carrito-content" (mouseleave)="startAutoClose()">
       <div style="margin-left: 16px; margin: 20px" (click)="handleCarritoClick()">
-        <custom-icon-svg src="icons/carrito-de-compras.svg" [color]="'#ff8118'" [size]="50" />
+        <custom-icon-svg src="icons/carrito-de-compras.svg" [color]="'#ff8118'" [size]="isMobile ? 35 : 50" />
       </div>
-
       <span class="numero-productos">{{ cantidadProductos }}</span>
-
       <app-shopping-cart-popup />
     </div>
   </div>

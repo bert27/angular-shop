@@ -3,14 +3,16 @@
     <p>&copy; {{ year }} {{ titleShop }}. Todos los derechos reservados.</p>
     <strong>
       {{ footerTextC }}
-      {{ contactText }}
-      <a [href]="'mailto:' + email" style="color: white; text-decoration: none">
-        {{ email }}
-      </a>
+      <div>
+        {{ contactText }}
+        <a [href]="'mailto:' + email" style="color: white; text-decoration: none">
+          {{ email }}
+        </a>
+      </div>
     </strong>
     <div class="social-media">
       <a *ngFor="let social of socialMedia" [href]="social.href">
-        <custom-icon-svg [src]="social.src" [color]="social.color"></custom-icon-svg>
+        <custom-icon-svg [src]="social.src" [color]="social.color" [size]="40"/>
       </a>
     </div>
 

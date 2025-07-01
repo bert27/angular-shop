@@ -1,0 +1,89 @@
+.dropdown-father {
+  width: 170px;
+  border-radius: 4px;
+}
+
+.mat-form-field {
+  height: 10px !important;
+
+  .mat-mdc-text-field-wrapper {
+    height: 20px !important;
+  }
+
+  .mat-select {
+    background-color: #003366;
+    color: white;
+    border: 1px solid transparent;
+    transition: border-color 0.3s ease;
+    padding: 0;
+    font-size: var(--textSize2);
+
+    &:hover {
+      border-color: #0055a5;
+    }
+
+    &:focus-within {
+      border-color: #0077cc;
+    }
+  }
+
+  .mat-select-arrow {
+    color: white; // Icono en blanco
+  }
+
+  .mat-option {
+    color: black;
+    background-color: white;
+    transition: background-color 0.3s ease;
+    font-size: var(--textSize2);
+
+    &:hover {
+      background-color: #f1f1f1;
+    }
+
+    &.mat-option-selected {
+      background-color: #0055a5; // Color al seleccionar
+      color: white; // Color de letra al seleccionar
+    }
+  }
+}
+
+.custom-select {
+  font-size: var(--textSize2); // Tamaño dinámico
+  padding: 0; // Quitar padding en el select
+
+  .mat-select-trigger {
+    height: 20px; // Ajusta la altura de la caja que activa el desplegable
+  }
+}
+
+.custom-option {
+  font-size: var(--textSize2); // Tamaño dinámico de las opciones
+}
+
+.custom-label {
+  white-space: nowrap; // Evitar que el texto se corte y se ajuste en una sola línea
+  overflow: visible; // Mostrar todo el contenido, aunque se desborde
+  text-overflow: ellipsis; // Añadir puntos suspensivos si el texto es demasiado largo
+  font-size: var(--textSize2); // Tamaño dinámico para el label
+}
+
+:host {
+  // Siempre envolver ::ng-deep con :host
+  ::ng-deep {
+    .mat-mdc-floating-label.mdc-floating-label {
+      max-width: 100px;
+      font-size: var(--textSize2); // Tamaño dinámico para la etiqueta flotante
+    }
+
+    .mat-mdc-form-field-subscript-wrapper {
+      height: 0px;
+    }
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .dropdown-father {
+    width: 128px;
+  }
+}

@@ -1,33 +1,61 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, forwardRef, HostBinding } from '@angular/core';
+import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, FormBuilder, ReactiveFormsModule, AbstractControl } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import { ErrorStateMatcher } from '@angular/material/core';
 
 @Component({
   selector: 'custom-input',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule, MatInputModule],
+  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule],
   templateUrl: './custom-input.component.html',
   styleUrls: ['./custom-input.component.scss'],
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => CustomInputComponent),
+      multi: true,
+    },
+  ],
 })
-export class CustomInputComponent {
-  @Input() label = 'Cantidad';
-  @Input() placeholder = '';
-  @Input() value = 1;
-  @Input() typeVisual: 'material' | 'no-material' = 'material';
+export class CustomInputComponent implements ControlValueAccessor {
+  @Input() label: string = 'Campo';
+  @Input() type: string = 'text';
+  @Input() placeholder: string = '';
+  @Input() errorMessage: string = 'Este campo es obligatorio.';
+  @Input() control!: FormControl; // Usa el operador `!` para evitar problemas de inicialización
+  @Input() matcher!: ErrorStateMatcher;
+  @Input() @HostBinding('attr.controlName') controlName!: string; // Vincula controlName al DOM
 
-  @Output() valueChange = new EventEmitter<number>();
+  value: any = '';
+  isDisabled: boolean = false;
 
-  onInputChange(event: Event): void {
-    const target = event.target as HTMLInputElement;
-    let newValue = parseFloat(target.value);
+  onChange = (_: any) => {};
+  onTouched = () => {};
 
-    if (isNaN(newValue) || newValue < 1) {
-      newValue = 1;
-    }
+  writeValue(value: any): void {
+    this.value = value;
+  }
 
-    this.value = newValue;
-    target.value = this.value.toString();
-    this.valueChange.emit(this.value);
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+
+  setDisabledState?(isDisabled: boolean): void {
+    this.isDisabled = isDisabled;
+  }
+
+  handleInputChange(event: any): void {
+    this.value = event.target.value;
+    this.onChange(this.value);
+  }
+
+  handleBlur(): void {
+    this.onTouched();
   }
 }

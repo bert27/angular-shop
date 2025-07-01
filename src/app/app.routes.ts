@@ -19,7 +19,12 @@ export const routes: Routes = [
   { path: 'metodo-envio', component: MetodoEnvioPageComponent },
 
   {
-    path: 'producto/:title/:tipo',
+    path: 'producto/:category/:title',
+    component: PageContentProductComponent,
+    data: { type: 'product' },
+  },
+  {
+    path: 'producto/:title',
     component: PageContentProductComponent,
     data: { type: 'product' },
   },

@@ -49,15 +49,28 @@ export class CardComponent implements OnInit {
 
   navigateToProduct(cardData: ProductDataInterface | ArticleInterface, selectedOption: { tipo: string; price: number } | undefined) {
     const productName = cardData.title.toLowerCase().replace(/\s+/g, '-');
-    const routePrefix = this.isArticle(cardData) ? 'articulo' : 'producto';
+    if (this.isArticle(cardData)) {
+      const route = `/articulo/${productName}`;
+      this.router.navigate([route]);
+    } else {
+      let route = '';
 
-    let route = `/${routePrefix}/${productName}`;
+      if (cardData.category) {
+        const categoryLower = cardData.category.toLowerCase().replace(/\s+/g, '-');
+        route = `/producto/${categoryLower}/${productName}`;
+      } else {
+        route = `/producto/${productName}`;
+      }
 
-    if (!this.isArticle(cardData) && selectedOption) {
-      route += `/${selectedOption.tipo}`;
+      if (selectedOption?.tipo) {
+        // Pasamos "tipo" como parte del estado, sin que aparezca en la URL
+        this.router.navigate([route], {
+          state: { tipo: selectedOption.tipo, quantity: this.quantity },
+        });
+      } else {
+        this.router.navigate([route]);
+      }
     }
-
-    this.router.navigate([route]);
   }
 
   get selectedPrice(): number {

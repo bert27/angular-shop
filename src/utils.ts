@@ -21,24 +21,49 @@ export function slugify(text: string): string {
 /**
  * Genera rutas dinámicas para productos.
  */
-export function generateProductRoutes(): Promise<Record<string, string>[]> {
-  const routes = productsData.flatMap((product) =>
-    product.options.map((option) => ({
-      title: product.title
-        .toLowerCase()
-        .replace(/\s+/g, '-')
-        .replace(/[^a-z0-9-]/g, ''), // Normalizar título
-      tipo: option.tipo.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]/g, ''), // Normalizar tipo
-    })),
-  );
+export function generateProductRoutes(mode: 'withCategory' | 'withoutCategory' | 'all' = 'all'): Promise<Record<string, string>[]> {
+  const routesBase = productsData.map((product) => {
+    const normalizedTitle = product.title
+      .toLowerCase()
+      .replace(/\s+/g, '-')
+      .replace(/[^a-z0-9-]/g, '');
 
-  // Asegúrate de que todas las propiedades sean cadenas
-  return Promise.resolve(
-    routes.map((route) => ({
-      title: route.title,
-      tipo: route.tipo,
-    })),
-  );
+    const normalizedCategory = product.category
+      ? product.category
+          .toLowerCase()
+          .replace(/\s+/g, '-')
+          .replace(/[^a-z0-9-]/g, '')
+      : '';
+
+    return {
+      title: normalizedTitle,
+      category: normalizedCategory,
+    };
+  });
+
+  const routesWithoutCategory = routesBase.map((r) => ({
+    title: r.title,
+  }));
+
+  const routesWithCategory = routesBase.map((r) => ({
+    title: r.title,
+    category: r.category,
+  }));
+
+  let finalRoutes: Record<string, string>[] = [];
+  switch (mode) {
+    case 'withoutCategory':
+      finalRoutes = routesWithoutCategory;
+      break;
+    case 'withCategory':
+      finalRoutes = routesWithCategory;
+      break;
+    default: // 'all'
+      finalRoutes = [...routesWithoutCategory, ...routesWithCategory];
+      break;
+  }
+
+  return Promise.resolve(finalRoutes);
 }
 
 /**
@@ -49,7 +74,7 @@ export function generateArticleRoutes(): Promise<Record<string, string>[]> {
     title: article.title
       .toLowerCase()
       .replace(/\s+/g, '-')
-      .replace(/[^a-z0-9-]/g, ''), // Normalizar título
+      .replace(/[^a-z0-9-]/g, ''),
   }));
 
   return Promise.resolve(

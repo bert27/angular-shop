@@ -61,9 +61,15 @@ export async function payMonei(req: Request, res: Response): Promise<void> {
 }
 
 export const calcularTotal = (productos: ProductCarritoInterface[], shippingCost: number): number => {
-  const totalProductos = productos.reduce((acc, producto) => acc + producto.tipoSeleccionado.price * producto.cantidad, 0);
+  const totalProductosCents = productos.reduce(
+    (acc, producto) => acc + Math.round(producto.tipoSeleccionado.price * 100) * producto.cantidad,
+    0,
+  );
 
-  return (totalProductos + shippingCost) * 100;
+  const shippingCostCents = Math.round(shippingCost * 100);
+  const totalCents = totalProductosCents + shippingCostCents;
+
+  return totalCents;
 };
 
 export async function sendEmailFromMoney(req: Request, res: Response): Promise<void> {

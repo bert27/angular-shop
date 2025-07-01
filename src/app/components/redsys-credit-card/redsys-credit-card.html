@@ -1,0 +1,7 @@
+<form id="payment-form" (submit)="handleSubmit($event)">
+  <div id="card-error" *ngIf="errorMessage">{{ errorMessage }}</div>
+  <div class="button-group">
+    <!-- Botón para enviar el formulario y redirigir a Redsys -->
+    <custom-button [texto]="isLoading ? 'Procesando...' : 'Pagar'" tipo="primario" [disabled]="isLoading" type="submit" />
+  </div>
+</form>

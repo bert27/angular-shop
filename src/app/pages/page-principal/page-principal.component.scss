@@ -1,0 +1,12 @@
+:host {
+  width: 100%;
+
+  .content-page {
+    width: 90%;
+    margin: 0 auto; 
+
+    @media (max-width: 768px) {
+      width: 90%;
+    }
+  }
+}

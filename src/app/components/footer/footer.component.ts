@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   standalone: true,
   imports: [IconSvgComponent, RouterModule, CommonModule],
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.sass'],
+  styleUrls: ['./footer.component.scss'],
 })
 export class FooterComponent {
   email = dataWeb.email;

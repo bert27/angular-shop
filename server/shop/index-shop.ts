@@ -6,6 +6,8 @@ import { directionShippingInterface, ProductCarritoInterface } from './model-int
 import { renderEmailTemplate } from './services/emailService';
 import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
+import { payRedsys, sendEmailFromRedsys } from './services/redsysService';
+import { selectedMethodPay } from '../../src/data/data';
 export const indexShop = (): Router => {
   const shopRouter = Router();
 
@@ -61,6 +63,9 @@ export const indexShop = (): Router => {
   shopRouter.post('/monei-payment', (req: Request, res: Response) => {
     payMonei(req, res);
   });
+  shopRouter.post('/redsys-payment', (req: Request, res: Response) => {
+    payRedsys(req, res);
+  });
 
   shopRouter.post('/stripe-payment', (req: Request, res: Response) => {
     payStripe(req, res);
@@ -68,14 +73,18 @@ export const indexShop = (): Router => {
   shopRouter.post('/stripe/webhook', express.raw({ type: 'application/json' }), handleStripeWebhook);
 
   shopRouter.post('/sendEmail', (req: Request, res: Response) => {
-    sendEmailFromMoney(req, res);
+    if (selectedMethodPay === 'monei') {
+      sendEmailFromMoney(req, res);
+    } else {
+      sendEmailFromRedsys(req, res);
+    }
   });
   interface DownloadPdfBody {
     invoiceNumber: string;
     directionShipping: directionShippingInterface;
     productos: ProductCarritoInterface[];
   }
-  shopRouter.post('/download-pdf', (req: Request<{}, {}, DownloadPdfBody>, res: Response) => {
+  shopRouter.post('/download-pdf', (req: Request<object, object, DownloadPdfBody>, res: Response) => {
     const { invoiceNumber, directionShipping, productos } = req.body;
 
     if (!invoiceNumber) {

@@ -6,6 +6,7 @@ import { indexShop } from '../server/shop/index-shop';
 import * as dotenv from 'dotenv';
 import { SitemapStream, streamToPromise } from 'sitemap';
 import fs from 'fs';
+//http://192.168.1.144:3000/ angular-shop % ng serve --host 0.0.0.0 --port 3000
 
 // Importa utilidades para generar rutas dinámicas y estáticas
 import { serverRoutes } from './app.routes.server';
@@ -19,8 +20,9 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 const app = express();
 const angularApp = new AngularNodeAppEngine();
 
-// Middleware JSON
+// ✅ Permitir JSON y datos en `application/x-www-form-urlencoded`
 app.use(express.json());
+app.use(express.urlencoded({ extended: true })); // 🔥 NECESARIO para recibir notificaciones de Redsys
 
 // Middleware personalizado
 app.use('/', indexShop());
@@ -32,6 +34,7 @@ app.use(
   }),
 );
 
+// ✅ Generación del sitemap.xml
 const generateSitemapRoutes = async (): Promise<Array<{ url: string; changefreq: string; priority: number }>> => {
   const staticRoutes = generateStaticRoutes(serverRoutes).map((route) => {
     const isHome = route.url === '/';
@@ -42,8 +45,13 @@ const generateSitemapRoutes = async (): Promise<Array<{ url: string; changefreq:
     };
   });
 
-  const productRoutes = (await generateProductRoutes()).map((route) => ({
-    url: `/producto/${route['title']}/${route['tipo']}`,
+  const productRoutes = (await generateProductRoutes('withCategory')).map((route) => ({
+    url: `/producto/${route['category']}/${route['title']}`,
+    changefreq: 'weekly',
+    priority: 0.9,
+  }));
+  const productRoutesNotCategory = (await generateProductRoutes('withoutCategory')).map((route) => ({
+    url: `/producto/${route['title']}`,
     changefreq: 'weekly',
     priority: 0.9,
   }));
@@ -54,8 +62,9 @@ const generateSitemapRoutes = async (): Promise<Array<{ url: string; changefreq:
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...productRoutes, ...articleRoutes];
+  return [...staticRoutes, ...productRoutes, ...articleRoutes, ...productRoutesNotCategory];
 };
+
 app.get('/sitemap.xml', async (req, res, next) => {
   try {
     const hostname = req.protocol + '://' + req.get('host');
@@ -76,12 +85,12 @@ app.get('/sitemap.xml', async (req, res, next) => {
   }
 });
 
-// Ruta de prueba
+// ✅ Ruta de prueba
 app.get('/test', (req, res) => {
   res.send('hola3');
 });
 
-// Manejador de rutas para Angular
+// ✅ Manejador de rutas para Angular
 app.use('/**', (req, res, next) => {
   angularApp
     .handle(req)
@@ -94,7 +103,7 @@ app.use('/**', (req, res, next) => {
  */
 if (isMainModule(import.meta.url)) {
   const port = process.env['PORT'] || 4000;
-  app.listen(port, () => {
+  app.listen(port as number, '0.0.0.0', () => {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
 }

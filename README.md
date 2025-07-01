@@ -5,7 +5,7 @@ If you use stripe change the stripePublicKey in the client, everything else is i
 
 **V1.3 Features:**
 
-- Multiple payment gateways.
+- Multiple payment gateways. 
 - Invoice delivery via email with React HTML templates.
 - PDF generation attached with the company’s logo and VAT included.
 

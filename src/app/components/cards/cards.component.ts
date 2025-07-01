@@ -8,8 +8,8 @@ import { ProductDataInterface, ArticleInterface } from '../../../data/interfaces
   standalone: true,
   imports: [CommonModule, CardComponent],
   templateUrl: './cards.component.html',
-  styleUrls: ['./cards.component.sass'],
+  styleUrls: ['./cards.component.scss'],
 })
 export class CardsComponent {
-  @Input() items: (ProductDataInterface | ArticleInterface)[] = []; // Cambié el nombre a items y ahora acepta ambos tipos
+  @Input() items: (ProductDataInterface | ArticleInterface)[] = [];
 }

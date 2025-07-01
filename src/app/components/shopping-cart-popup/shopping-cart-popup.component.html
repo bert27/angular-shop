@@ -17,7 +17,7 @@
         </div>
         <div class="producto-detalles">
           {{ producto.title }} ({{ producto.tipoSeleccionado.tipo }}) - {{ producto.tipoSeleccionado.price }}€
-          <custom-input [value]="producto.cantidad" (valueChange)="updateCantidad(producto, $event)" [typeVisual]="'no-material'" />
+          <custom-input-number [value]="producto.cantidad" (valueChange)="updateCantidad(producto, $event)" [typeVisual]="'no-material'" />
         </div>
       </div>
 
