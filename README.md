@@ -1,31 +1,37 @@
-# Ng-shop
+# 🛍️ Ng-shop
 
 This project is an online store in Spanish created with Angular.
 
-It supports three payment methods:
+[![Visit Shop🚀](https://img.shields.io/badge/Visit%20Shop-Angular--Store-00BFFF?style=for-the-badge)](https://angular-shop-iota.vercel.app/)
 
-````ts
+---
+
+## 💳 Payment Methods
+
+It supports **three payment gateways**:
+
+```ts
 type MethodPayInterface = 'monei' | 'stripe' | 'redsys';
+```
 
+### ✨ Features V1.3:\*\*
 
-**V1.3 Features:**
+- Multiple payment gateways (Redsys, Monei, Stripe)
+- Invoice delivery via email with React HTML templates
+- PDF invoice generation with logo and VAT included
 
-- Multiple payment gateways.
-- Invoice delivery via email with React HTML templates.
-- PDF generation attached with the company’s logo and VAT included.
-
-### Components:
+### 🧩 Components:
 
 - Carousel with animations
 - Forms for user inputs
-- Shopping cart for managing products
-- Button to download invoices in PDF format
+- Shopping cart with product management
+- Button to download invoices in PDF
 - Responsive design for all devices
 
-### Configuration:
+### ⚙️ Configuration:
 
-- Data, and sections are configured in data.ts.
-- Product configuration is located in products-data.ts, both in the data folder.
+- All data is defined in data.ts
+- Products are configured in products-data.ts
 - In selectedMethodPay, you can use monei or stripe. This will automatically switch the payment method.
 
   ```export const dataWeb = {
@@ -48,24 +54,23 @@ type MethodPayInterface = 'monei' | 'stripe' | 'redsys';
    pc: `${directory}/images-logo/logo-head.png`,
    icon: `${directory}/icon.ico`,
   },
+  ```
 
-````
-
-**Webhooks and External Communication:**
+### 🔗 Webhooks and External Communication:
 
     -  The server includes an example .env file. For the webhooks to work, use ngrok or any other tool to expose your local server to the internet.
     -  If you deploy the server outside your local machine, this issue will not occur.
     -  External communication allows payment gateways to return the status of the order (successful or failed) to the server.
     -  Once the server receives the payment status, it sends a PDF invoice with a React HTML template.
 
-## PC
+### 🖥️ PC
 
 <div style="display: flex; align-items: center; width: 100%;">
   <img src="public/screenshots/index_PC.png" alt="Home" style="width: 40%;">
   <img src="public/screenshots/products_PC.png" alt="Products" style="width: 40%;">
 </div>
 
-## SmartPhone
+## 📱 SmartPhone
 
 <div style="display: flex; align-items: center; width: 100%;">
   <img src="public/screenshots/index_MVL.png" alt="Home" style="width: 40%;">
@@ -88,7 +93,7 @@ Navigate to the project and run:
 
 npm i
 
-## Start the web to get started
+## ▶️ Start the web to get started
 
 Run npm run start or ng serve to start both the client and server. Both run on http://localhost:3000/
 
@@ -101,6 +106,20 @@ Alternatively, you can click on start-mac.sh (for macOS) or start-windows.bat (f
 To modify the products, go to `src/data/products-data.ts`. This file contains an array of product objects exported as `productsData`. Each product has properties such as `title`, `description`, `stock`, `imageUrl`, `category`, and `options`. You can add or update products by modifying the objects in this file.
 
 ### Example
+
+Each product is an object with properties such as:
+
+- title
+
+- description
+
+- stock
+
+- imageUrl
+
+- category
+
+- options (with price and tipo)
 
 ```javascript
 export const cardProduct1 = {
@@ -123,4 +142,8 @@ export const cardProduct1 = {
     },
   ],
 };
+```
+
+```
+
 ```
