@@ -22,7 +22,6 @@ const { createRedirectForm, processRestNotification } = createRedsysAPI({
   urls: SANDBOX_URLS, // URLs del entorno de pruebas
 });
 const clientPublicUrl: string = process.env['CLIENT_BASE_URL'] || '';
-const serverPublicUrl: string = process.env['SERVER_PUBLIC_URL'] || '';
 
 /**
  * Función para iniciar el proceso de pago con Redsys.
