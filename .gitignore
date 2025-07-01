@@ -5,8 +5,7 @@
 /tmp
 /out-tsc
 /bazel-out
-# Environment Configuration Files
-.env
+
 # Node
 /node_modules
 npm-debug.log
