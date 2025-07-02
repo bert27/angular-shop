@@ -79,6 +79,19 @@ type MethodPayInterface = 'monei' | 'stripe' | 'redsys';
 
 ---
 
+## 🧾 Redsys Integration
+
+Ng-shop also includes full support for **Redsys** with **3DS protocol**.
+
+You can test the Redsys payment integration using these test cards:
+
+🔗 [Redsys Test Cards and Environments](https://pagosonline.redsys.es/desarrolladores-inicio/integrate-con-nosotros/tarjetas-y-entornos-de-prueba/)
+
+| **Brand**  | **Protocol** | **Card Number**     | **Expiry** | **CVV** |
+| ---------- | ------------ | ------------------- | ---------- | ------- |
+| VISA       | EMV3DS 2.2   | 4548 8100 0000 0003 | 12/49      | 123     |
+| Mastercard | EMV3DS 2.1   | 5576 4415 6304 5037 | 12/49      | 123     |
+
 ### Other Characteristics
 
 | **View template in server**                                                        | **PDF template in server**                        | **Cart**                           |
