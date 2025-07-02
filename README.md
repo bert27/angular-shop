@@ -92,6 +92,8 @@ You can test the Redsys payment integration using these test cards:
 | VISA       | EMV3DS 2.2   | 4548 8100 0000 0003 | 12/49      | 123     |
 | Mastercard | EMV3DS 2.1   | 5576 4415 6304 5037 | 12/49      | 123     |
 
+<img src="public/screenshots/redsys.png" alt="Redsys Payment Screenshot" width="60%">
+
 ### Other Characteristics
 
 | **View template in server**                                                        | **PDF template in server**                        | **Cart**                           |
