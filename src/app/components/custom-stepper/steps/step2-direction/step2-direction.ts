@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 
-import { DirectionShippingInterface } from '../../../../../data/interfaces-model';
+import { DirectionShippingInterface } from '@data/interfaces-model';
 
 @Component({
   selector: 'app-step2-direction',

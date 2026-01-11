@@ -6,21 +6,21 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
-import { BotonComponent } from '../custom-button/custom-button.component';
-import { ShoppingCartListComponent } from '../shopping-cart-list/shopping-cart-list';
+import { BotonComponent } from '@components/custom-button/custom-button.component';
+import { ShoppingCartListComponent } from '@components/shopping-cart-list/shopping-cart-list';
 import { isPlatformBrowser } from '@angular/common';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
-import { StripeFieldComponent } from '../stripe-credit-card/stripe-field.component';
-import { MoneiCreditCardComponent } from '../monei-credit-card/monei-credit-card';
+import { StripeFieldComponent } from '@components/stripe-credit-card/stripe-field.component';
+import { MoneiCreditCardComponent } from '@components/monei-credit-card/monei-credit-card';
 import { ActivatedRoute, Router } from '@angular/router';
-import { CarritoService } from '../../../services/carrito.service';
-import { dataWeb, selectedMethodPay } from '../../../data/data';
-import { DirectionShippingInterface } from '../../../data/interfaces-model';
+import { CarritoService } from '@services/carrito.service';
+import { dataWeb, selectedMethodPay } from '@data/data';
+import { DirectionShippingInterface } from '@data/interfaces-model';
 import { Step1Form } from './steps/step1-form/step1-form.component';
 import { Step2DirectionComponent } from './steps/step2-direction/step2-direction';
-import { FormStateService } from '../../../services/formstate.service';
-import { RedsysCreditCardComponent } from '../redsys-credit-card/redsys-credit-card';
+import { FormStateService } from '@services/formstate.service';
+import { RedsysCreditCardComponent } from '@components/redsys-credit-card/redsys-credit-card';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { IconSvgComponent } from '../icon-svg/icon-svg.component';
+import { IconSvgComponent } from '@components/icon-svg/icon-svg.component';
 import { RouterModule } from '@angular/router';
-import { dataWeb, footerText } from '../../../data/data';
+import { dataWeb, footerText } from '@data/data';
 
 
 @Component({

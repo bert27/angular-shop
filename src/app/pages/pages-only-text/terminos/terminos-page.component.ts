@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { purchaseTerms } from '../../../../data/data';
+import { purchaseTerms } from '@data/data';
 
 @Component({
   selector: 'app-terminos',

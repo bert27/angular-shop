@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { StepperComponent } from '../../components/custom-stepper/custom-stepper';
+import { StepperComponent } from '@components/custom-stepper/custom-stepper';
 
 @Component({
   selector: 'app-payment-page',

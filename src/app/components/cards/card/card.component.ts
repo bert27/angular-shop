@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 
-import { BotonComponent } from '../../custom-button/custom-button.component';
-import { CarritoService } from '../../../../services/carrito.service';
-import { ProductDataInterface, ArticleInterface } from '../../../../data/interfaces-model';
-import { CustomDropdownMaterialComponent } from '../../custom-dropdown-material/custom-dropdown-material.component';
+import { BotonComponent } from '@components/custom-button/custom-button.component';
+import { CarritoService } from '@services/carrito.service';
+import { ProductDataInterface, ArticleInterface } from '@data/interfaces-model';
+import { CustomDropdownMaterialComponent } from '@components/custom-dropdown-material/custom-dropdown-material.component';
 import { Router } from '@angular/router';
-import { CustomQuantitySelectorComponent } from '../../custom-quantity-selector/custom-quantity-selector.component';
-import { ImageComponent } from '../../image/image';
+import { CustomQuantitySelectorComponent } from '@components/custom-quantity-selector/custom-quantity-selector.component';
+import { ImageComponent } from '@components/image/image';
 
 @Component({
   selector: 'custom-card',

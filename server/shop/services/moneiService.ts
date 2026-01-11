@@ -74,10 +74,24 @@ export const calcularTotal = (productos: ProductCarritoInterface[], shippingCost
 
 export async function sendEmailFromMoney(req: Request, res: Response): Promise<void> {
   try {
-    const signature = req.headers['monei-signature'];
+    const signature = req.headers['monei-signature'] as string;
 
     if (!signature) {
-      res.status(400).json({ error: 'Firma de MONEI faltante.' });
+      console.error('Monei signature header missing');
+      res.status(401).json({ error: 'Firma de MONEI faltante.' });
+      return;
+    }
+
+    // Verify signature using the raw body captured in server.ts
+    try {
+      const rawBody = (req as any).rawBody;
+      if (!rawBody) {
+        throw new Error('Raw body not captured. Check server.js middleware.');
+      }
+      monei.verifySignature(rawBody.toString(), signature);
+    } catch (err) {
+      console.error('Monei signature verification failed:', (err as Error).message);
+      res.status(401).json({ error: 'Firma de MONEI inválida.' });
       return;
     }
 
@@ -98,14 +112,13 @@ export async function sendEmailFromMoney(req: Request, res: Response): Promise<v
         productos,
       });
     } else {
-      console.warn('Estado del pago:', paymentData.status);
+      console.warn('Estado del pago no exitoso:', paymentData.status);
     }
 
-    res.status(200).json({ message: 'Webhook recibido correctamente.' });
+    res.status(200).json({ message: 'Webhook procesado y verificado.' });
   } catch (error) {
-    console.error('Error en el webhook:', error);
-
-    const errorMessage = error instanceof Error ? error.message : 'Error inesperado al procesar el webhook.';
+    console.error('Error en el webhook de Monei:', error);
+    const errorMessage = error instanceof Error ? error.message : 'Error inesperado.';
     res.status(500).json({ error: errorMessage });
   }
 }

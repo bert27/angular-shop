@@ -14,6 +14,20 @@ import { generateStaticRoutes, generateProductRoutes, generateArticleRoutes } fr
 
 dotenv.config();
 
+const requiredEnvVars = [
+  'GMAIL_USER',
+  'GMAIL_APP_PASSWORD',
+  'MONEI_API_KEY',
+  'STRIPE_SECRET_KEY',
+  'SERVER_PUBLIC_URL'
+];
+
+requiredEnvVars.forEach((envVar) => {
+  if (!process.env[envVar]) {
+    console.warn(`⚠️ WARNING: Environment variable ${envVar} is missing!`);
+  }
+});
+
 const serverDistFolder = dirname(fileURLToPath(import.meta.url));
 const browserDistFolder = resolve(serverDistFolder, '../browser');
 
@@ -21,7 +35,13 @@ const app = express();
 const angularApp = new AngularNodeAppEngine();
 
 // ✅ Permitir JSON y datos en `application/x-www-form-urlencoded`
-app.use(express.json());
+app.use(
+  express.json({
+    verify: (req: any, res, buf) => {
+      req.rawBody = buf;
+    },
+  }),
+);
 app.use(express.urlencoded({ extended: true })); // 🔥 NECESARIO para recibir notificaciones de Redsys
 
 // Middleware personalizado

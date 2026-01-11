@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { shippingMethodText } from '../../../../data/data';
+import { shippingMethodText } from '@data/data';
 
 @Component({
   selector: 'app-metodo-envio-page',

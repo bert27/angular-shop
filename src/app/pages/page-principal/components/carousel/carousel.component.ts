@@ -1,10 +1,10 @@
 
 import { Component, OnInit } from '@angular/core';
 import { NgbCarouselModule, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
-import { carouselConfig } from '../../../../../data/data';
+import { carouselConfig } from '@data/data';
 import { RouterModule } from '@angular/router';
-import { productsData } from '../../../../../data/products-data';
-import { slugify } from '../../../../../utils';
+import { productsData } from '@data/products-data';
+import { slugify } from '@utils';
 
 interface CarouselItem {
   bannerImg: string;

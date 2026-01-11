@@ -1,7 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 
-import { CustomQuantitySelectorComponent } from '../../custom-quantity-selector/custom-quantity-selector.component';
-import { ProductCarritoInterface } from '../../../../services/carrito.service';
+import { CustomQuantitySelectorComponent } from '@components/custom-quantity-selector/custom-quantity-selector.component';
+import { ProductCarritoInterface } from '@services/carrito.service';
 
 @Component({
   selector: 'item-shopping-cart',

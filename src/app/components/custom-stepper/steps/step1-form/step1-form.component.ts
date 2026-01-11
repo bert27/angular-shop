@@ -2,9 +2,9 @@ import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
 
 import { MatButtonModule } from '@angular/material/button';
-import { CustomInputComponent } from '../../../custom-input/custom-input.component';
+import { CustomInputComponent } from '@components/custom-input/custom-input.component';
 import { ErrorStateMatcher } from '@angular/material/core';
-import { DirectionShippingInterface } from '../../../../../data/interfaces-model';
+import { DirectionShippingInterface } from '@data/interfaces-model';
 
 export class SubmittedErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {

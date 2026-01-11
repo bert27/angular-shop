@@ -19,7 +19,16 @@
     "module": "ES2022",
     "jsx": "react",
     "jsxFactory": "React.createElement",
-    "jsxFragmentFactory": "React.Fragment"
+    "jsxFragmentFactory": "React.Fragment",
+    "baseUrl": "./",
+    "paths": {
+      "@services/*": ["src/app/services/*"],
+      "@components/*": ["src/app/components/*"],
+      "@data/*": ["src/data/*"],
+      "@pages/*": ["src/app/pages/*"],
+      "@env/*": ["src/environments/*"],
+      "@utils": ["src/utils.ts"]
+    }
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

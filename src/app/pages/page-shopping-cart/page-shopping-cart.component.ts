@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 
-import { ShoppingCartListComponent } from '../../components/shopping-cart-list/shopping-cart-list';
+import { ShoppingCartListComponent } from '@components/shopping-cart-list/shopping-cart-list';
 import { Router } from '@angular/router';
 
 @Component({

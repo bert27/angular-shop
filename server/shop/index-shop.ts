@@ -8,6 +8,8 @@ import { fileURLToPath } from 'url';
 import { dirname, resolve } from 'path';
 import { payRedsys, sendEmailFromRedsys } from './services/redsysService';
 import { selectedMethodPay } from '../../src/data/data';
+import { directionShippingMocked, productosMocked } from './data-mock';
+
 export const indexShop = (): Router => {
   const shopRouter = Router();
 
@@ -15,33 +17,6 @@ export const indexShop = (): Router => {
   const currentDir = dirname(currentFile);
   const publicDir = resolve(currentDir, 'public');
   shopRouter.use('/public', express.static(publicDir));
-
-  const productosMocked = [
-    {
-      id: 1,
-      title: 'Producto A',
-      cantidad: 2,
-      tipoSeleccionado: { tipo: 'Tipo 1', price: 50.0 },
-    },
-    {
-      id: 2,
-      title: 'Producto B',
-      cantidad: 1,
-      tipoSeleccionado: { tipo: 'Tipo 2', price: 100.0 },
-    },
-  ];
-
-  const directionShippingMocked = {
-    name: 'John',
-    surname: 'Doe',
-    address: '123 Calle Principal',
-    postalCode: '12345',
-    country: 'España',
-    province: 'Madrid',
-    city: 'Madrid',
-    phone: '123456789',
-    email: 'john.doe@example.com',
-  };
 
   // preview email
   shopRouter.get('/preview-email', async (req: Request, res: Response) => {

@@ -7,13 +7,9 @@ import { directionShippingInterface, ProductCarritoInterface } from '../model-in
 import { populatePDFContent } from '../templates/template-pdf';
 
 /**
- * Generates a PDF invoice and saves it in the `public` folder.
- * @param directionShipping - Shipping information.
- * @param invoiceNumber - Invoice number.
- * @param productos - List of products.
- * @returns The path to the generated PDF file.
+ * Generates a PDF invoice as a Buffer for in-memory handling.
  */
-export function generatePDF({
+export async function generatePDFBuffer({
   directionShipping,
   invoiceNumber,
   productos,
@@ -21,22 +17,49 @@ export function generatePDF({
   directionShipping: directionShippingInterface;
   invoiceNumber: string;
   productos: ProductCarritoInterface[];
-}): string {
-  const doc = new PDFDocument({ margin: 50 });
+}): Promise<Buffer> {
+  return new Promise((resolve, reject) => {
+    const doc = new PDFDocument({ margin: 50 });
+    const chunks: Buffer[] = [];
 
+    doc.on('data', (chunk) => chunks.push(chunk));
+    doc.on('end', () => resolve(Buffer.concat(chunks)));
+    doc.on('error', (err) => reject(err));
+
+    // Populate the PDF content
+    populatePDFContent(doc, directionShipping, invoiceNumber, productos);
+
+    doc.end();
+  });
+}
+
+/**
+ * Generates a PDF invoice and saves it in the `public` folder.
+ * @param directionShipping - Shipping information.
+ * @param invoiceNumber - Invoice number.
+ * @param productos - List of products.
+ * @returns The path to the generated PDF file.
+ */
+export async function generatePDF({
+  directionShipping,
+  invoiceNumber,
+  productos,
+}: {
+  directionShipping: directionShippingInterface;
+  invoiceNumber: string;
+  productos: ProductCarritoInterface[];
+}): Promise<string> {
   const outputDir = path.resolve('public');
+  
+  // Use async directory handling
   if (!fs.existsSync(outputDir)) {
-    fs.mkdirSync(outputDir);
+    await fs.promises.mkdir(outputDir, { recursive: true });
   }
+
   const filePath = path.join(outputDir, `Factura_${invoiceNumber}.pdf`);
+  const buffer = await generatePDFBuffer({ directionShipping, invoiceNumber, productos });
 
-  const writeStream = fs.createWriteStream(filePath);
-  doc.pipe(writeStream);
-
-  // Populate the PDF content
-  populatePDFContent(doc, directionShipping, invoiceNumber, productos);
-
-  doc.end();
+  await fs.promises.writeFile(filePath, buffer);
   return filePath;
 }
 

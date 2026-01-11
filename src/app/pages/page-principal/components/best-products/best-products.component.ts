@@ -2,9 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Router, RouterModule } from '@angular/router';
-import { ProductDataInterface } from '../../../../../data/interfaces-model';
-import { productsData } from '../../../../../data/products-data';
-import { ImageComponent } from '../../../../components/image/image';
+import { ProductDataInterface } from '@data/interfaces-model';
+import { productsData } from '@data/products-data';
+import { ImageComponent } from '@components/image/image';
 
 @Component({
   selector: 'app-best-products',

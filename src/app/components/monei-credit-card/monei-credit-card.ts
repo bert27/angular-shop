@@ -1,10 +1,10 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
 
-import { BotonComponent } from '../custom-button/custom-button.component';
+import { BotonComponent } from '@components/custom-button/custom-button.component';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
-import { CarritoService, ProductCarritoInterface } from '../../../services/carrito.service';
-import { dataWeb } from '../../../data/data';
-import { DirectionShippingInterface } from '../../../data/interfaces-model';
+import { CarritoService, ProductCarritoInterface } from '@services/carrito.service';
+import { dataWeb } from '@data/data';
+import { DirectionShippingInterface } from '@data/interfaces-model';
 
 @Component({
   selector: 'app-monei-credit-card',

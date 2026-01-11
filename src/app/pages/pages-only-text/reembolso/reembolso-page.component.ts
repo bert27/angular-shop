@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { refundPolicy } from '../../../../data/data';
+import { refundPolicy } from '@data/data';
 
 @Component({
   selector: 'app-reembolso',

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { dataWeb, legalNotice } from '../../../../data/data';
+import { dataWeb, legalNotice } from '@data/data';
 
 
 @Component({

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
-import { CardsComponent } from '../../components/cards/cards.component';
+import { CardsComponent } from '@components/cards/cards.component';
 
-import { BotonComponent } from '../../components/custom-button/custom-button.component';
-import { productsData } from '../../../data/products-data';
+import { BotonComponent } from '@components/custom-button/custom-button.component';
+import { productsData } from '@data/products-data';
 import { Meta, Title } from '@angular/platform-browser';
-import { setMetaTags } from '../../../data/seo';
+import { setMetaTags } from '@data/seo';
 
 @Component({
   selector: 'app-productos',

@@ -1,10 +1,10 @@
 import { Component, OnInit, OnDestroy, ViewChild, HostListener, AfterViewInit, Inject, PLATFORM_ID, Renderer2 } from '@angular/core';
-import { IconSvgComponent } from '../icon-svg/icon-svg.component';
+import { IconSvgComponent } from '@components/icon-svg/icon-svg.component';
 import { Router, RouterModule } from '@angular/router';
-import { ShoppingCartPopupComponent } from '../shopping-cart-popup/shopping-cart-popup.component';
-import { CarritoService } from '../../../services/carrito.service';
+import { ShoppingCartPopupComponent } from '@components/shopping-cart-popup/shopping-cart-popup.component';
+import { CarritoService } from '@services/carrito.service';
 import { Subscription } from 'rxjs';
-import { dataWeb } from '../../../data/data';
+import { dataWeb } from '@data/data';
 import { isPlatformBrowser } from '@angular/common';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';

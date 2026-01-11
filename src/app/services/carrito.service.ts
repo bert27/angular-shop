@@ -1,6 +1,6 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { ProductDataInterface } from '../data/interfaces-model';
+import { ProductDataInterface } from '@data/interfaces-model';
 import { isPlatformBrowser } from '@angular/common';
 
 interface Option {

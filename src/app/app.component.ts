@@ -1,12 +1,12 @@
 import { Component, Inject, PLATFORM_ID, Renderer2, AfterViewInit } from '@angular/core';
 import { Router, NavigationEnd, RouterOutlet } from '@angular/router';
 import { isPlatformBrowser } from '@angular/common';
-import { HeadComponent } from './components/head/head.component';
+import { HeadComponent } from '@components/head/head.component';
 import { fadeAnimation } from './animations/fadeIntRoute';
-import { FooterComponent } from './components/footer/footer.component';
+import { FooterComponent } from '@components/footer/footer.component';
 import { Title } from '@angular/platform-browser';
-import { dataWeb } from '../data/data';
-import { ThemeService } from '../services/theme.service';
+import { dataWeb } from '@data/data';
+import { ThemeService } from '@services/theme.service';
 
 
 @Component({

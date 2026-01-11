@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ProductDataInterface } from '../../../data/interfaces-model';
-import { BotonComponent } from '../../components/custom-button/custom-button.component';
-import { CarritoService } from '../../../services/carrito.service';
-import { CustomQuantitySelectorComponent } from '../../components/custom-quantity-selector/custom-quantity-selector.component';
-import { productsData } from '../../../data/products-data';
-import { CustomDropdownMaterialComponent } from '../../components/custom-dropdown-material/custom-dropdown-material.component';
+import { ProductDataInterface } from '@data/interfaces-model';
+import { BotonComponent } from '@components/custom-button/custom-button.component';
+import { CarritoService } from '@services/carrito.service';
+import { CustomQuantitySelectorComponent } from '@components/custom-quantity-selector/custom-quantity-selector.component';
+import { productsData } from '@data/products-data';
+import { CustomDropdownMaterialComponent } from '@components/custom-dropdown-material/custom-dropdown-material.component';
 
 @Component({
   selector: 'app-page-content-product',

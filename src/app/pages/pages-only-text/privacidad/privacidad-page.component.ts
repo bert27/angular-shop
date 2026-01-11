@@ -1,6 +1,6 @@
 
 import { Component } from '@angular/core';
-import { privacyPolicy } from '../../../../data/data';
+import { privacyPolicy } from '@data/data';
 
 @Component({
   selector: 'app-privacidad',

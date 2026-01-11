@@ -1,11 +1,11 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CarritoService, ProductCarritoInterface } from '../../../services/carrito.service';
+import { CarritoService, ProductCarritoInterface } from '@services/carrito.service';
 import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
-import { IconSvgComponent } from '../icon-svg/icon-svg.component';
-import { BotonComponent } from '../custom-button/custom-button.component';
+import { IconSvgComponent } from '@components/icon-svg/icon-svg.component';
+import { BotonComponent } from '@components/custom-button/custom-button.component';
 
-import { CustomInputNumberComponent } from '../custom-input-number/custom-input-number.component';
+import { CustomInputNumberComponent } from '@components/custom-input-number/custom-input-number.component';
 
 @Component({
   selector: 'app-shopping-cart-popup',

@@ -1,14 +1,13 @@
-import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { dataWeb } from '../data/data';
+import { Injectable, Inject, PLATFORM_ID, signal } from '@angular/core';
+import { dataWeb } from '@data/data';
 import { isPlatformBrowser } from '@angular/common';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ThemeService {
-  private cssVariablesSubject = new BehaviorSubject<Record<string, string>>({});
-  cssVariables$ = this.cssVariablesSubject.asObservable();
+  private cssVariablesSignal = signal<Record<string, string>>({});
+  cssVariables = this.cssVariablesSignal.asReadonly();
 
   constructor(@Inject(PLATFORM_ID) private platformId: object) {}
 
@@ -25,7 +24,7 @@ export class ThemeService {
         root.style.setProperty(key, value);
       });
 
-      this.cssVariablesSubject.next(variables);
+      this.cssVariablesSignal.set(variables);
     }
   }
 }

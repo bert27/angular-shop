@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 
-import { BestProductsComponent } from './components/best-products/best-products.component';
-import { CarouselComponent } from './components/carousel/carousel.component';
+import { BestProductsComponent } from '@pages/page-principal/components/best-products/best-products.component';
+import { CarouselComponent } from '@pages/page-principal/components/carousel/carousel.component';
 import { Title, Meta } from '@angular/platform-browser';
-import { setMetaTags } from '../../../data/seo';
+import { setMetaTags } from '@data/seo';
 
 @Component({
   selector: 'app-page',

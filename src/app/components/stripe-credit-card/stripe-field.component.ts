@@ -1,12 +1,12 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
 
 import { loadStripe, Stripe, StripeCardElement, StripeElements } from '@stripe/stripe-js';
-import { BotonComponent } from '../custom-button/custom-button.component';
-import { environment } from '../../../environments/environment';
+import { BotonComponent } from '@components/custom-button/custom-button.component';
+import { environment } from '@env/environment';
 import { HttpClient } from '@angular/common/http';
-import { CarritoService, ProductCarritoInterface } from '../../../services/carrito.service';
-import { DirectionShippingInterface } from '../../../data/interfaces-model';
-import { dataWeb } from '../../../data/data';
+import { CarritoService, ProductCarritoInterface } from '@services/carrito.service';
+import { DirectionShippingInterface } from '@data/interfaces-model';
+import { dataWeb } from '@data/data';
 
 @Component({
   selector: 'app-stripe-field',

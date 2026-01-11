@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ArticleInterface } from '../../../data/interfaces-model';
-import { articlesBlog } from '../../../data/data';
-import { BotonComponent } from '../../components/custom-button/custom-button.component';
+import { ArticleInterface } from '@data/interfaces-model';
+import { articlesBlog } from '@data/data';
+import { BotonComponent } from '@components/custom-button/custom-button.component';
 
 @Component({
   selector: 'app-page-content-article',

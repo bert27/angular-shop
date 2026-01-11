@@ -2,9 +2,8 @@ import nodemailer from 'nodemailer';
 import { render } from '@react-email/render';
 import InvoiceTemplate from '../templates/template-email';
 import React from 'react';
-import fs from 'fs';
 
-import { generatePDF } from './generatePdfService';
+import { generatePDFBuffer } from './generatePdfService';
 import { directionShippingInterface, ProductCarritoInterface } from '../model-interfaces';
 
 const transporter = nodemailer.createTransport({
@@ -57,8 +56,8 @@ export async function sendEmail({
       productos,
     });
 
-    // Generate the PDF for the invoice
-    const pdfPath = generatePDF({
+    // Generate the PDF for the invoice as a Buffer (In-Memory)
+    const pdfBuffer = await generatePDFBuffer({
       directionShipping,
       invoiceNumber,
       productos,
@@ -74,7 +73,7 @@ export async function sendEmail({
       attachments: [
         {
           filename: `Invoice_${invoiceNumber}.pdf`, // Attachment filename
-          path: pdfPath, // Path to the generated PDF
+          content: pdfBuffer, // In-memory buffer instead of file path
         },
       ],
     };
@@ -83,8 +82,6 @@ export async function sendEmail({
     const info = await transporter.sendMail(mailOptions);
     console.log(`Email successfully sent to ${directionShipping.email}. ID: ${info.messageId}`);
 
-    // Delete the PDF after sending the email (optional)
-    fs.unlinkSync(pdfPath);
   } catch (error) {
     console.error('Error sending the email:', (error as Error).message);
     throw error;

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
-import { CardsComponent } from '../../../components/cards/cards.component';
-import { articlesBlog } from '../../../../data/data';
-import { setMetaTags } from '../../../../data/seo';
+import { CardsComponent } from '@components/cards/cards.component';
+import { articlesBlog } from '@data/data';
+import { setMetaTags } from '@data/seo';
 import { Meta, Title } from '@angular/platform-browser';
 
 @Component({

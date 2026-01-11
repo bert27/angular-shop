@@ -1,7 +1,7 @@
 import { Injectable, Inject, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { DirectionShippingInterface } from '../data/interfaces-model';
+import { DirectionShippingInterface } from '@data/interfaces-model';
 
 @Injectable({
   providedIn: 'root',
