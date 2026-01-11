@@ -5,7 +5,9 @@ Este es un ecosistema de tienda online profesional desarrollado con **Angular 21
 [![Angular Version](https://img.shields.io/badge/Angular-21-DD0031?style=for-the-badge&logo=angular)](https://angular.io/)
 [![Vite](https://img.shields.io/badge/Vite-7-646CFF?style=for-the-badge&logo=vite)](https://vitejs.dev/)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.9-3178C6?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org/)
-[![Demo](https://img.shields.io/badge/Demo-Vercel-000000?style=for-the-badge&logo=vercel)](https://angular-shop-iota.vercel.app/)
+[![Ver Demo Online](https://img.shields.io/badge/Ver_Demo_Online-Visitar_Web-2ea44f?style=for-the-badge&logo=vercel)](https://angular-shop-iota.vercel.app/)
+
+> 🔗 **Acceder a la web:** [https://angular-shop-iota.vercel.app/](https://angular-shop-iota.vercel.app/)
 
 ---
 
