@@ -26,7 +26,7 @@
     "@angular/ssr": "^21.0.5",
     "@monei-js/components": "^1.7.4",
     "@monei-js/node-sdk": "^1.4.8",
-    "@ng-bootstrap/ng-bootstrap": "^18.0.0",
+    "@ng-bootstrap/ng-bootstrap": "^20.0.0",
     "@popperjs/core": "^2.11.8",
     "@react-email/render": "^1.0.4",
     "@stripe/stripe-js": "^4.9.0",
