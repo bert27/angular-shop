@@ -1,0 +1,101 @@
+.product-content {
+  width: 100%;
+  padding: 35px;
+  color: #404548;
+}
+.product-content .product-content-card {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: flex-start;
+}
+@media (max-width: 768px) {
+  .product-content .product-content-card {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}
+.product-content .product-image {
+  width: 30%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+.product-content .product-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  object-fit: cover;
+}
+.product-content .product-description {
+  width: 60%;
+}
+.product-content .product-description .product-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .product-content .product-description .product-row {
+    margin-top: 20px;
+    flex-direction: column;
+  }
+}
+.product-content .product-description .subtitle-text {
+  font-weight: bold;
+  margin-top: 8px;
+}
+.product-content .product-description .description-text {
+  margin-top: 8px;
+}
+.product-content .product-description .price {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #ff5722;
+  padding: 5px;
+  border: 1px solid #ff5722;
+  border-radius: 4px;
+  background-color: rgba(255, 87, 34, 0.1);
+}
+@media (max-width: 768px) {
+  .product-content .product-description .price {
+    margin-top: 20px;
+  }
+}
+.product-content .product-description .choose-details {
+  width: 40%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+@media (max-width: 768px) {
+  .product-content .product-description .choose-details {
+    width: 100%;
+    gap: 5px;
+    justify-content: space-around;
+  }
+}
+.product-content .product-description .button-father {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-top: 60px;
+}
+@media (max-width: 768px) {
+  .product-content .product-description .button-father {
+    flex-direction: column;
+    gap: 15px;
+    width: 50%;
+    margin: 0 auto;
+    margin-top: 30px;
+  }
+}
+@media (max-width: 768px) {
+  .product-content .product-description {
+    width: 100%;
+  }
+}
+
+/*# sourceMappingURL=page-content-product.component.css.map */

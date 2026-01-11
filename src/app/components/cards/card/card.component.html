@@ -1,5 +1,5 @@
-<div class="card custom-card" id="my-card" (click)="navigateToProduct(cardData, selectedOption)">
-  <component-image [cardData]="cardData" />
+<div class="card" id="my-card" data-testid="article-card" (click)="navigateToProduct(cardData, selectedOption)">
+  <component-image [cardData]="cardData" [objectFit]="isArticle(cardData) ? 'cover' : 'contain'" />
   <h1 class="title-card">{{ cardData.title }}</h1>
 
   @if (isArticle(cardData)) {
@@ -39,7 +39,7 @@
           (valueChange)="onQuantityChange($event)"
           (click)="$event.stopPropagation(); $event.preventDefault()"
         />
-        <custom-dropdown-material [(selectedOption)]="selectedOption" [options]="cardData.options"></custom-dropdown-material>
+        <custom-dropdown [(selectedOption)]="selectedOption" [options]="cardData.options"></custom-dropdown>
       </div>
 
       <div class="button-row">
@@ -47,7 +47,8 @@
           texto="Añadir a la cesta"
           tipo="primario"
           [disabled]="!cardData.stock || !selectedOption"
-          (click)="handleAddToCart(); $event.stopPropagation()"
+          (clicked)="handleAddToCart()"
+          testId="add-to-cart-btn"
         />
       </div>
     </div>

@@ -1,0 +1,200 @@
+
+.shipping-page {
+  padding-bottom: 2rem;
+  background-color: var(--colorBackground);
+  color: var(--colorText);
+}
+
+.shipping-hero {
+  background: var(--colorPrimary); /* Match header color exactly */
+  color: white;
+  padding: 0.8rem 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.shipping-hero .hero-title {
+  font-size: 2rem; /* Reduced font size */
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: white;
+  letter-spacing: -2px;
+}
+
+.shipping-hero .hero-subtitle {
+  font-size: 1rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.main-content {
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.shipping-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1rem; /* Tighter gap */
+  margin-bottom: 2rem;
+}
+
+.shipping-grid .shipping-card {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  padding: 1.5rem; /* Reduced padding */
+  border-radius: 16px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: var(--colorCard);
+}
+
+.shipping-grid .shipping-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.08);
+}
+
+.shipping-grid .shipping-card.highlight {
+  border: 2px solid var(--colorPrimary);
+  background: linear-gradient(to bottom, var(--colorCard) 0%, rgba(50, 62, 138, 0.05) 100%);
+}
+
+.shipping-grid .shipping-card .card-icon {
+  width: 48px; /* Smaller icon container */
+  height: 48px;
+  background: rgba(50, 62, 138, 0.1);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 1rem;
+  color: var(--colorPrimary);
+}
+
+.shipping-grid .shipping-card .card-icon mat-icon {
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+  flex-shrink: 0;
+}
+
+.shipping-grid .shipping-card h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.shipping-grid .shipping-card p {
+  font-size: 0.95rem;
+  line-height: 1.5;
+  opacity: 0.8;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 1.5rem;
+  letter-spacing: -1px;
+}
+
+.details-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.details-grid .detail-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  padding: 1rem; /* Compact detail item */
+  background-color: var(--colorCard);
+  border-radius: 12px;
+  border: 1px solid rgba(0, 0, 0, 0.05);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+.details-grid .detail-item mat-icon {
+  color: #10b981;
+  font-size: 20px;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.details-grid .detail-item p {
+  font-size: 0.9rem;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.tracking-cta {
+  background: linear-gradient(90deg, #1e293b 0%, #334155 100%);
+  color: white;
+  padding: 1.5rem; /* Compact CTA */
+  border-radius: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.tracking-cta .tracking-content {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  max-width: 600px;
+}
+
+.tracking-cta .tracking-content mat-icon {
+  font-size: 32px;
+  width: 32px;
+  height: 32px;
+  color: #38bdf8;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  overflow: visible;
+}
+
+.tracking-cta .tracking-content h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 0.2rem;
+  color: white;
+}
+
+.tracking-cta .tracking-content p {
+  opacity: 0.8;
+  font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+  .shipping-hero {
+    padding: 0.8rem 1rem;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+
+  .shipping-hero .hero-title {
+    font-size: 1.8rem;
+  }
+
+  .shipping-grid {
+    gap: 0.75rem;
+  }
+}

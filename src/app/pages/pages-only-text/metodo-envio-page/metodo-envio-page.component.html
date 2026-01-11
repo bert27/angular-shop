@@ -1,10 +1,44 @@
-<section class="container">
-  <h2 class="metodo-envio__titulo">Método de Envío</h2>
+<div class="shipping-page">
+  <div class="shipping-hero">
+    <div class="container">
+      <h1 class="hero-title">{{ data.hero.title }}</h1>
+      <p class="hero-subtitle">{{ data.hero.subtitle }}</p>
+    </div>
+  </div>
 
-  @for (paragraph of paragraphs; track paragraph) {
-    <p
-      class="metodo-envio__texto metodo-envio__texto--bold metodo-envio__texto--grande"
-      [innerHTML]="paragraph"
-    ></p>
-  }
-</section>
+  <div class="container main-content">
+    <div class="shipping-grid">
+      @for (card of data.mainCards; track card.title) {
+        <div class="shipping-card" [class.highlight]="card.highlight">
+          <div class="card-icon">
+            <mat-icon>{{ card.icon }}</mat-icon>
+          </div>
+          <h3>{{ card.title }}</h3>
+          <p [innerHTML]="card.description"></p>
+        </div>
+      }
+    </div>
+
+    <div class="details-section">
+      <h2 class="section-title">{{ data.details.title }}</h2>
+      <div class="details-grid">
+        @for (item of data.details.items; track item) {
+          <div class="detail-item">
+            <mat-icon>check_circle</mat-icon>
+            <p>{{ item }}</p>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="tracking-cta">
+      <div class="tracking-content">
+        <mat-icon>location_searching</mat-icon>
+        <div>
+          <h3>{{ data.tracking.title }}</h3>
+          <p>{{ data.tracking.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

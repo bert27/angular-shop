@@ -1,0 +1,46 @@
+:host {
+  display: block;
+}
+
+.blog-hero {
+  background: var(--colorPrimary); /* Match header color exactly */
+  color: white;
+  padding: 0.8rem 1rem;
+  text-align: center;
+  margin-bottom: 1rem;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.blog-hero h1 {
+  font-size: 2rem; /* Reduced font size */
+  font-weight: 800;
+  margin-bottom: 0.5rem;
+  color: white;
+  letter-spacing: -2px;
+}
+
+.blog-hero p {
+  font-size: 1rem;
+  opacity: 0.9;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .blog-hero {
+    padding: 0.8rem 1rem;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+  }
+
+  .blog-hero h1 {
+    font-size: 1.8rem;
+  }
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem 4rem;
+}

@@ -1,13 +1,13 @@
 @if (disabled) {
-  <button class="btn-primario disabled" [disabled]="true" [type]="type || 'button'">
+  <button class="btn btn--primary btn--disabled" [disabled]="true" [type]="type || 'button'" [attr.data-testid]="testId" (click)="onButtonClick($event)">
     {{ texto }}
   </button>
 } @else if (tipo === 'primario') {
-  <button class="btn-primario" [type]="type || 'button'">
+  <button class="btn btn--primary" [type]="type || 'button'" [attr.data-testid]="testId" (click)="onButtonClick($event)">
     {{ texto }}
   </button>
 } @else if (tipo === 'secundario') {
-  <button class="btn-secundario" [type]="type || 'button'">
+  <button class="btn btn--secondary" [type]="type || 'button'" [attr.data-testid]="testId" (click)="onButtonClick($event)">
     {{ texto }}
   </button>
 }

@@ -7,7 +7,7 @@ import { ProductCarritoInterface } from '@services/carrito.service';
   selector: 'item-shopping-cart',
   standalone: true,
   templateUrl: './item-shopping-cart.component.html',
-  styleUrls: ['./item-shopping-cart.component.scss'],
+  styleUrls: ['./item-shopping-cart.component.css'],
   imports: [CustomQuantitySelectorComponent],
 })
 export class ItemShoppingCartComponent {

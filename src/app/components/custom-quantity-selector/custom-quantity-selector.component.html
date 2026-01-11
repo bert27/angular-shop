@@ -1,15 +1,15 @@
 <div class="quantity-selector">
   @if (deleteButton && value === 1) {
-    <div class="remove-button-container">
-      <button class="remove-button" (click)="onDelete($event)">
+    <div class="quantity-selector__remove-container">
+      <button class="quantity-selector__remove-button" (click)="onDelete($event)">
         <custom-icon-svg src="icons/papelera.svg" [color]="'#ff8118'" [size]="15" />
       </button>
     </div>
   } @else {
-    <custom-button texto="-" tipo="primario" [disabled]="value <= 1" (click)="decrement($event)" />
+    <custom-button texto="-" tipo="primario" [disabled]="value <= 1" (clicked)="decrement()" />
   }
 
-  <custom-input-number [value]="value" (valueChange)="onInputChange($event)" type="number" />
+  <custom-input-number [value]="value" (valueChange)="onInputChange($event)" typeVisual="html" type="number" />
 
-  <custom-button texto="+" tipo="primario" (click)="increment($event)" />
+  <custom-button texto="+" tipo="primario" (clicked)="increment()" />
 </div>

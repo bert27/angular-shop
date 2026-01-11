@@ -13,6 +13,7 @@
     "isolatedModules": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
+    "types": [],
     "moduleResolution": "bundler",
     "importHelpers": true,
     "target": "ES2022",
@@ -22,12 +23,27 @@
     "jsxFragmentFactory": "React.Fragment",
     "baseUrl": "./",
     "paths": {
-      "@services/*": ["src/app/services/*"],
-      "@components/*": ["src/app/components/*"],
-      "@data/*": ["src/data/*"],
-      "@pages/*": ["src/app/pages/*"],
-      "@env/*": ["src/environments/*"],
-      "@utils": ["src/utils.ts"]
+      "@services/*": [
+        "src/app/services/*"
+      ],
+      "@components/*": [
+        "src/app/components/*"
+      ],
+      "@data/*": [
+        "src/data/*"
+      ],
+      "@pages/*": [
+        "src/app/pages/*"
+      ],
+      "@models/*": [
+        "src/app/models/*"
+      ],
+      "@env/*": [
+        "src/environments/*"
+      ],
+      "@utils": [
+        "src/utils.ts"
+      ]
     }
   },
   "angularCompilerOptions": {

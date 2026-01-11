@@ -8,6 +8,7 @@
         [matcher]="matcher"
         errorMessage="El nombre es obligatorio."
         [controlName]="'name'"
+        data-testid="input-name"
       ></custom-input>
 
       <!-- Campo Dirección -->
@@ -17,6 +18,7 @@
         [matcher]="matcher"
         errorMessage="La dirección es obligatoria."
         [controlName]="'address'"
+        data-testid="input-address"
       ></custom-input>
 
       <!-- Campo Teléfono -->
@@ -26,6 +28,7 @@
         [matcher]="matcher"
         errorMessage="El número de teléfono es obligatorio y debe ser válido."
         [controlName]="'phone'"
+        data-testid="input-phone"
       ></custom-input>
 
       <!-- Campo Ciudad -->
@@ -35,6 +38,7 @@
         [matcher]="matcher"
         errorMessage="La ciudad es obligatoria."
         [controlName]="'city'"
+        data-testid="input-city"
       ></custom-input>
     </div>
 
@@ -45,6 +49,7 @@
         [control]="getControl('surname')"
         [matcher]="matcher"
         errorMessage="Los apellidos son obligatorios."
+        data-testid="input-surname"
       ></custom-input>
 
       <!-- Campo País -->
@@ -54,6 +59,7 @@
         [matcher]="matcher"
         errorMessage="El país es obligatorio."
         [controlName]="'country'"
+        data-testid="input-country"
       ></custom-input>
 
       <!-- Campo Código Postal -->
@@ -63,6 +69,7 @@
         [matcher]="matcher"
         errorMessage="El código postal es obligatorio."
         [controlName]="'postalCode'"
+        data-testid="input-postalCode"
       ></custom-input>
 
       <!-- Campo Provincia -->
@@ -72,6 +79,7 @@
         [matcher]="matcher"
         errorMessage="La provincia es obligatoria."
         [controlName]="'province'"
+        data-testid="input-province"
       ></custom-input>
     </div>
   </div>
@@ -84,6 +92,7 @@
       [matcher]="matcher"
       errorMessage="El email debe ser válido."
       [controlName]="'email'"
+      data-testid="input-email"
     ></custom-input>
   </div>
 </div>

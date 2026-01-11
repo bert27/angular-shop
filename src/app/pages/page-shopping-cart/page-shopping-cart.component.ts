@@ -7,7 +7,7 @@ import { Router } from '@angular/router';
   selector: 'app-page-shopping-cart',
   standalone: true,
   templateUrl: './page-shopping-cart.component.html',
-  styleUrls: ['./page-shopping-cart.component.scss'],
+  styleUrls: ['./page-shopping-cart.component.css'],
   imports: [ShoppingCartListComponent],
 })
 export class PageShoppingCartComponent {

@@ -1,4 +1,4 @@
-<mat-form-field appearance="outline" class="form-field-class">
+<mat-form-field appearance="outline" class="input">
   <mat-label>{{ label }}</mat-label>
   <input
     matInput
@@ -8,10 +8,8 @@
     (input)="handleInputChange($event)"
     (blur)="handleBlur()"
     />
-    @if (control?.hasError('required')) {
-      <mat-error>
-        {{ errorMessage }}
-      </mat-error>
-    }
+    <mat-error>
+      {{ errorText }}
+    </mat-error>
   </mat-form-field>
 

@@ -1,6 +1,6 @@
 <div class="image-content-f">
   @if (cardData?.imageUrl) {
-    <div class="image-content" [ngClass]="size">
+    <div class="image-content" [ngClass]="[size, objectFit]">
       <img [src]="cardData.imageUrl" [alt]="cardData.title || 'Image'" />
     </div>
   }

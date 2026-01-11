@@ -1,6 +1,6 @@
-<footer>
-  <div class="footer-content">
-    <p>&copy; {{ year }} {{ titleShop }}. Todos los derechos reservados.</p>
+<footer id="app-footer" class="footer">
+  <div class="footer__content">
+    <p class="footer__text">&copy; {{ year }} {{ titleShop }}. Todos los derechos reservados.</p>
     <strong>
       {{ footerTextC }}
       <div>
@@ -10,7 +10,7 @@
         </a>
       </div>
     </strong>
-    <div class="social-media">
+    <div class="footer__social">
       @for (social of socialMedia; track social) {
         <a [href]="social.href">
           <custom-icon-svg [src]="social.src" [color]="social.color" [size]="40"/>
@@ -18,9 +18,9 @@
       }
     </div>
 
-    <nav class="footer-nav">
+    <nav class="footer__nav">
       @for (link of navLinks; track link) {
-        <a [routerLink]="link.path">
+        <a class="footer__nav-link" [routerLink]="link.path">
           {{ link.label }}
         </a>
       }

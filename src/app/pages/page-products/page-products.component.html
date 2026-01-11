@@ -1,7 +1,9 @@
 <div class="container">
   <div class="categorys-products">
     @for (category of categories; track category) {
-      <custom-button (click)="selectCategory(category)" [texto]="category" tipo="primario" />
+      <button class="category-item" (click)="selectCategory(category)" [class.active]="selectedCategory === category">
+        {{ category }}
+      </button>
     }
   </div>
   <div class="content">

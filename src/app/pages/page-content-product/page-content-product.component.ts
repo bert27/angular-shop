@@ -1,27 +1,26 @@
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ProductDataInterface } from '@data/interfaces-model';
 import { BotonComponent } from '@components/custom-button/custom-button.component';
 import { CarritoService } from '@services/carrito.service';
 import { CustomQuantitySelectorComponent } from '@components/custom-quantity-selector/custom-quantity-selector.component';
-import { productsData } from '@data/products-data';
-import { CustomDropdownMaterialComponent } from '@components/custom-dropdown-material/custom-dropdown-material.component';
+import { CustomDropdownComponent } from '@components/custom-dropdown/custom-dropdown.component';
 
 @Component({
   selector: 'app-page-content-product',
   standalone: true,
   templateUrl: './page-content-product.component.html',
-  styleUrls: ['./page-content-product.component.scss'],
-  imports: [BotonComponent, CustomQuantitySelectorComponent, CustomDropdownMaterialComponent],
+  styleUrls: ['./page-content-product.component.css'],
+  imports: [BotonComponent, CustomQuantitySelectorComponent, CustomDropdownComponent],
 })
-export class PageContentProductComponent {
+export class PageContentProductComponent implements OnInit {
+  @Input() product: ProductDataInterface | null = null; // Bound from Resolver
   productData: ProductDataInterface | null = null;
   typeProduct: string | null = null;
   quantity = 1;
   selectedOption: { tipo: string; price: number } | null = null;
 
   constructor(
-    private route: ActivatedRoute,
     public router: Router,
     private carritoService: CarritoService,
   ) {
@@ -35,35 +34,27 @@ export class PageContentProductComponent {
     if (typeof state?.quantity === 'number' && state.quantity > 0) {
       this.quantity = state.quantity;
     }
+  }
 
-    this.route.paramMap.subscribe((params) => {
-      const title = params.get('title')?.replace(/-/g, ' ');
-      const type = this.route.snapshot.data['type'];
+  ngOnInit(): void {
+    if (this.product) {
+      this.productData = this.product;
 
-      if (title && type === 'product') {
-        const foundProduct = productsData.find((product: ProductDataInterface) => product.title.toLowerCase() === title.toLowerCase());
-
-        if (foundProduct) {
-          this.productData = foundProduct;
-
-          if (this.typeProduct) {
-            const foundOption = foundProduct.options.find((option) => option.tipo === this.typeProduct);
-            this.selectedOption = foundOption || null;
-          }
-
-          if (!this.selectedOption && foundProduct.options.length > 0) {
-            this.selectedOption = foundProduct.options[0];
-          }
-        } else {
-          this.router.navigate(['/']);
-        }
+      if (this.typeProduct) {
+        const foundOption = this.productData.options.find((option) => option.tipo === this.typeProduct);
+        this.selectedOption = foundOption || null;
       }
-    });
+
+      if (!this.selectedOption && this.productData.options.length > 0) {
+        this.selectedOption = this.productData.options[0];
+      }
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   getPrice(): number | undefined {
     return this.selectedOption?.price;
-    // return (this.selectedOption?.price ?? 1) * this.quantity;
   }
 
   addShoppingBasket(): void {

@@ -1,6 +1,6 @@
 <app-head />
-<main class="main" [@fadeAnimation]="o.isActivated ? o.activatedRoute : ''">
+<div class="header-spacer"></div>
+<main id="app-body" class="main" [@fadeAnimation]="prepareRoute(o)">
   <router-outlet #o="outlet" />
-  <pre> {{ pokemon }}</pre>
 </main>
 <app-footer />

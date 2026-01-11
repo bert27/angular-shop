@@ -7,7 +7,7 @@ import { StepperComponent } from '@components/custom-stepper/custom-stepper';
   selector: 'app-payment-page',
   standalone: true,
   templateUrl: './payment-page.component.html',
-  styleUrls: ['./payment-page.component.sass'],
+  styleUrls: ['./payment-page.component.css'],
   imports: [FormsModule, StepperComponent],
 })
 export class PaymentPageComponent {

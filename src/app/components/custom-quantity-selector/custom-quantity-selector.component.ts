@@ -9,7 +9,7 @@ import { CustomInputNumberComponent } from '@components/custom-input-number/cust
   standalone: true,
   imports: [CustomInputNumberComponent, BotonComponent, IconSvgComponent],
   templateUrl: './custom-quantity-selector.component.html',
-  styleUrls: ['./custom-quantity-selector.component.scss'],
+  styleUrls: ['./custom-quantity-selector.component.css'],
 })
 export class CustomQuantitySelectorComponent {
   @Input() value = 1;
@@ -19,17 +19,20 @@ export class CustomQuantitySelectorComponent {
 
   @Output() productDelete = new EventEmitter<void>();
 
-  increment(event: Event): void {
-    event.preventDefault();
-    event.stopPropagation();
+  increment(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     this.value++;
     this.valueChange.emit(this.value);
   }
 
-  decrement(event: Event): void {
-    event.preventDefault();
-    event.stopPropagation();
-
+  decrement(event?: Event): void {
+    if (event) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
     if (this.value > 1) {
       this.value--;
       this.valueChange.emit(this.value);

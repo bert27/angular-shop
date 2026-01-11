@@ -48,7 +48,7 @@ export function populatePDFContent(
   productos: ProductCarritoInterface[],
 ): void {
   // Header: Title and Logo
-  const logoUrl = 'shop/public/logo.png';
+  const logoUrl = 'shop/public/logo-web.webp';
   const logoSize = 50;
 
   addText(doc, 'Factura', 50, 50, 20, true); // Title on the left

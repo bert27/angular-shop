@@ -1,5 +1,5 @@
 import { directory } from './data';
-import { ProductDataInterface } from './interfaces-model';
+import { IProductData } from '@models/product.interface';
 
 export const productsData = [
   {
@@ -91,4 +91,4 @@ export const productsData = [
       },
     ],
   },
-] as ProductDataInterface[];
+] as IProductData[];

@@ -17,8 +17,6 @@ import { ThemeService } from '@services/theme.service';
   animations: [fadeAnimation],
 })
 export class AppComponent implements AfterViewInit {
-  pokemon: any;
-
   constructor(
     private router: Router,
     @Inject(PLATFORM_ID) private platformId: object,
@@ -27,6 +25,10 @@ export class AppComponent implements AfterViewInit {
     private themeService: ThemeService,
   ) {
 
+  }
+
+  prepareRoute(outlet: RouterOutlet) {
+    return outlet && outlet.isActivated ? outlet.activatedRoute : '';
   }
 
   ngAfterViewInit(): void {

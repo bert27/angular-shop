@@ -9,7 +9,7 @@ import { DirectionShippingInterface } from '@data/interfaces-model';
 @Component({
   selector: 'app-redsys-credit-card',
   templateUrl: './redsys-credit-card.html',
-  styleUrls: ['./redsys-credit-card.scss'],
+  styleUrls: ['./redsys-credit-card.css'],
   standalone: true,
   imports: [BotonComponent],
 })

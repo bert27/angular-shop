@@ -1,0 +1,26 @@
+:host {
+  width: 60%;
+}
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+}
+.form-container .columns-wrapper {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+.form-container .columns-wrapper .column {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+@media (max-width: 768px) {
+  .form-container .columns-wrapper .column {
+    width: 45%;
+  }
+}
+
+/*# sourceMappingURL=step1-form.component.css.map */

@@ -3,7 +3,7 @@ import { Component, Input } from '@angular/core';
 @Component({
   selector: 'custom-icon-svg',
   templateUrl: './icon-svg.component.html',
-  styleUrls: ['./icon-svg.component.sass'],
+  styleUrls: ['./icon-svg.component.css'],
   standalone: true,
 })
 export class IconSvgComponent {

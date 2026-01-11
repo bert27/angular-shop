@@ -3,9 +3,9 @@
   <div id="card-errors" role="alert"></div>
 
   <div class="button-group" style="display: flex; justify-content: space-between">
-    <custom-button texto="Atrás" tipo="secundario" (click)="goToPreviousStep()" />
-    <custom-button texto="Tramitar Pago" tipo="primario" (click)="processPayment()" [disabled]="!cardElement" />
-    <custom-button texto="Siguiente" tipo="secundario" (click)="goToNextStep()" />
+    <custom-button texto="Atrás" tipo="secundario" (clicked)="goToPreviousStep()" />
+    <custom-button texto="Tramitar Pago" tipo="primario" (clicked)="processPayment()" [disabled]="!cardElement" testId="payment-btn" />
+    <custom-button texto="Siguiente" tipo="secundario" (clicked)="goToNextStep()" />
   </div>
 
   @if (errorMessage) {

@@ -9,6 +9,7 @@ import { Meta, Title } from '@angular/platform-browser';
   standalone: true,
   imports: [CardsComponent],
   templateUrl: './blog-page.component.html',
+  styleUrls: ['./blog-page.component.css'],
 })
 export class BlogPageComponent {
   articles = articlesBlog;

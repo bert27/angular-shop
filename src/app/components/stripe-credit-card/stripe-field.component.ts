@@ -11,7 +11,7 @@ import { dataWeb } from '@data/data';
 @Component({
   selector: 'app-stripe-field',
   templateUrl: './stripe-field.component.html',
-  styleUrls: ['./stripe-field.component.scss'],
+  styleUrls: ['./stripe-field.component.css'],
   standalone: true,
   imports: [BotonComponent],
 })

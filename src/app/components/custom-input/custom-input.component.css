@@ -1,0 +1,12 @@
+/* Input Block */
+.input {
+  width: 100%;
+  margin-bottom: 24px; /* Space for validation errors */
+}
+
+/* Material Overrides */
+.input ::ng-deep .mat-mdc-text-field-wrapper {
+  background: var(--colorCard);
+}
+
+/*# sourceMappingURL=custom-input.component.css.map */

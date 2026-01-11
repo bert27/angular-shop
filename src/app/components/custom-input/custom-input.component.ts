@@ -10,7 +10,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
   standalone: true,
   imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule],
   templateUrl: './custom-input.component.html',
-  styleUrls: ['./custom-input.component.scss'],
+  styleUrls: ['./custom-input.component.css'],
   providers: [
     {
       provide: NG_VALUE_ACCESSOR,
@@ -57,5 +57,26 @@ export class CustomInputComponent implements ControlValueAccessor {
 
   handleBlur(): void {
     this.onTouched();
+  }
+
+  get errorText(): string {
+    if (this.control?.hasError('required')) {
+      return this.errorMessage;
+    }
+    if (this.control?.hasError('email')) {
+      return 'El formato del correo electrónico no es válido.';
+    }
+    if (this.control?.hasError('pattern')) {
+      // Assuming pattern is primarily used for phone in this context or general formatting
+      if (this.controlName === 'phone') {
+         return 'El formato del teléfono no es válido (9-12 dígitos).';
+      }
+      return 'El formato ingresado no es válido.';
+    }
+    if (this.control?.hasError('minlength')) {
+      const min = this.control.errors?.['minlength'].requiredLength;
+      return `Mínimo ${min} caracteres.`;
+    }
+    return this.errorMessage;
   }
 }

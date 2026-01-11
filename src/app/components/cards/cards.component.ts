@@ -8,7 +8,7 @@ import { ProductDataInterface, ArticleInterface } from '@data/interfaces-model';
   standalone: true,
   imports: [CardComponent],
   templateUrl: './cards.component.html',
-  styleUrls: ['./cards.component.scss'],
+  styleUrls: ['./cards.component.css'],
 })
 export class CardsComponent {
   @Input() items: (ProductDataInterface | ArticleInterface)[] = [];

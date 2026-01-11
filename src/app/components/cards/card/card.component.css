@@ -1,0 +1,161 @@
+.card {
+  /* Layout */
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+
+  /* Compact Design */
+  padding: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  background-color: var(--colorBackground);
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease-in-out;
+  color: var(--colorText);
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  border-color: #d1d5db;
+}
+
+/* Image container hacks if needed (assuming component-image handles itself) */
+
+.title-card {
+  margin-top: 4px;
+  margin-bottom: 4px;
+  text-align: center;
+  font-weight: bold;
+  color: var(--colorText);
+  font-size: 0.95rem;
+  letter-spacing: 0;
+}
+
+.price-class {
+  font-weight: bold;
+  font-size: var(--textSize1);
+  color: var(--colorPrimary);
+}
+
+.price-stock-container {
+  font-size: var(--textSize1);
+  display: flex;
+  flex-wrap: nowrap; /* Force single line */
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px; /* Ensure space if they get close */
+  margin-bottom: 8px;
+}
+@media (max-width: 1120px) {
+  .price-stock-container {
+     /* keep space-between usually looks better than center for price/stock */
+    justify-content: space-between; 
+  }
+}
+@media (max-width: 768px) {
+  .price-stock-container {
+    justify-content: space-evenly;
+  }
+}
+
+.en-stock {
+  color: green;
+}
+
+.agotado {
+  color: red;
+}
+
+.description-class {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  text-overflow: ellipsis;
+  max-height: 4.5em;
+  text-align: center;
+}
+
+.subtitle-class {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  text-overflow: ellipsis;
+  max-height: 4.5em;
+  text-align: center;
+  font-weight: bold;
+  color: var(--colorText);
+  margin-bottom: 8px;
+}
+
+#fila {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 12px;
+}
+
+.options-f-class {
+  flex-direction: row;
+}
+@media (max-width: 768px) {
+  .options-f-class {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 768px) {
+  .second-button {
+    margin-top: 10px;
+  }
+}
+
+.quantity-options-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Center them */
+  gap: 4px;
+  margin-top: auto;
+  padding-top: 4px;
+  border-top: 1px solid #f3f4f6;
+  width: 100%;
+}
+
+.quantity-options-row custom-quantity-selector {
+  transform: none; /* Remove scale hack */
+  display: flex;
+  align-items: center;
+  background-color: var(--colorCard); /* Use variable instead of hardcoded #f9fafb */
+  border: 1px solid var(--colorSecondary); /* Use variable for border */
+}
+
+.quantity-options-row custom-dropdown {
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .quantity-options-row {
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .quantity-options-row custom-quantity-selector {
+    transform-origin: center;
+  }
+}
+
+.button-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 8px;
+}
+.button-row custom-button {
+  text-align: center;
+  width: auto;
+  color: var(--colorText);
+}
+
+/*# sourceMappingURL=card.component.css.map */

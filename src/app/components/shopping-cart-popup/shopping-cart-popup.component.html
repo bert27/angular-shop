@@ -1,41 +1,60 @@
 @if (carritoAbierto) {
+  <div class="carrito-overlay" (click)="closeCarritoView()"></div>
   <div class="carrito-lista" (mouseover)="resetAutoClose()" (mouseleave)="startAutoClose()">
     <div class="carrito-header">
-      <h1 class="carrito-title">Productos en el Carrito</h1>
-      <button (click)="closeCarritoView()" class="close-button" aria-label="Cerrar carrito">X</button>
+      <h2 class="carrito-title">Tu Cesta ({{ totalQuantity }})</h2>
+      <button mat-icon-button (click)="closeCarritoView()" class="close-button" aria-label="Cerrar carrito">
+        <mat-icon>close</mat-icon>
+      </button>
     </div>
-    @if (productos.length > 0) {
-      <div class="subtotal">
-        <div class="amount">
-          Subtotal ({{ totalQuantity }} productos):
-          <span class="color-price">{{ totalPriceValue }} €</span>
+
+    <div class="carrito-content">
+      @if (productos.length > 0) {
+        <ul class="product-list">
+          @for (producto of productos; track producto) {
+            <li class="product-item">
+              <div class="product-image-container">
+                <img [src]="producto.imageUrl" alt="{{ producto.title }}" class="product-img" />
+              </div>
+              
+              <div class="product-details">
+                <div class="product-info-top">
+                  <span class="product-name">{{ producto.title }}</span>
+                  <button class="remove-btn" (click)="removeProduct(producto)">
+                    <mat-icon>delete_outline</mat-icon>
+                  </button>
+                </div>
+                
+                <span class="product-variant">{{ producto.tipoSeleccionado.tipo }}</span>
+                
+                <div class="product-controls">
+                  <custom-input-number 
+                    [value]="producto.cantidad" 
+                    (valueChange)="updateCantidad(producto, $event)" 
+                    [typeVisual]="'no-material'" 
+                  />
+                  <span class="product-price">{{ producto.tipoSeleccionado.price }}€</span>
+                </div>
+              </div>
+            </li>
+          }
+        </ul>
+      } @else {
+        <div class="empty-state">
+          <custom-icon-svg src="icons/carrito-de-compras.svg" [color]="'#ccc'" [size]="60"></custom-icon-svg>
+          <p>Tu cesta está vacía</p>
+          <custom-button texto="Ver Productos" tipo="secundario" (clicked)="navigateTo('/productos')"></custom-button>
         </div>
-      </div>
-    }
-    <ul>
-      @for (producto of productos; track producto) {
-        <li>
-          <div class="producto-content">
-            <div class="producto-content-image">
-              <img [src]="producto.imageUrl" alt="{{ producto.title }}" class="producto-img" />
-            </div>
-            <div class="producto-detalles">
-              {{ producto.title }} ({{ producto.tipoSeleccionado.tipo }}) - {{ producto.tipoSeleccionado.price }}€
-              <custom-input-number [value]="producto.cantidad" (valueChange)="updateCantidad(producto, $event)" [typeVisual]="'no-material'" />
-            </div>
-          </div>
-          <button class="remove-button" (click)="removeProduct(producto)">
-            <custom-icon-svg src="icons/papelera.svg" [color]="'#ff8118'" [size]="12"></custom-icon-svg>
-          </button>
-        </li>
       }
-    </ul>
-    @if (productos.length === 0) {
-      <div class="mensaje-vacio">El carrito está vacío</div>
-    }
+    </div>
+
     @if (productos.length > 0) {
-      <div class="button-father">
-        <custom-button texto="Ir a la cesta" tipo="primario" (click)="navigateTo('/carrito')"></custom-button>
+      <div class="carrito-footer">
+        <div class="subtotal-row">
+          <span>Subtotal</span>
+          <span class="subtotal-price">{{ totalPriceValue }} €</span>
+        </div>
+        <custom-button texto="Tramitar Pedido" tipo="primario" (clicked)="navigateTo('/carrito')" class="checkout-btn" testId="cart-checkout-btn"></custom-button>
       </div>
     }
   </div>

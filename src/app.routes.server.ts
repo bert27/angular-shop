@@ -24,24 +24,15 @@ export const serverRoutes: Array<ServerRoute> = [
 
   {
     path: 'producto/:category/:title',
-    renderMode: RenderMode.Prerender,
-    async getPrerenderParams() {
-      return generateProductRoutes('withCategory');
-    },
+    renderMode: RenderMode.Server,
   },
   {
     path: 'producto/:title',
-    renderMode: RenderMode.Prerender,
-    async getPrerenderParams() {
-      return generateProductRoutes('withoutCategory');
-    },
+    renderMode: RenderMode.Server,
   },
   {
     path: 'articulo/:title',
-    renderMode: RenderMode.Prerender,
-    async getPrerenderParams() {
-      return generateArticleRoutes();
-    },
+    renderMode: RenderMode.Server,
   },
 
   // Aviso legal

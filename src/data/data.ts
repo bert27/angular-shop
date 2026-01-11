@@ -1,6 +1,6 @@
-import { ArticleInterface } from './interfaces-model';
+import { IArticle } from '@models/article.interface';
 
-export const directory = 'shop1';
+export const directory = '/shop1';
 
 type MethodPayInterface = 'monei' | 'stripe' | 'redsys';
 export const selectedMethodPay: MethodPayInterface = 'redsys';
@@ -23,13 +23,16 @@ export const dataWeb = {
         : 'http://localhost:3000/monei-payment',
   shippingCost: 4.24,
   logo: {
-    mobile: `${directory}/images-logo/logo-head-mobile.png`,
-    pc: `${directory}/images-logo/logo-head.png`,
+    mobile: `${directory}/images-logo/logo-web.webp`,
+    pc: `${directory}/images-logo/logo-web.webp`,
     icon: `${directory}/icon.ico`,
   },
 
   colorBackground: '#F5F8F4',
   colorText: 'black',
+  colorBackgroundDark: '#111827', // Very dark gray/black
+  colorTextDark: '#f9fafb', // Off-white
+  colorCardDark: '#1f2937', // Dark gray for cards
 };
 export const carouselConfig = [
   {
@@ -91,7 +94,7 @@ export const articleBlog5 = {
 };
 
 // articles
-export const articlesBlog = [articleBlog1, articleBlog2, articleBlog3, articleBlog4, articleBlog5] as ArticleInterface[];
+export const articlesBlog = [articleBlog1, articleBlog2, articleBlog3, articleBlog4, articleBlog5] as IArticle[];
 
 // Aviso legal
 export const legalNotice = [
@@ -259,17 +262,42 @@ export const refundPolicy = [
 ];
 export const footerText = `Todos los productos y servicios ofrecidos en esta plataforma están diseñados para mejorar la experiencia tecnológica de nuestros usuarios. Las especificaciones técnicas y funcionalidades están sujetas a cambios sin previo aviso. Por favor, consulte a un especialista antes de implementar soluciones tecnológicas avanzadas. Los nombres, logotipos y marcas utilizadas en este sitio son propiedad de sus respectivos dueños. Siempre garantizamos el cumplimiento de los estándares más altos de calidad en el sector tecnológico.`;
 
-export const shippingMethodText: string[] = [
-  `Realizamos envíos urgentes en 24-48 horas laborables con las principales empresas de mensajería.`,
-  `Si tu pedido supera los 70 euros, los gastos de envío son completamente gratuitos.`,
-  `Tus iPhones viajan asegurados y empaquetados con sumo cuidado para garantizar que lleguen en perfecto estado.`,
-  `Nuestros gastos de envío incluyen manipulación, embalaje reforzado y seguimiento online de tu paquete.`,
-  `Te recomendamos agrupar todos tus productos en un mismo pedido para optimizar los costes de envío.`,
-  `En caso de cualquier incidencia con la entrega, contacta con nosotros de inmediato y lo resolveremos cuanto antes.`,
-  `Enviamos de forma rápida y fiable, para que disfrutes de tu nuevo iPhone sin demoras innecesarias.`,
-  `Ofrecemos un seguro de transporte adicional para mayor tranquilidad ante posibles daños o extravíos.`,
-  `Indícanos un correo electrónico de contacto para recibir todas las notificaciones de seguimiento y entrega.`,
-  `<strong>¿DÓNDE ESTÁ MI PEDIDO?</strong> Puedes verificar en cualquier momento el estado de tu envío a través del enlace de seguimiento que recibirás por email.`,
-  `Pagando hoy, tu iPhone sale de nuestro almacén cuanto antes, listo para llegar en pocos días a tu dirección.`,
-  `Compra con total confianza: nuestros envíos son ágiles, seguros y respaldados por un servicio de atención al cliente de primer nivel.`,
-];
+export const shippingPageData = {
+  hero: {
+    title: 'Método de Envío',
+    subtitle: 'Tu tecnología favorita, entregada con la máxima rapidez y seguridad.',
+  },
+  mainCards: [
+    {
+      icon: 'local_shipping',
+      title: 'Envíos Urgentes',
+      description: 'Recibe tu pedido en <strong>24-48 horas</strong> laborables con las principales empresas de mensajería.',
+    },
+    {
+      icon: 'card_giftcard',
+      title: 'Envío Gratuito',
+      description: 'Si tu pedido supera los <strong>70 euros</strong>, los gastos de envío son completamente gratuitos.',
+      highlight: true,
+    },
+    {
+      icon: 'security',
+      title: '100% Asegurado',
+      description: 'Tus productos viajan asegurados y empaquetados con sumo cuidado para garantizar su estado perfecto.',
+    },
+  ],
+  details: {
+    title: 'Nuestra Garantía de Envío',
+    items: [
+      'Nuestros gastos incluyen manipulación, embalaje reforzado y seguimiento online.',
+      'Te recomendamos agrupar tus productos para optimizar los costes de envío.',
+      'Resolución inmediata ante cualquier incidencia con la entrega.',
+      'Envío rápido y fiable para que disfrutes de tu compra sin demoras.',
+      'Seguro de transporte adicional incluido para mayor tranquilidad.',
+      'Notificaciones automáticas de seguimiento por correo electrónico.',
+    ],
+  },
+  tracking: {
+    title: '¿Dónde está mi pedido?',
+    description: 'Verifica el estado de tu envío con el enlace de seguimiento que recibirás por email.',
+  },
+};

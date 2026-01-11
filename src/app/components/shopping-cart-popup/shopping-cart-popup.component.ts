@@ -4,21 +4,23 @@ import { Subscription } from 'rxjs';
 import { Router } from '@angular/router';
 import { IconSvgComponent } from '@components/icon-svg/icon-svg.component';
 import { BotonComponent } from '@components/custom-button/custom-button.component';
+import { MatIconModule } from '@angular/material/icon';
 
 import { CustomInputNumberComponent } from '@components/custom-input-number/custom-input-number.component';
 
 @Component({
   selector: 'app-shopping-cart-popup',
   standalone: true,
-  imports: [IconSvgComponent, BotonComponent, CustomInputNumberComponent],
+  imports: [IconSvgComponent, BotonComponent, CustomInputNumberComponent, MatIconModule],
   templateUrl: './shopping-cart-popup.component.html',
-  styleUrls: ['./shopping-cart-popup.component.sass'],
+  styleUrls: ['./shopping-cart-popup.component.css'],
 })
 export class ShoppingCartPopupComponent implements OnInit, OnDestroy {
   carritoAbierto = false;
   productos: ProductCarritoInterface[] = [];
   private autoCloseTimeout: any;
   private cantidadSubscription!: Subscription;
+  private openSubscription!: Subscription;
 
   constructor(
     public router: Router,
@@ -28,6 +30,11 @@ export class ShoppingCartPopupComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.updateProducts();
     this.cantidadSubscription = this.carritoService.getProductCount().subscribe(() => this.updateProducts());
+    this.openSubscription = this.carritoService.getCartOpen().subscribe((open) => {
+      if (open) {
+        this.openCarrito();
+      }
+    });
   }
 
   private updateProducts() {
@@ -51,6 +58,7 @@ export class ShoppingCartPopupComponent implements OnInit, OnDestroy {
   }
   closeCarritoView() {
     this.carritoAbierto = false;
+    this.carritoService.closeCartView();
     this.resetAutoClose();
   }
 
@@ -88,6 +96,7 @@ export class ShoppingCartPopupComponent implements OnInit, OnDestroy {
 
   ngOnDestroy() {
     this.cantidadSubscription.unsubscribe();
+    this.openSubscription.unsubscribe();
     this.resetAutoClose();
   }
 }

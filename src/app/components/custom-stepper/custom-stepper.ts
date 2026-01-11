@@ -26,7 +26,7 @@ import { RedsysCreditCardComponent } from '@components/redsys-credit-card/redsys
   // eslint-disable-next-line @angular-eslint/component-selector
   selector: 'custom-stepper',
   templateUrl: './custom-stepper.html',
-  styleUrls: ['./custom-stepper.scss'],
+  styleUrls: ['./custom-stepper.css'],
   standalone: true,
   providers: [
     {
@@ -143,7 +143,7 @@ export class StepperComponent implements AfterViewInit, OnInit {
         return;
       }
 
-      const response = await fetch('http://localhost:4000/download-pdf', {
+      const response = await fetch('http://localhost:3000/download-pdf', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

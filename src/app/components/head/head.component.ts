@@ -10,11 +10,13 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatButtonModule } from '@angular/material/button';
 
+import { ThemeService } from '@services/theme.service';
+
 @Component({
   selector: 'app-head',
   standalone: true,
   templateUrl: './head.component.html',
-  styleUrls: ['./head.component.scss', 'burger-menu.scss'],
+  styleUrls: ['./head.component.css', 'burger-menu.css'],
   imports: [IconSvgComponent, RouterModule, ShoppingCartPopupComponent, MatIconModule, MatMenuModule, MatButtonModule],
 })
 export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
@@ -34,6 +36,7 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
     public router: Router,
     @Inject(PLATFORM_ID) private platformId: Object,
     private renderer: Renderer2,
+    public themeService: ThemeService, // Injected public to use in template
   ) {}
 
   get isBrowser(): boolean {
@@ -73,13 +76,12 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
       clearTimeout(this.resizeTimer);
       this.resizeTimer = setTimeout(() => {
         this.updateLogo();
-        this.adjustMainMargin();
       }, 200);
     }
   }
 
   ngAfterViewInit() {
-    this.adjustMainMargin();
+    // No longer needed - using CSS spacer instead
   }
 
   private updateLogo() {
@@ -87,18 +89,6 @@ export class HeadComponent implements OnInit, OnDestroy, AfterViewInit {
       const width = this.getWindow()?.innerWidth!;
       this.isMobile = width <= 768;
       this.logoSrc = this.isMobile ? dataWeb.logo.mobile : dataWeb.logo.pc;
-    }
-  }
-
-  private adjustMainMargin() {
-    if (this.isBrowser) {
-      const header = this.renderer.selectRootElement('header', true);
-      const main = this.renderer.selectRootElement('main', true);
-
-      if (header && main) {
-        const headerHeight = header.offsetHeight;
-        this.renderer.setStyle(main, 'marginTop', `${headerHeight}px`);
-      }
     }
   }
 

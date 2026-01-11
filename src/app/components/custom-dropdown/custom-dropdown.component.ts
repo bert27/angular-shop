@@ -1,36 +1,28 @@
-import { Component, HostListener } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { MatSelectModule } from '@angular/material/select';
+import { MatFormFieldModule } from '@angular/material/form-field';
+
+import { FormsModule } from '@angular/forms';
+
+export interface Option {
+  tipo: string;
+  price: number;
+}
 
 @Component({
   selector: 'custom-dropdown',
   standalone: true,
   templateUrl: './custom-dropdown.component.html',
-  styleUrls: ['./custom-dropdown.component.sass'],
-  imports: [CommonModule],
+  styleUrls: ['./custom-dropdown.component.css'],
+  imports: [MatFormFieldModule, MatSelectModule, FormsModule],
 })
-export class DropdownComponent {
-  isOpen = false;
-  selectedOption: string | null = null;
+export class CustomDropdownComponent {
+  @Input() options: Option[] = [];
+  @Input() selectedOption: Option | null = this.options[0];
+  @Output() selectedOptionChange = new EventEmitter<Option | null>();
 
-  options = ['Opción 1', 'Opción 2', 'Opción 3'];
-
-  toggleDropdown() {
-    this.isOpen = !this.isOpen;
-  }
-
-  selectOption(option: string, event: MouseEvent) {
-    event.stopPropagation();
+  selectOption(option: Option) {
     this.selectedOption = option;
-    this.isOpen = false;
-  }
-
-  @HostListener('document:click', ['$event'])
-  onDocumentClick(event: MouseEvent) {
-    const target = event.target as HTMLElement;
-    const dropdown = document.querySelector('.dropdown') as HTMLElement;
-
-    if (dropdown && !dropdown.contains(target)) {
-      this.isOpen = false;
-    }
+    this.selectedOptionChange.emit(this.selectedOption);
   }
 }

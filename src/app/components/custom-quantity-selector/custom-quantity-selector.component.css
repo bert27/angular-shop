@@ -1,0 +1,78 @@
+/* Quantity Selector Block */
+.quantity-selector {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Space between elements */
+}
+
+/* Override custom-button to be circular */
+.quantity-selector ::ng-deep custom-button {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-selector ::ng-deep custom-button .btn {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  font-size: 18px;
+  line-height: 1;
+  background-color: var(--colorSecondary); /* Default neutral background */
+  color: white; /* Ensure visible check/plus/minus */
+  box-shadow: none;
+}
+
+.quantity-selector ::ng-deep custom-button .btn--primary {
+  background-color: var(--colorPrimary);
+  color: white;
+}
+
+.quantity-selector ::ng-deep custom-button .btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.quantity-selector ::ng-deep custom-button .btn:disabled {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Input alignment */
+.quantity-selector custom-input-number {
+  width: 60px;
+}
+
+/* Remove button container (if present in other variants) */
+.quantity-selector__remove-container {
+  display: flex;
+  align-items: center;
+}
+
+.quantity-selector__remove-button {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background-color: transparent;
+  border: 1px solid #ff8118;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+
+.quantity-selector__remove-button:hover {
+  background-color: #ff8118;
+}
+
+.quantity-selector__remove-button:hover ::ng-deep svg path {
+  fill: white; /* Assuming SVG color can be toggled or filtered */
+}

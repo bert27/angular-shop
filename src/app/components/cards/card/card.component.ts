@@ -1,23 +1,36 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 import { BotonComponent } from '@components/custom-button/custom-button.component';
 import { CarritoService } from '@services/carrito.service';
 import { ProductDataInterface, ArticleInterface } from '@data/interfaces-model';
-import { CustomDropdownMaterialComponent } from '@components/custom-dropdown-material/custom-dropdown-material.component';
+import { CustomDropdownComponent } from '@components/custom-dropdown/custom-dropdown.component';
 import { Router } from '@angular/router';
 import { CustomQuantitySelectorComponent } from '@components/custom-quantity-selector/custom-quantity-selector.component';
 import { ImageComponent } from '@components/image/image';
+import { slugify } from '@utils';
 
 @Component({
   selector: 'custom-card',
   standalone: true,
-  imports: [BotonComponent, CustomDropdownMaterialComponent, CustomQuantitySelectorComponent, ImageComponent],
+  imports: [BotonComponent, CustomDropdownComponent, CustomQuantitySelectorComponent, ImageComponent],
   templateUrl: './card.component.html',
-  styleUrls: ['./card.component.scss'],
+  styleUrls: ['./card.component.css'],
 })
-export class CardComponent implements OnInit {
-  onQuantityChange(newQuantity: number): void {}
-  @Input() cardData!: ProductDataInterface | ArticleInterface;
+export class CardComponent {
+  private _cardData!: ProductDataInterface | ArticleInterface;
+
+  @Input()
+  set cardData(value: ProductDataInterface | ArticleInterface) {
+    this._cardData = value;
+    if (!this.isArticle(value) && value.options && value.options.length > 0) {
+      this.selectedOption = value.options[0];
+    }
+  }
+
+  get cardData(): ProductDataInterface | ArticleInterface {
+    return this._cardData;
+  }
+
   selectedOption!: { tipo: string; price: number };
   quantity = 1;
 
@@ -26,10 +39,8 @@ export class CardComponent implements OnInit {
     private router: Router,
   ) {}
 
-  ngOnInit() {
-    if (!this.isArticle(this.cardData) && this.cardData.options.length > 0) {
-      this.selectedOption = this.cardData.options[0];
-    }
+  onQuantityChange(newQuantity: number): void {
+    this.quantity = newQuantity;
   }
 
   addShoppingBasket(productSelect: ProductDataInterface, optionSelect: { tipo: string; price: number }, quantity: number) {
@@ -42,13 +53,14 @@ export class CardComponent implements OnInit {
 
   handleAddToCart() {
     if (!this.isArticle(this.cardData)) {
+      if (!this.selectedOption || this.quantity < 1) return;
       this.addShoppingBasket(this.cardData, this.selectedOption, this.quantity);
       this.carritoService.openCartView();
     }
   }
 
   navigateToProduct(cardData: ProductDataInterface | ArticleInterface, selectedOption: { tipo: string; price: number } | undefined) {
-    const productName = cardData.title.toLowerCase().replace(/\s+/g, '-');
+    const productName = slugify(cardData.title);
     if (this.isArticle(cardData)) {
       const route = `/articulo/${productName}`;
       this.router.navigate([route]);
@@ -56,7 +68,7 @@ export class CardComponent implements OnInit {
       let route = '';
 
       if (cardData.category) {
-        const categoryLower = cardData.category.toLowerCase().replace(/\s+/g, '-');
+        const categoryLower = slugify(cardData.category);
         route = `/producto/${categoryLower}/${productName}`;
       } else {
         route = `/producto/${productName}`;
@@ -74,7 +86,7 @@ export class CardComponent implements OnInit {
   }
 
   get selectedPrice(): number {
-    if (!this.isArticle(this.cardData)) {
+    if (!this.isArticle(this.cardData) && this.selectedOption) {
       return this.selectedOption.price;
     }
     return 0;

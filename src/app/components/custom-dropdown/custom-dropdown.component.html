@@ -1,22 +1,10 @@
-<div class="dropdown" (click)="toggleDropdown()">
-  <button class="dropdown-toggle">
-    {{ selectedOption || 'Selecciona una opción' }}
-    <span class="arrow">
-      @if (isOpen) {
-        <span>&#9650;</span>
-      }
-      @if (!isOpen) {
-        <span>&#9660;</span>
-      }
-    </span>
-  </button>
-  @if (isOpen) {
-    <ul class="dropdown-menu">
-      @for (option of options; track option) {
-        <li (click)="selectOption(option, $event)" [ngClass]="{ selected: selectedOption === option }">
-          {{ option }}
-        </li>
-      }
-    </ul>
-  }
-</div>
+<mat-form-field appearance="outline" class="dropdown">
+
+  <mat-select class="dropdown__select" [(ngModel)]="selectedOption" (selectionChange)="selectOption($event.value)">
+    @for (option of options; track option) {
+      <mat-option class="dropdown__option" [value]="option">
+        {{ option.tipo }}
+      </mat-option>
+    }
+  </mat-select>
+</mat-form-field>

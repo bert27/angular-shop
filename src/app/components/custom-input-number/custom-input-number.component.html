@@ -1,6 +1,5 @@
 @if (typeVisual === 'material') {
   <mat-form-field appearance="outline" class="custom-input-father">
-    <mat-label class="custom-label">{{ label }}</mat-label>
     <input matInput type="number" [min]="1" [value]="value" [placeholder]="placeholder" (input)="onInputChange($event)" />
   </mat-form-field>
 } @else {

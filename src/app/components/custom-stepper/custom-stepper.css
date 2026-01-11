@@ -1,0 +1,181 @@
+:host {
+  width: 100%;
+  display: block;
+}
+
+/* Container to center and contain the stepper content */
+:host ::ng-deep .mat-horizontal-stepper-wrapper {
+  background: transparent;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+:host ::ng-deep mat-stepper,
+:host ::ng-deep .mat-stepper-horizontal,
+:host ::ng-deep .mat-horizontal-content-container,
+:host ::ng-deep .mat-horizontal-stepper-header-container {
+  background-color: transparent !important;
+  background: transparent !important;
+}
+
+:host ::ng-deep .mat-horizontal-content-container {
+  padding: 24px;
+}
+
+/* Stepper Header Styling */
+:host ::ng-deep .mat-step-header {
+  border-radius: 8px;
+  transition: background-color 0.2s;
+}
+
+:host ::ng-deep .mat-step-header:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+:host ::ng-deep .mat-step-icon {
+  background-color: color-mix(in srgb, var(--colorText), transparent 85%);
+  color: var(--colorText);
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border: 1px solid color-mix(in srgb, var(--colorText), transparent 90%); /* Subtle border to define edge */
+}
+
+:host ::ng-deep .mat-step-icon-selected,
+:host ::ng-deep .mat-step-icon-state-edit {
+  background-color: var(--colorPrimary);
+  color: white;
+  box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2); /* Soft glow matching indigo */
+}
+
+:host ::ng-deep .mat-step-icon-state-done {
+  background-color: #10b981 !important; /* Green for success */
+}
+
+:host ::ng-deep .mat-step-label {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--colorText);
+}
+
+/* Step Content Layout - General */
+.step1-checkout,
+.step-content {
+  display: flex;
+  gap: 24px;
+  align-items: flex-start;
+}
+
+.form-container,
+.cart-container,
+.column {
+  flex: 1;
+  background: var(--colorCard);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+}
+
+/* Headings */
+h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--colorText);
+  margin-top: 0;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(0,0,0,0.05);
+  padding-bottom: 12px;
+}
+
+/* Summary / Totals */
+.color-price {
+  font-size: 1.5rem;
+  color: var(--colorPrimary) !important;
+  font-weight: 800;
+  margin-top: 12px;
+  text-align: right;
+}
+
+/* Success Card specialized formatting */
+.stepper__success-card {
+  text-align: center;
+  max-width: 600px;
+  margin: 40px auto;
+  padding: 40px;
+  background: var(--colorCard);
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.05);
+  color: var(--colorText);
+}
+
+.stepper__success-card .button-father {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  width: 100%;
+  margin: 20px auto 0;
+}
+
+.stepper__success-card strong {
+  font-size: 1.1rem;
+}
+
+/* Responsive adjustments */
+@media (max-width: 900px) {
+  .step1-checkout,
+  .step-content {
+    flex-direction: column;
+  }
+  
+  .form-container,
+  .cart-container,
+  .column {
+    width: 100%;
+    margin-bottom: 20px;
+    box-sizing: border-box;
+  }
+}
+
+/* =========================================
+   DARK MODE INPUT FIX & MATERIAL OVERRIDES 
+   ========================================= */
+
+/* Force input text color for value */
+:host ::ng-deep .mat-mdc-form-field-input-control.mat-mdc-form-field-input-control {
+  color: var(--colorText) !important;
+}
+
+/* Force placeholder color */
+:host ::ng-deep .mat-mdc-input-element::placeholder {
+  color: var(--colorText) !important;
+  opacity: 0.6;
+}
+
+/* Force Label color in both floating and resting states */
+:host ::ng-deep .mat-mdc-form-field-label,
+:host ::ng-deep .mat-mdc-floating-label {
+  color: var(--colorText) !important;
+  opacity: 0.7;
+}
+
+/* Specific fix for resting label (text inside the box before focus) */
+:host ::ng-deep .mat-mdc-form-field:not(.mat-focused):not(.mat-form-field-should-float) .mat-mdc-floating-label {
+  color: var(--colorText) !important;
+  opacity: 0.6;
+}
+
+:host ::ng-deep .mat-mdc-select-value {
+  color: var(--colorText) !important;
+}
+
+:host ::ng-deep .mat-mdc-select-arrow {
+  color: var(--colorText) !important;
+  opacity: 0.6;
+}
+
+:host ::ng-deep .mat-icon {
+  color: var(--colorText);
+}
+

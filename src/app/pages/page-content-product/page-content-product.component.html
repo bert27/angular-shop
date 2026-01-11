@@ -19,7 +19,7 @@
       </div>
 
       <div class="choose-details">
-        <custom-dropdown-material [(selectedOption)]="selectedOption" [options]="productData?.options || []" />
+        <custom-dropdown [(selectedOption)]="selectedOption" [options]="productData?.options || []" />
         <custom-quantity-selector
           [(value)]="quantity"
           (valueChange)="onQuantityChange($event)"
@@ -28,8 +28,8 @@
       </div>
 
       <div class="button-father">
-        <custom-button texto="Añadir a la cesta" tipo="secundario" (click)="addShoppingBasket()"></custom-button>
-        <custom-button texto="Comprar ya" tipo="primario" (click)="buyNow()"></custom-button>
+        <custom-button texto="Añadir a la cesta" tipo="secundario" (clicked)="addShoppingBasket()" testId="add-to-cart-detail-btn"></custom-button>
+        <custom-button texto="Comprar ya" tipo="primario" (clicked)="buyNow()"></custom-button>
       </div>
     </div>
   </div>

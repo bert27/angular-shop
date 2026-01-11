@@ -8,13 +8,13 @@ import { MatInputModule } from '@angular/material/input';
   standalone: true,
   imports: [MatFormFieldModule, MatInputModule],
   templateUrl: './custom-input-number.component.html',
-  styleUrls: ['./custom-input-number.component.scss'],
+  styleUrls: ['./custom-input-number.component.css'],
 })
 export class CustomInputNumberComponent {
   @Input() label = 'Cantidad';
   @Input() placeholder = '';
   @Input() value = 1;
-  @Input() typeVisual: 'material' | 'no-material' = 'material';
+  @Input() typeVisual: 'material' | 'no-material' | 'html' = 'material';
 
   @Output() valueChange = new EventEmitter<number>();
 

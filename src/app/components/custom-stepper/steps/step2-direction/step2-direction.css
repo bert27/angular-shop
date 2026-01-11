@@ -1,0 +1,31 @@
+:host {
+  width: 100%;
+  display: block;
+}
+
+.bold {
+  font-weight: 900;
+}
+
+.step2-direction-container {
+  width: 100%;
+}
+.step2-direction-container .columns-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+.step2-direction-container .columns-wrapper .column {
+  width: 48%;
+  display: flex;
+  flex-direction: column;
+}
+.step2-direction-container .columns-wrapper .column p {
+  margin: 0 0 10px;
+}
+.step2-direction-container .email {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/*# sourceMappingURL=step2-direction.css.map */

@@ -1,10 +1,10 @@
 <div class="article-content">
   <div class="article-header">
-    <h1 class="article-title">{{ articleData?.title }}</h1>
+    <h1 class="article-title" data-testid="article-title">{{ articleData?.title }}</h1>
   </div>
 
   <div class="article-image">
-    <img [src]="articleData?.imageUrl" alt="{{ articleData?.title }}" />
+    <img [src]="articleData?.imageUrl" alt="{{ articleData?.title }}" data-testid="article-image" />
   </div>
 
   <div class="article-body">
@@ -13,6 +13,6 @@
   </div>
 
   <div class="article-actions">
-    <custom-button texto="Volver a la lista" tipo="secundario" (click)="router.navigate(['/blog'])"></custom-button>
+    <custom-button texto="Volver a la lista" tipo="secundario" (clicked)="goBack()"></custom-button>
   </div>
 </div>

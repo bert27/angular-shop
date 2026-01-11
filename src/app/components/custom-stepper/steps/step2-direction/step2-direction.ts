@@ -5,7 +5,7 @@ import { DirectionShippingInterface } from '@data/interfaces-model';
 @Component({
   selector: 'app-step2-direction',
   templateUrl: './step2-direction.html',
-  styleUrls: ['./step2-direction.scss'],
+  styleUrls: ['./step2-direction.css'],
   standalone: true,
   imports: [],
 })

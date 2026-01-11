@@ -21,7 +21,7 @@
         <div class="color-price">{{ totalPriceValue }} €</div>
       </div>
       <div class="checkout-button">
-        <custom-button texto="Tramitar Pedido" type="submit" tipo="primario" (click)="sendOrder()" />
+        <custom-button texto="Tramitar Pedido" type="submit" tipo="primario" (clicked)="sendOrder()" testId="checkout-submit-btn" />
       </div>
     </div>
   </div>

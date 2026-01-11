@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { CardsComponent } from '@components/cards/cards.component';
 
-import { BotonComponent } from '@components/custom-button/custom-button.component';
+
 import { productsData } from '@data/products-data';
 import { Meta, Title } from '@angular/platform-browser';
 import { setMetaTags } from '@data/seo';
@@ -9,9 +9,9 @@ import { setMetaTags } from '@data/seo';
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [CardsComponent, BotonComponent],
+  imports: [CardsComponent],
   templateUrl: './page-products.component.html',
-  styleUrls: ['./page-products.component.scss'],
+  styleUrls: ['./page-products.component.css'],
 })
 export class ProductosComponent {
   products = productsData;

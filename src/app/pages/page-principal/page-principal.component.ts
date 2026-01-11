@@ -10,7 +10,7 @@ import { setMetaTags } from '@data/seo';
   standalone: true,
   imports: [BestProductsComponent, CarouselComponent],
   templateUrl: './page-principal.component.html',
-  styleUrls: ['./page-principal.component.scss'],
+  styleUrls: ['./page-principal.component.css'],
 })
 export class PagePrincipalComponent implements OnInit {
   constructor(

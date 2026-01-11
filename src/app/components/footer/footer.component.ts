@@ -9,7 +9,7 @@ import { dataWeb, footerText } from '@data/data';
   standalone: true,
   imports: [IconSvgComponent, RouterModule],
   templateUrl: './footer.component.html',
-  styleUrls: ['./footer.component.scss'],
+  styleUrls: ['./footer.component.css'],
 })
 export class FooterComponent {
   email = dataWeb.email;

@@ -16,7 +16,7 @@ export class SubmittedErrorStateMatcher implements ErrorStateMatcher {
 @Component({
   selector: 'app-step1-form',
   templateUrl: './step1-form.component.html',
-  styleUrls: ['./step1-form.component.scss'],
+  styleUrls: ['./step1-form.component.css'],
   standalone: true,
   imports: [CustomInputComponent, MatButtonModule],
 })

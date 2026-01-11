@@ -10,7 +10,7 @@
       (click)="goToPreviousStep()"
       />
       -->
-      <custom-button texto="{{ isLoading ? 'Procesando...' : 'Pagar' }}" tipo="primario" [disabled]="isLoading" type="submit" />
+      <custom-button texto="{{ isLoading ? 'Procesando...' : 'Pagar' }}" tipo="primario" [disabled]="isLoading" type="submit" testId="payment-btn" />
       <!--
       <custom-button
         texto="Siguiente"

@@ -1,0 +1,14 @@
+:host {
+  width: 100%;
+}
+:host .content-page {
+  width: 90%;
+  margin: 0 auto;
+}
+@media (max-width: 768px) {
+  :host .content-page {
+    width: 90%;
+  }
+}
+
+/*# sourceMappingURL=page-principal.component.css.map */

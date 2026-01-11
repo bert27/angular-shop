@@ -1,28 +1,8 @@
-export interface ProductDataInterface {
-  options: { tipo: string; price: number }[];
-  title: string;
-  subtitle: string;
-  body?: string;
-  description?: string;
-  stock?: boolean;
-  imageUrl: string;
-  category: string;
-}
-export interface DirectionShippingInterface {
-  name: string;
-  surname: string;
-  address: string;
-  postalCode: string;
-  country: string;
-  province: string;
-  city: string;
-  phone: string;
-  email: string;
-}
+// This file is kept for backward compatibility
+// All interfaces have been moved to src/app/models/
+export * from '../app/models';
 
-export interface ArticleInterface {
-  title: string;
-  imageUrl: string;
-  bodyTitle: string;
-  textContent: string;
-}
+// Type aliases for backward compatibility
+export type { IProductData as ProductDataInterface } from '../app/models/product.interface';
+export type { IDirectionShipping as DirectionShippingInterface } from '../app/models/direction-shipping.interface';
+export type { IArticle as ArticleInterface } from '../app/models/article.interface';

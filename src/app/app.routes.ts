@@ -1,4 +1,4 @@
-import { Routes } from '@angular/router';
+import { Routes, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 
 export const routes: Routes = [
   {
@@ -21,17 +21,23 @@ export const routes: Routes = [
 
   {
     path: 'producto/:category/:title',
-    loadComponent: () => import('./pages/page-content-product/page-content-product.component').then((m) => m.PageContentProductComponent),
+    loadComponent: () =>
+      import('./pages/page-content-product/page-content-product.component').then((m) => m.PageContentProductComponent),
+    resolve: { product: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => import('./pages/page-content-product/product.resolver').then((m) => m.productResolver(route, state)) },
     data: { type: 'product' },
   },
   {
     path: 'producto/:title',
-    loadComponent: () => import('./pages/page-content-product/page-content-product.component').then((m) => m.PageContentProductComponent),
+    loadComponent: () =>
+      import('./pages/page-content-product/page-content-product.component').then((m) => m.PageContentProductComponent),
+    resolve: { product: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => import('./pages/page-content-product/product.resolver').then((m) => m.productResolver(route, state)) },
     data: { type: 'product' },
   },
   {
     path: 'articulo/:title',
-    loadComponent: () => import('./pages/page-content-article/page-content-article.component').then((m) => m.PageContentArticleComponent),
+    loadComponent: () =>
+      import('./pages/page-content-article/page-content-article.component').then((m) => m.PageContentArticleComponent),
+    resolve: { article: (route: ActivatedRouteSnapshot, state: RouterStateSnapshot) => import('./pages/page-content-article/article.resolver').then((m) => m.articleResolver(route, state)) },
     data: { type: 'article' },
   },
 

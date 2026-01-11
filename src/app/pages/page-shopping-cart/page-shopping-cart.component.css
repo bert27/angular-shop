@@ -1,0 +1,15 @@
+.shopping-cart {
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+@media (max-width: 576px) {
+  .shopping-cart {
+    padding: 8px;
+  }
+  .shopping-cart .margin {
+    margin-top: 10px;
+  }
+}
+
+/*# sourceMappingURL=page-shopping-cart.component.css.map */

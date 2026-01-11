@@ -1,0 +1,82 @@
+.custom-input-father {
+  width: 80px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.custom-input-father ::ng-deep .mat-mdc-form-field-infix {
+  width: 80px;
+  padding-top: 6px !important;
+  padding-bottom: 6px !important; 
+  min-height: unset;
+}
+.custom-input-father ::ng-deep input.mat-input-element {
+  text-align: center !important;
+  padding: 0;
+}
+@media (max-width: 768px) {
+  .custom-input-father {
+    width: 80px;
+  }
+}
+.custom-input-father ::ng-deep .mat-mdc-form-field-wrapper {
+  padding: 0;
+}
+.custom-input-father ::ng-deep .mat-mdc-form-field-subscript-wrapper {
+  display: none;
+  height: 0;
+}
+.custom-input-father ::ng-deep .mat-mdc-form-field-infix {
+  margin-left: 10px;
+}
+.custom-input-father ::ng-deep input.mat-input-element {
+  text-align: center;
+}
+.custom-input-father ::ng-deep .mat-mdc-outline {
+  border-radius: 4px;
+  height: 100%;
+}
+
+.custom-label {
+  white-space: nowrap;
+  overflow: visible;
+  text-overflow: ellipsis;
+}
+
+.no-material-input {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px; /* Compact width */
+  height: 40px;
+}
+@media (max-width: 768px) {
+  .no-material-input {
+    width: 40px;
+  }
+}
+.no-material-input input {
+  width: 100%;
+  height: 36px;
+  border: none; /* No border for seamless look */
+  background: transparent;
+  font-weight: 600;
+  font-size: 1rem;
+  padding: 0;
+  text-align: center;
+  color: var(--colorText);
+  outline: none;
+}
+/* Hide spin buttons */
+.no-material-input input::-webkit-outer-spin-button,
+.no-material-input input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.no-material-input input[type=number] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+/*# sourceMappingURL=custom-input-number.component.css.map */

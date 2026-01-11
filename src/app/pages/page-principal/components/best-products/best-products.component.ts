@@ -11,7 +11,7 @@ import { ImageComponent } from '@components/image/image';
   standalone: true,
   imports: [CarouselModule, RouterModule, ImageComponent],
   templateUrl: './best-products.component.html',
-  styleUrls: ['./best-products.component.scss'],
+  styleUrls: ['./best-products.component.css'],
 })
 export class BestProductsComponent {
   bestProducts = productsData;

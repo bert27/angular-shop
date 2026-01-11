@@ -1,14 +1,14 @@
-<header>
-  <div id="column1-head">
-    <img [src]="logoSrc" alt="Shop logo" class="header-logo" (click)="navigateToInicio()" />
+<header id="app-header" class="header">
+  <div class="header__column--primary">
+    <img [src]="logoSrc" alt="Shop logo" class="header__logo" (click)="navigateToInicio()" />
   </div>
 
-  <div id="column2-head">
+  <div class="header__column--secondary">
     @if (!isMobile) {
-      <nav class="nav-menu">
-        <a routerLink="/productos">Productos</a>
-        <a routerLink="/metodo-envio">Método de Envío</a>
-        <a routerLink="/blog">Blog</a>
+      <nav class="header__nav-menu">
+        <a class="header__nav-link" routerLink="/productos">Productos</a>
+        <a class="header__nav-link" routerLink="/metodo-envio">Método de Envío</a>
+        <a class="header__nav-link" routerLink="/blog">Blog</a>
       </nav>
     } @else {
       <div
@@ -39,11 +39,16 @@
       </mat-menu>
     }
 
-    <div class="carrito-content" (mouseleave)="startAutoClose()">
-      <div style="margin-left: 16px; margin: 20px" (click)="handleCarritoClick()">
+    <div class="header__cart" (mouseleave)="startAutoClose()">
+      <!-- Theme Toggle Button -->
+      <button mat-icon-button (click)="themeService.toggleTheme()" style="margin-right: 10px; color: white;">
+        <mat-icon>{{ themeService.isDarkMode() ? 'light_mode' : 'dark_mode' }}</mat-icon>
+      </button>
+
+      <div class="cart-icon-container" (click)="handleCarritoClick()" data-testid="cart-icon">
         <custom-icon-svg src="icons/carrito-de-compras.svg" [color]="'#ff8118'" [size]="isMobile ? 35 : 50" />
+        <span class="header__cart-badge">{{ cantidadProductos }}</span>
       </div>
-      <span class="numero-productos">{{ cantidadProductos }}</span>
       <app-shopping-cart-popup />
     </div>
   </div>

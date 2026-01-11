@@ -9,7 +9,7 @@ import { ItemShoppingCartComponent } from './item-shopping-cart/item-shopping-ca
   selector: 'custom-shopping-cart-list',
   standalone: true,
   templateUrl: './shopping-cart-list.component.html',
-  styleUrls: ['./shopping-cart-list.component.scss'],
+  styleUrls: ['./shopping-cart-list.component.css'],
   imports: [BotonComponent, ItemShoppingCartComponent],
 })
 export class ShoppingCartListComponent {
