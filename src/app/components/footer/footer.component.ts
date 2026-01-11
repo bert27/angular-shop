@@ -2,12 +2,12 @@ import { Component } from '@angular/core';
 import { IconSvgComponent } from '../icon-svg/icon-svg.component';
 import { RouterModule } from '@angular/router';
 import { dataWeb, footerText } from '../../../data/data';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-footer',
   standalone: true,
-  imports: [IconSvgComponent, RouterModule, CommonModule],
+  imports: [IconSvgComponent, RouterModule],
   templateUrl: './footer.component.html',
   styleUrls: ['./footer.component.scss'],
 })

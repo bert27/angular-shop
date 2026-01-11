@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { BotonComponent } from '../custom-button/custom-button.component';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { CarritoService, ProductCarritoInterface } from '../../../services/carrito.service';
@@ -11,7 +11,7 @@ import { DirectionShippingInterface } from '../../../data/interfaces-model';
   templateUrl: './redsys-credit-card.html',
   styleUrls: ['./redsys-credit-card.scss'],
   standalone: true,
-  imports: [CommonModule, BotonComponent],
+  imports: [BotonComponent],
 })
 export class RedsysCreditCardComponent implements OnInit {
   @Input() directionShipping!: DirectionShippingInterface;

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnDestroy, OnInit, Output } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { loadStripe, Stripe, StripeCardElement, StripeElements } from '@stripe/stripe-js';
 import { BotonComponent } from '../custom-button/custom-button.component';
 import { environment } from '../../../environments/environment';
@@ -13,7 +13,7 @@ import { dataWeb } from '../../../data/data';
   templateUrl: './stripe-field.component.html',
   styleUrls: ['./stripe-field.component.scss'],
   standalone: true,
-  imports: [CommonModule, BotonComponent],
+  imports: [BotonComponent],
 })
 export class StripeFieldComponent implements OnInit, OnDestroy {
   @Input() directionShipping!: DirectionShippingInterface;

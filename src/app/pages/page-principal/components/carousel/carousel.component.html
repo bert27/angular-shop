@@ -1,15 +1,19 @@
 <div class="content-carousel">
-  <ngb-carousel *ngIf="carouselList.length">
-    <ng-template ngbSlide *ngFor="let item of carouselList">
-      <div class="picsum-img-wrapper">
-        <a [routerLink]="item.url">
-          <img [src]="item.bannerImg" [alt]="item.title" />
-        </a>
-      </div>
-      <div class="carousel-caption">
-        <h3>{{ item.title }}</h3>
-        <p>{{ item.description }}</p>
-      </div>
-    </ng-template>
-  </ngb-carousel>
+  @if (carouselList.length) {
+    <ngb-carousel>
+      @for (item of carouselList; track item) {
+        <ng-template ngbSlide>
+          <div class="picsum-img-wrapper">
+            <a [routerLink]="item.url">
+              <img [src]="item.bannerImg" [alt]="item.title" />
+            </a>
+          </div>
+          <div class="carousel-caption">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </div>
+        </ng-template>
+      }
+    </ngb-carousel>
+  }
 </div>

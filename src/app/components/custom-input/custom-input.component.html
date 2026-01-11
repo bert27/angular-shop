@@ -7,9 +7,11 @@
     [errorStateMatcher]="matcher"
     (input)="handleInputChange($event)"
     (blur)="handleBlur()"
-  />
-  <mat-error *ngIf="control?.hasError('required')">
-    {{ errorMessage }}
-  </mat-error>
-</mat-form-field>
+    />
+    @if (control?.hasError('required')) {
+      <mat-error>
+        {{ errorMessage }}
+      </mat-error>
+    }
+  </mat-form-field>
 

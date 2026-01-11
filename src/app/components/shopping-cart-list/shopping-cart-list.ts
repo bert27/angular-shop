@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { CarritoService, ProductCarritoInterface } from '../../../services/carrito.service';
-import { CommonModule } from '@angular/common';
+
 import { Router } from '@angular/router';
 import { BotonComponent } from '../custom-button/custom-button.component';
 import { ItemShoppingCartComponent } from './item-shopping-cart/item-shopping-cart.component';
@@ -10,7 +10,7 @@ import { ItemShoppingCartComponent } from './item-shopping-cart/item-shopping-ca
   standalone: true,
   templateUrl: './shopping-cart-list.component.html',
   styleUrls: ['./shopping-cart-list.component.scss'],
-  imports: [CommonModule, BotonComponent, ItemShoppingCartComponent],
+  imports: [BotonComponent, ItemShoppingCartComponent],
 })
 export class ShoppingCartListComponent {
   @Input() productos: ProductCarritoInterface[] = [];

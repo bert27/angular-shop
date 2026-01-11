@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, FormGroupDirective, NgForm } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { MatButtonModule } from '@angular/material/button';
 import { CustomInputComponent } from '../../../custom-input/custom-input.component';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -18,7 +18,7 @@ export class SubmittedErrorStateMatcher implements ErrorStateMatcher {
   templateUrl: './step1-form.component.html',
   styleUrls: ['./step1-form.component.scss'],
   standalone: true,
-  imports: [CommonModule, CustomInputComponent, MatButtonModule],
+  imports: [CustomInputComponent, MatButtonModule],
 })
 export class Step1Form {
   @Input() customForm!: FormGroup;

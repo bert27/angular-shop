@@ -8,7 +8,7 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatIconModule } from '@angular/material/icon';
 import { BotonComponent } from '../custom-button/custom-button.component';
 import { ShoppingCartListComponent } from '../shopping-cart-list/shopping-cart-list';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { STEPPER_GLOBAL_OPTIONS } from '@angular/cdk/stepper';
 import { CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { StripeFieldComponent } from '../stripe-credit-card/stripe-field.component';
@@ -44,12 +44,11 @@ import { RedsysCreditCardComponent } from '../redsys-credit-card/redsys-credit-c
     Step1Form,
     BotonComponent,
     ShoppingCartListComponent,
-    CommonModule,
     StripeFieldComponent,
     MoneiCreditCardComponent,
     RedsysCreditCardComponent,
-    Step2DirectionComponent,
-  ],
+    Step2DirectionComponent
+],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class StepperComponent implements AfterViewInit, OnInit {

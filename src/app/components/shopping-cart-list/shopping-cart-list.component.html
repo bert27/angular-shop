@@ -1,17 +1,19 @@
-<div *ngIf="productos.length === 0; else productList">
-  <p>Tu cesta está vacía.</p>
-</div>
-
-<ng-template #productList>
+@if (productos.length === 0) {
+  <div>
+    <p>Tu cesta está vacía.</p>
+  </div>
+} @else {
   <div class="cart-layout">
     <ul class="product-list">
-      <li *ngFor="let producto of productos">
-        <item-shopping-cart
-          [producto]="producto"
-          (remove)="onRemoveProduct($event)"
-          (updateCantidad)="onUpdateCantidad($event.producto, $event.nuevaCantidad)"
-        ></item-shopping-cart>
-      </li>
+      @for (producto of productos; track producto) {
+        <li>
+          <item-shopping-cart
+            [producto]="producto"
+            (remove)="onRemoveProduct($event)"
+            (updateCantidad)="onUpdateCantidad($event.producto, $event.nuevaCantidad)"
+          ></item-shopping-cart>
+        </li>
+      }
     </ul>
     <div class="checkout-column">
       <div class="total-price">
@@ -23,4 +25,5 @@
       </div>
     </div>
   </div>
-</ng-template>
+}
+

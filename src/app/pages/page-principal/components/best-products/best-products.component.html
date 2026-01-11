@@ -2,7 +2,7 @@
   <h2 class="products-title">Nuestros Mejores Productos</h2>
   <div class="slider">
     <owl-carousel-o [options]="customOptions" class="owl-stage">
-      <ng-container *ngFor="let item of bestProducts">
+      @for (item of bestProducts; track item) {
         <ng-template carouselSlide [id]="item.title">
           <div
             class="card"
@@ -13,7 +13,7 @@
             (mouseup)="onDragEnd($event)"
             (touchend)="onDragEnd($event)"
             (click)="onCardClick(item, item.options[0])"
-          >
+            >
             <component-image [cardData]="item" size="small" />
             <h4 class="product-title">{{ item.title }}</h4>
             <p class="product-description">{{ item.description }}</p>
@@ -23,7 +23,7 @@
             </div>
           </div>
         </ng-template>
-      </ng-container>
+      }
     </owl-carousel-o>
   </div>
 </section>

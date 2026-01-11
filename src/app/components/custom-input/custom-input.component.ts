@@ -1,6 +1,6 @@
 import { Component, Input, forwardRef, HostBinding } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR, FormControl, FormBuilder, ReactiveFormsModule, AbstractControl } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { ErrorStateMatcher } from '@angular/material/core';
@@ -8,7 +8,7 @@ import { ErrorStateMatcher } from '@angular/material/core';
 @Component({
   selector: 'custom-input',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, MatFormFieldModule, MatInputModule],
+  imports: [ReactiveFormsModule, MatFormFieldModule, MatInputModule],
   templateUrl: './custom-input.component.html',
   styleUrls: ['./custom-input.component.scss'],
   providers: [

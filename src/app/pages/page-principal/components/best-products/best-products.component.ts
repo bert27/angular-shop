@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { CarouselModule, OwlOptions } from 'ngx-owl-carousel-o';
 import { Router, RouterModule } from '@angular/router';
@@ -9,7 +9,7 @@ import { ImageComponent } from '../../../../components/image/image';
 @Component({
   selector: 'app-best-products',
   standalone: true,
-  imports: [CarouselModule, CommonModule, RouterModule, ImageComponent],
+  imports: [CarouselModule, RouterModule, ImageComponent],
   templateUrl: './best-products.component.html',
   styleUrls: ['./best-products.component.scss'],
 })

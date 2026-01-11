@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component, OnInit } from '@angular/core';
 import { NgbCarouselModule, NgbCarouselConfig } from '@ng-bootstrap/ng-bootstrap';
 import { carouselConfig } from '../../../../../data/data';
@@ -16,7 +16,7 @@ interface CarouselItem {
 @Component({
   selector: 'app-carousel',
   standalone: true,
-  imports: [CommonModule, NgbCarouselModule, RouterModule],
+  imports: [NgbCarouselModule, RouterModule],
   providers: [NgbCarouselConfig],
   templateUrl: './carousel.component.html',
   styleUrls: ['./carousel.component.scss'],

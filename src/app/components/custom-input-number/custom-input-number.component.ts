@@ -1,12 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'custom-input-number',
   standalone: true,
-  imports: [CommonModule, MatFormFieldModule, MatInputModule],
+  imports: [MatFormFieldModule, MatInputModule],
   templateUrl: './custom-input-number.component.html',
   styleUrls: ['./custom-input-number.component.scss'],
 })

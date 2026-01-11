@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { BotonComponent } from '../custom-button/custom-button.component';
 import { IconSvgComponent } from '../icon-svg/icon-svg.component';
 import { CustomInputNumberComponent } from '../custom-input-number/custom-input-number.component';
@@ -7,7 +7,7 @@ import { CustomInputNumberComponent } from '../custom-input-number/custom-input-
 @Component({
   selector: 'custom-quantity-selector',
   standalone: true,
-  imports: [CommonModule, CustomInputNumberComponent, BotonComponent, IconSvgComponent],
+  imports: [CustomInputNumberComponent, BotonComponent, IconSvgComponent],
   templateUrl: './custom-quantity-selector.component.html',
   styleUrls: ['./custom-quantity-selector.component.scss'],
 })

@@ -2,13 +2,21 @@
   <button class="dropdown-toggle">
     {{ selectedOption || 'Selecciona una opción' }}
     <span class="arrow">
-      <span *ngIf="isOpen">&#9650;</span>
-      <span *ngIf="!isOpen">&#9660;</span>
+      @if (isOpen) {
+        <span>&#9650;</span>
+      }
+      @if (!isOpen) {
+        <span>&#9660;</span>
+      }
     </span>
   </button>
-  <ul *ngIf="isOpen" class="dropdown-menu">
-    <li *ngFor="let option of options" (click)="selectOption(option, $event)" [ngClass]="{ selected: selectedOption === option }">
-      {{ option }}
-    </li>
-  </ul>
+  @if (isOpen) {
+    <ul class="dropdown-menu">
+      @for (option of options; track option) {
+        <li (click)="selectOption(option, $event)" [ngClass]="{ selected: selectedOption === option }">
+          {{ option }}
+        </li>
+      }
+    </ul>
+  }
 </div>

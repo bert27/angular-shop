@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { BotonComponent } from '../../custom-button/custom-button.component';
 import { CarritoService } from '../../../../services/carrito.service';
 import { ProductDataInterface, ArticleInterface } from '../../../../data/interfaces-model';
@@ -11,7 +11,7 @@ import { ImageComponent } from '../../image/image';
 @Component({
   selector: 'custom-card',
   standalone: true,
-  imports: [CommonModule, BotonComponent, CustomDropdownMaterialComponent, CustomQuantitySelectorComponent, ImageComponent],
+  imports: [BotonComponent, CustomDropdownMaterialComponent, CustomQuantitySelectorComponent, ImageComponent],
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.scss'],
 })

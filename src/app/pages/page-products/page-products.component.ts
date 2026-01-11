@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { CardsComponent } from '../../components/cards/cards.component';
-import { CommonModule } from '@angular/common';
+
 import { BotonComponent } from '../../components/custom-button/custom-button.component';
 import { productsData } from '../../../data/products-data';
 import { Meta, Title } from '@angular/platform-browser';
@@ -9,7 +9,7 @@ import { setMetaTags } from '../../../data/seo';
 @Component({
   selector: 'app-productos',
   standalone: true,
-  imports: [CardsComponent, CommonModule, BotonComponent],
+  imports: [CardsComponent, BotonComponent],
   templateUrl: './page-products.component.html',
   styleUrls: ['./page-products.component.scss'],
 })

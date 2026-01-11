@@ -1,5 +1,5 @@
 import { Component, Input } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'custom-button',
@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 
   templateUrl: './custom-button.component.html',
   styleUrls: ['./custom-button.component.scss'],
-  imports: [CommonModule],
+  imports: [],
 })
 export class BotonComponent {
   @Input() texto = 'Botón';

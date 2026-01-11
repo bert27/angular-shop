@@ -8,5 +8,7 @@
     <custom-button texto="Siguiente" tipo="secundario" (click)="goToNextStep()" />
   </div>
 
-  <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+  @if (errorMessage) {
+    <div class="error-message">{{ errorMessage }}</div>
+  }
 </div>

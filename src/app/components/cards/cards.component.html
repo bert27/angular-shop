@@ -1,3 +1,5 @@
 <div class="cards-container">
-  <custom-card *ngFor="let card of items" [cardData]="card" class="custom-cards" />
+  @for (card of items; track card) {
+    <custom-card [cardData]="card" class="custom-cards" />
+  }
 </div>

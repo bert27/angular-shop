@@ -11,15 +11,19 @@
       </div>
     </strong>
     <div class="social-media">
-      <a *ngFor="let social of socialMedia" [href]="social.href">
-        <custom-icon-svg [src]="social.src" [color]="social.color" [size]="40"/>
-      </a>
+      @for (social of socialMedia; track social) {
+        <a [href]="social.href">
+          <custom-icon-svg [src]="social.src" [color]="social.color" [size]="40"/>
+        </a>
+      }
     </div>
 
     <nav class="footer-nav">
-      <a *ngFor="let link of navLinks" [routerLink]="link.path">
-        {{ link.label }}
-      </a>
+      @for (link of navLinks; track link) {
+        <a [routerLink]="link.path">
+          {{ link.label }}
+        </a>
+      }
     </nav>
   </div>
 </footer>

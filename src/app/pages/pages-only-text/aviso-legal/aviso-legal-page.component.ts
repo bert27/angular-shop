@@ -1,11 +1,11 @@
 import { Component } from '@angular/core';
 import { dataWeb, legalNotice } from '../../../../data/data';
-import { CommonModule } from '@angular/common';
+
 
 @Component({
   selector: 'app-aviso-legal',
   standalone: true,
-  imports: [CommonModule],
+  imports: [],
   templateUrl: './aviso-legal-page.component.html',
 })
 export class AvisoLegalPageComponent {

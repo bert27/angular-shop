@@ -1,8 +1,8 @@
 <div class="container">
   <div class="categorys-products">
-    <ng-container *ngFor="let category of categories">
+    @for (category of categories; track category) {
       <custom-button (click)="selectCategory(category)" [texto]="category" tipo="primario" />
-    </ng-container>
+    }
   </div>
   <div class="content">
     @if (filteredProducts.length > 0) {

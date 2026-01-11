@@ -1,13 +1,15 @@
 <section class="container">
-  <div *ngFor="let term of terms">
-    <h2
+  @for (term of terms; track term) {
+    <div>
+      <h2
       [ngClass]="{
         'bold-title': term.isBold,
         'payment-method': term.isPaymentMethod,
       }"
-    >
-      {{ term.title }}
-    </h2>
-    <p>{{ term.content }}</p>
-  </div>
+        >
+        {{ term.title }}
+      </h2>
+      <p>{{ term.content }}</p>
+    </div>
+  }
 </section>

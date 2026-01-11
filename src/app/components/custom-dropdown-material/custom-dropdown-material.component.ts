@@ -1,6 +1,6 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatSelectModule } from '@angular/material/select';
-import { CommonModule } from '@angular/common';
+
 import { FormsModule } from '@angular/forms';
 
 export interface Option {
@@ -13,7 +13,7 @@ export interface Option {
   standalone: true,
   templateUrl: './custom-dropdown-material.component.html',
   styleUrls: ['./custom-dropdown-material.component.scss'],
-  imports: [CommonModule, MatSelectModule, FormsModule],
+  imports: [MatSelectModule, FormsModule],
 })
 export class CustomDropdownMaterialComponent {
   @Input() options: Option[] = [];
