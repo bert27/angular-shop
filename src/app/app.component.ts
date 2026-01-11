@@ -8,7 +8,6 @@ import { Title } from '@angular/platform-browser';
 import { dataWeb } from '../data/data';
 import { ThemeService } from '../services/theme.service';
 
-const POKEMON_STATE_KEY = 'dd';
 
 @Component({
   selector: 'app-root',
@@ -26,18 +25,8 @@ export class AppComponent implements AfterViewInit {
     private titleService: Title,
     private renderer: Renderer2,
     private themeService: ThemeService,
-    // private transferState: TransferState,
   ) {
-    /*if (isPlatformServer(this.platformId)) {
-      // Solo se ejecuta en el servidor
-      this.dataSvc.getPokemon().subscribe((data) => {
-        this.pokemon = data;
-        this.transferState.set(POKEMON_STATE_KEY, data); // Transfiere los datos al cliente
-      });
-    } else {
-      // Recupera los datos transferidos si están disponibles
-      this.pokemon = this.transferState.get(POKEMON_STATE_KEY, null);
-    }*/
+
   }
 
   ngAfterViewInit(): void {

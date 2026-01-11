@@ -70,10 +70,5 @@
     "prettier": "^3.4.2",
     "typescript": "~5.9.3",
     "typescript-eslint": "8.18.0"
-  },
-  "overrides": {
-    "http-proxy-middleware": "^3",
-    "vite": "^5.4.5",
-    "rollup": "^4.23.0"
   }
 }
