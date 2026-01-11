@@ -1,4 +1,4 @@
-# 🛍️ Angular Shop Premium
+# 🛍️ Angular Shop
 
 Este es un ecosistema de tienda online profesional desarrollado con **Angular 21**, diseñado para ser escalable, seguro y visualmente impactante.
 
@@ -14,7 +14,18 @@ Este es un ecosistema de tienda online profesional desarrollado con **Angular 21
 - **📝 Facturación Automatizada**: Generación de facturas PDF profesionales y envío automático por email.
 - **⚡ Rendimiento Optimizado**: Uso de **Lazy Loading**, **Signals** (Angular 21) y **SSR** (Server Side Rendering).
 - **🎨 Diseño Premium**: Interfaz moderna, responsiva y con gestión dinámica de temas (Signals-based).
+
+## 🛍️ Catálogo de Productos
+
+![Productos PC](public/screenshots/products_PC.png)
 - **📧 Plantillas de Email**: Notificaciones elegantes usando `react-email`.
+
+## 🎨 Previsualización de Plantillas
+
+<div style="display: flex; gap: 10px;">
+  <img src="public/screenshots/template-email.png" alt="Plantilla Email" width="45%">
+  <img src="public/screenshots/template-pdf.jpeg" alt="Plantilla PDF" width="45%">
+</div>
 
 ---
 
@@ -111,7 +122,3 @@ Luego actualiza `SERVER_PUBLIC_URL` en tu `.env` con la URL de ngrok.
 | **VISA** | `4548 8100 0000 0003` | 12/49 | 123 |
 | **Mastercard** | `5576 4415 6304 5037` | 12/49 | 123 |
 
----
-
-## 👨‍💻 Autor
-Desarrollado con ❤️ por **Albert Benavent**.
