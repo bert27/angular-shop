@@ -177,7 +177,7 @@ export class StepperComponent implements AfterViewInit, OnInit {
       }
 
       if (isPlatformBrowser(this.platformId)) {
-        const blob = new Blob(chunks, { type: 'application/pdf' });
+        const blob = new Blob(chunks as any, { type: 'application/pdf' });
         const url = window.URL.createObjectURL(blob);
         const link = document.createElement('a');
         link.href = url;
